@@ -305,7 +305,8 @@ class GoogleReviews {
             isset( $this->google_reviews_options['gmb_id_1'] ) ? esc_attr( $this->google_reviews_options['gmb_id_1']) : ''
         );
         echo '<div><p>Search for your business below and paste the place ID into the field above.</p></div>';
-        echo '<iframe height="200" style="height: 200px; width: 100%; margin-left: -20px; margin-right: -20px;max-width: 700px;display:block;" src="https://developers.google.com/maps/documentation/places/web-service/place-id_9048ab0574c011a627f2440239e01a2c149e485a49a5978c5226b76e20b110db.frame?hl=de" allow="clipboard-write https://developers-dot-devsite-v2-prod.appspot.com" allowfullscreen="" name="goog_730064616"></iframe>';
+        echo '<iframe height="200" style="height: 200px; width: 100%; max-width: 700px;display:block;" src="https://geo-devrel-javascript-samples.web.app/samples/places-placeid-finder/app/dist/" allow="fullscreen; "></iframe>';
+
     }
 
     /**
