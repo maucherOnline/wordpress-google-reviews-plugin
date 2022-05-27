@@ -88,6 +88,8 @@ class GoogleReviews {
      * @param      string    $version    The version of this plugin.
      */
     public function __construct( $plugin_name, $version ) {
+	    $this->google_reviews_options = get_option( 'google_reviews_option_name' );
+
         add_action( 'admin_menu', array( $this, 'google_reviews_add_plugin_page' ) );
         add_action( 'admin_init', array( $this, 'google_reviews_page_init' ) );
         add_action( 'updated_option', array( $this, 'on_saving_options' ), 10, 3 );
@@ -148,7 +150,10 @@ class GoogleReviews {
      * Create admin page on backend
      */
     public function google_reviews_create_admin_page() {
-        $this->google_reviews_options = get_option( 'google_reviews_option_name' ); ?>
+        if (empty($this->google_reviews_options))
+            $this->google_reviews_options = get_option( 'google_reviews_option_name' );
+
+        ?>
 
         <div class="wrap">
             <h2>Google Reviews</h2>
@@ -238,6 +243,32 @@ class GoogleReviews {
             'google_reviews_style_layout_setting_section' // section
         );
 
+        if(strtolower($this->google_reviews_options['style_2']) === 'grid'){
+	        add_settings_field(
+		        'grid_columns', // id
+		        'Grid Columns', // title
+		        array( $this, 'grid_columns_callback' ), // callback
+		        'google-reviews-admin', // page
+		        'google_reviews_style_layout_setting_section' // section
+	        );
+        }else{
+	        add_settings_field(
+		        'slide_duration', // id
+		        'Slide Duration', // title
+		        array( $this, 'slide_duration_callback' ), // callback
+		        'google-reviews-admin', // page
+		        'google_reviews_style_layout_setting_section' // section
+	        );
+        }
+
+	    add_settings_field(
+		    'layout_style', // id
+		    'Layout Style', // title
+		    array( $this, 'layout_style_callback' ), // callback
+		    'google-reviews-admin', // page
+		    'google_reviews_style_layout_setting_section' // section
+	    );
+
         add_settings_field(
             'reviews_instructions', // id
             'Review Instructions', // title
@@ -273,6 +304,18 @@ class GoogleReviews {
         if ( isset( $input['style_2'] ) ) {
             $sanitary_values['style_2'] = $input['style_2'];
         }
+
+	    if ( isset( $input['grid_columns'] ) ) {
+		    $sanitary_values['grid_columns'] = $input['grid_columns'];
+	    }
+
+	    if ( isset( $input['layout_style'] ) ) {
+		    $sanitary_values['layout_style'] = $input['layout_style'];
+	    }
+
+	    if ( isset( $input['slide_duration'] ) ) {
+		    $sanitary_values['slide_duration'] = $input['slide_duration'];
+	    }
 
         if ( isset( $input['reviews_language_3'] ) ) {
             $sanitary_values['reviews_language_3'] = $input['reviews_language_3'];
@@ -314,12 +357,62 @@ class GoogleReviews {
      */
     public function style_2_callback() {
         ?> <select name="google_reviews_option_name[style_2]" id="style_2">
-            <?php $selected = (isset( $this->google_reviews_options['style_2'] ) && $this->google_reviews_options['style_2'] === 'Slide') ? 'selected' : '' ; ?>
-            <option <?php echo $selected; ?>>Slide</option>
+            <?php $selected = (isset( $this->google_reviews_options['style_2'] ) && $this->google_reviews_options['style_2'] === 'Slider') ? 'selected' : '' ; ?>
+            <option <?php echo $selected; ?>>Slider</option>
             <?php $selected = (isset( $this->google_reviews_options['style_2'] ) && $this->google_reviews_options['style_2'] === 'Grid') ? 'selected' : '' ; ?>
             <option <?php echo $selected; ?>>Grid</option>
         </select> <?php
     }
+
+	public function grid_columns_callback() {
+        $columns = $this->google_reviews_options['grid_columns'];
+
+        if (empty($columns)){
+            $columns = 3;
+        }
+
+        ?>
+
+        <select name="google_reviews_option_name[grid_columns]" id="grid_columns">
+            <option <?php selected($columns, '1'); ?> value="1"><?php esc_attr_e('1'); ?></option>
+            <option <?php selected($columns, '2'); ?> value="2"><?php esc_attr_e('2'); ?></option>
+            <option <?php selected($columns, '3'); ?> value="3"><?php esc_attr_e('3'); ?></option>
+        </select>
+
+        <?php
+
+    }
+
+	public function layout_style_callback() {
+		$layout_style = $this->google_reviews_options['layout_style'];
+
+		if (empty($layout_style)){
+			$layout_style = '1';
+		}
+
+		?>
+
+        <select name="google_reviews_option_name[layout_style]" id="layout_style">
+            <option <?php selected($layout_style, '1'); ?> value="1"><?php esc_attr_e('Layout #1'); ?></option>
+        </select>
+
+		<?php
+    }
+
+	public function slide_duration_callback() {
+		$slide_duration = $this->google_reviews_options['slide_duration'];
+
+		if (empty($slide_duration)){
+			$slide_duration = '1500';
+		}
+
+		?>
+
+        <input type="number" min="50" max="9999" step="50" name="google_reviews_option_name[slide_duration]" value="<?php echo $slide_duration; ?>">
+
+		<?php
+    }
+
 
     /**
      * Echo language field

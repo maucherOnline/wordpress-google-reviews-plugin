@@ -41,6 +41,12 @@ class Google_Reviews_Public {
 	private $version;
 
 	/**
+	 * Plugin Options/settings.
+	 * @var null
+	 */
+	private $options = null;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -48,9 +54,13 @@ class Google_Reviews_Public {
 	 * @param      string    $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
+		$this->options = get_option( 'google_reviews_option_name' );
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+
+		add_action('admin_enqueue_scripts', [$this, 'enqueue_styles']);
+		add_action('admin_enqueue_scripts', [$this, 'enqueue_scripts']);
 
 	}
 
@@ -75,6 +85,9 @@ class Google_Reviews_Public {
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/google-reviews-public.css', array(), $this->version, 'all' );
 
+		if (strtolower($this->options['style_2']) === 'slider'){
+			wp_enqueue_style('swiperjs', 'https://unpkg.com/swiper@8/swiper-bundle.min.css', [], '8.15');
+		}
 	}
 
 	/**
@@ -97,6 +110,13 @@ class Google_Reviews_Public {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/google-reviews-public.js', array( 'jquery' ), $this->version, false );
+
+		wp_enqueue_script('matchheight', plugin_dir_url(__FILE__) . 'js/jquery.matchHeight.js', ['jquery'], '1.0.0', true);
+
+		if (strtolower($this->options['style_2']) === 'slider'){
+			wp_enqueue_script('swiperjs', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', ['jquery'], '8.15', true);
+			wp_enqueue_script('sliderjs', plugin_dir_url( __FILE__ ) . 'js/slider.js', ['jquery'], time(), true);
+		}
 
 	}
 

@@ -58,6 +58,12 @@ class Google_Reviews {
 	protected $version;
 
 	/**
+	 * Plugin Options/settings.
+	 * @var null
+	 */
+	protected $options = null;
+
+	/**
 	 * Define the core functionality of the plugin.
 	 *
 	 * Set the plugin name and the plugin version that can be used throughout the plugin.
@@ -74,6 +80,7 @@ class Google_Reviews {
 			$this->version = '1.0.0';
 		}
 		$this->plugin_name = 'google-reviews';
+		$this->options = get_option( 'google_reviews_option_name' );
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -141,6 +148,35 @@ class Google_Reviews {
         return $reviews;
     }
 
+	private function time_elapsed_string($datetime, $full = false) {
+		$now = new DateTime;
+		$ago = new DateTime($datetime);
+		$diff = $now->diff($ago);
+
+		$diff->w = floor($diff->d / 7);
+		$diff->d -= $diff->w * 7;
+
+		$string = array(
+			'y' => 'year',
+			'm' => 'month',
+			'w' => 'week',
+			'd' => 'day',
+			'h' => 'hour',
+			'i' => 'minute',
+			's' => 'second',
+		);
+		foreach ($string as $k => &$v) {
+			if ($diff->$k) {
+				$v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+			} else {
+				unset($string[$k]);
+			}
+		}
+
+		if (!$full) $string = array_slice($string, 0, 1);
+		return $string ? implode(', ', $string) . ' ago' : 'just now';
+	}
+
     /**
      * Put together shortcode / html output
      * @return string|void
@@ -154,7 +190,7 @@ class Google_Reviews {
         }
 
         $output = '<div id="g-review">';
-
+	    $slider_output = '';
         foreach ($reviews as $review) {
 
             $name = $review['author_name'];
@@ -166,84 +202,60 @@ class Google_Reviews {
             $time = date('m/d/Y', $review['time']);
 
             $star = '<img src="'. plugin_dir_url( __FILE__ ).'img/svg-star.svg" alt="" />';
-            $star_output = '';
+            $star_output = '<span class="stars-wrapper">';
             for ($i = 1; $i <= $rating; $i++) {
                 $star_output .= $star;
             }
 
-            $output .= '
-                <div class="g-review">
-                    <div class="gr-inner-header">
-                        <img 
-                            class="gr-profile"
-                            src="'.$profile_photo_url.'" 
-                            width="50" 
-                            height="50" 
-                            alt=""
-                            data-imgtype="image/png" 
-                            referrerpolicy="no-referrer"
-                        />
-                        <img 
-                            src="'.plugin_dir_url( __FILE__ ).'img/google-logo-svg.svg" 
-                            alt=""
-                            class="gr-google" 
-                        />
-                        <p><a href="'.$author_url.'" target="_blank">'.$name.'</a>
-                        <br>
-                        <span class="gr-stars">'.$star_output.'</span></p>
-                    </div>
-                    
-                    <div class="gr-inner-body">
-                        <p>'.$text.'</p>
-                    </div>
-                </div>
-                ';
+            $star_output .= '</span>';
+
+            $star_output .= '<span class="time">' . $this->time_elapsed_string( date('Y-m-d h:i:s', $review['time']) ) .'</span>';
+	        $google_svg = plugin_dir_url( __FILE__ ) . 'img/google-logo-svg.svg';
+
+	        // @todo: get settings and display grid and/or slider.
+	        $display_type = strtolower($this->options['style_2']);
+
+	        if ($display_type === 'slider'){
+		        $slide_duration = $this->options['slide_duration'];
+
+	        	ob_start();
+	        	require 'partials/slider/markup.php';
+	        	$slider_output .= ob_get_clean();
+	        }else{
+	        	ob_start();
+		        require 'partials/grid/markup.php';
+		        $output .= ob_get_clean();
+	        }
         }
-        $output .= '
-            <style>
-            #g-review {
-                display: flex;
-                flex-flow: row wrap;
-                justify-content: space-between;
-                gap: 32px;
-            }
-            #g-review .g-review {
-                flex-basis: calc(50% - 80px);
-                padding: 32px;
-                box-shadow: 0 0 8px grey;
-                background-color: white;
-            }
-            #g-review .gr-inner-header {
-                display: flex;
-                flex-flow: row wrap;
-                position: relative;           
-            }
-            #g-review .gr-inner-header p {
-                margin: 0;
-                flex-basis: calc(100% - 60px);
-                font-size: 16px;
-                line-height: 1.5;
-            }
-            #g-review .gr-inner-header img.gr-profile {
-                margin: 0 10px 10px 0;
-            }
-            #g-review .gr-inner-header img.gr-google {
-                position: absolute;
-                right: 0;
-                top: 0;
-                width: 18px;
-                height: 18px;
-            }
-                
-            #g-review .g-review .gr-stars img {
-                display: inline-block !important;
-                width: 18px !important;
-                height: 18px !important;
-                margin: 0 4px 0 0 !important;
-                vertical-align: middle !important;        
-            }
-            </style>
-            </div>';
+
+
+	    if ($display_type === 'slider'){
+		    ob_start();
+		    require_once 'partials/slider/slider-header.php';
+		    echo $slider_output;
+		    require_once 'partials/slider/slider-footer.php';
+
+		    $output .= ob_get_clean();
+	    }
+
+	    $db_grid_columns = isset($this->options['grid_columns']) ? $this->options['grid_columns'] : 3;
+	    $columns_css = '';
+
+	    for ($x = 0; $x < $db_grid_columns; $x++){
+		    $columns_css .= '1fr ';
+	    }
+
+        if ($display_type === 'slider'){
+        	ob_start();
+	        require 'partials/slider/style.php';
+	        $output .= ob_get_clean();
+        }else{
+        	ob_start();
+	        require 'partials/grid/style.php';
+	        $output .= ob_get_clean();
+        }
+
+        $output .= '</div>';
 
         return $output;
 
