@@ -393,7 +393,10 @@ class GoogleReviews {
 		?>
 
         <select name="google_reviews_option_name[layout_style]" id="layout_style">
-            <option <?php selected($layout_style, '1'); ?> value="1"><?php esc_attr_e('Layout #1'); ?></option>
+            <option <?php selected($layout_style, '1'); ?> value="layout_style-1"><?php esc_attr_e('Layout #1'); ?></option>
+            <option <?php selected($layout_style, '2'); ?> value="layout_style-2"><?php esc_attr_e('Layout #2'); ?></option>
+            <option <?php selected($layout_style, '3'); ?> value="layout_style-3"><?php esc_attr_e('Layout #3'); ?></option>
+            <option <?php selected($layout_style, '4'); ?> value="layout_style-4"><?php esc_attr_e('Layout #4'); ?></option>
         </select>
 
 		<?php

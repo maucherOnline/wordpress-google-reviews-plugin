@@ -5,8 +5,9 @@
         // Optional parameters
         direction: 'horizontal',
         slidesPerView: 3,
-        spaceBetween: 8,
-        autoplay: true,
+        spaceBetween: 0,
+        autoplay: false,
+        loop: true,
         breakpoints: {
             // when window width is >= 480px
             270: {

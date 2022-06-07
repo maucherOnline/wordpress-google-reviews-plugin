@@ -88,6 +88,8 @@ class Google_Reviews_Public {
 		if (strtolower($this->options['style_2']) === 'slider'){
 			wp_enqueue_style('swiperjs', 'https://unpkg.com/swiper@8/swiper-bundle.min.css', [], '8.15');
 		}
+		wp_enqueue_style('customstyles',  plugin_dir_url( __FILE__ ) . 'css/custom-styles.css', array(), $this->version, 'all');
+		wp_enqueue_style('mcustomscrollbar',  plugin_dir_url( __FILE__ ) . 'css/jquery.mCustomScrollbar.css', array(), $this->version, 'all');
 	}
 
 	/**
@@ -117,7 +119,6 @@ class Google_Reviews_Public {
 			wp_enqueue_script('swiperjs', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', ['jquery'], '8.15', true);
 			wp_enqueue_script('sliderjs', plugin_dir_url( __FILE__ ) . 'js/slider.js', ['jquery'], time(), true);
 		}
-
+		wp_enqueue_script('mcustomscrollbar', plugin_dir_url( __FILE__ ) . 'js/jquery.mCustomScrollbar.min.js', ['jquery'], time(), true);
 	}
-
 }
