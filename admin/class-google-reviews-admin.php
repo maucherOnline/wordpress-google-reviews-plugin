@@ -390,13 +390,18 @@ class GoogleReviews {
 			$layout_style = '1';
 		}
 
+        $layout_styles_count = 4;
 		?>
 
         <select name="google_reviews_option_name[layout_style]" id="layout_style">
-            <option <?php selected($layout_style, '1'); ?> value="layout_style-1"><?php esc_attr_e('Layout #1'); ?></option>
-            <option <?php selected($layout_style, '2'); ?> value="layout_style-2"><?php esc_attr_e('Layout #2'); ?></option>
-            <option <?php selected($layout_style, '3'); ?> value="layout_style-3"><?php esc_attr_e('Layout #3'); ?></option>
-            <option <?php selected($layout_style, '4'); ?> value="layout_style-4"><?php esc_attr_e('Layout #4'); ?></option>
+            <?php for ( $i = 1; $i <= 4; $i++ ) : ?>
+                <option
+                    <?php selected( $layout_style, 'layout_style-' . $i ); ?>
+                    value="<?php echo esc_attr( sprintf( 'layout_style-%s', $i ) ) ?>"
+                >
+                    <?php esc_attr_e( 'Layout #' . $i ); ?>
+                </option>
+            <?php endfor; ?>
         </select>
 
 		<?php

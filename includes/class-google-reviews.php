@@ -189,9 +189,10 @@ class Google_Reviews {
             return __( 'No reviews available', 'google-reviews' );
         }
 
-        $output = '<div id="g-review">';
+        $output = '<div id="g-review" class="' . $this->options['layout_style'] .'">';
 	    $slider_output = '';
         foreach ($reviews as $review) {
+
 
             $name = $review['author_name'];
             $author_url = $review['author_url'];
