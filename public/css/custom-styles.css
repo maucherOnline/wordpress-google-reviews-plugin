@@ -490,6 +490,8 @@ body .swiper-button-prev:hover {
 	opacity: 0.7;
 }
 body .swiper-button-next:after {
+	position: relative;
+	left: 2px;
 	margin-left: 0;
 }
 @media (max-width: 1023px) {
