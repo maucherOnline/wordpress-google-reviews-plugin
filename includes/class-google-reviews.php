@@ -193,7 +193,6 @@ class Google_Reviews {
 	    $slider_output = '';
         foreach ($reviews as $review) {
 
-
             $name = $review['author_name'];
             $author_url = $review['author_url'];
             $profile_photo_url = $review['profile_photo_url'];
