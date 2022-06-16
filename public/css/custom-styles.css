@@ -22,7 +22,7 @@ body #g-review.layout_style-1 .gr-inner-header img.gr-profile {
 body #g-review.layout_style-1 .gr-inner-header p {
 	position: relative;
 	top: -1px;
-	flex-basis: calc(100% - 70px);
+	flex-basis: calc(100% - 95px);
 }
 
 body #g-review.layout_style-1 .g-review .gr-stars img {
