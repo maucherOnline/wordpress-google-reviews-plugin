@@ -279,6 +279,7 @@ body #g-review.layout_style-3 .gr-inner-body p {
 }
 
 body #g-review.layout_style-3 .swiper:before {
+	/*
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -289,8 +290,10 @@ body #g-review.layout_style-3 .swiper:before {
 	content: '';
 	background: url(./img/slide-bg-prev.png) repeat-y 0 0;
 	z-index: 5;
+	 */
 }
 body #g-review.layout_style-3 .swiper:after {
+	/*
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -301,6 +304,7 @@ body #g-review.layout_style-3 .swiper:after {
 	content: '';
 	background: url(./img/slide-bg-next.png) repeat-y 0 0;
 	z-index: 5;
+	*/
 }
 
 body #g-review.layout_style-3 .swiper {

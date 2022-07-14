@@ -1,27 +1,22 @@
 <?php
 
 /**
- * The plugin bootstrap file
- *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
- *
- * @link              test
- * @since             1.0.0
- * @package           Google_Reviews
+ * @author            PARETO Digital
+ * @copyright         2022 PARETO Digital GmbH & Co. KG
+ * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name:       Google Reviews
- * Plugin URI:        test
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Plugin Name:       Google Reviews Plugin
+ * Plugin URI:        https://paretodigital.io/
+ * Description:       This Google Reviews Plugin pulls reviews from Google profiles and displays them on your website.
  * Version:           1.0.0
- * Author:            David Maucher
- * Author URI:        test
+ * Requires at least: 5.1
+ * Requires PHP:      7.2
+ * Author:            ParetoDigital.io
+ * Author URI:        https://paretodigital.io/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       google-reviews
+ * Text Domain:       google-reviews-plugin
  * Domain Path:       /languages
  */
 
@@ -37,10 +32,10 @@ if ( ! function_exists( 'grw_fs' ) ) {
             $grw_fs = fs_dynamic_init( array(
                 'id'                  => '10211',
                 'slug'                => 'google-reviews-widget',
+                'premium_slug'        => 'google-reviews-plugin-pro',
                 'type'                => 'plugin',
                 'public_key'          => 'pk_6823179f29a329a909c59a7a25a0a',
                 'is_premium'          => true,
-                'premium_suffix'      => 'Professional',
                 // If your plugin is a serviceware, set this option to false.
                 'has_premium_version' => true,
                 'has_addons'          => false,
