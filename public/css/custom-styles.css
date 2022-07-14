@@ -22,14 +22,11 @@ body #g-review.layout_style-1 .gr-inner-header img.gr-profile {
 body #g-review.layout_style-1 .gr-inner-header p {
 	position: relative;
 	top: -1px;
-<<<<<<< HEAD
-	flex-basis: calc(100% - 95px);
-=======
 	flex-basis: calc(100% - 75px);
 }
+
 body #g-review.layout_style-1 .gr-inner-header p a {
 	padding-right: 20px;
->>>>>>> 4af77f0 (Add dummy content option, make plugin translatable)
 }
 
 body #g-review.layout_style-1 .g-review .gr-stars img {
