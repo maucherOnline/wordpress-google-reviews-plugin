@@ -104,8 +104,8 @@ class GoogleReviews {
     public function google_reviews_add_plugin_page() {
 
         add_menu_page(
-            'Google Reviews', // page_title
-            'Google Reviews', // menu_title
+            __( 'Google Reviews', 'google-reviews' ), // page_title
+            __( 'Google Reviews', 'google-reviews' ), // menu_title
             'manage_options', // capability
             'google-reviews', // menu_slug
             array( $this, 'google_reviews_create_admin_page' ), // function
@@ -156,7 +156,9 @@ class GoogleReviews {
         ?>
 
         <div class="wrap">
-            <h2>Google Reviews</h2>
+            <h2>
+                <?php _e( 'Google Reviews', 'google-reviews' ); ?>
+            </h2>
             <?php settings_errors(); ?>
 
             <form method="post" action="options.php">
@@ -186,14 +188,22 @@ class GoogleReviews {
 
         add_settings_section(
             'google_reviews_setting_section', // id
-            'Global settings for showing reviews', // title
+            __( 'Global settings for showing reviews', 'google-reviews' ), // title
             array( $this, 'google_reviews_section_info' ), // callback
             'google-reviews-admin' // page
         );
 
         add_settings_field(
+            'show_dummy_content', // id
+            __( 'Show Dummy Content', 'google-reviews' ), // title
+            array( $this, 'show_dummy_content_callback' ), // callback
+            'google-reviews-admin', // page
+            'google_reviews_setting_section' // section
+        );
+
+        add_settings_field(
             'api_key_0', // id
-            'API Key', // title
+            __( 'API Key', 'google-reviews' ), // title
             array( $this, 'api_key_0_callback' ), // callback
             'google-reviews-admin', // page
             'google_reviews_setting_section' // section
@@ -201,7 +211,7 @@ class GoogleReviews {
 
         add_settings_field(
             'gmb_id_1', // id
-            'Place ID', // title
+            __( 'Place ID', 'google-reviews' ), // title
             array( $this, 'gmb_id_1_callback' ), // callback
             'google-reviews-admin', // page
             'google_reviews_setting_section' // section
@@ -209,7 +219,7 @@ class GoogleReviews {
 
         add_settings_field(
             'reviews_language_3', // id
-            'Reviews Language', // title
+            __( 'Reviews Language', 'google-reviews' ), // title
             array( $this, 'reviews_language_3_callback' ), // callback
             'google-reviews-admin', // page
             'google_reviews_setting_section' // section
@@ -229,7 +239,7 @@ class GoogleReviews {
         // add style and layout settings section
         add_settings_section(
             'google_reviews_style_layout_setting_section', // id
-            'Display settings', // title
+            __( 'Display settings', 'google-reviews' ), // title
             array( $this, 'google_reviews_section_info' ), // callback
             'google-reviews-admin' // page
         );
@@ -237,7 +247,7 @@ class GoogleReviews {
         // add style and layout settings field
         add_settings_field(
             'style_2', // id
-            'Style', // title
+            __( 'Style', 'google-reviews' ), // title
             array( $this, 'style_2_callback' ), // callback
             'google-reviews-admin', // page
             'google_reviews_style_layout_setting_section' // section
@@ -254,7 +264,7 @@ class GoogleReviews {
         }else{
 	        add_settings_field(
 		        'slide_duration', // id
-		        'Slide Duration', // title
+		        __( 'Slide Duration', 'google-reviews' ), // title
 		        array( $this, 'slide_duration_callback' ), // callback
 		        'google-reviews-admin', // page
 		        'google_reviews_style_layout_setting_section' // section
@@ -263,7 +273,7 @@ class GoogleReviews {
 
 	    add_settings_field(
 		    'layout_style', // id
-		    'Layout Style', // title
+		    __( 'Layout Style', 'google-reviews' ), // title
 		    array( $this, 'layout_style_callback' ), // callback
 		    'google-reviews-admin', // page
 		    'google_reviews_style_layout_setting_section' // section
@@ -271,7 +281,7 @@ class GoogleReviews {
 
         add_settings_field(
             'reviews_instructions', // id
-            'Review Instructions', // title
+            __( 'Review Instructions', 'google-reviews' ), // title
             array( $this, 'reviews_instructions_callback' ), // callback
             'google-reviews-admin', // page
             'google_reviews_style_layout_setting_section' // section
@@ -279,7 +289,7 @@ class GoogleReviews {
 
         add_settings_field(
             'reviews_preview', // id
-            'Preview', // title
+            __( 'Preview', 'google-reviews' ), // title
             array( $this, 'reviews_preview_callback' ), // callback
             'google-reviews-admin', // page
             'google_reviews_style_layout_setting_section' // section
@@ -293,6 +303,11 @@ class GoogleReviews {
      */
     public function google_reviews_sanitize($input) {
         $sanitary_values = array();
+
+        if ( isset( $input['show_dummy_content'] ) ) {
+            $sanitary_values['show_dummy_content'] = sanitize_text_field( $input['show_dummy_content'] );
+        }
+
         if ( isset( $input['api_key_0'] ) ) {
             $sanitary_values['api_key_0'] = sanitize_text_field( $input['api_key_0'] );
         }
@@ -328,6 +343,22 @@ class GoogleReviews {
         // additional output possible
     }
 
+    public function show_dummy_content_callback() {
+        ob_start();
+        ?>
+
+        <input type="checkbox" name="google_reviews_option_name[show_dummy_content]" value="1" id="show_dummy_content" <?php echo esc_attr( ! empty( $this->google_reviews_options['show_dummy_content'] ) ? 'checked' : '' ); ?>>
+
+        <span>
+            <?php _e( 'Yes', 'google-reviews' ); ?>
+        </span>
+
+        <?php
+        $html = ob_get_clean();
+
+        echo $html;
+    }
+
     /**
      * Echo API key field
      */
@@ -336,7 +367,7 @@ class GoogleReviews {
             '<input class="regular-text" type="text" name="google_reviews_option_name[api_key_0]" id="api_key_0" value="%s">',
             isset( $this->google_reviews_options['api_key_0'] ) ? esc_attr( $this->google_reviews_options['api_key_0']) : ''
         );
-        echo '<div><p>Head over to <a href="https://console.cloud.google.com/apis/dashboard" target="_blank">Google Developer Console</a> and create an API key. See short <a href="" target="_blank">explainer video here.</a></p></div>';
+        printf( __( '<div><p>Head over to <a href="%s" target="_blank">Google Developer Console</a> and create an API key. See short <a href="%s" target="_self">explainer video here.</a></p></div>', 'google-reviews' ), 'https://console.cloud.google.com/apis/dashboard', '#' );
     }
 
     /**
@@ -347,7 +378,7 @@ class GoogleReviews {
             '<input class="regular-text" type="text" name="google_reviews_option_name[gmb_id_1]" id="gmb_id_1" value="%s">',
             isset( $this->google_reviews_options['gmb_id_1'] ) ? esc_attr( $this->google_reviews_options['gmb_id_1']) : ''
         );
-        echo '<div><p>Search for your business below and paste the place ID into the field above.</p></div>';
+        echo '<div><p>' . __( 'Search for your business below and paste the place ID into the field above.', 'google-reviews' ) . '</p></div>';
         echo '<iframe height="200" style="height: 200px; width: 100%; max-width: 700px;display:block;" src="https://geo-devrel-javascript-samples.web.app/samples/places-placeid-finder/app/dist/" allow="fullscreen; "></iframe>';
 
     }
@@ -358,9 +389,13 @@ class GoogleReviews {
     public function style_2_callback() {
         ?> <select name="google_reviews_option_name[style_2]" id="style_2">
             <?php $selected = (isset( $this->google_reviews_options['style_2'] ) && $this->google_reviews_options['style_2'] === 'Slider') ? 'selected' : '' ; ?>
-            <option <?php echo $selected; ?>>Slider</option>
+            <option <?php echo $selected; ?>>
+                <?php _e( 'Slider', 'google-reviews' ); ?>
+            </option>
             <?php $selected = (isset( $this->google_reviews_options['style_2'] ) && $this->google_reviews_options['style_2'] === 'Grid') ? 'selected' : '' ; ?>
-            <option <?php echo $selected; ?>>Grid</option>
+            <option <?php echo $selected; ?>>
+                <?php _e( 'Grid', 'google-reviews' ); ?>
+            </option>
         </select> <?php
     }
 
@@ -399,7 +434,7 @@ class GoogleReviews {
                     <?php selected( $layout_style, 'layout_style-' . $i ); ?>
                     value="<?php echo esc_attr( sprintf( 'layout_style-%s', $i ) ) ?>"
                 >
-                    <?php esc_attr_e( 'Layout #' . $i ); ?>
+                    <?php esc_attr_e( __( 'Layout', 'google-reviews' ) . '#' . $i ); ?>
                 </option>
             <?php endfor; ?>
         </select>
@@ -505,7 +540,9 @@ class GoogleReviews {
     public function reviews_instructions_callback() {
         ?>
         <div>
-            <p>Use this shortcode to show your reviews on pages and posts:</p>
+            <p>
+                <?php _e( 'Use this shortcode to show your reviews on pages and posts:', 'google-reviews' ); ?>
+            </p>
             <pre>[google-reviews]</pre>
         </div>
 
