@@ -6,7 +6,7 @@
  * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name:       Google Reviews Plugin
+ * Plugin Name:       Best Google Reviews Plugin
  * Plugin URI:        https://paretodigital.io/
  * Description:       This Google Reviews Plugin pulls reviews from Google profiles and displays them on your website.
  * Version:           1.0.0
@@ -16,7 +16,7 @@
  * Author URI:        https://paretodigital.io/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       google-reviews-plugin
+ * Text Domain:       best-google-reviews-plugin
  * Domain Path:       /languages
  */
 
@@ -31,8 +31,8 @@ if ( ! function_exists( 'grw_fs' ) ) {
 
             $grw_fs = fs_dynamic_init( array(
                 'id'                  => '10211',
-                'slug'                => 'google-reviews-widget',
-                'premium_slug'        => 'google-reviews-plugin-pro',
+                'slug'                => 'best-google-reviews-plugin',
+                'premium_slug'        => 'best-google-reviews-plugin-pro',
                 'type'                => 'plugin',
                 'public_key'          => 'pk_6823179f29a329a909c59a7a25a0a',
                 'is_premium'          => true,
