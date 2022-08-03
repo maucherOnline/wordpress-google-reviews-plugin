@@ -20,28 +20,29 @@
  * Domain Path:       /languages
  */
 
-if ( ! function_exists( 'grw_fs' ) ) {
+if ( ! function_exists( 'grwp_fs' ) ) {
     // Create a helper function for easy SDK access.
-    function grw_fs() {
-        global $grw_fs;
+    function grwp_fs() {
+        global $grwp_fs;
 
-        if ( ! isset( $grw_fs ) ) {
+        if ( ! isset( $grwp_fs ) ) {
             // Include Freemius SDK.
             require_once dirname(__FILE__) . '/freemius/start.php';
 
-            $grw_fs = fs_dynamic_init( array(
+            $grwp_fs = fs_dynamic_init( array(
                 'id'                  => '10211',
-                'slug'                => 'best-google-reviews-plugin',
-                'premium_slug'        => 'best-google-reviews-plugin-pro',
+                'slug'                => 'embedder-for-google-reviews',
+                'premium_slug'        => 'embedder-for-google-reviews-pro',
                 'type'                => 'plugin',
                 'public_key'          => 'pk_6823179f29a329a909c59a7a25a0a',
-                'is_premium'          => true,
+                'is_premium'          => false,
                 'is_premium_only'     => false,
                 'has_addons'          => false,
-                'has_paid_plans'      => false,
+                'has_paid_plans'      => true,
                 'menu'                => array(
                     'slug'           => 'google-reviews',
                     'first-path'     => 'admin.php?page=google-reviews',
+                    'contact'        => false,
                     'support'        => false,
                 ),
                 // Set the SDK to work in a sandbox mode (for development & testing).
@@ -50,13 +51,13 @@ if ( ! function_exists( 'grw_fs' ) ) {
             ) );
         }
 
-        return $grw_fs;
+        return $grwp_fs;
     }
 
     // Init Freemius.
-    grw_fs();
+    grwp_fs();
     // Signal that SDK was initiated.
-    do_action( 'grw_fs_loaded' );
+    do_action( 'grwp_fs_loaded' );
 }
 
 /**
