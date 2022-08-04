@@ -240,7 +240,7 @@ class Google_Reviews {
 
             $time = date('m/d/Y', $review['time']);
 
-            $star = '<img src="'. plugin_dir_url( __FILE__ ).'img/svg-star.svg" alt="" />';
+            $star = '<img src="'. esc_attr(plugin_dir_url( __FILE__ )).'img/svg-star.svg" alt="" />';
             $star_output = '<span class="stars-wrapper">';
             for ($i = 1; $i <= $rating; $i++) {
                 $star_output .= $star;

@@ -36,18 +36,14 @@ if ( ! function_exists( 'grwp_fs' ) ) {
                 'type'                => 'plugin',
                 'public_key'          => 'pk_6823179f29a329a909c59a7a25a0a',
                 'is_premium'          => false,
-                'is_premium_only'     => false,
                 'has_addons'          => false,
-                'has_paid_plans'      => true,
+                'has_paid_plans'      => false,
                 'menu'                => array(
                     'slug'           => 'google-reviews',
                     'first-path'     => 'admin.php?page=google-reviews',
                     'contact'        => false,
                     'support'        => false,
                 ),
-                // Set the SDK to work in a sandbox mode (for development & testing).
-                // IMPORTANT: MAKE SURE TO REMOVE SECRET KEY BEFORE DEPLOYMENT.
-                'secret_key'          => 'sk_n1k[Rs%2sq?HC_3k23p=Gw88*{gMm',
             ) );
         }
 

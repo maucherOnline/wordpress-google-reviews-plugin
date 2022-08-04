@@ -14,12 +14,12 @@
  */
 ?>
 
-<div class="swiper-slide" data-swiper-autoplay="<?php echo $slide_duration; ?>">
+<div class="swiper-slide" data-swiper-autoplay="<?php echo esc_attr($slide_duration); ?>">
     <div class="g-review">
         <div class="gr-inner-header">
             <img
                     class="gr-profile"
-                    src="<?php echo $profile_photo_url; ?>"
+                    src="<?php echo esc_attr($profile_photo_url); ?>"
                     width="50"
                     height="50"
                     alt=""
@@ -27,17 +27,17 @@
                     referrerpolicy="no-referrer"
             />
             <img
-                    src="<?php echo $google_svg; ?>"
+                    src="<?php echo esc_attr($google_svg); ?>"
                     alt=""
                     class="gr-google"
             />
-            <p><a href="<?php echo $author_url; ?>" target="_blank"><?php echo $name; ?></a>
+            <p><a href="<?php echo esc_attr($author_url); ?>" target="_blank"><?php echo esc_html($name); ?></a>
                 <br>
                 <span class="gr-stars"><?php echo $star_output; ?></span></p>
         </div>
 
         <div class="gr-inner-body">
-            <p><?php echo $text; ?></p>
+            <p><?php echo esc_html($text); ?></p>
         </div>
     </div>
 </div>
