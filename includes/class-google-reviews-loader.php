@@ -21,7 +21,7 @@
  * @subpackage Google_Reviews/includes
  * @author     David Maucher <hallo@maucher-online.com>
  */
-class Google_Reviews_Loader {
+class GRWP_Google_Reviews_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

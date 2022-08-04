@@ -27,7 +27,7 @@
  * @subpackage Google_Reviews/includes
  * @author     David Maucher <hallo@maucher-online.com>
  */
-class Google_Reviews {
+class GRWP_Google_Reviews {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -35,7 +35,7 @@ class Google_Reviews {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Google_Reviews_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      GRWP_Google_Reviews_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -74,8 +74,8 @@ class Google_Reviews {
 	 */
 	public function __construct() {
 
-		if ( defined( 'GOOGLE_REVIEWS_VERSION' ) ) {
-			$this->version = GOOGLE_REVIEWS_VERSION;
+		if ( defined( 'GRWP_GOOGLE_REVIEWS_VERSION' ) ) {
+			$this->version = GRWP_GOOGLE_REVIEWS_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
@@ -99,7 +99,7 @@ class Google_Reviews {
     /**
      * Must be pubilc to get called by external methods
      */
-    public function get_reviews() {
+    public static function get_reviews() {
 
         $google_reviews_options = get_option( 'google_reviews_option_name' );
         $api_key_0 = $google_reviews_options['api_key_0'];
@@ -124,7 +124,7 @@ class Google_Reviews {
      * Parse json results and check for errors
      * @return mixed|WP_Error
      */
-    public function parse_review_json() {
+    public static function parse_review_json() {
 
         $raw = get_option('gr_latest_results');
         $reviewArr = json_decode($raw, true);
@@ -204,8 +204,10 @@ class Google_Reviews {
      */
     public function reviews_shortcode() {
 
+        // prevent php notize if undefined
+        $showdummy = isset($this->options['show_dummy_content']) ? true : false;
 
-        if ( $this->options['show_dummy_content'] ) {
+        if ( $showdummy ) {
         	$reviews = array( array(
         		'author_name'               => __( 'Lorem Ipsum', 'google-reviews' ),
         		'author_url'                => '#',
@@ -255,6 +257,7 @@ class Google_Reviews {
 	        $display_type = strtolower($this->options['style_2']);
 
 	        if ($display_type === 'slider'){
+
 		        $slide_duration = $this->options['slide_duration'];
 
 	        	ob_start();
@@ -305,10 +308,10 @@ class Google_Reviews {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Google_Reviews_Loader. Orchestrates the hooks of the plugin.
-	 * - Google_Reviews_i18n. Defines internationalization functionality.
+	 * - GRWP_Google_Reviews_Loader. Orchestrates the hooks of the plugin.
+	 * - GRWP_Google_Reviews_i18n . Defines internationalization functionality.
 	 * - Google_Reviews_Admin. Defines all hooks for the admin area.
-	 * - Google_Reviews_Public. Defines all hooks for the public side of the site.
+	 * - GRWP_Google_Reviews_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -343,14 +346,14 @@ class Google_Reviews {
 
 
 
-		$this->loader = new Google_Reviews_Loader();
+		$this->loader = new GRWP_Google_Reviews_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Google_Reviews_i18n class in order to set the domain and to register the hook
+	 * Uses the GRWP_Google_Reviews_i18n  class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -358,7 +361,7 @@ class Google_Reviews {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Google_Reviews_i18n();
+		$plugin_i18n = new GRWP_Google_Reviews_i18n ();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -375,7 +378,7 @@ class Google_Reviews {
 
 	    if ( is_admin() ) {
 
-            $plugin_admin = new GoogleReviews($this->get_plugin_name(), $this->get_version());
+            $plugin_admin = new GRWP_Google_ReviewsAdmin($this->get_plugin_name(), $this->get_version());
 
             $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
             $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
@@ -393,7 +396,7 @@ class Google_Reviews {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Google_Reviews_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new GRWP_Google_Reviews_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -424,7 +427,7 @@ class Google_Reviews {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Google_Reviews_Loader    Orchestrates the hooks of the plugin.
+	 * @return    GRWP_Google_Reviews_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

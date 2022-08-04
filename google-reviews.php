@@ -61,28 +61,28 @@ if ( ! function_exists( 'grwp_fs' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'GOOGLE_REVIEWS_VERSION', '1.0.0' );
+define( 'GRWP_GOOGLE_REVIEWS_VERSION', '1.0.0' );
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-google-reviews-activator.php
  */
-function activate_google_reviews() {
+function grwp_activate_google_reviews() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-google-reviews-activator.php';
-	Google_Reviews_Activator::activate();
+	GRWP_Google_Reviews_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-google-reviews-deactivator.php
  */
-function deactivate_google_reviews() {
+function grwp_deactivate_google_reviews() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-google-reviews-deactivator.php';
-	Google_Reviews_Deactivator::deactivate();
+	GRWP_Google_Reviews_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_google_reviews' );
-register_deactivation_hook( __FILE__, 'deactivate_google_reviews' );
+register_activation_hook( __FILE__, 'grwp_activate_google_reviews' );
+register_deactivation_hook( __FILE__, 'grwp_deactivate_google_reviews' );
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -99,10 +99,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-google-reviews.php';
  *
  * @since    1.0.0
  */
-function run_google_reviews() {
+function grwp_run_google_reviews() {
 
-	$plugin = new Google_Reviews();
+	$plugin = new GRWP_Google_Reviews();
 	$plugin->run();
 
 }
-run_google_reviews();
+grwp_run_google_reviews();

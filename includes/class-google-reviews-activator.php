@@ -20,7 +20,7 @@
  * @subpackage Google_Reviews/includes
  * @author     David Maucher <hallo@maucher-online.com>
  */
-class Google_Reviews_Activator {
+class GRWP_Google_Reviews_Activator {
 
 	/**
 	 * Short Description. (use period)

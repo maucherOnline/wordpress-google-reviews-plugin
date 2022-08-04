@@ -11,7 +11,7 @@
  */
 
 // https://jeremyhixon.com/tool/wordpress-option-page-generator/
-class GoogleReviews {
+class GRWP_Google_ReviewsAdmin {
 
     private $google_reviews_options;
 
@@ -45,10 +45,10 @@ class GoogleReviews {
          * This function is provided for demonstration purposes only.
          *
          * An instance of this class should be passed to the run() function
-         * defined in Google_Reviews_Loader as all of the hooks are defined
+         * defined in GRWP_Google_Reviews_Loader as all of the hooks are defined
          * in that particular class.
          *
-         * The Google_Reviews_Loader will then create the relationship
+         * The GRWP_Google_Reviews_Loader will then create the relationship
          * between the defined hooks and the functions defined in this
          * class.
          */
@@ -68,10 +68,10 @@ class GoogleReviews {
          * This function is provided for demonstration purposes only.
          *
          * An instance of this class should be passed to the run() function
-         * defined in Google_Reviews_Loader as all of the hooks are defined
+         * defined in GRWP_Google_Reviews_Loader as all of the hooks are defined
          * in that particular class.
          *
-         * The Google_Reviews_Loader will then create the relationship
+         * The GRWP_Google_Reviews_Loader will then create the relationship
          * between the defined hooks and the functions defined in this
          * class.
          */
@@ -127,8 +127,8 @@ class GoogleReviews {
         // get newest results if core API  settings were changed
         if ($option_name === 'google_reviews_option_name') {
 
-            Google_Reviews::get_reviews();
-            $review_json = Google_Reviews::parse_review_json();
+            GRWP_Google_Reviews::get_reviews();
+            $review_json = GRWP_Google_Reviews::parse_review_json();
 
             if ( is_wp_error( $review_json ) ) {
 
