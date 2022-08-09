@@ -31,9 +31,16 @@
                     alt=""
                     class="gr-google"
             />
-            <p><a href="<?php echo esc_attr($author_url); ?>" target="_blank"><?php echo esc_html($name); ?></a>
+            <p>
+                <a href="<?php echo esc_attr($author_url); ?>"
+                   target="_blank">
+                    <?php echo esc_html($name); ?>
+                </a>
                 <br>
-                <span class="gr-stars"><?php echo $star_output; ?></span></p>
+                <span class="gr-stars">
+                    <?php echo $star_output; ?>
+                </span>
+            </p>
         </div>
 
         <div class="gr-inner-body">

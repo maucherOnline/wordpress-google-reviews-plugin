@@ -258,12 +258,12 @@ class GRWP_Google_Reviews {
 
 	        if ($display_type === 'slider'){
 
-		        $slide_duration = $this->options['slide_duration'];
+		        $slide_duration = $this->options['slide_duration'] ?? '';
 
 	        	ob_start();
 	        	require 'partials/slider/markup.php';
 	        	$slider_output .= ob_get_clean();
-	        }else{
+	        } else {
 	        	ob_start();
 		        require 'partials/grid/markup.php';
 		        $output .= ob_get_clean();

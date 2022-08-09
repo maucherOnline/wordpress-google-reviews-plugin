@@ -347,7 +347,12 @@ class GRWP_Google_ReviewsAdmin {
         ob_start();
         ?>
 
-        <input type="checkbox" name="google_reviews_option_name[show_dummy_content]" value="1" id="show_dummy_content" <?php echo esc_attr( ! empty( $this->google_reviews_options['show_dummy_content'] ) ? 'checked' : '' ); ?>>
+        <input type="checkbox"
+               name="google_reviews_option_name[show_dummy_content]"
+               value="1"
+               id="show_dummy_content"
+            <?php echo esc_attr( ! empty( $this->google_reviews_options['show_dummy_content'] ) ? 'checked' : '' ); ?>
+        >
 
         <span>
             <?php _e( 'Yes', 'google-reviews' ); ?>
@@ -400,7 +405,7 @@ class GRWP_Google_ReviewsAdmin {
     }
 
 	public function grid_columns_callback() {
-        $columns = $this->google_reviews_options['grid_columns'];
+        $columns = $this->google_reviews_options['grid_columns'] ?? '';
 
         if (empty($columns)){
             $columns = 3;
@@ -443,7 +448,7 @@ class GRWP_Google_ReviewsAdmin {
     }
 
 	public function slide_duration_callback() {
-		$slide_duration = $this->google_reviews_options['slide_duration'];
+		$slide_duration = $this->google_reviews_options['slide_duration'] ?? '';
 
 		if (empty($slide_duration)){
 			$slide_duration = '1500';

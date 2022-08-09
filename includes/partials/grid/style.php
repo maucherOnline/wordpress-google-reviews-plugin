@@ -7,7 +7,7 @@ if (! defined('ABSPATH'))
 <style>
     #g-review {
         display: grid;
-        grid-template-columns: <?php echo $columns_css; ?>;
+        grid-template-columns: <?php echo esc_html($columns_css); ?>;
         gap: 32px;
         margin: 30px 0;
     }
