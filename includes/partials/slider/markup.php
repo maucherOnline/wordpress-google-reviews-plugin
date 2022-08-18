@@ -11,6 +11,7 @@
  * @var string $author_url
  * @var string $name
  * @var number $slide_duration
+ * @var array  $allowed_html
  */
 ?>
 
@@ -38,7 +39,7 @@
                 </a>
                 <br>
                 <span class="gr-stars">
-                    <?php echo $star_output; ?>
+                    <?php echo wp_kses($star_output, $allowed_html); ?>
                 </span>
             </p>
         </div>

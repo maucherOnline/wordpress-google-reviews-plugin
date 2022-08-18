@@ -204,6 +204,35 @@ class GRWP_Google_Reviews {
      */
     public function reviews_shortcode() {
 
+        $allowed_html = [
+            'img' => [
+                'title'             => [],
+                'src'               => [],
+                'alt'               => [],
+                'width'             => [],
+                'height'            => [],
+                'class'             => [],
+                'data-imgtype'      => [],
+                'referrerpolicy'    => [],
+            ],
+            'style'                     => [],
+            'div'                       => [
+                'class'                 => [],
+                'id'                    => [],
+                'data-swiper-autoplay'  => [],
+            ],
+            'a' => [
+                'href'      => [],
+                'target'    => [],
+            ],
+            'p' => [],
+            'span' => [
+                'class' => [],
+                'id'    => [],
+            ],
+            'br' => [],
+        ];
+
         // prevent php notize if undefined
         $showdummy = isset($this->options['show_dummy_content']) ? true : false;
 
@@ -274,7 +303,7 @@ class GRWP_Google_Reviews {
 	    if ($display_type === 'slider'){
 		    ob_start();
 		    require_once 'partials/slider/slider-header.php';
-		    echo $slider_output;
+		    echo wp_kses($slider_output, $allowed_html);
 		    require_once 'partials/slider/slider-footer.php';
 
 		    $output .= ob_get_clean();
@@ -287,11 +316,11 @@ class GRWP_Google_Reviews {
 		    $columns_css .= '1fr ';
 	    }
 
-        if ($display_type === 'slider'){
+        if ( $display_type === 'slider' ){
         	ob_start();
 	        require 'partials/slider/style.php';
 	        $output .= ob_get_clean();
-        }else{
+        } else {
         	ob_start();
 	        require 'partials/grid/style.php';
 	        $output .= ob_get_clean();
@@ -299,7 +328,7 @@ class GRWP_Google_Reviews {
 
         $output .= '</div>';
 
-        return $output;
+        return wp_kses($output, $allowed_html);
 
     }
 

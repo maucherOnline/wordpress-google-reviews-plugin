@@ -16,6 +16,15 @@ class GRWP_Google_ReviewsAdmin {
     private $google_reviews_options;
 
     /**
+     * Allowed html tags for echo
+     *
+     * @since    1.0.0
+     * @access   private
+     * @var      array    $allowed_html    Allowed html tags for echo
+     */
+    private $allowed_html;
+
+    /**
      * The ID of this plugin.
      *
      * @since    1.0.0
@@ -96,6 +105,51 @@ class GRWP_Google_ReviewsAdmin {
 
         $this->plugin_name = $plugin_name;
         $this->version = $version;
+
+        $this->allowed_html = [
+            'img' => [
+                'title'             => [],
+                'src'               => [],
+                'alt'               => [],
+                'width'             => [],
+                'height'            => [],
+                'class'             => [],
+                'data-imgtype'      => [],
+                'referrerpolicy'    => [],
+            ],
+            'style'                     => [],
+            'div'                       => [
+                'class'                 => [],
+                'id'                    => [],
+                'data-swiper-autoplay'  => [],
+            ],
+            'a' => [
+                'href'      => [],
+                'target'    => [],
+            ],
+            'p' => [],
+            'span' => [
+                'class' => [],
+                'id'    => [],
+            ],
+            'br' => [],
+            'iframe' => [
+                'src'       => [],
+                'width'     => [],
+                'height'    => [],
+                'style'     => [],
+                'allow'     => []
+
+            ],
+            'input' => [
+                'class'     => [],
+                'id'        => [],
+                'type'      => [],
+                'name'      => [],
+                'checked'   => [],
+                'value'     => []
+            ],
+        ];
     }
 
     /**
@@ -361,7 +415,7 @@ class GRWP_Google_ReviewsAdmin {
         <?php
         $html = ob_get_clean();
 
-        echo $html;
+        echo wp_kses($html, $this->allowed_html);
     }
 
     /**
@@ -383,8 +437,11 @@ class GRWP_Google_ReviewsAdmin {
             '<input class="regular-text" type="text" name="google_reviews_option_name[gmb_id_1]" id="gmb_id_1" value="%s">',
             isset( $this->google_reviews_options['gmb_id_1'] ) ? esc_attr( $this->google_reviews_options['gmb_id_1']) : ''
         );
-        echo '<div><p>' . __( 'Search for your business below and paste the place ID into the field above.', 'google-reviews' ) . '</p></div>';
-        echo '<iframe height="200" style="height: 200px; width: 100%; max-width: 700px;display:block;" src="https://geo-devrel-javascript-samples.web.app/samples/places-placeid-finder/app/dist/" allow="fullscreen; "></iframe>';
+
+        $echo = '<div><p>' . __( 'Search for your business below and paste the place ID into the field above.', 'google-reviews' ) . '</p></div>';
+        $echo .= '<iframe height="200" style="height: 200px; width: 100%; max-width: 700px;display:block;" src="https://geo-devrel-javascript-samples.web.app/samples/places-placeid-finder/app/dist/" allow="fullscreen; "></iframe>';
+
+        echo wp_kses($echo, $this->allowed_html);
 
     }
 
@@ -394,11 +451,11 @@ class GRWP_Google_ReviewsAdmin {
     public function style_2_callback() {
         ?> <select name="google_reviews_option_name[style_2]" id="style_2">
             <?php $selected = (isset( $this->google_reviews_options['style_2'] ) && $this->google_reviews_options['style_2'] === 'Slider') ? 'selected' : '' ; ?>
-            <option <?php echo $selected; ?>>
+            <option <?php echo esc_attr($selected); ?>>
                 <?php _e( 'Slider', 'google-reviews' ); ?>
             </option>
             <?php $selected = (isset( $this->google_reviews_options['style_2'] ) && $this->google_reviews_options['style_2'] === 'Grid') ? 'selected' : '' ; ?>
-            <option <?php echo $selected; ?>>
+            <option <?php echo esc_attr($selected); ?>>
                 <?php _e( 'Grid', 'google-reviews' ); ?>
             </option>
         </select> <?php
@@ -456,7 +513,7 @@ class GRWP_Google_ReviewsAdmin {
 
 		?>
 
-        <input type="number" min="50" max="9999" step="50" name="google_reviews_option_name[slide_duration]" value="<?php echo $slide_duration; ?>">
+        <input type="number" min="50" max="9999" step="50" name="google_reviews_option_name[slide_duration]" value="<?php echo esc_attr($slide_duration); ?>">
 
 		<?php
     }
@@ -530,9 +587,9 @@ class GRWP_Google_ReviewsAdmin {
             <?php
             foreach ($languages as $key => $language) {
                 if ($key === $current) {
-                    echo '<option value="'.$key.'" selected>'.$language.'</option>';
+                    echo '<option value="'.esc_attr($key).'" selected>'.esc_attr($language).'</option>';
                 } else {
-                    echo '<option value="'.$key.'">'.$language.'</option>';
+                    echo '<option value="'.esc_attr($key).'">'.esc_attr($language).'</option>';
                 }
 
             } ?>
@@ -558,6 +615,6 @@ class GRWP_Google_ReviewsAdmin {
      * Echo shortcode for demo/preview purposes
      */
     public function reviews_preview_callback() {
-        echo do_shortcode('[google-reviews]');
+        echo wp_kses(do_shortcode('[google-reviews]'), $this->allowed_html);
     }
 }

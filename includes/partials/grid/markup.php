@@ -10,6 +10,7 @@ if (! defined('ABSPATH'))
  * @var string $profile_photo_url
  * @var string $author_url
  * @var string $name
+ * @var array  $allowed_html
  */
 ?>
 
@@ -31,7 +32,7 @@ if (! defined('ABSPATH'))
 		/>
 		<p><a href="<?php echo esc_attr($author_url); ?>" target="_blank"><?php echo esc_html($name); ?></a>
 			<br>
-			<span class="gr-stars"><?php echo $star_output; ?></span></p>
+			<span class="gr-stars"><?php echo wp_kses($star_output, $allowed_html); ?></span></p>
 	</div>
 
 	<div class="gr-inner-body">
