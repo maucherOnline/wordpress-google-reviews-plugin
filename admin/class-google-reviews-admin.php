@@ -167,6 +167,28 @@ class GRWP_Google_ReviewsAdmin {
             75 // position
         );
 
+        add_submenu_page(
+        'google-reviews',
+        'How to',
+        'How to',
+        'manage_options',
+        'my-top-level-slug',
+        array( $this, 'google_reviews_create_sub_page_how_to')
+        );
+
+    }
+
+    /**
+     * Backend How to sub page
+     * @return void
+     */
+    public function google_reviews_create_sub_page_how_to() {
+        global $imgpath;
+        $imgpath = plugin_dir_url(__FILE__) .'img/';
+
+        echo '<div class="wrap">';
+        require_once plugin_dir_path(__FILE__) .'/includes/how-to.php';
+        echo '</div>';
     }
 
     /**
