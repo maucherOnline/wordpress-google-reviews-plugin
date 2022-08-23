@@ -1,7 +1,6 @@
 === Embedder for Google Reviews ===
 Contributors: paretodigital
 Tags: google reviews, google reviews plugin, google reviews widget, google reviews block, google reviews slider
-Requires at least: 5.7
 Tested up to: 6.0
 Requires PHP: 7.0
 License: GPLv2 or later

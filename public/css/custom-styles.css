@@ -17,6 +17,8 @@ body #g-review.layout_style-1 .g-review {
 
 body #g-review.layout_style-1 .gr-inner-header img.gr-profile {
 	margin: 0 20px 10px 0;
+	width: 50px;
+	height: 50px;
 }
 
 body #g-review.layout_style-1 .gr-inner-header p {
