@@ -62,7 +62,7 @@ class GRWP_Google_ReviewsAdmin {
          * class.
          */
 
-        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/google-reviews-admin.css', array(), $this->version, 'all' );
+        wp_enqueue_style( 'admin-' . $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/google-reviews-admin.css', array(), $this->version, 'all' );
 
     }
 
@@ -85,7 +85,12 @@ class GRWP_Google_ReviewsAdmin {
          * class.
          */
 
-        wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/google-reviews-admin.js', array( 'jquery' ), $this->version, false );
+        wp_enqueue_script( 'admin-' . $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/google-reviews-admin.js', array( 'jquery' ), $this->version, false );
+
+        wp_localize_script( 'admin-' . $this->plugin_name, 'js_global', array(
+            'wp_ajax_url' => admin_url( 'admin-ajax.php' ),
+            'language'    => $this->google_reviews_options['reviews_language_3']
+        ) );
 
     }
 
@@ -204,6 +209,7 @@ class GRWP_Google_ReviewsAdmin {
         if ($option_name === 'google_reviews_option_name') {
 
             GRWP_Google_Reviews::get_reviews();
+
             $review_json = GRWP_Google_Reviews::parse_review_json();
 
             if ( is_wp_error( $review_json ) ) {
@@ -242,7 +248,6 @@ class GRWP_Google_ReviewsAdmin {
                 settings_fields( 'google_reviews_option_group' );
                 submit_button();
                 do_settings_sections( 'google-reviews-admin' );
-
                 ?>
             </form>
         </div>
@@ -277,21 +282,40 @@ class GRWP_Google_ReviewsAdmin {
             'google_reviews_setting_section' // section
         );
 
-        add_settings_field(
-            'api_key_0', // id
-            __( 'API Key', 'google-reviews' ), // title
-            array( $this, 'api_key_0_callback' ), // callback
-            'google-reviews-admin', // page
-            'google_reviews_setting_section' // section
-        );
+        if ( grwp_fs()->is__premium_only() ) {
+            add_settings_field(
+                'serp_business_name', // id
+                __( 'Search for your business:', 'google-reviews' ), // title
+                array( $this, 'serp_business_name_callback' ), // callback
+                'google-reviews-admin', // page
+                'google_reviews_setting_section' // section
+            );
 
-        add_settings_field(
-            'gmb_id_1', // id
-            __( 'Place ID', 'google-reviews' ), // title
-            array( $this, 'gmb_id_1_callback' ), // callback
-            'google-reviews-admin', // page
-            'google_reviews_setting_section' // section
-        );
+            add_settings_field(
+                'serp_data_id', // id
+                false, // title
+                array( $this, 'serp_data_id_callback' ), // callback
+                'google-reviews-admin', // page
+                'google_reviews_setting_section', // section
+                array( 'class' => 'hidden' )
+            );
+        } else {
+            add_settings_field(
+                'api_key_0', // id
+                __( 'API Key', 'google-reviews' ), // title
+                array( $this, 'api_key_0_callback' ), // callback
+                'google-reviews-admin', // page
+                'google_reviews_setting_section' // section
+            );
+
+            add_settings_field(
+                'gmb_id_1', // id
+                __( 'Place ID', 'google-reviews' ), // title
+                array( $this, 'gmb_id_1_callback' ), // callback
+                'google-reviews-admin', // page
+                'google_reviews_setting_section' // section
+            );
+        }
 
         add_settings_field(
             'reviews_language_3', // id
@@ -384,6 +408,14 @@ class GRWP_Google_ReviewsAdmin {
             $sanitary_values['show_dummy_content'] = sanitize_text_field( $input['show_dummy_content'] );
         }
 
+        if ( isset( $input['serp_business_name'] ) ) {
+            $sanitary_values['serp_business_name'] = sanitize_text_field( $input['serp_business_name'] );
+        }
+
+        if ( isset( $input['serp_data_id'] ) ) {
+            $sanitary_values['serp_data_id'] = sanitize_text_field( $input['serp_data_id'] );
+        }
+
         if ( isset( $input['api_key_0'] ) ) {
             $sanitary_values['api_key_0'] = sanitize_text_field( $input['api_key_0'] );
         }
@@ -438,6 +470,48 @@ class GRWP_Google_ReviewsAdmin {
         $html = ob_get_clean();
 
         echo wp_kses($html, $this->allowed_html);
+    }
+
+    /**
+     * Echo Business Search Field
+     */
+    public function serp_business_name_callback() {
+        ob_start();
+        ?>
+
+        <div class="serp-container">
+            <div class="serp-search">
+                <input type="search" class="regular-text js-serp-business-search" name="google_reviews_option_name[serp_business_name]" id="serp_business_name" value="<?php echo esc_attr( isset( $this->google_reviews_options['serp_business_name'] ) ? $this->google_reviews_options['serp_business_name'] : '' ); ?>" autocomplete="off">
+
+                <fieldset class="serp-results"></fieldset><!-- /.serp-results -->
+            </div><!-- /.serp-search -->
+
+            <div class="serp-error"> </div><!-- /.serp-error -->
+        </div><!-- /.serp-container -->
+
+        <p>
+            <?php _e( 'Details like country, state, city and/or phone number may help for achieving more accurate results.', 'google-reviews' ); ?>
+        </p>
+
+        <?php
+        $html = ob_get_clean();
+
+        echo $html;
+    }
+
+    /**
+     * Echo Hidden SERP Data ID Field
+     */
+    public function serp_data_id_callback() {
+        ob_start();
+        ?>
+
+        <input type="hidden" class="hidden js-serp-data-id" name="google_reviews_option_name[serp_data_id]" id="serp_data_id" value="<?php echo esc_attr( isset( $this->google_reviews_options['serp_data_id'] ) ? $this->google_reviews_options['serp_data_id'] : '' ); ?>">
+
+        <?php
+        $html = ob_get_clean();
+
+        echo $html;
     }
 
     /**
@@ -639,4 +713,5 @@ class GRWP_Google_ReviewsAdmin {
     public function reviews_preview_callback() {
         echo wp_kses(do_shortcode('[google-reviews]'), $this->allowed_html);
     }
+
 }

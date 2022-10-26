@@ -2,3 +2,57 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+
+.serp-container {
+    display: flex;
+    align-items: center;
+}
+
+.serp-search {
+    display: inline-block;
+}
+
+.serp-results {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0 0 2px;
+    max-height: 500px;
+    max-width: 348px;
+    overflow: auto;
+    background-color: #f4f4f4;
+    -webkit-box-shadow: 0px 2px 15px -3px rgba(156,156,156,0.65);
+    box-shadow: 0px 2px 15px -3px rgba(156,156,156,0.65);
+    display: none;
+}
+
+.serp-results .serp-result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    margin: 0 !important;
+    transition: background-color .3s;
+    cursor: pointer;
+}
+
+.serp-results .serp-result:hover {
+    background-color: #e0e0e0;
+}
+
+.serp-results .serp-result input[type="radio"] {
+    float: right;
+    order: 2;
+    margin-left: 20px;
+}
+
+input.has-error:focus,
+input.has-error {
+    border-color: red;
+    box-shadow: unset;
+}
+
+.serp-error {
+    margin-left: 10px;
+    color: red;
+}

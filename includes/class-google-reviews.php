@@ -96,27 +96,64 @@ class GRWP_Google_Reviews {
 
     }
 
-    /**
-     * Must be pubilc to get called by external methods
-     */
     public static function get_reviews() {
 
         $google_reviews_options = get_option( 'google_reviews_option_name' );
-        $api_key_0 = $google_reviews_options['api_key_0'];
-        $gmb_id_1 = $google_reviews_options['gmb_id_1'];
 
-        // https://developers.google.com/maps/faq#languagesupport
-        $reviews_language = $google_reviews_options['reviews_language_3'];
-        $url = 'https://maps.googleapis.com/maps/api/place/details/json?place_id='
-            .$gmb_id_1
-            .'&key='
-            .$api_key_0
-            .'&fields=reviews&language='
-            .$reviews_language;
+        if ( grwp_fs()->is__premium_only() ) {
 
-        $result = wp_remote_get($url);
+	        $data_id          = $google_reviews_options['serp_data_id'];
+	        $reviews_language = $google_reviews_options['reviews_language_3'];
 
-        update_option('gr_latest_results', json_encode($result));
+	        if ( empty( $data_id ) ) {
+	        	update_option( 'gr_latest_results', null );
+
+	        	return;
+	        }
+
+			$install_id = grwp_fs()->get_site()->id;
+	        $secret_key = base64_encode( grwp_fs()->get_site()->secret_key );
+
+	        $new_hash_request_url = 'https://api.reviewsembedder.com/generate-hash.php';
+
+	        $new_hash = wp_remote_get( $new_hash_request_url, array(
+	        	'headers' => array(
+	        		'Authorization' => $secret_key
+	        	)
+	        ) );
+
+	        $license_request_url = sprintf( 'https://api.reviewsembedder.com/get-reviews.php?install_id=%s&data_id=%s&language=%s', $install_id, $data_id, $reviews_language );
+
+	        $get_reviews = wp_remote_get( $license_request_url, array(
+	        	'headers' => array(
+	        		'Authorization' => wp_remote_retrieve_body( $new_hash )
+	        	)
+	        ) );
+
+	        $get_reviews = json_decode( wp_remote_retrieve_body( $get_reviews ) );
+
+	        update_option( 'gr_latest_results', json_encode( $get_reviews->results ) );
+
+        } else {
+
+        	$api_key_0 = $google_reviews_options['api_key_0'];
+	        $gmb_id_1  = $google_reviews_options['gmb_id_1'];
+
+	        // https://developers.google.com/maps/faq#languagesupport
+	        $reviews_language = $google_reviews_options['reviews_language_3'];
+	        $url = 'https://maps.googleapis.com/maps/api/place/details/json?place_id='
+	            .$gmb_id_1
+	            .'&key='
+	            .$api_key_0
+	            .'&fields=reviews&language='
+	            .$reviews_language;
+
+	        $result = wp_remote_get($url);
+
+        	update_option('gr_latest_results', json_encode($result));
+
+        }
+
 
     }
 
@@ -124,28 +161,63 @@ class GRWP_Google_Reviews {
      * Parse json results and check for errors
      * @return mixed|WP_Error
      */
+
     public static function parse_review_json() {
 
-        $raw = get_option('gr_latest_results');
-        $reviewArr = json_decode($raw, true);
-        $reviewArrBody = json_decode($reviewArr['body'], true);
+		if ( grwp_fs()->is__premium_only() ) {
+			$install_id           = grwp_fs()->get_site()->id;
+			$secret_key           = base64_encode( grwp_fs()->get_site()->secret_key );
+	        $new_hash_request_url = 'https://api.reviewsembedder.com/generate-hash.php';
 
-        if ($reviewArrBody['status'] === 'REQUEST_DENIED') {
-            return new WP_Error(
-                'REQUEST_DENIED',
-                $reviewArrBody['error_message']
-            );
-        }
-        if ($reviewArrBody['status'] === 'INVALID_REQUEST') {
-            return new WP_Error(
-                'INVALID_REQUEST',
-                __('Invalid request. Please check your place ID for errors.', 'google-reviews')
-            );
-        }
+	        $new_hash = wp_remote_get( $new_hash_request_url, array(
+	        	'headers' => array(
+	        		'Authorization' => $secret_key
+	        	)
+	        ) );
 
-        $reviews = $reviewArrBody['result']['reviews'];
+			$is_valid_url = sprintf( 'https://api.reviewsembedder.com/validate-reviews.php?install_id=%s&validate_reviews=1', $install_id );
+
+			$is_valid = wp_remote_get( $is_valid_url, array(
+	        	'headers' => array(
+	        		'Authorization' => wp_remote_retrieve_body( $new_hash )
+	        	)
+	        ) );
+
+	        $is_valid = json_decode( wp_remote_retrieve_body( $is_valid ) );
+
+	        if ( ! $is_valid->results ) {
+	        	return;
+	        }
+
+			$raw       = get_option('gr_latest_results');
+	        $reviewArr = json_decode($raw, true);
+	        $reviews   = $reviewArr['reviews'];
+
+		} else {
+
+			$raw           = get_option('gr_latest_results');
+	        $reviewArr     = json_decode($raw, true);
+	        $reviewArrBody = json_decode($reviewArr['body'], true);
+
+	        if ($reviewArrBody['status'] === 'REQUEST_DENIED') {
+	            return new WP_Error(
+	                'REQUEST_DENIED',
+	                $reviewArrBody['error_message']
+	            );
+	        }
+	        if ($reviewArrBody['status'] === 'INVALID_REQUEST') {
+	            return new WP_Error(
+	                'INVALID_REQUEST',
+	                __('Invalid request. Please check your place ID for errors.', 'google-reviews')
+	            );
+	        }
+
+	        $reviews = $reviewArrBody['result']['reviews'];
+
+		}
 
         return $reviews;
+
     }
 
 	private function time_elapsed_string($datetime, $full = false) {
@@ -262,14 +334,31 @@ class GRWP_Google_Reviews {
         $output = '<div id="g-review" class="' . $this->options['layout_style'] .'">';
 	    $slider_output = '';
         foreach ($reviews as $review) {
+        	if ( grwp_fs()->is__premium_only() ) {
+        		if ( $showdummy ) {
+	    			$name = $review['author_name'];
+		            $author_url = $review['author_url'];
+		            $profile_photo_url = $review['profile_photo_url'];
+		            $rating = $review['rating'];
+		            $text = $review['text'];
 
-            $name = $review['author_name'];
-            $author_url = $review['author_url'];
-            $profile_photo_url = $review['profile_photo_url'];
-            $rating = $review['rating'];
-            $text = $review['text'];
+		            $time = date('m/d/Y', $review['time']);
+        		} else {
+		        	$name              = $review['user']['name'];
+		        	$author_url        = $review['user']['link'];
+		        	$profile_photo_url = $review['user']['thumbnail'];
+		        	$rating            = $review['rating'];
+		        	$text              = $review['snippet'];
+        		}
+        	} else {
+	            $name = $review['author_name'];
+	            $author_url = $review['author_url'];
+	            $profile_photo_url = $review['profile_photo_url'];
+	            $rating = $review['rating'];
+	            $text = $review['text'];
 
-            $time = date('m/d/Y', $review['time']);
+	            $time = date('m/d/Y', $review['time']);
+        	}
 
             $star = '<img src="'. esc_attr(plugin_dir_url( __FILE__ )).'img/svg-star.svg" alt="" />';
             $star_output = '<span class="stars-wrapper">';
@@ -279,7 +368,16 @@ class GRWP_Google_Reviews {
 
             $star_output .= '</span>';
 
-            $star_output .= '<span class="time">' . $this->time_elapsed_string( date('Y-m-d h:i:s', $review['time']) ) .'</span>';
+            if ( grwp_fs()->is__premium_only() ) {
+            	if ( $showdummy ) {
+            		$star_output .= '<span class="time">' . $this->time_elapsed_string( date('Y-m-d h:i:s', $review['time']) ) .'</span>';
+            	} else {
+            		$star_output .= '<span class="time">' . $review['date'] .'</span>';
+            	}
+            } else {
+            	$star_output .= '<span class="time">' . $this->time_elapsed_string( date('Y-m-d h:i:s', $review['time']) ) .'</span>';
+            }
+
 	        $google_svg = plugin_dir_url( __FILE__ ) . 'img/google-logo-svg.svg';
 
 	        // @todo: get settings and display grid and/or slider.
@@ -429,6 +527,9 @@ class GRWP_Google_Reviews {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+		$this->loader->add_action( 'wp_ajax_handle_serp_business_search', $plugin_public, 'handle_serp_business_search' );
+        $this->loader->add_action( 'wp_ajax_nopriv_handle_serp_business_search', $plugin_public, 'handle_serp_business_search' );
 
 	}
 

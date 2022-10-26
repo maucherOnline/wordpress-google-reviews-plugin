@@ -1,40 +1,46 @@
 (function( $ ) {
     'use strict';
 
-    const swiper = new Swiper('.mySwiper', {
-        // Optional parameters
-        direction: 'horizontal',
-        slidesPerView: 3,
-        spaceBetween: 0,
-        autoplay: false,
-        loop: true,
-        breakpoints: {
-            // when window width is >= 480px
-            270: {
-                slidesPerView: 1,
-                spaceBetween: 16
-            },
-            690: {
-                slidesPerView: 2,
-                spaceBetween: 24
-            },
-            1024: {
-                slidesPerView: 3,
-                spaceBetween: 24
-            }
-        },
-        // Navigation arrows
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-    });
+    let swiper;
 
-    $(window).resize(function(){
-        var ww = $(window).width()
-        swiperWidth();
-        swiper.update();
-    })
+    if ( $('.mySwiper').length ) {
+        swiper = new Swiper('.mySwiper', {
+            // Optional parameters
+            direction: 'horizontal',
+            slidesPerView: 3,
+            spaceBetween: 0,
+            autoplay: false,
+            loop: true,
+            breakpoints: {
+                // when window width is >= 480px
+                270: {
+                    slidesPerView: 1,
+                    spaceBetween: 16
+                },
+                690: {
+                    slidesPerView: 2,
+                    spaceBetween: 24
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 24
+                }
+            },
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    }
+
+    if ( swiper ) {
+        $(window).resize(function(){
+            var ww = $(window).width()
+            swiperWidth();
+            swiper.update();
+        })
+    }
     $(window).trigger('resize')
 
     function swiperWidth(){
@@ -46,7 +52,9 @@
         $('.mySwiper').css('width', width + 'px');
     }
 
-    swiperWidth();
+    if ( swiper ) {
+        swiperWidth();
+    }
 
     $('.g-review').matchHeight({
         byRow: true,

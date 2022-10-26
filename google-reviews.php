@@ -36,15 +36,21 @@ if ( ! function_exists( 'grwp_fs' ) ) {
                 'premium_slug'        => 'embedder-for-google-reviews-pro',
                 'type'                => 'plugin',
                 'public_key'          => 'pk_6823179f29a329a909c59a7a25a0a',
-                'is_premium'          => false,
+                'is_premium'          => true,
+                'premium_suffix'      => 'Premium',
+                // If your plugin is a serviceware, set this option to false.
+                'has_premium_version' => true,
                 'has_addons'          => false,
-                'has_paid_plans'      => false,
+                'has_paid_plans'      => true,
                 'menu'                => array(
                     'slug'           => 'google-reviews',
                     'first-path'     => 'admin.php?page=google-reviews',
                     'contact'        => false,
                     'support'        => false,
                 ),
+                // Set the SDK to work in a sandbox mode (for development & testing).
+                // IMPORTANT: MAKE SURE TO REMOVE SECRET KEY BEFORE DEPLOYMENT.
+                'secret_key'          => 'sk_n1k[Rs%2sq?HC_3k23p=Gw88*{gMm',
             ) );
         }
 
@@ -55,6 +61,8 @@ if ( ! function_exists( 'grwp_fs' ) ) {
     grwp_fs();
     // Signal that SDK was initiated.
     do_action( 'grwp_fs_loaded' );
+
+    grwp_fs()->add_action( 'after_uninstall', 'grwp_fs_uninstall_cleanup' );
 }
 
 /**
