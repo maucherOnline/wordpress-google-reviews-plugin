@@ -59,7 +59,7 @@
 		 $('.js-serp-business-search').on('keyup', debounce( function(){
 		 	const $this = $(this);
 
-		 	if ( $('body').hasClass('is-loading') || ! $this.val() ) {
+		 	if ( $('body').hasClass('grwp-is-loading') || ! $this.val() ) {
 		 		return;
 		 	}
 
@@ -73,7 +73,7 @@
 					language: js_global.language
 				},
 				beforeSend: function () {
-					$('body').addClass('is-loading');
+					$('body').addClass('grwp-is-loading');
 				},
 				success: function (response) {
 					if ( ! response.success ) {
@@ -90,7 +90,7 @@
 					}
 				},
 				complete: function () {
-					$('body').removeClass('is-loading');
+					$('body').removeClass('grwp-is-loading');
 				}
 			});
 		 }, 500));
