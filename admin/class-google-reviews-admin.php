@@ -381,7 +381,7 @@ class GRWP_Google_ReviewsAdmin {
 
         add_settings_field(
             'reviews_instructions', // id
-            __( 'Review Instructions', 'google-reviews' ), // title
+            __( 'Embedding Instructions', 'google-reviews' ), // title
             array( $this, 'reviews_instructions_callback' ), // callback
             'google-reviews-admin', // page
             'google_reviews_style_layout_setting_section' // section
@@ -523,6 +523,13 @@ class GRWP_Google_ReviewsAdmin {
             isset( $this->google_reviews_options['api_key_0'] ) ? esc_attr( $this->google_reviews_options['api_key_0']) : ''
         );
         printf( __( '<div><p>Head over to <a href="%s" target="_blank">Google Developer Console</a> and create an API key. See short <a href="%s" target="_self">explainer video here.</a></p></div>', 'google-reviews' ), 'https://console.cloud.google.com/apis/dashboard', 'https://www.youtube.com/watch?v=feM25lZkLkA' );
+        printf( __( '<p style="
+    padding: 1rem;
+    border: 2px solid #1f6bae;
+    background: white;
+    margin-top: 1rem;
+    max-width: 665px;
+"><strong>Attention</strong>: Google\'s free version only allows for pulling 5 reviews. If you want to circumvent this, <a href="%s">upgrade to the PRO version</a> and pull ALL reviews, without messing around with API keys and Google :)</p>', 'google-reviews' ), get_site_url().'/wp-admin/admin.php?page=google-reviews-pricing');
     }
 
     /**
@@ -701,7 +708,7 @@ class GRWP_Google_ReviewsAdmin {
             <p>
                 <?php _e( 'Use this shortcode to show your reviews on pages and posts:', 'google-reviews' ); ?>
             </p>
-            <pre>[google-reviews]</pre>
+            <input class="shortcode-container" type="text" disabled="" value="[google-reviews]">
         </div>
 
         <?php

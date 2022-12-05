@@ -5,12 +5,15 @@ Tested up to: 6.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 Tags: google reviews, google, reviews, rating, widget, reviews plugin, google business, testimonial, testimonials, google places reviews, map reviews, google my business
 
 == Description ==
 With a few easy clicks, display your Google Reviews for free, and improve your website user experience and conversions.
 Our Google Reviews plugin displays customer reviews with newly and easily implemented widgets.
+
+⚡ PRO Version to **pull ALL reviews** (no Google API key needed) ⚡
+[https://reviewsembedder.com](https://reviewsembedder.com)
 
 == Innovative Design ==
 Design and create your own widgets, and choose the reviews to build your customer's trust and optimize the website.

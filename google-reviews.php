@@ -9,7 +9,7 @@
  * Plugin Name:       Embedder for Google Reviews
  * Plugin URI:        https://paretodigital.io
  * Description:       This Google Reviews Plugin pulls reviews from Google profiles and displays them on your website.
- * Version:           1.0.1
+ * Version:           1.1.0
  * Requires at least: 5.4
  * Requires PHP:      7.4
  * Tested up to:      6.0
@@ -36,12 +36,16 @@ if ( ! function_exists( 'grwp_fs' ) ) {
                 'premium_slug'        => 'embedder-for-google-reviews-pro',
                 'type'                => 'plugin',
                 'public_key'          => 'pk_6823179f29a329a909c59a7a25a0a',
-                'is_premium'          => true,
+                'is_premium'          => false,
                 'premium_suffix'      => 'Premium',
                 // If your plugin is a serviceware, set this option to false.
                 'has_premium_version' => true,
                 'has_addons'          => false,
                 'has_paid_plans'      => true,
+                'trial'               => array(
+                    'days'               => 4,
+                    'is_require_payment' => true,
+                ),
                 'menu'                => array(
                     'slug'           => 'google-reviews',
                     'first-path'     => 'admin.php?page=google-reviews',
@@ -61,8 +65,6 @@ if ( ! function_exists( 'grwp_fs' ) ) {
     grwp_fs();
     // Signal that SDK was initiated.
     do_action( 'grwp_fs_loaded' );
-
-    grwp_fs()->add_action( 'after_uninstall', 'grwp_fs_uninstall_cleanup' );
 }
 
 /**
