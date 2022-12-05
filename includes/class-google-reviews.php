@@ -274,7 +274,7 @@ class GRWP_Google_Reviews {
      * Put together shortcode / html output
      * @return string|void
      */
-    public function reviews_shortcode() {
+    public function reviews_shortcode($atts = null) {
 
         $allowed_html = [
             'img' => [
@@ -304,6 +304,11 @@ class GRWP_Google_Reviews {
             ],
             'br' => [],
         ];
+
+        // check if shortcode attributes are provided
+        if ( $atts ) {
+            $review_type_override = $atts['type'] == 'grid' ? 'grid' : '';
+        }
 
         // prevent php notize if undefined
         $showdummy = isset($this->options['show_dummy_content']) ? true : false;
@@ -383,7 +388,7 @@ class GRWP_Google_Reviews {
 	        // @todo: get settings and display grid and/or slider.
 	        $display_type = strtolower($this->options['style_2']);
 
-	        if ($display_type === 'slider'){
+	        if ($display_type === 'slider' && $review_type_override !== 'grid'){
 
 		        $slide_duration = $this->options['slide_duration'] ?? '';
 
@@ -398,7 +403,7 @@ class GRWP_Google_Reviews {
         }
 
 
-	    if ($display_type === 'slider'){
+	    if ($display_type === 'slider' && $review_type_override !== 'grid') {
 		    ob_start();
 		    require_once 'partials/slider/slider-header.php';
 		    echo wp_kses($slider_output, $allowed_html);
@@ -414,7 +419,7 @@ class GRWP_Google_Reviews {
 		    $columns_css .= '1fr ';
 	    }
 
-        if ( $display_type === 'slider' ){
+        if ( $display_type === 'slider' && $review_type_override !== 'grid'){
         	ob_start();
 	        require 'partials/slider/style.php';
 	        $output .= ob_get_clean();
