@@ -40,7 +40,7 @@ The Google Reviews WordPress plugin has different styles and layouts and offers 
 💪 **Ultra-fast loading times** - Not only is the embedding process of our widget easy, but its loading time is ultra-fast to ensure the best customer experience.
 
 == PRO Features of the paid version ==
-With premium version, you can pull all Google reviews of a business instead of only 5.
+With [the pro version](https://reviewsembedder.com), you can pull all Google reviews of a business instead of only 5.
 Showing a more significant number of positive comments will make your business website more attractive to your customers and further build trust.
 The premium version also includes additional premium settings with more customization options to increase your sales and conversions.
 The plugin also has a special word filter that enables you to search for powerful and positive words amongst all the reviews and filter reviews by rating option, which will only show 5 or 4-star reviews.
@@ -195,8 +195,7 @@ Statistically, 86% of customers hesitate to purchase from companies with negativ
 2. Sample design of Google Reviews Plugin #2
 3. Sample design of Google Reviews Plugin #3
 4. Sample design of Google Reviews Plugin #4
-4. Sample design of Google Reviews Plugin #5
-5. Configuration Step #1: search for your buiness
+5. Configuration Step #1: search for your business
 6. Configuration Step #2: copy Place ID
 7. Configuration Step #3: paste Place ID
 8. Configuration Step #4: get an API key
