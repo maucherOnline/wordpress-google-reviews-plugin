@@ -310,7 +310,7 @@ class GRWP_Google_Reviews {
             $review_type_override = $atts['type'] == 'grid' ? 'grid' : '';
         }
 
-        // prevent php notize if undefined
+        // prevent php notice if undefined
         $showdummy = isset($this->options['show_dummy_content']) ? true : false;
 
         if ( $showdummy ) {
@@ -328,6 +328,7 @@ class GRWP_Google_Reviews {
         	for ( $i = 0; $i <= 4; $i++ ) {
         		$reviews[] = $reviews[0];
         	}
+
         } else {
         	$reviews = $this->parse_review_json();
         }
@@ -339,6 +340,7 @@ class GRWP_Google_Reviews {
         $output = '<div id="g-review" class="' . $this->options['layout_style'] .'">';
 	    $slider_output = '';
         foreach ($reviews as $review) {
+
         	if ( grwp_fs()->is__premium_only() ) {
         		if ( $showdummy ) {
 	    			$name = $review['author_name'];
@@ -388,30 +390,39 @@ class GRWP_Google_Reviews {
 	        // @todo: get settings and display grid and/or slider.
 	        $display_type = strtolower($this->options['style_2']);
 
-	        if ($display_type === 'slider' && $review_type_override !== 'grid'){
+            // if is slider
+	        if ( $display_type === 'slider' && $review_type_override !== 'grid' ){
 
 		        $slide_duration = $this->options['slide_duration'] ?? '';
 
 	        	ob_start();
 	        	require 'partials/slider/markup.php';
 	        	$slider_output .= ob_get_clean();
-	        } else {
+
+	        }
+            // if is grid
+            else {
+
 	        	ob_start();
 		        require 'partials/grid/markup.php';
 		        $output .= ob_get_clean();
+
 	        }
         }
 
+        // add swiper header and footer if is slider
+	    if ( $display_type === 'slider' && $review_type_override !== 'grid' ) {
 
-	    if ($display_type === 'slider' && $review_type_override !== 'grid') {
 		    ob_start();
 		    require_once 'partials/slider/slider-header.php';
 		    echo wp_kses($slider_output, $allowed_html);
 		    require_once 'partials/slider/slider-footer.php';
 
 		    $output .= ob_get_clean();
+
 	    }
 
+        // set grid columns
 	    $db_grid_columns = isset($this->options['grid_columns']) ? $this->options['grid_columns'] : 3;
 	    $columns_css = '';
 
@@ -419,11 +430,14 @@ class GRWP_Google_Reviews {
 		    $columns_css .= '1fr ';
 	    }
 
+        // add slider styles if is slider
         if ( $display_type === 'slider' && $review_type_override !== 'grid'){
         	ob_start();
 	        require 'partials/slider/style.php';
 	        $output .= ob_get_clean();
-        } else {
+        }
+        // else add grid styles
+        else {
         	ob_start();
 	        require 'partials/grid/style.php';
 	        $output .= ob_get_clean();

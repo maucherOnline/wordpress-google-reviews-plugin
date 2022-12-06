@@ -5,7 +5,7 @@ Tested up to: 6.1.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 Tags: google reviews, google, reviews, rating, widget, reviews plugin, google business, testimonial, testimonials, google places reviews, map reviews, google my business
 
 == Description ==
@@ -14,6 +14,48 @@ Our Google Reviews plugin displays customer reviews with newly and easily implem
 
 ⚡ PRO Version to **pull ALL reviews** (no Google API key needed) ⚡
 [https://reviewsembedder.com](https://reviewsembedder.com)
+
+== Top Features of this Google Reviews Plugin ==
+The Google Reviews WordPress plugin has different styles and layouts and offers easy installation and integration.
+
+- 💪 Pull your Google Reviews from Google My Business / Google Business Profile
+- 💪 Updates every night, automatically
+- 💪 Display Reviews as Slider or Grid
+- 💪 Chose from different layouts
+- 💪 **Free usage** - Our plugin is free to use with different free options to choose from and further increase your conversions and customer experience.
+- 💪 **Display Google reviews in different layouts** - Make your website look more attractive to your customers by choosing different layouts for Google Reviews.
+- 💪 **Use dummy content for testing if you don't have reviews yet** - If you don't have reviews yet, no worries, you can use dummy content for testing and still embed the google reviews plugin on your business website.
+- 💪 **Use high-quality pre-designed styles** - Choose from a variety of high-quality pre-designed styles to catch the eyes of your customers.
+- 💪 **All designs are fully customizable via CSS** - We know how important is the use of CSS for your design, and that's why all of our designs are compatible and fully customizable via CSS.
+- 💪 **Show reviews as a slider or as a grid** - Depending on your preferences, you can choose to show reviews as a slider or as a grid.
+- 💪 **Set the slide duration** - Since attention spam is a significant factor in customer experience, there is an option to optimize the slide duration specifically to the profile of your customers.
+- 💪 **Set the number of columns** -Choose the number of reviews to be seen by setting the number of columns.
+- 💪 **Link reviews to your Google profile** -There is an option to link all reviews to the Google profile of your choice to avoid mistakes when using multiple Google accounts.
+- 💪 **Shortcode integration** - Activate widget on your business website with straightforward shortcode integration.
+- 💪 **Use in any page builder** like, Divi, Classic Editor, Gutenberg, Page Origin, Beaver Builder, WPBakery etc. - Our plugin is available and compatible with a wide variety of page builders, and the process of integration is as simple as pasting a shortcode mentioned in the feature before.
+- 💪 **Save all reviews to WordPress for 100% uptime** -The reviews are kept in the WordPress folder for 100% uptime and easy navigation.
+- 💪 **Boost your SEO** - Make your website rank higher in search results and allow more people and potential customers to discover your excellent products and services.
+- 💪 **Ultra-fast loading times** - Not only is the embedding process of our widget easy, but its loading time is ultra-fast to ensure the best customer experience.
+
+== PRO Features of the paid version ==
+With premium version, you can pull all Google reviews of a business instead of only 5.
+Showing a more significant number of positive comments will make your business website more attractive to your customers and further build trust.
+The premium version also includes additional premium settings with more customization options to increase your sales and conversions.
+The plugin also has a special word filter that enables you to search for powerful and positive words amongst all the reviews and filter reviews by rating option, which will only show 5 or 4-star reviews.
+
+- ⭐ **Pull ALL Google reviews of a business, instead of only 5** (Google standard API only allows for 5) - Google standard API only allows 5 comments to be displayed, and with our PRO feature, you can display as many google reviews as you like! Placing more google reviews will show your customers the quality of your products and services and ensure they keep coming back to buy from you again.
+- ⭐ **Get access to additional premium designs** - The premium package contains many different and valuable tools to design further and customize your google reviews widget more easily.
+- ⭐ **Filter reviews by special words** - With an easy-to-use special words filter, you can search and select reviews that only contain words you were searching for in the first place. This will make your review selection process effortless and less time-consuming.
+- ⭐ **Filter reviews by rating (showing 5 or 4 star reviews only)** - The premium version of our wordpress google reviews plugin has special reviews by rating feature only available to premium users. The feature allows only 5 or 4-star reviews to be shown on your wordpress website.
+
+== How does the installation process look like? ==
+1. Install the plugin
+2. Activate it
+3. Paste your Google Developer API Key
+4. Search for your local business within our plugins interface and paste the GMB ID
+5. Configure the visual settings
+6. Save
+7. Paste shortcode in pages, posts, or even Elementor, Beaver Builder, WP Bakery etc.
 
 == Innovative Design ==
 Design and create your own widgets, and choose the reviews to build your customer's trust and optimize the website.
@@ -28,35 +70,6 @@ Our plugin will boost your SEO and rank your website higher in search results be
 == Easy and Intuitive Implementation ==
 The implementation process is simple, and it only takes a couple of clicks to finish everything. You must copy your business website's link into our Google Reviews widget and follow the steps outlined in the video above.
 After that, you are all set and can finally focus on other aspects of your business.
-
-== Free Plugin Features ==
-The Google Reviews Wordpress plugin has different styles and layouts and offers easy installation and integration.
-
-- **Free usage** - Our plugin is free to use with different free options to choose from and further increase your conversions and customer experience.
-- **Display Google reviews in different layouts** - Make your website look more attractive to your customers by choosing different layouts for Google Reviews.
-- **Use dummy content for testing if you don't have reviews yet** - If you don't have reviews yet, no worries, you can use dummy content for testing and still embed the google reviews plugin on your business website.
-- **Use high-quality pre-designed styles** - Choose from a variety of high-quality pre-designed styles to catch the eyes of your customers.
-- **All designs are fully customizable via CSS** - We know how important is the use of CSS for your design, and that's why all of our designs are compatible and fully customizable via CSS.
-- **Show reviews as a slider or as a grid** - Depending on your preferences, you can choose to show reviews as a slider or as a grid.
-- **Set the slide duration** - Since attention spam is a significant factor in customer experience, there is an option to optimize the slide duration specifically to the profile of your customers.
-- **Set the number of columns** -Choose the number of reviews to be seen by setting the number of columns.
-- **Link reviews to your Google profile** -There is an option to link all reviews to the Google profile of your choice to avoid mistakes when using multiple Google accounts.
-- **Shortcode integration** - Activate widget on your business website with straightforward shortcode integration.
-- **Use in any page builder** like, Divi, Classic Editor, Gutenberg, Page Origin, Beaver Builder, WPBakery etc. - Our plugin is available and compatible with a wide variety of page builders, and the process of integration is as simple as pasting a shortcode mentioned in the feature before.
-- **Save all reviews to WordPress for 100% uptime** -The reviews are kept in the WordPress folder for 100% uptime and easy navigation.
-- **Boost your SEO** - Make your website rank higher in search results and allow more people and potential customers to discover your excellent products and services.
-- **Ultra-fast loading times** - Not only is the embedding process of our widget easy, but its loading time is ultra-fast to ensure the best customer experience.
-
-== Pro Plugin Features ==
-With premium version, you can pull all Google reviews of a business instead of only 5.
-Showing a more significant number of positive comments will make your business website more attractive to your customers and further build trust.
-The premium version also includes additional premium settings with more customization options to increase your sales and conversions.
-The plugin also has a special word filter that enables you to search for powerful and positive words amongst all the reviews and filter reviews by rating option, which will only show 5 or 4-star reviews.
-
-- **Pull ALL Google reviews of a business, instead of only 5** (Google standard API only allows for 5) - Google standard API only allows 5 comments to be displayed, and with our PRO feature, you can display as many google reviews as you like! Placing more google reviews will show your customers the quality of your products and services and ensure they keep coming back to buy from you again.
-- **Get access to additional premium designs** - The premium package contains many different and valuable tools to design further and customize your google reviews widget more easily.
-- **Filter reviews by special words** - With an easy-to-use special words filter, you can search and select reviews that only contain words you were searching for in the first place. This will make your review selection process effortless and less time-consuming.
-- **Filter reviews by rating (showing 5 or 4 star reviews only)** - The premium version of our wordpress google reviews plugin has special reviews by rating feature only available to premium users. The feature allows only 5 or 4-star reviews to be shown on your wordpress website.
 
 == What are the benefits of embedding Google reviews on your website? ==
 
@@ -79,22 +92,16 @@ Here are some reasons why Google reviews help with your search engine optimizati
 - **Google likes to read** - Google "reads" your site to understand the world. The more content there is about your website, the more it will know about your business. Sometimes customers will unintentionally describe your products and services to Google and help him add SEO value to your business.
 - **Great reviews => More stars => Increased CTR (Click Through Rate)** - People would usually choose to buy products and services from a business that has more star ratings. Still, those depend on the number of reviews, especially the positive ones you get from your customers. If more people review your business, you will have a better rating and, in turn, increase your website traffic and CTA.
 
-
 == Language ==
 Since many companies conduct business globally, the Google Reviews widget must support various languages.
 Our WordPress plugin supports Afrikaans, Albanian, Arabic, Armenian, Azerbaijani, Bengali, Bosnian, Bulgarian, Chinese, Croatian, Czech, Danish, Dutch, English, Estonian, Finnish, French, Galician, Georgian, German, Greek, Hebrew, Hindi, Hungarian, Icelandic, Indonesian, Italian, Japanese, Kazakh, Korean, Lithuanian, Macedonian, Malay, Norwegian, Persian, Polish, Portuguese, Romanian, Russian, Scottish Gaelic, Serbian, Slovak, Slovenian, Spanish, Swedish, Thai, Turkish, Ukrainian, Vietnamese, and Welsh.
 
-== How does the installation process look like? ==
-1. Install the plugin
-2. Activate it
-3. Paste your Google Developer API Key
-4. Search for your local business within our plugins interface and paste the GMB ID
-5. Configure the visual settings
-6. Save
-
 == Support ==
-Here are the most common questions associated with google review plugins and review widgets.
+Here are the most common questions associated with Google Review Plugins and reviews widgets.
 If you have any problem whatsoever or didn't find the answer you were looking for, make sure to contact our support at WordPress.org support forums.
+
+== ⚡ PRO Version to **pull ALL reviews** (no Google API key needed) ⚡ ==
+[https://reviewsembedder.com](https://reviewsembedder.com)
 
 == Frequently Asked Questions ==
 
@@ -178,10 +185,21 @@ Negative reviews can seriously impact your business by decreasing your conversio
 Statistically, 86% of customers hesitate to purchase from companies with negative reviews.
 
 == Screenshots ==
-1. Sample design of Google Reviews #01
-2. Sample design of Google Reviews #01
-3. Sample design of Google Reviews #01
+1. Sample design of Google Reviews Plugin #1
+2. Sample design of Google Reviews Plugin #2
+3. Sample design of Google Reviews Plugin #3
+4. Sample design of Google Reviews Plugin #4
+4. Sample design of Google Reviews Plugin #5
+5. Configuration Step #1: search for your buiness
+6. Configuration Step #2: copy Place ID
+7. Configuration Step #3: paste Place ID
+8. Configuration Step #4: get an API key
+9. Configuration Step #5: paste API key and hit SAVE
+10. Configuration Step #6: configure design and use shortcode to display reviews
+
 
 == Changelog ==
 = 1.0 =
 * Published first version
+= 1.1.3 =
+* Added screenshots
