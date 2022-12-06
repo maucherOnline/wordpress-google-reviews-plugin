@@ -19,24 +19,40 @@ Our Google Reviews plugin displays customer reviews with newly and easily implem
 The Google Reviews WordPress plugin has different styles and layouts and offers easy installation and integration.
 
 💪 **Pull your Google Reviews** from Google My Business / Google Business Profile
+
 💪 **Updates every night**, automatically
+
 💪 **Display reviews** as Slider or Grid
+
 💪 **Chose** from different layouts
 
 == Plus ==
 💪 **Free usage** - Our plugin is free to use with different free options to choose from and further increase your conversions and customer experience.
+
 💪 **Display Google reviews in different layouts** - Make your website look more attractive to your customers by choosing different layouts for Google Reviews.
+
 💪 **Use dummy content for testing if you don't have reviews yet** - If you don't have reviews yet, no worries, you can use dummy content for testing and still embed the google reviews plugin on your business website.
+
 💪 **Use high-quality pre-designed styles** - Choose from a variety of high-quality pre-designed styles to catch the eyes of your customers.
+
 💪 **All designs are fully customizable via CSS** - We know how important is the use of CSS for your design, and that's why all of our designs are compatible and fully customizable via CSS.
+
 💪 **Show reviews as a slider or as a grid** - Depending on your preferences, you can choose to show reviews as a slider or as a grid.
+
 💪 **Set the slide duration** - Since attention spam is a significant factor in customer experience, there is an option to optimize the slide duration specifically to the profile of your customers.
+
 💪 **Set the number of columns** -Choose the number of reviews to be seen by setting the number of columns.
+
 💪 **Link reviews to your Google profile** -There is an option to link all reviews to the Google profile of your choice to avoid mistakes when using multiple Google accounts.
+
 💪 **Shortcode integration** - Activate widget on your business website with straightforward shortcode integration.
+
 💪 **Use in any page builder** like, Divi, Classic Editor, Gutenberg, Page Origin, Beaver Builder, WPBakery etc. - Our plugin is available and compatible with a wide variety of page builders, and the process of integration is as simple as pasting a shortcode mentioned in the feature before.
+
 💪 **Save all reviews to WordPress for 100% uptime** -The reviews are kept in the WordPress folder for 100% uptime and easy navigation.
+
 💪 **Boost your SEO** - Make your website rank higher in search results and allow more people and potential customers to discover your excellent products and services.
+
 💪 **Ultra-fast loading times** - Not only is the embedding process of our widget easy, but its loading time is ultra-fast to ensure the best customer experience.
 
 == PRO Features of the paid version ==
