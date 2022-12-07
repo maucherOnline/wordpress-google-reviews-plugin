@@ -29,7 +29,7 @@ if (! defined('ABSPATH'))
         font-size: 16px;
         line-height: 1.5;
     }
-    #g-review .gr-inner-header p a{
+    #g-review .gr-inner-header p a {
         text-decoration: none;
         font: normal normal bold 18px/22px Roboto;
         letter-spacing: 0px;
@@ -53,7 +53,7 @@ if (! defined('ABSPATH'))
         margin: 0 10px 0 0 !important;
         vertical-align: middle !important;
     }
-    #g-review .g-review .gr-stars .time{
+    #g-review .g-review .gr-stars .time {
         vertical-align: middle;
         margin-left: 15px;
         font: normal normal normal 14px/17px Roboto;
@@ -61,11 +61,11 @@ if (! defined('ABSPATH'))
         color: #0000004D;
     }
 
-    #g-review .gr-inner-body{
+    #g-review .gr-inner-body {
         margin-top: 10px;
     }
 
-    #g-review .gr-inner-body p{
+    #g-review .gr-inner-body p {
         margin-bottom: 1.6em;
         text-align: left;
         font: normal normal normal 14px/19px Roboto;

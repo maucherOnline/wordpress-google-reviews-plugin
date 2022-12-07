@@ -9,12 +9,12 @@
  * Plugin Name:       Embedder for Google Reviews
  * Plugin URI:        https://paretodigital.io
  * Description:       This Google Reviews Plugin pulls reviews from Google profiles and displays them on your website.
- * Version:           1.1.31
+ * Version:           1.1.32
  * Requires at least: 5.4
  * Requires PHP:      7.4
  * Tested up to:      6.1.1
  * Author:            ParetoDigital.de
- * Author URI:        https://paretodigital.de
+ * Author URI:        https://reviewsembedder.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       embedder-for-google-reviews

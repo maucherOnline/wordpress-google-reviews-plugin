@@ -308,7 +308,18 @@ class GRWP_Google_Reviews {
         // check if shortcode attributes are provided
         if ( $atts ) {
             $review_type_override = $atts['type'] == 'grid' ? 'grid' : '';
+            $review_style_override = $atts['style'] !== null ? $atts['style'] : '';
+
+            // map shortcode value to proper css class
+            if ( $review_style_override ) {
+                if ( $review_style_override == '1') $review_style_override = 'layout_style-1';
+                elseif ( $review_style_override == '2') $review_style_override = 'layout_style-2';
+                elseif ( $review_style_override == '3') $review_style_override = 'layout_style-3';
+                elseif ( $review_style_override == '4') $review_style_override = 'layout_style-4';
+                else $review_style_override = '';
+            }
         }
+
 
         // prevent php notice if undefined
         $showdummy = isset($this->options['show_dummy_content']) ? true : false;
@@ -337,116 +348,133 @@ class GRWP_Google_Reviews {
             return __( 'No reviews available', 'google-reviews' );
         }
 
-        $output = '<div id="g-review" class="' . $this->options['layout_style'] .'">';
-	    $slider_output = '';
-        foreach ($reviews as $review) {
+        return $this->reviews_output($reviews, $showdummy, $review_type_override, $allowed_html, $review_style_override);
 
-        	if ( grwp_fs()->is__premium_only() ) {
-        		if ( $showdummy ) {
-	    			$name = $review['author_name'];
-		            $author_url = $review['author_url'];
-		            $profile_photo_url = $review['profile_photo_url'];
-		            $rating = $review['rating'];
-		            $text = $review['text'];
+    }
 
-		            $time = date('m/d/Y', $review['time']);
-        		} else {
-		        	$name              = $review['user']['name'];
-		        	$author_url        = $review['user']['link'];
-		        	$profile_photo_url = $review['user']['thumbnail'];
-		        	$rating            = $review['rating'];
-		        	$text              = $review['snippet'];
-        		}
-        	} else {
-	            $name = $review['author_name'];
-	            $author_url = $review['author_url'];
-	            $profile_photo_url = $review['profile_photo_url'];
-	            $rating = $review['rating'];
-	            $text = $review['text'];
+    private function reviews_output( $reviews, $showdummy, $review_type_override, $allowed_html, $review_style_override ) {
 
-	            $time = date('m/d/Y', $review['time']);
-        	}
+        // check if style settings are overwritten by shortcode settings
+        $layout_stlye = $this->options['layout_style'];
+        if ( $review_style_override !== null && $review_style_override !== '' ) {
+            $layout_stlye = $review_style_override;
+        }
 
+        // loop through reviews
+        $output = '<div id="g-review" class="' . $layout_stlye .'">';
+        $slider_output = '';
+        foreach ( $reviews as $review ) {
+
+            // dummy content not necessary for premium version
+            if ( grwp_fs()->is__premium_only() ) {
+                if ( $showdummy ) {
+                    $name = $review['author_name'];
+                    $author_url = $review['author_url'];
+                    $profile_photo_url = $review['profile_photo_url'];
+                    $rating = $review['rating'];
+                    $text = $review['text'];
+
+                    $time = date('m/d/Y', $review['time']);
+                } else {
+                    $name              = $review['user']['name'];
+                    $author_url        = $review['user']['link'];
+                    $profile_photo_url = $review['user']['thumbnail'];
+                    $rating            = $review['rating'];
+                    $text              = $review['snippet'];
+                }
+            }
+
+            // but for free version...
+            else {
+                $name = $review['author_name'];
+                $author_url = $review['author_url'];
+                $profile_photo_url = $review['profile_photo_url'];
+                $rating = $review['rating'];
+                $text = $review['text'];
+
+                $time = date('m/d/Y', $review['time']);
+            }
+
+            // count and prepare stars
             $star = '<img src="'. esc_attr(plugin_dir_url( __FILE__ )).'img/svg-star.svg" alt="" />';
             $star_output = '<span class="stars-wrapper">';
             for ($i = 1; $i <= $rating; $i++) {
                 $star_output .= $star;
             }
-
             $star_output .= '</span>';
 
+            // prepare time elapsed string
             if ( grwp_fs()->is__premium_only() ) {
-            	if ( $showdummy ) {
-            		$star_output .= '<span class="time">' . $this->time_elapsed_string( date('Y-m-d h:i:s', $review['time']) ) .'</span>';
-            	} else {
-            		$star_output .= '<span class="time">' . $review['date'] .'</span>';
-            	}
+                if ( $showdummy ) {
+                    $star_output .= '<span class="time">' . $this->time_elapsed_string( date('Y-m-d h:i:s', $review['time']) ) .'</span>';
+                } else {
+                    $star_output .= '<span class="time">' . $review['date'] .'</span>';
+                }
             } else {
-            	$star_output .= '<span class="time">' . $this->time_elapsed_string( date('Y-m-d h:i:s', $review['time']) ) .'</span>';
+                $star_output .= '<span class="time">' . $this->time_elapsed_string( date('Y-m-d h:i:s', $review['time']) ) .'</span>';
             }
 
-	        $google_svg = plugin_dir_url( __FILE__ ) . 'img/google-logo-svg.svg';
+            $google_svg = plugin_dir_url( __FILE__ ) . 'img/google-logo-svg.svg';
 
-	        // @todo: get settings and display grid and/or slider.
-	        $display_type = strtolower($this->options['style_2']);
+            // get style type
+            $display_type = strtolower($this->options['style_2']);
 
             // if is slider
-	        if ( $display_type === 'slider' && $review_type_override !== 'grid' ){
+            if ( $display_type === 'slider' && $review_type_override !== 'grid' ){
 
-		        $slide_duration = $this->options['slide_duration'] ?? '';
+                $slide_duration = $this->options['slide_duration'] ?? '';
 
-	        	ob_start();
-	        	require 'partials/slider/markup.php';
-	        	$slider_output .= ob_get_clean();
+                ob_start();
+                require 'partials/slider/markup.php';
+                $slider_output .= ob_get_clean();
 
-	        }
+            }
             // if is grid
             else {
 
-	        	ob_start();
-		        require 'partials/grid/markup.php';
-		        $output .= ob_get_clean();
+                ob_start();
+                require 'partials/grid/markup.php';
+                $output .= ob_get_clean();
 
-	        }
+            }
         }
 
         // add swiper header and footer if is slider
-	    if ( $display_type === 'slider' && $review_type_override !== 'grid' ) {
+        if ( $display_type === 'slider' && $review_type_override !== 'grid' ) {
 
-		    ob_start();
-		    require_once 'partials/slider/slider-header.php';
-		    echo wp_kses($slider_output, $allowed_html);
-		    require_once 'partials/slider/slider-footer.php';
+            ob_start();
+            require_once 'partials/slider/slider-header.php';
+            echo wp_kses($slider_output, $allowed_html);
+            require_once 'partials/slider/slider-footer.php';
 
-		    $output .= ob_get_clean();
+            $output .= ob_get_clean();
 
-	    }
+        }
 
         // set grid columns
-	    $db_grid_columns = isset($this->options['grid_columns']) ? $this->options['grid_columns'] : 3;
-	    $columns_css = '';
+        $db_grid_columns = isset($this->options['grid_columns']) ? $this->options['grid_columns'] : 3;
+        $columns_css = '';
 
-	    for ($x = 0; $x < $db_grid_columns; $x++){
-		    $columns_css .= '1fr ';
-	    }
+        for ($x = 0; $x < $db_grid_columns; $x++){
+            $columns_css .= '1fr ';
+        }
 
         // add slider styles if is slider
         if ( $display_type === 'slider' && $review_type_override !== 'grid'){
-        	ob_start();
-	        require 'partials/slider/style.php';
-	        $output .= ob_get_clean();
+            ob_start();
+            require 'partials/slider/style.php';
+            $output .= ob_get_clean();
         }
         // else add grid styles
         else {
-        	ob_start();
-	        require 'partials/grid/style.php';
-	        $output .= ob_get_clean();
+            ob_start();
+            require 'partials/grid/style.php';
+            $output .= ob_get_clean();
         }
 
         $output .= '</div>';
 
         return wp_kses($output, $allowed_html);
-
     }
 
 	/**

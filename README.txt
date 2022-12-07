@@ -2,10 +2,10 @@
 Contributors: paretodigital
 Tags: google reviews, google reviews plugin, google reviews widget, google reviews block, google reviews slider
 Tested up to: 6.1.1
-Requires PHP: 7.0
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.1.31
+Stable tag: 1.1.32
 Tags: google reviews, google, reviews, rating, widget, reviews plugin, google business, testimonial, testimonials, google places reviews, map reviews, google my business
 
 == Description ==
