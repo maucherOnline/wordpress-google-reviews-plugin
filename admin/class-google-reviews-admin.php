@@ -152,7 +152,11 @@ class GRWP_Google_ReviewsAdmin {
                 'type'      => [],
                 'name'      => [],
                 'checked'   => [],
-                'value'     => []
+                'value'     => [],
+                'min'       => [],
+                'max'       => [],
+                'step'      => [],
+
             ],
         ];
     }
@@ -209,7 +213,7 @@ class GRWP_Google_ReviewsAdmin {
         $imgpath = plugin_dir_url(__FILE__) .'img/';
 
         echo '<div class="wrap">';
-        require_once plugin_dir_path(__FILE__) .'/includes/how-to.php';
+        require_once plugin_dir_path(__FILE__) .'/includes/how-to-premium.php';
         echo '</div>';
     }
 
@@ -306,7 +310,7 @@ class GRWP_Google_ReviewsAdmin {
 
         add_settings_field(
             'show_dummy_content', // id
-            __( 'Show Dummy Content', 'google-reviews' ), // title
+            __( 'Show dummy content', 'google-reviews' ), // title
             array( $this, 'show_dummy_content_callback' ), // callback
             'google-reviews-admin', // page
             'google_reviews_setting_section' // section
@@ -349,7 +353,7 @@ class GRWP_Google_ReviewsAdmin {
 
         add_settings_field(
             'reviews_language_3', // id
-            __( 'Reviews Language', 'google-reviews' ), // title
+            __( 'Reviews language', 'google-reviews' ), // title
             array( $this, 'reviews_language_3_callback' ), // callback
             'google-reviews-admin', // page
             'google_reviews_setting_section' // section
@@ -394,7 +398,7 @@ class GRWP_Google_ReviewsAdmin {
         }else{
 	        add_settings_field(
 		        'slide_duration', // id
-		        __( 'Slide Duration', 'google-reviews' ), // title
+		        __( 'Slide duration (milliseconds)', 'google-reviews' ), // title
 		        array( $this, 'slide_duration_callback' ), // callback
 		        'google-reviews-admin', // page
 		        'google_reviews_style_layout_setting_section' // section
@@ -403,15 +407,26 @@ class GRWP_Google_ReviewsAdmin {
 
 	    add_settings_field(
 		    'layout_style', // id
-		    __( 'Layout Style', 'google-reviews' ), // title
+		    __( 'Layout style', 'google-reviews' ), // title
 		    array( $this, 'layout_style_callback' ), // callback
 		    'google-reviews-admin', // page
 		    'google_reviews_style_layout_setting_section' // section
 	    );
 
+        // Option for filtering out bad reviews
+        if ( grwp_fs()->is__premium_only() ) {
+            add_settings_field(
+                'filter_below_5_stars', // id
+                __('Minimum rating (stars)', 'google-reviews'), // title
+                array($this, 'filter_below_5_stars_callback'), // callback
+                'google-reviews-admin', // page
+                'google_reviews_style_layout_setting_section' // section
+            );
+        }
+
         add_settings_field(
             'reviews_instructions', // id
-            __( 'Embedding Instructions', 'google-reviews' ), // title
+            __( 'Embedding instructions', 'google-reviews' ), // title
             array( $this, 'reviews_instructions_callback' ), // callback
             'google-reviews-admin', // page
             'google_reviews_style_layout_setting_section' // section
@@ -466,8 +481,12 @@ class GRWP_Google_ReviewsAdmin {
 		    $sanitary_values['layout_style'] = $input['layout_style'];
 	    }
 
-	    if ( isset( $input['slide_duration'] ) ) {
-		    $sanitary_values['slide_duration'] = $input['slide_duration'];
+        if ( isset( $input['show_dummy_content'] ) ) {
+            $sanitary_values['show_dummy_content'] = sanitize_text_field( $input['show_dummy_content'] );
+        }
+
+	    if ( isset( $input['filter_below_5_stars'] ) ) {
+		    $sanitary_values['filter_below_5_stars'] = $input['filter_below_5_stars'];
 	    }
 
         if ( isset( $input['reviews_language_3'] ) ) {
@@ -475,6 +494,26 @@ class GRWP_Google_ReviewsAdmin {
         }
 
         return $sanitary_values;
+    }
+
+    public function filter_below_5_stars_callback() {
+        ob_start();
+        ?>
+
+        <input type="number"
+               name="google_reviews_option_name[filter_below_5_stars]"
+               id="filter_below_5_stars"
+               min="1"
+               max="5"
+               step="1"
+               value="<?php echo esc_attr( ! empty( $this->google_reviews_options['filter_below_5_stars'] ) ? $this->google_reviews_options['filter_below_5_stars'] : '5' ); ?>"
+        />
+
+        <?php
+        $html = ob_get_clean();
+
+        echo wp_kses($html, $this->allowed_html);
+
     }
 
     public function google_reviews_section_info() {

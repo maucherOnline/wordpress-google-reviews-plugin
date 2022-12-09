@@ -5,7 +5,7 @@ Tested up to: 6.1.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.1.32
+Stable tag: 1.2
 Tags: google reviews, google, reviews, rating, widget, reviews plugin, google business, testimonial, testimonials, google places reviews, map reviews, google my business
 
 == Description ==
@@ -43,8 +43,6 @@ The Google Reviews WordPress plugin has different styles and layouts and offers 
 
 💪 **Set the number of columns** -Choose the number of reviews to be seen by setting the number of columns.
 
-💪 **Link reviews to your Google profile** -There is an option to link all reviews to the Google profile of your choice to avoid mistakes when using multiple Google accounts.
-
 💪 **Shortcode integration** - Activate widget on your business website with straightforward shortcode integration.
 
 💪 **Use in any page builder** like, Divi, Classic Editor, Gutenberg, Page Origin, Beaver Builder, WPBakery etc. - Our plugin is available and compatible with a wide variety of page builders, and the process of integration is as simple as pasting a shortcode mentioned in the feature before.
@@ -64,8 +62,6 @@ The plugin also has a special word filter that enables you to search for powerfu
 ⭐ **Pull ALL Google reviews of a business, instead of only 5** (Google standard API only allows for 5) - Google standard API only allows 5 comments to be displayed, and with our PRO feature, you can display as many google reviews as you like! Placing more google reviews will show your customers the quality of your products and services and ensure they keep coming back to buy from you again.
 
 ⭐ **Get access to additional premium designs** - The premium package contains many different and valuable tools to design further and customize your google reviews widget more easily.
-
-⭐ **Filter reviews by special words** - With an easy-to-use special words filter, you can search and select reviews that only contain words you were searching for in the first place. This will make your review selection process effortless and less time-consuming.
 
 ⭐ **Filter reviews by rating (showing 5 or 4 star reviews only)** - The premium version of our wordpress google reviews plugin has special reviews by rating feature only available to premium users. The feature allows only 5 or 4-star reviews to be shown on your wordpress website.
 

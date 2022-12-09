@@ -366,7 +366,9 @@ class GRWP_Google_Reviews {
 
             // dummy content not necessary for premium version
             if ( grwp_fs()->is__premium_only() ) {
+
                 if ( $showdummy ) {
+
                     $name = $review['author_name'];
                     $author_url = $review['author_url'];
                     $profile_photo_url = $review['profile_photo_url'];
@@ -374,12 +376,23 @@ class GRWP_Google_Reviews {
                     $text = $review['text'];
 
                     $time = date('m/d/Y', $review['time']);
-                } else {
+
+                }
+
+                else {
+
                     $name              = $review['user']['name'];
                     $author_url        = $review['user']['link'];
                     $profile_photo_url = $review['user']['thumbnail'];
                     $rating            = $review['rating'];
                     $text              = $review['snippet'];
+
+                    // step over rating if minimum stars are not met
+                    $min_rating = intval($this->options['filter_below_5_stars']);
+                    if ( $rating < $min_rating ) {
+                        continue;
+                    }
+
                 }
             }
 
