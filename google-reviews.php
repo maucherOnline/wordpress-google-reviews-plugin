@@ -9,7 +9,7 @@
  * Plugin Name:       Embedder for Google Reviews
  * Plugin URI:        https://paretodigital.io
  * Description:       This Google Reviews Plugin pulls reviews from Google profiles and displays them on your website.
- * Version:           1.1.32
+ * Version:           1.1.33
  * Requires at least: 5.4
  * Requires PHP:      7.4
  * Tested up to:      6.1.1
@@ -21,7 +21,10 @@
  * Domain Path:       /languages
  */
 
-if ( ! function_exists( 'grwp_fs' ) ) {
+if ( function_exists( 'grwp_fs' ) ) {
+    grwp_fs()->set_basename( true, __FILE__ );
+}
+else {
     // Create a helper function for easy SDK access.
     function grwp_fs() {
         global $grwp_fs;
@@ -65,55 +68,11 @@ if ( ! function_exists( 'grwp_fs' ) ) {
     grwp_fs();
     // Signal that SDK was initiated.
     do_action( 'grwp_fs_loaded' );
-}
 
-/**
- * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
- */
-define( 'GRWP_GOOGLE_REVIEWS_VERSION', '1.0.0' );
 
-/**
- * The code that runs during plugin activation.
- * This action is documented in includes/class-google-reviews-activator.php
- */
-function grwp_activate_google_reviews() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-google-reviews-activator.php';
-	GRWP_Google_Reviews_Activator::activate();
-}
-
-/**
- * The code that runs during plugin deactivation.
- * This action is documented in includes/class-google-reviews-deactivator.php
- */
-function grwp_deactivate_google_reviews() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-google-reviews-deactivator.php';
-	GRWP_Google_Reviews_Deactivator::deactivate();
-}
-
-register_activation_hook( __FILE__, 'grwp_activate_google_reviews' );
-register_deactivation_hook( __FILE__, 'grwp_deactivate_google_reviews' );
-
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-require plugin_dir_path( __FILE__ ) . 'includes/class-google-reviews.php';
-
-/**
- * Begins execution of the plugin.
- *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    1.0.0
- */
-function grwp_run_google_reviews() {
-
-	$plugin = new GRWP_Google_Reviews();
-	$plugin->run();
+    require plugin_dir_path( __FILE__ ) . 'includes/class-google-reviews.php';
+    require plugin_dir_path( __FILE__ ) . 'includes/startup-helpers.php';
 
 }
-grwp_run_google_reviews();
+
+

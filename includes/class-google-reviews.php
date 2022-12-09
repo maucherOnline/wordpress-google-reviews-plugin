@@ -154,7 +154,6 @@ class GRWP_Google_Reviews {
 
         }
 
-
     }
 
     /**

@@ -172,19 +172,49 @@ class GRWP_Google_ReviewsAdmin {
             75 // position
         );
 
-        add_submenu_page(
-        'google-reviews',
-        'How to',
-        'How to',
-        'manage_options',
-        'my-top-level-slug',
-        array( $this, 'google_reviews_create_sub_page_how_to')
-        );
+        if ( grwp_fs()->is__premium_only() ) {
+
+            add_submenu_page(
+                'google-reviews',
+                'How to',
+                'How to',
+                'manage_options',
+                'how-to-premium-version',
+                array($this, 'google_reviews_create_sub_page_how_to_premium')
+            );
+
+        }
+
+        else {
+
+            add_submenu_page(
+                'google-reviews',
+                'How to',
+                'How to',
+                'manage_options',
+                'how-to-free-version',
+                array($this, 'google_reviews_create_sub_page_how_to')
+            );
+
+        }
 
     }
 
     /**
-     * Backend How to sub page
+     * Backend how to subpage for premium version
+     * @return void
+     */
+    public function google_reviews_create_sub_page_how_to_premium() {
+        global $imgpath;
+        $imgpath = plugin_dir_url(__FILE__) .'img/';
+
+        echo '<div class="wrap">';
+        require_once plugin_dir_path(__FILE__) .'/includes/how-to.php';
+        echo '</div>';
+    }
+
+    /**
+     * Backend how to subpage for free version
      * @return void
      */
     public function google_reviews_create_sub_page_how_to() {
