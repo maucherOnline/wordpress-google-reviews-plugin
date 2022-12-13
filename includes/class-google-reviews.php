@@ -63,6 +63,8 @@ class GRWP_Google_Reviews {
 	 */
 	protected $options = null;
 
+    protected $api_url;
+
 	/**
 	 * Define the core functionality of the plugin.
 	 *
@@ -76,9 +78,14 @@ class GRWP_Google_Reviews {
 
 		if ( defined( 'GRWP_GOOGLE_REVIEWS_VERSION' ) ) {
 			$this->version = GRWP_GOOGLE_REVIEWS_VERSION;
-		} else {
+		}
+        else {
 			$this->version = '1.0.0';
 		}
+
+        // @todo use this instead of single strings within methods
+        $this->api_url = 'https://api.reviewsembedder.com';
+
 		$this->plugin_name = 'google-reviews';
 		$this->options = get_option( 'google_reviews_option_name' );
 
@@ -190,7 +197,7 @@ class GRWP_Google_Reviews {
 
 			$raw       = get_option('gr_latest_results');
 	        $reviewArr = json_decode($raw, true);
-	        $reviews   = $reviewArr['reviews'];
+	        $reviews   = $reviewArr;
 
 		} else {
 
