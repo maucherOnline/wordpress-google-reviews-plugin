@@ -10,12 +10,14 @@ if (! defined('ABSPATH'))
 
 <!-- If we need scrollbar -->
 <div class="swiper-scrollbar"></div>
-</div> <!--swiper-->
-
-
 
 <!-- If we need navigation buttons -->
 <div class="slider-prev-next-wrapper">
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
 </div>
+
+</div> <!--swiper-->
+
+
+

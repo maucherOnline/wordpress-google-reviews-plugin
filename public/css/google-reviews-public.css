@@ -1,4 +1,534 @@
-/**
- * All of the CSS for your public-facing functionality should be
- * included in this file.
+#g-review {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 30px;
+  margin: 30px auto;
+  padding: 0;
+  max-width: 1200px;
+}
+#g-review .g-review {
+  padding: 24px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0 7px 20px #00000029;
+  border-radius: 16px;
+  opacity: 1;
+}
+@media screen and (max-width: 1024px) {
+  #g-review .g-review {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (max-width: 768px) {
+  #g-review .g-review {
+    grid-template-columns: 1fr;
+  }
+}
+#g-review .g-review .gr-inner-header {
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+}
+#g-review .g-review .gr-inner-header p {
+  margin: 0;
+  flex-basis: calc(100% - 60px);
+  font-size: 16px;
+  line-height: 1.5;
+}
+#g-review .g-review .gr-inner-header p a {
+  text-decoration: none;
+  font: normal normal bold 18px/22px Roboto;
+  letter-spacing: 0;
+  color: #5791FF;
+}
+#g-review .g-review .gr-inner-header img.gr-google {
+  margin: 0 10px 10px 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+}
+#g-review .g-review .gr-stars img {
+  display: inline-block !important;
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 10px 0 0 !important;
+  vertical-align: middle !important;
+}
+#g-review .g-review .gr-stars .time {
+  vertical-align: middle;
+  margin-left: 15px;
+  font: normal normal normal 14px/17px Roboto;
+  letter-spacing: 0;
+  color: #0000004D;
+}
+#g-review .g-review .gr-inner-body {
+  margin-top: 10px;
+}
+#g-review .g-review .gr-inner-body p {
+  margin-bottom: 1.6em;
+  text-align: left;
+  font: normal normal normal 14px/19px Roboto;
+  letter-spacing: 0;
+  color: #00000099;
+  line-height: 1.6;
+}
+
+.mCSB_scrollTools {
+  opacity: 1 !important;
+  width: 8px !important;
+  background: rgba(0, 0, 0, 0.1) !important;
+  border-radius: 100px !important;
+}
+.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+  background: rgba(0, 0, 0, 0.2) !important;
+  border-radius: 100px !important;
+  width: 8px !important;
+}
+.mCSB_scrollTools .mCSB_draggerRail {
+  opacity: 0 !important;
+}
+
+/* ------------------------------------------------------------------------- */
+/* G Review Grid 1 */
+/* ------------------------------------------------------------------------- */
+body #g-review.layout_style-1 .g-review {
+  padding: 30px;
+  border-radius: 16px;
+  opacity: 1;
+}
+
+body #g-review.layout_style-1 .gr-inner-header img.gr-profile {
+  margin: 0 20px 10px 0;
+  width: 50px;
+  height: 50px;
+}
+
+body #g-review.layout_style-1 .gr-inner-header p {
+  position: relative;
+  top: -1px;
+  flex-basis: calc(100% - 75px);
+}
+
+body #g-review.layout_style-1 .gr-inner-header p a {
+  padding-right: 20px;
+}
+
+body #g-review.layout_style-1 .g-review .gr-stars img {
+  margin-right: 5px !important;
+}
+
+body #g-review.layout_style-1 .g-review .gr-stars .time {
+  margin-left: 5px;
+}
+
+body #g-review.layout_style-1 .gr-inner-header img.gr-google {
+  width: 20px;
+  height: 20px;
+}
+
+body #g-review.layout_style-1 .gr-inner-body {
+  max-height: 76px;
+  overflow: auto;
+}
+
+body #g-review.layout_style-1 .gr-inner-body p {
+  margin: 0 0 4px;
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.36;
+  letter-spacing: 0;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+body #g-review.layout_style-1 .swiper-button-next,
+body #g-review.layout_style-1 .swiper-button-prev {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+body #g-review.layout_style-1 .g-review {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.16);
+}
+
+/*
+@media (max-width: 1279px) {
+  body #g-review.layout_style-1 {
+    max-width: 100%;
+    padding: 0 20px;
+    gap: 15px;
+  }
+}
+@media (max-width: 1199px) {
+  body #g-review.layout_style-1 {
+    max-width: 100%;
+    padding: 0 0;
+    gap: 10px;
+  }
+}
+@media (max-width: 1023px) {
+  body #g-review.layout_style-1 .g-review {
+    padding: 15px;
+    border-radius: 8px;
+  }
+}
+
+
  */
+/* ------------------------------------------------------------------------- */
+/* G Review Grid 2 */
+/* ------------------------------------------------------------------------- */
+body #g-review.layout_style-2 .g-review {
+  position: relative;
+  padding: 24px 30px 106px;
+  border-radius: 16px;
+  opacity: 1;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0) !important;
+  overflow: hidden;
+}
+
+body #g-review.layout_style-2 .g-review:before {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 89px;
+  display: block;
+  z-index: 0;
+  background: rgba(0, 0, 0, 0.05);
+  display: block;
+  content: "";
+}
+
+body #g-review.layout_style-2 .gr-inner-header {
+  position: static;
+}
+
+body #g-review.layout_style-2 .gr-inner-header img.gr-profile {
+  position: absolute;
+  bottom: 20px;
+  left: 29px;
+  margin: 0;
+}
+
+body #g-review.layout_style-2 .gr-inner-header p {
+  position: static;
+  flex-basis: 100%;
+}
+
+body #g-review.layout_style-2 .gr-inner-header p .gr-stars {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+body #g-review.layout_style-2 .gr-inner-header p br {
+  display: none;
+}
+
+body #g-review.layout_style-2 .gr-inner-header p a {
+  position: absolute;
+  bottom: 34px;
+  left: 100px;
+}
+
+body #g-review.layout_style-2 .g-review .gr-stars img {
+  margin-right: 6px !important;
+}
+
+body #g-review.layout_style-2 .g-review .gr-stars .time {
+  padding-top: 6px;
+  margin-left: 0;
+  margin-right: -1px;
+}
+
+body #g-review.layout_style-2 .gr-inner-header img.gr-google {
+  position: absolute;
+  bottom: 34px;
+  right: 30px;
+  top: auto;
+  width: 20px;
+  height: 20px;
+}
+
+body #g-review.layout_style-2 .gr-inner-body {
+  margin: 21px 0 0;
+  max-height: 76px;
+  overflow: auto;
+}
+
+body #g-review.layout_style-2 .gr-inner-body p {
+  margin: 0;
+  padding-right: 10px;
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.36;
+  letter-spacing: 0;
+  color: rgba(0, 0, 0, 0.6);
+  height: 100%;
+}
+
+body #g-review.layout_style-2 .g-review {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.16);
+}
+
+/*
+@media (max-width: 1279px) {
+  body #g-review.layout_style-2 {
+    max-width: 100%;
+    padding: 0 20px;
+    gap: 15px;
+  }
+}
+@media (max-width: 1199px) {
+  body #g-review.layout_style-2 {
+    max-width: 100%;
+    padding: 0 0;
+    gap: 10px;
+  }
+
+  body #g-review.layout_style-2 .gr-inner-header p a {
+    left: 85px;
+    font-size: 12px;
+  }
+}
+@media (max-width: 1023px) {
+  body #g-review.layout_style-2 .g-review {
+    padding: 15px 15px 110px;
+    border-radius: 8px;
+  }
+}
+*/
+/* ------------------------------------------------------------------------- */
+/* G Review Grid 3 */
+/* ------------------------------------------------------------------------- */
+body #g-review.layout_style-3 .g-review {
+  padding: 29px 30px 32px;
+  border-radius: 16px;
+  opacity: 1;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0) !important;
+  overflow: hidden;
+  text-align: center;
+}
+
+body #g-review.layout_style-3 .gr-inner-header img.gr-profile {
+  display: block;
+  margin: 0 auto 9px;
+}
+
+body #g-review.layout_style-3 .gr-inner-header p {
+  flex-basis: 100%;
+}
+
+body #g-review.layout_style-3 .gr-inner-header p br {
+  display: none;
+}
+
+body #g-review.layout_style-3 .gr-inner-header p a {
+  display: block;
+  margin-bottom: 4px;
+}
+
+body #g-review.layout_style-3 .g-review .gr-stars img {
+  margin-right: 7px !important;
+}
+
+body #g-review.layout_style-3 .g-review .gr-stars .time {
+  margin-left: 5px;
+}
+
+body #g-review.layout_style-3 .gr-inner-header img.gr-google {
+  width: 20px;
+  height: 20px;
+}
+
+body #g-review.layout_style-3 .gr-inner-body {
+  max-height: 76px;
+  overflow: auto;
+}
+
+body #g-review.layout_style-3 .gr-inner-body p {
+  margin: 18px 0 4px;
+  font-size: 14px;
+  line-height: 1.36;
+  letter-spacing: 0;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+body #g-review.layout_style-3 .swiper {
+  padding-top: 25px;
+}
+
+body #g-review.layout_style-3 .swiper .swiper-slide .g-review {
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+body #g-review.layout_style-3 .swiper .swiper-slide-next .g-review {
+  margin-top: -15px;
+  border: 1px solid #5791FF;
+}
+
+/*
+@media (max-width: 1279px) {
+  body #g-review.layout_style-3 {
+    max-width: 100%;
+    padding: 0 20px;
+    gap: 15px;
+  }
+}
+@media (max-width: 1199px) {
+  body #g-review.layout_style-3 {
+    max-width: 100%;
+    padding: 0 0;
+    gap: 10px;
+  }
+}
+@media (max-width: 1023px) {
+  body #g-review.layout_style-3 .g-review {
+    padding: 15px;
+    border-radius: 8px;
+  }
+  body #g-review.layout_style-3 .swiper:before,
+  body #g-review.layout_style-3 .swiper:after {
+    display: none;
+  }
+  body #g-review.layout_style-3 .swiper .swiper-slide .g-review {
+    margin-top: 0;
+    border: 1px solid #5791FF;
+  }
+}
+*/
+/* ------------------------------------------------------------------------- */
+/* G Review Grid 4 */
+/* ------------------------------------------------------------------------- */
+body #g-review.layout_style-4 .g-review {
+  position: relative;
+  padding: 30px 30px 58px;
+  border-radius: 0;
+  opacity: 1;
+}
+
+body #g-review.layout_style-4 .g-review:before {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 45px;
+  display: block;
+  z-index: 0;
+  background: rgba(0, 0, 0, 0.05);
+  display: block;
+  content: "";
+}
+
+body #g-review.layout_style-4 .gr-inner-header {
+  position: static;
+}
+
+body #g-review.layout_style-4 .gr-inner-header img.gr-profile {
+  margin: 0 20px 10px 0;
+}
+
+body #g-review.layout_style-4 .gr-inner-header p {
+  position: static;
+  margin-top: 14px;
+  flex-basis: calc(100% - 70px);
+}
+
+body #g-review.layout_style-4 .g-review .gr-stars {
+  position: absolute;
+  bottom: 12px;
+  left: 30px;
+  right: 30px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+body #g-review.layout_style-4 .g-review .gr-stars img {
+  margin-right: 7px !important;
+}
+
+body #g-review.layout_style-4 .g-review .gr-stars .time {
+  margin-top: 5px;
+  margin-left: 7px;
+}
+
+body #g-review.layout_style-4 .gr-inner-header img.gr-google {
+  top: 45px;
+  right: 30px;
+  width: 20px;
+  height: 20px;
+}
+
+body #g-review.layout_style-4 .gr-inner-body {
+  max-height: 76px;
+  overflow: auto;
+}
+
+body #g-review.layout_style-4 .gr-inner-body p {
+  margin: 0 0 4px;
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.36;
+  letter-spacing: 0;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+body #g-review.layout_style-4 .g-review {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.16);
+}
+
+/*
+@media (max-width: 1279px) {
+  body #g-review.layout_style-4 {
+    max-width: 100%;
+    padding: 0 20px;
+    gap: 15px;
+  }
+}
+@media (max-width: 1199px) {
+  body #g-review.layout_style-4 {
+    max-width: 100%;
+    padding: 0 0;
+    gap: 10px;
+  }
+  body #g-review.layout_style-4 .gr-inner-header img.gr-profile {
+    margin-right: 10px;
+  }
+  body #g-review.layout_style-4 .gr-inner-header p {
+    flex-basis: calc(100% - 100px);
+  }
+}
+@media (max-width: 1023px) {
+  body #g-review.layout_style-4 .g-review {
+    padding: 15px 15px 60px;
+    border-radius: 0;
+  }
+  body #g-review.layout_style-4 .gr-inner-header img.gr-google {
+    top: 30px;
+  }
+}
+@media (max-width: 370px) {
+  body #g-review.layout_style-4 .g-review .gr-stars img {
+    margin-right: 2px !important;
+  }
+  body #g-review.layout_style-4 .g-review .gr-stars .time {
+    margin-left: 2px;
+  }
+}
+
+*/
+
+/*# sourceMappingURL=google-reviews-public.css.map */

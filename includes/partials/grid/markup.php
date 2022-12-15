@@ -39,3 +39,5 @@ if (! defined('ABSPATH'))
 		<p><?php echo esc_html($text); ?></p>
 	</div>
 </div>
+
+

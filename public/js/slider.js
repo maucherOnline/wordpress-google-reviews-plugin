@@ -3,8 +3,9 @@
 
     let swiper;
 
-    if ( $('.mySwiper').length ) {
-        swiper = new Swiper('.mySwiper', {
+    if ( $('.reviews_embedder_slider').length ) {
+
+        swiper = new Swiper('.reviews_embedder_slider', {
             // Optional parameters
             direction: 'horizontal',
             slidesPerView: 3,
@@ -41,6 +42,7 @@
             swiper.update();
         })
     }
+
     $(window).trigger('resize')
 
     function swiperWidth(){
@@ -49,7 +51,7 @@
         if ($('#main').length > 0){
             width = $('#main').innerWidth();
         }
-        $('.mySwiper').css('width', width + 'px');
+        $('.reviews_embedder_slider').css('width', width + 'px');
     }
 
     if ( swiper ) {

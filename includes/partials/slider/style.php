@@ -5,11 +5,6 @@ if (! defined('ABSPATH'))
 ?>
 
 <style>
-    html,
-    body {
-        position: relative;
-        height: 100%;
-    }
 
     .swiper {
         width: 100%;
@@ -46,7 +41,6 @@ if (! defined('ABSPATH'))
     .slider-prev-next-wrapper{
         position: absolute;
         left: 50%;
-        /*top: 78%;*/
     }
 
     .swiper-scrollbar{
@@ -59,13 +53,13 @@ if (! defined('ABSPATH'))
     #g-review {
         margin-bottom: 90px;
     }
+
     #g-review .g-review {
         padding: 24px;
         background: #FFFFFF 0% 0% no-repeat padding-box;
         box-shadow: 0px 7px 20px #00000029;
         border-radius: 16px;
         opacity: 1;
-        margin: 10px;
     }
     #g-review .gr-inner-header {
         display: flex;
@@ -122,4 +116,5 @@ if (! defined('ABSPATH'))
         color: #00000099;
         line-height: 1.6;
     }
+
 </style>

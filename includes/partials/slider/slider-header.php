@@ -5,6 +5,6 @@ if (! defined('ABSPATH'))
 ?>
 
 <!-- Slider main container -->
-<div class="swiper mySwiper">
+<div class="swiper reviews_embedder_slider">
 	<!-- Additional required wrapper -->
 	<div class="swiper-wrapper">
