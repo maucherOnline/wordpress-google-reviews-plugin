@@ -92,7 +92,7 @@ class GRWP_Google_Reviews_Public {
 		if (strtolower($this->options['style_2']) === 'slider'){
 			wp_enqueue_style('swiperjs', plugin_dir_url( __FILE__ ) . 'css/swiper-bundle.min.css', [], '8.15');
 		}
-		wp_enqueue_style('customstyles',  plugin_dir_url( __FILE__ ) . 'css/custom-styles.css', array(), $this->version, 'all');
+
 		wp_enqueue_style('mcustomscrollbar',  plugin_dir_url( __FILE__ ) . 'css/jquery.mCustomScrollbar.css', array(), $this->version, 'all');
 	}
 

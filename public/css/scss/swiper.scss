@@ -1,0 +1,47 @@
+/* ------------------------------------------------------------------------- */
+/* Swiper */
+/* ------------------------------------------------------------------------- */
+
+#g-review {
+  .swiper {
+    padding: 0 0 75px 0;
+    max-width: 100%;
+
+    .swiper-wrapper {
+      .swiper-slide {
+        .g-review {;
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16);
+          height: auto !important;
+        }
+      }
+
+
+    }
+    .slider-prev-next-wrapper {
+
+      .swiper-button-next,
+      .swiper-button-prev {
+        -webkit-transition: all .4s;
+        transition: all .4s;
+
+        position: absolute;
+        margin-top: 120px;
+        width: 40px;
+        height: 40px;
+        color: black;
+        border: 1px solid #bbbbbb;
+        border-radius: 50%;
+        background: #FFFFFF 0% 0% no-repeat padding-box;
+
+        &:after{
+          font-size: 18px;
+          font-weight: bold;
+        }
+
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+}

@@ -284,6 +284,10 @@ class GRWP_Google_ReviewsAdmin {
                 do_settings_sections( 'google-reviews-admin' );
                 ?>
             </form>
+            <h2>
+                <?php _e( 'Preview', 'google-reviews' ); ?>
+            </h2>
+            <?php echo wp_kses(do_shortcode('[google-reviews]'), $this->allowed_html); ?>
         </div>
     <?php }
 
@@ -387,6 +391,7 @@ class GRWP_Google_ReviewsAdmin {
             'google_reviews_style_layout_setting_section' // section
         );
 
+        /*
         if(strtolower($this->google_reviews_options['style_2']) === 'grid'){
 	        add_settings_field(
 		        'grid_columns', // id
@@ -404,6 +409,7 @@ class GRWP_Google_ReviewsAdmin {
 		        'google_reviews_style_layout_setting_section' // section
 	        );
         }
+        */
 
 	    add_settings_field(
 		    'layout_style', // id
@@ -432,13 +438,6 @@ class GRWP_Google_ReviewsAdmin {
             'google_reviews_style_layout_setting_section' // section
         );
 
-        add_settings_field(
-            'reviews_preview', // id
-            __( 'Preview', 'google-reviews' ), // title
-            array( $this, 'reviews_preview_callback' ), // callback
-            'google-reviews-admin', // page
-            'google_reviews_style_layout_setting_section' // section
-        );
     }
 
     /**
@@ -668,7 +667,7 @@ class GRWP_Google_ReviewsAdmin {
                     <?php selected( $layout_style, 'layout_style-' . $i ); ?>
                     value="<?php echo esc_attr( sprintf( 'layout_style-%s', $i ) ) ?>"
                 >
-                    <?php esc_attr_e( __( 'Layout', 'google-reviews' ) . '#' . $i ); ?>
+                    <?php esc_attr_e( __( 'Design', 'google-reviews' ) . ' #' . $i ); ?>
                 </option>
             <?php endfor; ?>
         </select>
@@ -781,13 +780,6 @@ class GRWP_Google_ReviewsAdmin {
         </div>
 
         <?php
-    }
-
-    /**
-     * Echo shortcode for demo/preview purposes
-     */
-    public function reviews_preview_callback() {
-        echo wp_kses(do_shortcode('[google-reviews]'), $this->allowed_html);
     }
 
 }

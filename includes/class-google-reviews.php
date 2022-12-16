@@ -474,9 +474,11 @@ class GRWP_Google_Reviews {
         $db_grid_columns = isset($this->options['grid_columns']) ? $this->options['grid_columns'] : 3;
         $columns_css = '';
 
+        /*
         for ($x = 0; $x < $db_grid_columns; $x++){
             $columns_css .= '1fr ';
         }
+        */
 
         // add slider styles if is slider
         if ( $display_type === 'slider' && $review_type_override !== 'grid'){
@@ -485,11 +487,13 @@ class GRWP_Google_Reviews {
             $output .= ob_get_clean();
         }
         // else add grid styles
+        /*
         else {
             ob_start();
             require 'partials/grid/style.php';
             $output .= ob_get_clean();
         }
+        */
 
         $output .= '</div>';
 

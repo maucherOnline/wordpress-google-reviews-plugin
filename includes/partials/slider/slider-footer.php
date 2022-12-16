@@ -8,9 +8,6 @@ if (! defined('ABSPATH'))
 <!-- If we need pagination -->
 <div class="swiper-pagination"></div>
 
-<!-- If we need scrollbar -->
-<div class="swiper-scrollbar"></div>
-
 <!-- If we need navigation buttons -->
 <div class="slider-prev-next-wrapper">
     <div class="swiper-button-next"></div>

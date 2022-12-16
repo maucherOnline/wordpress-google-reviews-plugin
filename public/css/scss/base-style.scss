@@ -1,0 +1,97 @@
+/* ------------------------------------------------------------------------- */
+/* General styles for reviews
+/* ------------------------------------------------------------------------- */
+
+#g-review {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+  gap: 30px;
+  margin: 30px auto;
+  padding: 0;
+
+  .g-review {
+    padding: 24px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0 7px 20px #00000029;
+    border-radius: 16px;
+    opacity: 1;
+
+    .gr-inner-header {
+      display: flex;
+      flex-flow: row wrap;
+      position: relative;
+
+      p {
+        margin: 0;
+        flex-basis: calc(100% - 60px);
+        font-size: 16px;
+        line-height: 1.5;
+
+        a {
+          text-decoration: none;
+          font: normal normal bold 18px/22px Roboto;
+          letter-spacing: 0;
+          color: #5791FF;
+        }
+      }
+
+      img.gr-google {
+        margin: 0 10px 10px 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    .gr-stars {
+      img {
+        display: inline-block !important;
+        width: 18px !important;
+        height: 18px !important;
+        margin: 0 10px 0 0 !important;
+        vertical-align: middle !important;
+      }
+      .time {
+        vertical-align: middle;
+        margin-left: 15px;
+        font: normal normal normal 14px/17px Roboto;
+        letter-spacing: 0;
+        color: #0000004D;
+      }
+    }
+
+    .gr-inner-body {
+      margin-top: 10px;
+
+      p {
+        margin-bottom: 1.6em;
+        text-align: left;
+        font: normal normal normal 14px/19px Roboto;
+        letter-spacing: 0;
+        color: #00000099;
+        line-height: 1.6;
+      }
+
+      // mCSB_scrollTools
+      .mCSB_scrollTools {
+        opacity: 1 !important;
+        width: 8px !important;
+        background: rgba(0,0,0,0.1) !important;
+        border-radius: 100px !important;
+
+        .mCSB_dragger .mCSB_dragger_bar {
+          background: rgba(0,0,0,0.2) !important;
+          border-radius: 100px !important;
+          width: 8px !important;
+        }
+
+        .mCSB_draggerRail {
+          opacity: 0 !important;
+        }
+
+      }
+    }
+  }
+}
