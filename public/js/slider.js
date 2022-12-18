@@ -38,6 +38,7 @@
 
     }
 
+    /*
     if ( swiper ) {
         $(window).resize(function(){
             var ww = $(window).width()
@@ -67,5 +68,7 @@
         target: null,
         remove: false
     });
+
+     */
 
 })( jQuery );
