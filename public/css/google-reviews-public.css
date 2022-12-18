@@ -11,7 +11,7 @@
 #g-review .g-review {
   padding: 24px;
   background: #FFFFFF 0% 0% no-repeat padding-box;
-  box-shadow: 0 7px 20px #00000029;
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.1607843137);
   border-radius: 16px;
   opacity: 1;
 }
@@ -52,7 +52,7 @@
   margin-left: 15px;
   font: normal normal normal 14px/17px Roboto;
   letter-spacing: 0;
-  color: #0000004D;
+  color: rgba(0, 0, 0, 0.3019607843);
 }
 #g-review .g-review .gr-inner-body {
   margin-top: 10px;
@@ -62,7 +62,7 @@
   text-align: left;
   font: normal normal normal 14px/19px Roboto;
   letter-spacing: 0;
-  color: #00000099;
+  color: rgba(0, 0, 0, 0.6);
   line-height: 1.6;
 }
 #g-review .g-review .gr-inner-body .mCSB_scrollTools {
@@ -308,11 +308,6 @@ body #g-review.layout_style-3 .swiper .swiper-slide .g-review {
   transition: all 0.4s;
 }
 
-body #g-review.layout_style-3 .swiper .swiper-slide-next .g-review {
-  margin-top: -15px;
-  border: 1px solid #5791FF;
-}
-
 /* ------------------------------------------------------------------------- */
 /* G Review Grid 4 */
 /* ------------------------------------------------------------------------- */
@@ -401,12 +396,13 @@ body #g-review.layout_style-4 .g-review {
 /* Swiper */
 /* ------------------------------------------------------------------------- */
 #g-review .swiper {
-  padding: 0 0 75px 0;
+  padding: 0 0 100px 0;
   max-width: 100%;
 }
 #g-review .swiper .swiper-wrapper .swiper-slide .g-review {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16);
   height: auto !important;
+  margin: 13px 10px;
 }
 #g-review .swiper .slider-prev-next-wrapper .swiper-button-next,
 #g-review .swiper .slider-prev-next-wrapper .swiper-button-prev {

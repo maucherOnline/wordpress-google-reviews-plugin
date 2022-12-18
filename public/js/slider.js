@@ -5,34 +5,37 @@
 
     if ( $('.reviews_embedder_slider').length ) {
 
-        swiper = new Swiper('.reviews_embedder_slider', {
-            // Optional parameters
-            direction: 'horizontal',
-            slidesPerView: 3,
-            spaceBetween: 0,
-            autoplay: false,
-            loop: true,
-            breakpoints: {
-                // when window width is >= 480px
-                270: {
-                    slidesPerView: 1,
-                    spaceBetween: 16
+        $('.reviews_embedder_slider').each(function (i, slider) {
+
+            swiper = new Swiper(slider, {
+                cssMode: true,
+                slidesPerView: 1,
+                spaceBetween: 0,
+                autoplay: false,
+                loop: true,
+                breakpointsBase: 'container',
+                breakpoints: {
+                    690: {
+                        slidesPerView: 2,
+                        spaceBetween: 0
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 0
+                    },
+                    1200: {
+                        slidesPerView: 4,
+                        spaceBetween: 0
+                    }
                 },
-                690: {
-                    slidesPerView: 2,
-                    spaceBetween: 24
+                // Navigation arrows
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
                 },
-                1024: {
-                    slidesPerView: 3,
-                    spaceBetween: 24
-                }
-            },
-            // Navigation arrows
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
+            });
         });
+
     }
 
     if ( swiper ) {

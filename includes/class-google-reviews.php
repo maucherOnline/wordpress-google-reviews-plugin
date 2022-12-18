@@ -313,8 +313,15 @@ class GRWP_Google_Reviews {
 
         // check if shortcode attributes are provided
         if ( $atts ) {
-            $review_type_override = $atts['type'] == 'grid' ? 'grid' : '';
-            $review_style_override = $atts['style'] !== null ? $atts['style'] : '';
+
+            $review_type_override = '';
+            $review_style_override = '';
+            if ( isset($atts['type']) ) {
+                $review_type_override = $atts['type'] == 'grid' ? 'grid' : '';
+            }
+            if ( isset($atts['style']) ) {
+                $review_style_override = $atts['style'];
+            }
 
             // map shortcode value to proper css class
             if ( $review_style_override ) {
@@ -350,7 +357,7 @@ class GRWP_Google_Reviews {
         	$reviews = $this->parse_review_json();
         }
 
-        if (is_wp_error($reviews) || $reviews == '' || $reviews == null) {
+        if ( is_wp_error($reviews) || $reviews == '' || $reviews == null ) {
             return __( 'No reviews available', 'google-reviews' );
         }
 
@@ -365,6 +372,9 @@ class GRWP_Google_Reviews {
         if ( $review_style_override !== null && $review_style_override !== '' ) {
             $layout_stlye = $review_style_override;
         }
+
+        // get style type
+        $display_type = strtolower($this->options['style_2']);
 
         // loop through reviews
         $output = '<div id="g-review" class="' . $layout_stlye .'">';
@@ -435,8 +445,7 @@ class GRWP_Google_Reviews {
 
             $google_svg = plugin_dir_url( __FILE__ ) . 'img/google-logo-svg.svg';
 
-            // get style type
-            $display_type = strtolower($this->options['style_2']);
+
 
             // if is slider
             if ( $display_type === 'slider' && $review_type_override !== 'grid' ){
@@ -462,9 +471,9 @@ class GRWP_Google_Reviews {
         if ( $display_type === 'slider' && $review_type_override !== 'grid' ) {
 
             ob_start();
-            require_once 'partials/slider/slider-header.php';
+            require 'partials/slider/slider-header.php';
             echo wp_kses($slider_output, $allowed_html);
-            require_once 'partials/slider/slider-footer.php';
+            require 'partials/slider/slider-footer.php';
 
             $output .= ob_get_clean();
 
