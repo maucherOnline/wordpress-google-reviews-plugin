@@ -311,11 +311,12 @@ class GRWP_Google_Reviews {
             'br' => [],
         ];
 
+        $review_type_override = '';
+        $review_style_override = '';
+
         // check if shortcode attributes are provided
         if ( $atts ) {
 
-            $review_type_override = '';
-            $review_style_override = '';
             if ( isset($atts['type']) ) {
                 $review_type_override = $atts['type'] == 'grid' ? 'grid' : '';
             }
@@ -329,6 +330,7 @@ class GRWP_Google_Reviews {
                 elseif ( $review_style_override == '2') $review_style_override = 'layout_style-2';
                 elseif ( $review_style_override == '3') $review_style_override = 'layout_style-3';
                 elseif ( $review_style_override == '4') $review_style_override = 'layout_style-4';
+                elseif ( $review_style_override == '5') $review_style_override = 'layout_style-5';
                 else $review_style_override = '';
             }
         }

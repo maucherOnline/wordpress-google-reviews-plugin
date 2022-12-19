@@ -662,7 +662,7 @@ class GRWP_Google_ReviewsAdmin {
 		?>
 
         <select name="google_reviews_option_name[layout_style]" id="layout_style">
-            <?php for ( $i = 1; $i <= 4; $i++ ) : ?>
+            <?php for ( $i = 1; $i <= 5; $i++ ) : ?>
                 <option
                     <?php selected( $layout_style, 'layout_style-' . $i ); ?>
                     value="<?php echo esc_attr( sprintf( 'layout_style-%s', $i ) ) ?>"

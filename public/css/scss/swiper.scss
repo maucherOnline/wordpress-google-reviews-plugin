@@ -3,6 +3,34 @@
 /* ------------------------------------------------------------------------- */
 
 #g-review {
+
+  &.layout_style-1 {
+    .g-review {
+      min-height: 210px;
+    }
+  }
+  &.layout_style-2 {
+    .g-review {
+      min-height: 255px;
+    }
+  }
+  &.layout_style-3 {
+    .g-review {
+      min-height: 255px;
+    }
+  }
+  &.layout_style-4 {
+    .g-review {
+      min-height: 255px;
+    }
+  }
+  &.layout_style-5 {
+    .g-review {
+      min-height: 255px;
+    }
+  }
+
+
   .swiper {
     padding: 0 0 100px 0;
     max-width: 100%;
@@ -11,8 +39,8 @@
       .swiper-slide {
         .g-review {;
           box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16);
-          height: auto !important;
           margin: 13px 10px;
+          box-sizing: border-box;
         }
       }
 
