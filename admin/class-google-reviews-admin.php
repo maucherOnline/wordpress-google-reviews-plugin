@@ -549,7 +549,15 @@ class GRWP_Google_ReviewsAdmin {
 
         <div class="serp-container">
             <div class="serp-search">
-                <input type="search" class="regular-text js-serp-business-search" name="google_reviews_option_name[serp_business_name]" id="serp_business_name" value="<?php echo esc_attr( isset( $this->google_reviews_options['serp_business_name'] ) ? $this->google_reviews_options['serp_business_name'] : '' ); ?>" autocomplete="off">
+                <input type="search"
+                       class="regular-text js-serp-business-search"
+                       name="google_reviews_option_name[serp_business_name]"
+                       id="serp_business_name"
+                       value="<?php echo esc_attr( isset( $this->google_reviews_options['serp_business_name'] ) ? $this->google_reviews_options['serp_business_name'] : '' ); ?>"
+                       autocomplete="off"
+                       placeholder="<?php _e('Search for your business', 'google-reviews');?>"
+                />
+                <a class="button pull-reviews"><?php _e('Pull reviews', 'google-reviews');?></a>
 
                 <fieldset class="serp-results"></fieldset><!-- /.serp-results -->
             </div><!-- /.serp-search -->

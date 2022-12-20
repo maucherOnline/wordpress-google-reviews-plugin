@@ -96,11 +96,23 @@ class GRWP_Google_Reviews {
 
         add_shortcode('google-reviews', [ $this, 'reviews_shortcode' ] );
         add_action ( 'get_google_reviews', [ $this, 'get_reviews' ]);
+        add_action( 'rest_api_init', [$this, 'add_reviews_rest_endpoint'] );
 
         if (!wp_next_scheduled('get_google_reviews')) {
             wp_schedule_event( time(), 'daily', 'get_google_reviews' );
         }
 
+    }
+
+    public function add_reviews_rest_endpoint() {
+        register_rest_route( 'google-reviews/v1', '/reviews/)', array(
+            'methods' => 'GET',
+            'callback' => [ $this, 'reviews_rest_endpoint_callback' ]
+        ) );
+    }
+
+    static function reviews_rest_endpoint_callback ($data) {
+        return 'Hallo Test123';
     }
 
     public static function get_reviews() {

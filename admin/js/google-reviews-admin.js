@@ -128,5 +128,19 @@
 		        $resultsContainer.slideUp();
 		    }
 		});
+
+		$('.button.pull-reviews').on('click', function () {
+			$(this)
+				.addClass('pulling');
+				//.attr('disabled', true);
+
+			$.ajax({
+				url: 'http://localhost/reviews/wp-json/google-reviews/v1/reviews/',
+				success: function(response) {
+					console.log(respons);
+				}
+			});
+		});
+
 	 });
 })( jQuery );

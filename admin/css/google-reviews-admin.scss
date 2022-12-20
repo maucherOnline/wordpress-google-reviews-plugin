@@ -2,40 +2,48 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+
 .serp-container {
   display: flex;
   align-items: center;
-}
-.serp-container .serp-search {
-  display: inline-block;
-  width: 100%;
-}
-.serp-container .serp-search input[type=search] {
-  display: inline-block;
-  width: calc(100% - 96px);
-  max-width: 400px;
-}
-.serp-container .serp-search .button.pull-reviews {
-  display: inline-block;
-  width: 100%;
-  max-width: 90px;
-  text-align: center;
-  position: relative;
-}
-.serp-container .serp-search .button.pull-reviews.pulling:after {
-  content: " ";
-  display: block;
-  width: 14px;
-  height: 14px;
-  margin: 8px;
-  border-radius: 50%;
-  border: 3px solid #2271b1;
-  border-color: #2271b1 transparent #2271b1 transparent;
-  animation: lds-dual-ring 1.2s linear infinite;
-  position: absolute;
-  right: -39px;
-  top: -5px;
-  cursor: auto;
+
+  .serp-search {
+    display: inline-block;
+    width: 100%;
+
+    input[type="search"] {
+      display: inline-block;
+      width: calc(100% - 96px);
+      max-width: 400px;
+    }
+    .button.pull-reviews {
+      display: inline-block;
+      width: 100%;
+      max-width: 90px;
+      text-align: center;
+      position: relative;
+
+      &.pulling {
+        &:after {
+          content: ' ';
+          display: block;
+          width: 14px;
+          height: 14px;
+          margin: 8px;
+          border-radius: 50%;
+          border: 3px solid #2271b1;
+          border-color: #2271b1 transparent #2271b1 transparent;
+          animation: lds-dual-ring 1.2s linear infinite;
+          position: absolute;
+          right: -39px;
+          top: -5px;
+          cursor: auto;
+        }
+      }
+
+
+    }
+  }
 }
 
 @keyframes lds-dual-ring {
@@ -46,6 +54,8 @@
     transform: rotate(360deg);
   }
 }
+
+
 .serp-results {
   position: absolute;
   display: flex;
@@ -55,8 +65,8 @@
   max-width: 348px;
   overflow: auto;
   background-color: #f4f4f4;
-  -webkit-box-shadow: 0px 2px 15px -3px rgba(156, 156, 156, 0.65);
-  box-shadow: 0px 2px 15px -3px rgba(156, 156, 156, 0.65);
+  -webkit-box-shadow: 0px 2px 15px -3px rgba(156,156,156,0.65);
+  box-shadow: 0px 2px 15px -3px rgba(156,156,156,0.65);
   display: none;
 }
 
@@ -66,7 +76,7 @@
   align-items: center;
   padding: 10px 15px;
   margin: 0 !important;
-  transition: background-color 0.3s;
+  transition: background-color .3s;
   cursor: pointer;
 }
 
@@ -74,7 +84,7 @@
   background-color: #e0e0e0;
 }
 
-.serp-results .serp-result input[type=radio] {
+.serp-results .serp-result input[type="radio"] {
   float: right;
   order: 2;
   margin-left: 20px;
@@ -94,11 +104,11 @@ input.has-error {
 body.grwp-is-loading {
   overflow: hidden;
   pointer-events: none;
-  transition: opacity 0.4s;
+  transition: opacity .4s;
 }
 
 body.grwp-is-loading:before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -110,7 +120,7 @@ body.grwp-is-loading:before {
 }
 
 body.grwp-is-loading:after {
-  content: url("../img/spinner.gif");
+  content: url('../img/spinner.gif');
   position: absolute;
   top: 50%;
   left: 50%;
@@ -131,13 +141,10 @@ body.grwp-is-loading:after {
 }
 
 .form-table select,
-.form-table input[type=text],
-.form-table input[type=number] {
+.form-table input[type="text"],
+.form-table input[type="number"] {
   min-width: 200px;
 }
-
-.form-table input[type=search] {
+.form-table input[type="search"] {
   border: 1px solid #1f6bae;
 }
-
-/*# sourceMappingURL=google-reviews-admin.css.map */
