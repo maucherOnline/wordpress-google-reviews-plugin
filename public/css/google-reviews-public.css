@@ -11,7 +11,7 @@
 #g-review .g-review {
   padding: 24px;
   background: #FFFFFF 0% 0% no-repeat padding-box;
-  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.1607843137);
+  box-shadow: 0 7px 20px #00000029;
   border-radius: 16px;
   opacity: 1;
 }
@@ -52,7 +52,7 @@
   margin-left: 15px;
   font: normal normal normal 14px/17px Roboto;
   letter-spacing: 0;
-  color: rgba(0, 0, 0, 0.3019607843);
+  color: #0000004D;
 }
 #g-review .g-review .gr-inner-body {
   margin-top: 10px;
@@ -62,7 +62,7 @@
   text-align: left;
   font: normal normal normal 14px/19px Roboto;
   letter-spacing: 0;
-  color: rgba(0, 0, 0, 0.6);
+  color: #00000099;
   line-height: 1.6;
 }
 #g-review .g-review .gr-inner-body .mCSB_scrollTools {
