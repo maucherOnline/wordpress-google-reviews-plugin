@@ -137,7 +137,7 @@
 			const $submit = $('#submit');
 
 			$.ajax({
-				url: location.origin +'/google-reviews/wp-json/google-reviews/v1/pull-reviews/',
+				url: location.origin +'/wp-json/google-reviews/v1/pull-reviews/',
 				beforeSend: function () {
 					$that
 						.addClass('pulling')
