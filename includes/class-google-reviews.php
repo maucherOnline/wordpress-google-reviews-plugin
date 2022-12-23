@@ -98,7 +98,7 @@ class GRWP_Google_Reviews {
         add_action ( 'get_google_reviews', [ $this, 'get_reviews' ]);
 
         if (!wp_next_scheduled('get_google_reviews')) {
-            wp_schedule_event( time(), 'daily', 'get_google_reviews' );
+            wp_schedule_event( time(), 'weekly', 'get_google_reviews' );
         }
 
     }
