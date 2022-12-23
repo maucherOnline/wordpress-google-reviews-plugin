@@ -30,7 +30,7 @@
 	 */
 
 	 $(document).ready(function(){
-	 	function debounce(func, wait, immediate) {
+		function debounce(func, wait, immediate) {
 			let timeout;
 
 			return function() {
@@ -54,7 +54,7 @@
 					func.apply(context, args);
 				}
 			};
-		};
+		}
 
 		 $('.js-serp-business-search').on('keyup', debounce( function(){
 		 	const $this = $(this);
@@ -102,6 +102,8 @@
 
 		 	$('.js-serp-data-id').attr('value', $this.val());
 		 	$('.js-serp-business-search').val($.trim($this.parent().text()));
+
+			 $('#submit').click();
 		 });
 
 		 $('.js-serp-business-search').on('click', function(){
@@ -130,15 +132,29 @@
 		});
 
 		$('.button.pull-reviews').on('click', function () {
-			$(this)
-				.addClass('pulling');
-				//.attr('disabled', true);
+
+			const $that = $(this);
+			const $submit = $('#submit');
 
 			$.ajax({
-				url: 'http://localhost/reviews/wp-json/google-reviews/v1/reviews/',
+				url: location.origin +'/google-reviews/wp-json/google-reviews/v1/pull-reviews/',
+				beforeSend: function () {
+					$that
+						.addClass('pulling')
+						.attr('disabled', true);
+				},
 				success: function(response) {
-					console.log(respons);
+					console.log(response);
+				},
+				complete: function () {
+					$that
+						.removeClass('pulling')
+						.attr('disabled', false);
+
+					$submit.click();
 				}
+
+
 			});
 		});
 

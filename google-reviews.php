@@ -72,25 +72,6 @@ else {
 
     require plugin_dir_path( __FILE__ ) . 'includes/class-google-reviews.php';
     require plugin_dir_path( __FILE__ ) . 'includes/startup-helpers.php';
+    require plugin_dir_path( __FILE__ ) . 'includes/rest-endpoints.php';
 
 }
-
-
-
-function add_reviews_rest_endpoint() {
-    register_rest_route( 'google-reviews/v1', 'reviews/(?P<id>\d+)', array(
-        'methods' => 'GET',
-        'callback' => 'reviews_rest_endpoint_callback',
-    ) );
-
-}
-
-function reviews_rest_endpoint_callback ($request) {
-
-    $test = 'Test123 ' .$request['id'];
-    $response = new WP_REST_Response($test);
-    $response->set_status(200);
-    return $response;
-}
-
-add_action( 'rest_api_init', 'add_reviews_rest_endpoint');

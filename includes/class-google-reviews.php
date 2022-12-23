@@ -113,7 +113,7 @@ class GRWP_Google_Reviews {
 	        $reviews_language = $google_reviews_options['reviews_language_3'];
 
 	        if ( empty( $data_id ) ) {
-	        	update_option( 'gr_latest_results', null );
+	        	//update_option( 'gr_latest_results', null );
 
 	        	return;
 	        }
@@ -139,7 +139,10 @@ class GRWP_Google_Reviews {
 
 	        $get_reviews = json_decode( wp_remote_retrieve_body( $get_reviews ) );
 
-	        update_option( 'gr_latest_results', json_encode( $get_reviews->results ) );
+	        update_option( 'gr_latest_results', [
+                $data_id => json_encode( $get_reviews->results )
+            ]);
+
 
         } else {
 
@@ -171,6 +174,10 @@ class GRWP_Google_Reviews {
     public static function parse_review_json() {
 
 		if ( grwp_fs()->is__premium_only() ) {
+
+            // This generates unneccessary loads on our servers
+
+/*
 			$install_id           = grwp_fs()->get_site()->id;
 			$secret_key           = base64_encode( grwp_fs()->get_site()->secret_key );
 	        $new_hash_request_url = 'https://api.reviewsembedder.com/generate-hash.php';
@@ -194,10 +201,21 @@ class GRWP_Google_Reviews {
 	        if ( ! $is_valid->results ) {
 	        	return;
 	        }
+*/
 
-			$raw       = get_option('gr_latest_results');
-	        $reviewArr = json_decode($raw, true);
-	        $reviews   = $reviewArr;
+			$business  = get_option('google_reviews_option_name');
+            $data_id = $business['serp_data_id'];
+
+            $raw       = get_option('gr_latest_results');
+
+            if ( isset($raw[$data_id]) && $raw[$data_id] ) {
+                $reviewArr = json_decode($raw[$data_id], true);
+                $reviews   = $reviewArr;
+            } else {
+                $reviews = null;
+            }
+
+
 
 		} else {
 

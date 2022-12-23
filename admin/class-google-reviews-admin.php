@@ -159,7 +159,9 @@ class GRWP_Google_ReviewsAdmin {
 
             ],
         ];
+
     }
+
 
     /**
      * Add menu page to backend
@@ -239,6 +241,7 @@ class GRWP_Google_ReviewsAdmin {
      */
     public function on_saving_options($option_name, $before, $after) {
 
+        /*
         // get newest results if core API  settings were changed
         if ($option_name === 'google_reviews_option_name') {
 
@@ -259,6 +262,8 @@ class GRWP_Google_ReviewsAdmin {
             }
 
         }
+
+        */
 
     }
 
