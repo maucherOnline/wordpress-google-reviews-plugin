@@ -21,14 +21,11 @@ global $imgpath;
         <li>If you do not do this, the API will not work. You will <strong>not be able</strong> to pull any reviews</li>
         <li>You will receive a credit that probably will never be used at all.</li>
         <li>The API requests are so rare, it will almost never cause any costs per month (a few cents, if any)</li>
-        <li><img src="<?php echo $imgpath .'activate-payment-01.png'; ?>" alt="" /></li>
         <li>You will be asked to give your company information, phone number and payment data as well.</li>
-        <li><img src="<?php echo $imgpath .'activate-payment-02.png'; ?>" alt="" /></li>
     </ol>
     <li>Create a new project or select a project from the <strong>Select the Project</strong> dropdown.</li>
     <li>After creating the project click <strong>Enabled APIs and Services</strong> option on the project page.</li>
 </ol>
-<img src="<?php echo $imgpath .'step-01.png'; ?>" alt="" />
 
 <h3>Select the Maps JavaScript API</h3>
 
@@ -36,33 +33,24 @@ global $imgpath;
     <li>Select the <strong>Maps JavaScript API</strong> from the APIs list and click the '<strong>Enable</strong>' button.</li>
 </ol>
 
-<img src="<?php echo $imgpath .'step-02.png'; ?>" alt="" />
-<img src="<?php echo $imgpath .'step-03.png'; ?>" alt="" />
-
 <h3>Select the Places API</h3>
 <ol start="5">
     <li>Go back to API Library and select <strong>Places API</strong> and enable it as well.</li>
 </ol>
-<img src="<?php echo $imgpath .'step-04.png'; ?>" alt="" />
-<img src="<?php echo $imgpath .'step-05.png'; ?>" alt="" />
 
 <h3>Create credentials</h3>
 <ol start="6">
     <li>After enabling the APIs, select the APIs and Services option and then the <strong>Credentials</strong> option from the sidebar.</li>
 </ol>
-<img src="<?php echo $imgpath .'step-06.png'; ?>" alt="" />
-<img src="<?php echo $imgpath .'step-07.png'; ?>" alt="" />
 
 <ol start="6">
     <li>On the next page, select <strong>Create Credentials</strong> >&gt; <strong>API Key</strong></li>
 </ol>
-<img src="<?php echo $imgpath .'step-08.png'; ?>" alt="" />
 
 <ol start="7">
     <li>A modal box will appear with the newly created API key.</li>
     <li>Copy the API key and paste it in a text file or somewhere else to keep it for the next steps</li>
 </ol>
-<img src="<?php echo $imgpath .'step-09.png'; ?>" alt="" />
 
 <blockquote><strong>NOTE:</strong> You should restrict the API key, so it can only be used by your domain.</blockquote>
 
@@ -71,7 +59,6 @@ global $imgpath;
     <li>Now, head back to the '<strong>Embedder for Google Reviews</strong>' options panel in your WordPress backend.</li>
     <li>Paste the API key in the API key field.</li>
 </ol>
-<img src="<?php echo $imgpath .'step-10.png'; ?>" alt="" />
 
 <h3>Look up your business</h3>
 <ol start="8">
@@ -80,11 +67,9 @@ global $imgpath;
     <li>Paste the <strong>Place ID</strong> into the text field</li>
     <li>If for any reasons, this should not be working as expected, please go to <a href="https://developers.google.com/maps/documentation/places/web-service/place-id" target="_blank"> this site</a> and try again there.</li>
 </ol>
-<img src="<?php echo $imgpath .'step-11.png'; ?>" alt="" />
-<img src="<?php echo $imgpath .'step-12.png'; ?>" alt="" />
 
 <h3>Hit 'Save Changes' - Done!</h3>
-<img src="<?php echo $imgpath .'step-13.png'; ?>" alt="" />
+
 <ul>
     <li>From now on, your reviews get pulled automatically, once a day</li>
 </ul>

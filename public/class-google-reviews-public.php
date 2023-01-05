@@ -127,8 +127,8 @@ class GRWP_Google_Reviews_Public {
 	}
 
 	public function handle_serp_business_search() {
-        $search_value = isset( $_GET['search'] ) ? $_GET['search'] : '';
-        $language     = isset( $_GET['language'] ) ? $_GET['language'] : 'en';
+        $search_value = isset( $_GET['search'] ) ? sanitize_text_field($_GET['search']) : '';
+        $language     = isset( $_GET['language'] ) ? sanitize_text_field($_GET['language']) : 'en';
 
         $install_id = grwp_fs()->get_site()->id;
         $secret_key = base64_encode( grwp_fs()->get_site()->secret_key );

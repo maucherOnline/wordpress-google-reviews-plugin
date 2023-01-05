@@ -175,34 +175,6 @@ class GRWP_Google_Reviews {
 
 		if ( grwp_fs()->is__premium_only() ) {
 
-            // This generates unneccessary loads on our servers
-
-/*
-			$install_id           = grwp_fs()->get_site()->id;
-			$secret_key           = base64_encode( grwp_fs()->get_site()->secret_key );
-	        $new_hash_request_url = 'https://api.reviewsembedder.com/generate-hash.php';
-
-	        $new_hash = wp_remote_get( $new_hash_request_url, array(
-	        	'headers' => array(
-	        		'Authorization' => $secret_key
-	        	)
-	        ) );
-
-			$is_valid_url = sprintf( 'https://api.reviewsembedder.com/validate-reviews.php?install_id=%s&validate_reviews=1', $install_id );
-
-			$is_valid = wp_remote_get( $is_valid_url, array(
-	        	'headers' => array(
-	        		'Authorization' => wp_remote_retrieve_body( $new_hash )
-	        	)
-	        ) );
-
-	        $is_valid = json_decode( wp_remote_retrieve_body( $is_valid ) );
-
-	        if ( ! $is_valid->results ) {
-	        	return;
-	        }
-*/
-
 			$business  = get_option('google_reviews_option_name');
             $data_id = $business['serp_data_id'];
 

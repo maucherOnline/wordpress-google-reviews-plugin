@@ -214,9 +214,9 @@ class GRWP_Google_ReviewsAdmin {
         global $imgpath;
         $imgpath = plugin_dir_url(__FILE__) .'img/';
 
-        echo '<div class="wrap">';
+        echo wp_kses('<div class="wrap">', $this->allowed_html);
         require_once plugin_dir_path(__FILE__) .'/includes/how-to-premium.php';
-        echo '</div>';
+        echo wp_kses('</div>', $this->allowed_html);
     }
 
     /**
@@ -227,9 +227,9 @@ class GRWP_Google_ReviewsAdmin {
         global $imgpath;
         $imgpath = plugin_dir_url(__FILE__) .'img/';
 
-        echo '<div class="wrap">';
+        echo wp_kses('<div class="wrap">', $this->allowed_html);
         require_once plugin_dir_path(__FILE__) .'/includes/how-to.php';
-        echo '</div>';
+        echo wp_kses('</div>', $this->allowed_html);
     }
 
     /**
@@ -592,7 +592,7 @@ class GRWP_Google_ReviewsAdmin {
         <?php
         $html = ob_get_clean();
 
-        echo $html;
+        echo wp_kses($html, $this->allowed_html);
     }
 
     /**
