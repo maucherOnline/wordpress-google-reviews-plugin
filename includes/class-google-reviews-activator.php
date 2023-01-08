@@ -31,6 +31,7 @@ class GRWP_Google_Reviews_Activator {
 	 */
 	public static function activate() {
         add_option('gr_latest_results','');
+        add_option('gr_latest_results_free','');
 	}
 
 }

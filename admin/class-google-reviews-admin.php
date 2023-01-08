@@ -233,7 +233,7 @@ class GRWP_Google_ReviewsAdmin {
     }
 
     /**
-     * Fire API request when core options are changed to check
+     * Fire API request when free api options are changed to check
      * for connection issues and get latest reviews
      * @param $option_name
      * @param $before
@@ -241,13 +241,13 @@ class GRWP_Google_ReviewsAdmin {
      */
     public function on_saving_options($option_name, $before, $after) {
 
-        /*
-        // get newest results if core API  settings were changed
+
+        // get newest results if free API  settings were changed
         if ($option_name === 'google_reviews_option_name') {
 
-            GRWP_Google_Reviews::get_reviews();
+            GRWP_Google_Reviews::get_reviews_free_api();
 
-            $review_json = GRWP_Google_Reviews::parse_review_json();
+            /*$review_json = GRWP_Google_Reviews::parse_review_json();
 
             if ( is_wp_error( $review_json ) ) {
 
@@ -260,10 +260,11 @@ class GRWP_Google_ReviewsAdmin {
                 );
 
             }
+            */
 
         }
 
-        */
+
 
     }
 
@@ -343,6 +344,7 @@ class GRWP_Google_ReviewsAdmin {
                 array( 'class' => 'hidden' )
             );
         } else {
+            /*
             add_settings_field(
                 'api_key_0', // id
                 __( 'API Key', 'google-reviews' ), // title
@@ -350,6 +352,7 @@ class GRWP_Google_ReviewsAdmin {
                 'google-reviews-admin', // page
                 'google_reviews_setting_section' // section
             );
+            */
 
             add_settings_field(
                 'gmb_id_1', // id
@@ -604,13 +607,6 @@ class GRWP_Google_ReviewsAdmin {
             isset( $this->google_reviews_options['api_key_0'] ) ? esc_attr( $this->google_reviews_options['api_key_0']) : ''
         );
         printf( __( '<div><p>Head over to <a href="%s" target="_blank">Google Developer Console</a> and create an API key. See short <a href="%s" target="_self">explainer video here.</a></p></div>', 'google-reviews' ), 'https://console.cloud.google.com/apis/dashboard', 'https://www.youtube.com/watch?v=feM25lZkLkA' );
-        printf( __( '<p style="
-    padding: 1rem;
-    border: 2px solid #1f6bae;
-    background: white;
-    margin-top: 1rem;
-    max-width: 665px;
-"><strong>Attention</strong>: Google\'s free version only allows for pulling 5 reviews. If you want to circumvent this, <a href="%s">upgrade to the PRO version</a> and pull ALL reviews, without messing around with API keys and Google :)</p>', 'google-reviews' ), get_site_url().'/wp-admin/admin.php?page=google-reviews-pricing');
     }
 
     /**
@@ -618,12 +614,20 @@ class GRWP_Google_ReviewsAdmin {
      */
     public function gmb_id_1_callback() {
         printf(
-            '<input class="regular-text" type="text" name="google_reviews_option_name[gmb_id_1]" id="gmb_id_1" value="%s">',
-            isset( $this->google_reviews_options['gmb_id_1'] ) ? esc_attr( $this->google_reviews_options['gmb_id_1']) : ''
+            '<input class="regular-text" 
+                            type="text" 
+                            name="google_reviews_option_name[gmb_id_1]" 
+                            id="gmb_id_1" 
+                            value="%s"
+                            placeholder="%s">',
+            isset( $this->google_reviews_options['gmb_id_1'] ) ? esc_attr( $this->google_reviews_options['gmb_id_1']) : '',
+            __( 'Search for your business below and paste the place ID here.', 'google-reviews' )
         );
 
-        $echo = '<div><p>' . __( 'Search for your business below and paste the place ID into the field above.', 'google-reviews' ) . '</p></div>';
-        $echo .= '<iframe height="200" style="height: 200px; width: 100%; max-width: 700px;display:block;" src="https://geo-devrel-javascript-samples.web.app/samples/places-placeid-finder/app/dist/" allow="fullscreen; "></iframe>';
+        $echo = '<br><br><iframe height="200" style="height: 200px; width: 100%; max-width: 700px;display:block;" src="https://geo-devrel-javascript-samples.web.app/samples/places-placeid-finder/app/dist/" allow="fullscreen; "></iframe>';
+        ob_start();
+        printf( __( '<p><strong>Attention</strong>: Google\'s free version only allows for pulling 5 reviews. <br>If you want to circumvent this, <a href="%s">upgrade to the PRO version</a> and pull ALL reviews.</p>', 'google-reviews' ), get_site_url().'/wp-admin/admin.php?page=google-reviews-pricing');
+        $echo .= ob_get_clean();
 
         echo wp_kses($echo, $this->allowed_html);
 

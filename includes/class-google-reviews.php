@@ -113,7 +113,6 @@ class GRWP_Google_Reviews {
 	        $reviews_language = $google_reviews_options['reviews_language_3'];
 
 	        if ( empty( $data_id ) ) {
-	        	//update_option( 'gr_latest_results', null );
 
 	        	return;
 	        }
@@ -144,27 +143,20 @@ class GRWP_Google_Reviews {
             ]);
 
 
-        } else {
-
-        	$api_key_0 = $google_reviews_options['api_key_0'];
-	        $gmb_id_1  = $google_reviews_options['gmb_id_1'];
-
-	        // https://developers.google.com/maps/faq#languagesupport
-	        $reviews_language = $google_reviews_options['reviews_language_3'];
-            $url =
-	        $url = 'https://maps.googleapis.com/maps/api/place/details/json?place_id='
-	            .$gmb_id_1
-	            .'&key='
-	            .$api_key_0
-	            .'&fields=reviews&language='
-	            .$reviews_language;
-
-	        $result = wp_remote_get($url);
-
-        	update_option('gr_latest_results', json_encode($result));
-
         }
 
+    }
+
+    static function get_reviews_free_api() {
+
+        $google_reviews_options = get_option( 'google_reviews_option_name' );
+        $gmb_id_1  = $google_reviews_options['gmb_id_1'];
+        $reviews_language = $google_reviews_options['reviews_language_3'];
+        $url = 'https://api.reviewsembedder.com/free-api.php?gmb='.$gmb_id_1.'&language='.$reviews_language;
+
+        $result = wp_remote_get($url);
+
+        update_option('gr_latest_results_free', json_encode($result));
     }
 
     /**
@@ -177,7 +169,8 @@ class GRWP_Google_Reviews {
 		if ( grwp_fs()->is__premium_only() ) {
 
 			$business  = get_option('google_reviews_option_name');
-            $data_id = $business['serp_data_id'];
+            $data_id = isset($business['serp_data_id']) && $business['serp_data_id'] ? $business['serp_data_id'] : null;
+
 
             $raw       = get_option('gr_latest_results');
 
@@ -188,11 +181,11 @@ class GRWP_Google_Reviews {
                 $reviews = null;
             }
 
-
-
 		} else {
 
-			$raw           = get_option('gr_latest_results');
+			$raw           = get_option('gr_latest_results_free');
+            if ($raw == null || $raw == '') return null;
+
 	        $reviewArr     = json_decode($raw, true);
 	        $reviewArrBody = json_decode($reviewArr['body'], true);
 
