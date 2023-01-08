@@ -106,7 +106,11 @@ class GRWP_Google_ReviewsAdmin {
 
         add_action( 'admin_menu', array( $this, 'google_reviews_add_plugin_page' ) );
         add_action( 'admin_init', array( $this, 'google_reviews_page_init' ) );
-        add_action( 'updated_option', array( $this, 'on_saving_options' ), 10, 3 );
+
+        // only for free version
+        if ( ! grwp_fs()->is__premium_only() ) {
+            add_action('updated_option', array($this, 'on_saving_options'), 10, 3);
+        }
 
         $this->plugin_name = $plugin_name;
         $this->version = $version;
