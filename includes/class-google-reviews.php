@@ -151,6 +151,7 @@ class GRWP_Google_Reviews {
 
 	        // https://developers.google.com/maps/faq#languagesupport
 	        $reviews_language = $google_reviews_options['reviews_language_3'];
+            $url =
 	        $url = 'https://maps.googleapis.com/maps/api/place/details/json?place_id='
 	            .$gmb_id_1
 	            .'&key='
