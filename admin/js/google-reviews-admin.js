@@ -103,7 +103,8 @@
 		 	$('.js-serp-data-id').attr('value', $this.val());
 		 	$('.js-serp-business-search').val($.trim($this.parent().text()));
 
-			 $('#submit').click();
+	 		$('.button.pull-reviews').attr('disabled', true);
+		 	$('#submit').click();
 		 });
 
 		 $('.js-serp-business-search').on('click', function(){
@@ -131,6 +132,7 @@
 		    }
 		});
 
+		// pull reviews button
 		$('.button.pull-reviews').on('click', function () {
 
 			const $that = $(this);

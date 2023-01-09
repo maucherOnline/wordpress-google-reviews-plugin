@@ -251,7 +251,7 @@ class GRWP_Google_ReviewsAdmin {
 
             GRWP_Google_Reviews::get_reviews_free_api();
 
-            /*$review_json = GRWP_Google_Reviews::parse_review_json();
+            $review_json = GRWP_Google_Reviews::parse_review_json();
 
             if ( is_wp_error( $review_json ) ) {
 
@@ -264,11 +264,8 @@ class GRWP_Google_ReviewsAdmin {
                 );
 
             }
-            */
 
         }
-
-
 
     }
 

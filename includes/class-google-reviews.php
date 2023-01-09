@@ -113,7 +113,6 @@ class GRWP_Google_Reviews {
 	        $reviews_language = $google_reviews_options['reviews_language_3'];
 
 	        if ( empty( $data_id ) ) {
-
 	        	return;
 	        }
 
@@ -156,6 +155,20 @@ class GRWP_Google_Reviews {
 
         $result = wp_remote_get($url);
 
+        $review_json = GRWP_Google_Reviews::parse_review_json();
+
+        if ( is_wp_error( $review_json ) ) {
+
+            add_settings_error(
+
+                'google_reviews_option_name',
+                esc_attr( 'settings_updated' ),
+                $review_json->get_error_message()
+
+            );
+
+        }
+
         update_option('gr_latest_results_free', json_encode($result));
     }
 
@@ -171,8 +184,7 @@ class GRWP_Google_Reviews {
 			$business  = get_option('google_reviews_option_name');
             $data_id = isset($business['serp_data_id']) && $business['serp_data_id'] ? $business['serp_data_id'] : null;
 
-
-            $raw       = get_option('gr_latest_results');
+            $raw = get_option('gr_latest_results');
 
             if ( isset($raw[$data_id]) && $raw[$data_id] ) {
                 $reviewArr = json_decode($raw[$data_id], true);
@@ -183,8 +195,14 @@ class GRWP_Google_Reviews {
 
 		} else {
 
-			$raw           = get_option('gr_latest_results_free');
-            if ($raw == null || $raw == '') return null;
+			$raw =  get_option('gr_latest_results_free');
+
+            if ($raw == null || $raw == '') {
+                return new WP_Error(
+                    'REQUEST_DENIED',
+                    'Result was emtpy.'
+                );
+            }
 
 	        $reviewArr     = json_decode($raw, true);
 	        $reviewArrBody = json_decode($reviewArr['body'], true);
