@@ -208,15 +208,13 @@ Statistically, 86% of customers hesitate to purchase from companies with negativ
 3. Sample design of Google Reviews Plugin #3
 4. Sample design of Google Reviews Plugin #4
 5. Configuration Step #1: search for your business
-6. Configuration Step #2: copy Place ID
-7. Configuration Step #3: paste Place ID
-8. Configuration Step #4: get an API key
-9. Configuration Step #5: paste API key and hit SAVE
-10. Configuration Step #6: configure design and use shortcode to display reviews
-
+6. Configuration Step #2: copy Place ID, paste Place ID
+7. Configuration Step #3: configure design and use shortcode to display reviews
 
 == Changelog ==
 = 1.0 =
 * Published first version
 = 1.1.3 =
 * Added screenshots
+= 1.3.2 =
+* Added free API
