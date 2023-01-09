@@ -5,14 +5,14 @@ Tested up to: 6.1.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 Tags: google reviews, google, reviews, rating, widget, reviews plugin, google business, testimonial, testimonials, google places reviews, map reviews, google my business
 
 == Description ==
 With a few easy clicks, display your Google Reviews for free, and improve your website user experience and conversions.
 Our Google Reviews plugin displays customer reviews with newly and easily implemented widgets.
 
-⚡ PRO Version to **pull ALL reviews** (no Google API key needed) ⚡
+⚡ PRO Version to **pull ALL reviews**
 [https://reviewsembedder.com](https://reviewsembedder.com)
 
 == Top Features of this Google Reviews Plugin ==
@@ -24,7 +24,7 @@ The Google Reviews WordPress plugin has different styles and layouts and offers 
 
 💪 **Display reviews** as Slider or Grid
 
-💪 **Chose** from different layouts
+💪 **Choose** from different layouts
 
 == Plus ==
 💪 **Free usage** - Our plugin is free to use with different free options to choose from and further increase your conversions and customer experience.
@@ -41,13 +41,11 @@ The Google Reviews WordPress plugin has different styles and layouts and offers 
 
 💪 **Set the slide duration** - Since attention spam is a significant factor in customer experience, there is an option to optimize the slide duration specifically to the profile of your customers.
 
-💪 **Set the number of columns** -Choose the number of reviews to be seen by setting the number of columns.
-
 💪 **Shortcode integration** - Activate widget on your business website with straightforward shortcode integration.
 
 💪 **Use in any page builder** like, Divi, Classic Editor, Gutenberg, Page Origin, Beaver Builder, WPBakery etc. - Our plugin is available and compatible with a wide variety of page builders, and the process of integration is as simple as pasting a shortcode mentioned in the feature before.
 
-💪 **Save all reviews to WordPress for 100% uptime** -The reviews are kept in the WordPress folder for 100% uptime and easy navigation.
+💪 **Save all reviews to WordPress for 100% uptime** - reviews are kept in the WordPress database for 100% uptime and easy navigation.
 
 💪 **Boost your SEO** - Make your website rank higher in search results and allow more people and potential customers to discover your excellent products and services.
 
@@ -68,11 +66,10 @@ The plugin also has a special word filter that enables you to search for powerfu
 == How does the installation process look like? ==
 1. Install the plugin
 2. Activate it
-3. Paste your Google Developer API Key
-4. Search for your local business within our plugins interface and paste the GMB ID
-5. Configure the visual settings
-6. Save
-7. Paste shortcode in pages, posts, or even Elementor, Beaver Builder, WP Bakery etc.
+3. Search for your local business within our plugins interface and paste the GMB ID
+4. Configure the visual settings
+5. Save
+6. Paste shortcode in pages, posts, or even Elementor, Beaver Builder, WP Bakery etc.
 
 == Innovative Design ==
 Design and create your own widgets, and choose the reviews to build your customer's trust and optimize the website.
@@ -118,7 +115,6 @@ Here are the most common questions associated with Google Review Plugins and rev
 If you have any problem whatsoever or didn't find the answer you were looking for, make sure to contact our support at WordPress.org support forums.
 
 == ⚡ PRO Version to pull ALL reviews ⚡ ==
-== (no Google API key needed) ==
 [https://reviewsembedder.com](https://reviewsembedder.com)
 
 == Frequently Asked Questions ==
@@ -155,12 +151,11 @@ It's easier to click over for more information, and your customers have more inf
 = How do I add reviews to my website? =
 
 Follow these steps to add google reviews to website:
-1. Paste your Google Developer API Key when you install the plugin.
-2. Search for your local business within our plugin interface and paste the GMB ID.
-3. Configure the visual settings and choose the design that suits your Google business website the most.
-4. Save.
-5. Copy the code.
-6. Paste it on the page/post where you want your customer reviews to be seen.
+1. Search for your local business within our plugin interface and paste the GMB ID.
+2. Configure the visual settings and choose the design that suits your Google business website the most.
+3. Save.
+4. Copy the code.
+5. Paste it on the page/post where you want your customer reviews to be seen.
 
 = Should you put reviews on your website? =
 
