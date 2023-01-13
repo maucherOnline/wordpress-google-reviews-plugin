@@ -1,6 +1,6 @@
 <?php
 
-global $imgpath; ?>
+?>
 
 <h1>How to use the premium version</h1>
 <ol>
