@@ -87,10 +87,17 @@ class GRWP_Google_ReviewsAdmin {
 
         wp_enqueue_script( 'admin-' . $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/google-reviews-admin.js', array( 'jquery' ), $this->version, false );
 
-        wp_localize_script( 'admin-' . $this->plugin_name, 'js_global', array(
-            'wp_ajax_url' => admin_url( 'admin-ajax.php' ),
-            'language'    => $this->google_reviews_options['reviews_language_3']
-        ) );
+        if (isset($this->google_reviews_options['reviews_language_3'])) {
+            wp_localize_script('admin-' . $this->plugin_name, 'js_global', array(
+                'wp_ajax_url' => admin_url('admin-ajax.php'),
+                'language' => $this->google_reviews_options['reviews_language_3']
+            ));
+        } else {
+            wp_localize_script('admin-' . $this->plugin_name, 'js_global', array(
+                'wp_ajax_url' => admin_url('admin-ajax.php'),
+                'language' => 'en'
+            ));
+        }
 
     }
 
@@ -670,7 +677,7 @@ class GRWP_Google_ReviewsAdmin {
     }
 
 	public function layout_style_callback() {
-		$layout_style = $this->google_reviews_options['layout_style'];
+		$layout_style = isset($this->google_reviews_options['layout_style']) ? $this->google_reviews_options['layout_style'] : '';
 
 		if (empty($layout_style)){
 			$layout_style = '1';
@@ -768,7 +775,7 @@ class GRWP_Google_ReviewsAdmin {
             'zh-Hant'       => 'Chinese (Traditional)',
         ];
 
-        $current =  $this->google_reviews_options['reviews_language_3'];
+        $current = isset($this->google_reviews_options['reviews_language_3']) ? $this->google_reviews_options['reviews_language_3'] : 'en';
 
         ?>
         <select name="google_reviews_option_name[reviews_language_3]" id="reviews_language_3">

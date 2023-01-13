@@ -49,6 +49,7 @@ else {
                     'days'               => 4,
                     'is_require_payment' => true,
                 ),
+                'has_affiliation'     => 'all',
                 'menu'                => array(
                     'slug'           => 'google-reviews',
                     'first-path'     => 'admin.php?page=google-reviews',

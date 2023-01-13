@@ -26,8 +26,18 @@ function grwp_deactivate_google_reviews() {
     GRWP_Google_Reviews_Deactivator::deactivate();
 }
 
+/**
+ * The code that runs during plugin deletion.
+ * This action is documented in includes/class-google-reviews-uninstaller.php
+ */
+function grwp_uninstall_google_reviews() {
+    require_once plugin_dir_path( __FILE__ ) . 'includes/class-google-reviews-uninstaller.php';
+    GRWP_Google_Reviews_Uninstaller::uninstall();
+}
+
 register_activation_hook( __FILE__, 'grwp_activate_google_reviews' );
 register_deactivation_hook( __FILE__, 'grwp_deactivate_google_reviews' );
+register_uninstall_hook( __FILE__, 'grwp_uninstall_google_reviews' );
 
 /**
  * Begins execution of the plugin.
