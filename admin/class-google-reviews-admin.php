@@ -622,15 +622,15 @@ class GRWP_Google_ReviewsAdmin {
                             value="%s"
                             placeholder="%s">',
             isset( $this->google_reviews_options['gmb_id_1'] ) ? esc_attr( $this->google_reviews_options['gmb_id_1']) : '',
-            __( 'Search for your business below and paste the place ID here.', 'google-reviews' )
+            __( 'Paste the Place ID of your business here.', 'google-reviews' )
         );
 
-        $echo = '<br><br><iframe height="200" style="height: 200px; width: 100%; max-width: 700px;display:block;" src="https://geo-devrel-javascript-samples.web.app/samples/places-placeid-finder/app/dist/" allow="fullscreen; "></iframe>';
+        //$echo = '<br><br><iframe height="200" style="height: 200px; width: 100%; max-width: 700px;display:block;" src="https://geo-devrel-javascript-samples.web.app/samples/places-placeid-finder/app/dist/" allow="fullscreen; "></iframe>';
+        printf(__('<br><br><a href="%s" target="_blank">Head over to Google</a> and search for your business. Then copy the Place ID and paste it in the field above.', 'google-reviews'), 'https://developers.google.com/maps/documentation/places/web-service/place-id#find-id');
         ob_start();
         printf( __( '<p><strong>Attention</strong>: Google\'s free version only allows for pulling 5 reviews. <br>If you want to circumvent this, <a href="%s">upgrade to the PRO version</a> and pull ALL reviews.</p>', 'google-reviews' ), get_site_url().'/wp-admin/admin.php?page=google-reviews-pricing');
-        $echo .= ob_get_clean();
 
-        echo wp_kses($echo, $this->allowed_html);
+        //echo wp_kses($echo, $this->allowed_html);
 
     }
 

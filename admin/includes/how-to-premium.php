@@ -5,7 +5,7 @@
 <h1>How to use the premium version</h1>
 <ol>
     <li>Search for your business</li>
-    <li>Chose your preferred language</li>
+    <li>Choose your preferred language</li>
     <li>Configure styling and layout</li>
     <li>Hit 'save'</li>
     <li>Remove checkmark at 'Show Dummy Content'</li>

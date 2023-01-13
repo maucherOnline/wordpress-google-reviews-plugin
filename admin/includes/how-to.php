@@ -3,10 +3,12 @@
 ?>
 <h1>How to use the free version</h1>
 <ol>
-    <li>Search for your business</li>
+    <li>Search for your business
+        <a href="https://developers.google.com/maps/documentation/places/web-service/place-id#find-id" target="_blank">
+            here</a></li>
     <li>Copy the business' Place ID</li>
     <li>Paste the business' Place ID into the Place ID field</li>
-    <li>Chose your preferred language</li>
+    <li>Choose your preferred language</li>
     <li>Configure styling and layout</li>
     <li>Hit 'save'</li>
     <li>Remove checkmark at 'Show Dummy Content'</li>
