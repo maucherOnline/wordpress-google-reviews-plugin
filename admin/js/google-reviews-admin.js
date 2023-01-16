@@ -137,9 +137,12 @@
 
 			const $that = $(this);
 			const $submit = $('#submit');
+			const endpoint = '/wp-json/google-reviews/v1/pull-reviews/';
+			const baseURL = window.wp_base_url ?? location.origin;
+			const url = baseURL + endpoint;
 
 			$.ajax({
-				url: location.origin +'/wp-json/google-reviews/v1/pull-reviews/',
+				url: url,
 				beforeSend: function () {
 					$that
 						.addClass('pulling')

@@ -83,6 +83,8 @@ class GRWP_Google_Reviews {
 			$this->version = '1.0.0';
 		}
 
+        require_once __DIR__ .'/allowed-html.php';
+
         // @todo use this instead of single strings within methods
         $this->api_url = 'https://api.reviewsembedder.com';
 
@@ -284,34 +286,7 @@ class GRWP_Google_Reviews {
      */
     public function reviews_shortcode($atts = null) {
 
-        $allowed_html = [
-            'img' => [
-                'title'             => [],
-                'src'               => [],
-                'alt'               => [],
-                'width'             => [],
-                'height'            => [],
-                'class'             => [],
-                'data-imgtype'      => [],
-                'referrerpolicy'    => [],
-            ],
-            'style'                     => [],
-            'div'                       => [
-                'class'                 => [],
-                'id'                    => [],
-                'data-swiper-autoplay'  => [],
-            ],
-            'a' => [
-                'href'      => [],
-                'target'    => [],
-            ],
-            'p' => [],
-            'span' => [
-                'class' => [],
-                'id'    => [],
-            ],
-            'br' => [],
-        ];
+        global $allowed_html;
 
         $review_type_override = '';
         $review_style_override = '';
