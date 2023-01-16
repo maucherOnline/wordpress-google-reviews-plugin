@@ -9,8 +9,6 @@
  * @package    Google_Reviews
  * @subpackage Google_Reviews/admin
  */
-
-// https://jeremyhixon.com/tool/wordpress-option-page-generator/
 class GRWP_Google_ReviewsAdmin {
 
     private $google_reviews_options;
@@ -18,6 +16,38 @@ class GRWP_Google_ReviewsAdmin {
     private $plugin_name;
 
     private $version;
+
+    private $dir;
+
+    /**
+     * Initialize the class and set its properties.
+     *
+     * @since    1.0.0
+     * @param      string    $plugin_name       The name of this plugin.
+     * @param      string    $version    The version of this plugin.
+     */
+    public function __construct( $plugin_name, $version ) {
+
+        $this->google_reviews_options = get_option( 'google_reviews_option_name' );
+        $this->dir = plugin_dir_path(__FILE__);
+
+        add_action( 'admin_menu', array( $this, 'gr_add_plugin_pages' ) );
+        add_action( 'admin_init', array( $this, 'google_reviews_page_init' ) );
+
+        // only for free version
+        if ( ! grwp_fs()->is__premium_only() ) {
+
+            require_once $this->dir . 'includes/free/class-free-api-service.php';
+            $free_api_service = new Free_API_Service();
+
+        }
+
+        $this->plugin_name = $plugin_name;
+        $this->version = $version;
+
+        require_once $this->dir .'../includes/allowed-html.php';
+
+    }
 
     /**
      * Register the stylesheets for the admin area.
@@ -71,46 +101,18 @@ class GRWP_Google_ReviewsAdmin {
     }
 
     /**
-     * Initialize the class and set its properties.
-     *
-     * @since    1.0.0
-     * @param      string    $plugin_name       The name of this plugin.
-     * @param      string    $version    The version of this plugin.
-     */
-    public function __construct( $plugin_name, $version ) {
-
-	    $this->google_reviews_options = get_option( 'google_reviews_option_name' );
-
-        add_action( 'admin_menu', array( $this, 'gr_add_plugin_pages' ) );
-        add_action( 'admin_init', array( $this, 'google_reviews_page_init' ) );
-
-        // only for free version
-        if ( ! grwp_fs()->is__premium_only() ) {
-            require_once plugin_dir_path(__FILE__) .'includes/free/free-api-service.php';
-            $free_api_service = new Free_API_Service();
-        }
-
-        $this->plugin_name = $plugin_name;
-        $this->version = $version;
-
-        require_once plugin_dir_path(__FILE__) .'../includes/allowed-html.php';
-
-    }
-
-
-    /**
      * Add menu pages to backend
      */
     public function gr_add_plugin_pages() {
 
         // Parent for free and pro version
-        require_once plugin_dir_path(__FILE__) .'includes/global/global-menu-pages.php';
+        require_once $this->dir . 'includes/global/class-global-menu-pages.php';
         new Global_Menu_Pages();
 
         // Pro version only
         if ( grwp_fs()->is__premium_only() ) {
 
-            require_once plugin_dir_path(__FILE__) .'includes/pro/pro-menu-pages.php';
+            require_once $this->dir . 'includes/pro/class-pro-menu-pages.php';
             new Pro_Menu_Pages();
 
         }
@@ -118,7 +120,7 @@ class GRWP_Google_ReviewsAdmin {
         // Free version only
         else {
 
-            require_once plugin_dir_path(__FILE__) .'includes/free/free-menu-pages.php';
+            require_once $this->dir . 'includes/free/class-free-menu-pages.php';
             new Free_Menu_Pages();
 
         }
@@ -131,19 +133,21 @@ class GRWP_Google_ReviewsAdmin {
     public function google_reviews_page_init() {
 
         // Global settings
-        require_once plugin_dir_path(__FILE__) . '/includes/global/global-settings.php';
+        require_once $this->dir . '/includes/global/class-global-settings.php';
         new Global_Settings();
 
         // Settings for pro version
         if ( grwp_fs()->is__premium_only() ) {
-            require_once plugin_dir_path(__FILE__) . '/includes/pro/pro-settings.php';
+
+            require_once $this->dir . '/includes/pro/class-pro-settings.php';
             new Pro_Settings();
+
         }
 
         // Settings for free version
         else {
 
-            require_once plugin_dir_path(__FILE__) . '/includes/free/free-settings.php';
+            require_once $this->dir . '/includes/free/class-free-settings.php';
             new Free_Settings();
 
         }
