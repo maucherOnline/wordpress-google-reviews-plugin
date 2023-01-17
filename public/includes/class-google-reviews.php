@@ -277,7 +277,7 @@ class GRWP_Google_Reviews {
 		}
 
 		if (!$full) $string = array_slice($string, 0, 1);
-		return $string ? implode(', ', $string) . ' ' . __( 'ago', 'google-reviews' ) : __( 'just now', 'google-reviews' );
+		return $string ? implode(', ', $string) . ' class-google-reviews.php' . __( 'ago', 'google-reviews' ) : __( 'just now', 'google-reviews' );
 	}
 
     /**
@@ -321,7 +321,7 @@ class GRWP_Google_Reviews {
         		'author_name'               => __( 'Lorem Ipsum', 'google-reviews' ),
         		'author_url'                => '#',
         		'language'                  => 'en',
-        		'profile_photo_url'         => plugin_dir_url( __FILE__ ) . 'img/sample-photo.png',
+        		'profile_photo_url'         => plugin_dir_url(__FILE__) . 'img/sample-photo.png',
         		'rating'                    => 5,
         		'relative_time_description' => __( 'three months ago', 'google-reviews' ),
         		'text'                      => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'google-reviews' ),
@@ -422,7 +422,7 @@ class GRWP_Google_Reviews {
                 $star_output .= '<span class="time">' . $this->time_elapsed_string( date('Y-m-d h:i:s', $review['time']) ) .'</span>';
             }
 
-            $google_svg = plugin_dir_url( __FILE__ ) . 'img/google-logo-svg.svg';
+            $google_svg = plugin_dir_url(__FILE__) . 'img/google-logo-svg.svg';
 
 
 
@@ -510,24 +510,24 @@ class GRWP_Google_Reviews {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-google-reviews-loader.php';
+		require_once GR_BASE_PATH_ADMIN . 'includes/hooks/class-google-reviews-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-google-reviews-i18n.php';
+		require_once GR_BASE_PATH_ADMIN . 'includes/hooks/class-google-reviews-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-google-reviews-admin.php';
+		require_once GR_BASE_PATH_ADMIN . 'class-google-reviews-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-google-reviews-public.php';
+		require_once GR_BASE_PATH_PUBLIC . 'class-google-reviews-public.php';
 
 
 

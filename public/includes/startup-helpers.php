@@ -13,7 +13,7 @@ define( 'GRWP_GOOGLE_REVIEWS_VERSION', '1.0.0' );
  * This action is documented in includes/class-google-reviews-activator.php
  */
 function grwp_activate_google_reviews() {
-    require_once plugin_dir_path( __FILE__ ) . 'includes/class-google-reviews-activator.php';
+    require_once GR_BASE_PATH_ADMIN . 'hooks/includes/class-google-reviews-activator.php';
     GRWP_Google_Reviews_Activator::activate();
 }
 
@@ -22,7 +22,7 @@ function grwp_activate_google_reviews() {
  * This action is documented in includes/class-google-reviews-deactivator.php
  */
 function grwp_deactivate_google_reviews() {
-    require_once plugin_dir_path( __FILE__ ) . 'includes/class-google-reviews-deactivator.php';
+    require_once GR_BASE_PATH_ADMIN . 'hooks/includes/class-google-reviews-deactivator.php';
     GRWP_Google_Reviews_Deactivator::deactivate();
 }
 
@@ -31,7 +31,7 @@ function grwp_deactivate_google_reviews() {
  * This action is documented in includes/class-google-reviews-uninstaller.php
  */
 function grwp_uninstall_google_reviews() {
-    require_once plugin_dir_path( __FILE__ ) . 'includes/class-google-reviews-uninstaller.php';
+    require_once GR_BASE_PATH_ADMIN . 'hooks/includes/class-google-reviews-uninstaller.php';
     GRWP_Google_Reviews_Uninstaller::uninstall();
 }
 

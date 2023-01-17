@@ -70,9 +70,14 @@ else {
     // Signal that SDK was initiated.
     do_action( 'grwp_fs_loaded' );
 
+    // Base path to plugin for includes
+    define('GR_BASE_PATH', plugin_dir_path( __FILE__ ) );
+    define('GR_BASE_PATH_ADMIN', plugin_dir_path( __FILE__ ) .'admin/' );
+    define('GR_BASE_PATH_PUBLIC', plugin_dir_path( __FILE__ ) .'public/' );
 
-    require plugin_dir_path( __FILE__ ) . 'includes/class-google-reviews.php';
-    require plugin_dir_path( __FILE__ ) . 'includes/startup-helpers.php';
-    require plugin_dir_path( __FILE__ ) . 'includes/rest-endpoints.php';
+    require GR_BASE_PATH_PUBLIC . 'includes/class-google-reviews.php';
+    require GR_BASE_PATH_PUBLIC . 'includes/startup-helpers.php';
+    require GR_BASE_PATH_PUBLIC . 'includes/rest-endpoints.php';
+
 
 }
