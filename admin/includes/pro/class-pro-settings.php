@@ -5,8 +5,12 @@ Class Pro_Settings {
     private $google_reviews_options;
 
     public function __construct() {
+
         $this->google_reviews_options = get_option( 'google_reviews_option_name' );
         $this->add_settings();
+
+        require GR_BASE_PATH_PUBLIC . 'includes/rest-endpoints.php';
+
     }
 
     private function add_settings() {

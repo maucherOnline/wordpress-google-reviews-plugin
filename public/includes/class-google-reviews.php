@@ -97,138 +97,9 @@ class GRWP_Google_Reviews {
 		$this->define_public_hooks();
 
         add_shortcode('google-reviews', [ $this, 'reviews_shortcode' ] );
-        add_action ( 'get_google_reviews', [ $this, 'get_reviews' ]);
-
-        if (!wp_next_scheduled('get_google_reviews')) {
-            wp_schedule_event( time(), 'weekly', 'get_google_reviews' );
-        }
 
     }
 
-    public static function get_reviews() {
-
-        $google_reviews_options = get_option( 'google_reviews_option_name' );
-
-        if ( grwp_fs()->is__premium_only() ) {
-
-	        $data_id          = $google_reviews_options['serp_data_id'];
-	        $reviews_language = $google_reviews_options['reviews_language_3'];
-
-	        if ( empty( $data_id ) ) {
-	        	return;
-	        }
-
-			$install_id = grwp_fs()->get_site()->id;
-	        $secret_key = base64_encode( grwp_fs()->get_site()->secret_key );
-
-	        $new_hash_request_url = 'https://api.reviewsembedder.com/generate-hash.php';
-
-	        $new_hash = wp_remote_get( $new_hash_request_url, array(
-	        	'headers' => array(
-	        		'Authorization' => $secret_key
-	        	)
-	        ) );
-
-	        $license_request_url = sprintf( 'https://api.reviewsembedder.com/get-reviews.php?install_id=%s&data_id=%s&language=%s', $install_id, $data_id, $reviews_language );
-
-	        $get_reviews = wp_remote_get( $license_request_url, array(
-	        	'headers' => array(
-	        		'Authorization' => wp_remote_retrieve_body( $new_hash )
-	        	)
-	        ) );
-
-	        $get_reviews = json_decode( wp_remote_retrieve_body( $get_reviews ) );
-
-	        update_option( 'gr_latest_results', [
-                $data_id => json_encode( $get_reviews->results )
-            ]);
-
-
-        }
-
-    }
-
-    static function get_reviews_free_api() {
-
-        $google_reviews_options = get_option( 'google_reviews_option_name' );
-        $gmb_id_1  = $google_reviews_options['gmb_id_1'];
-        $reviews_language = $google_reviews_options['reviews_language_3'];
-        $url = 'https://api.reviewsembedder.com/free-api.php?gmb='.$gmb_id_1.'&language='.$reviews_language;
-
-        $result = wp_remote_get($url);
-
-        $review_json = GRWP_Google_Reviews::parse_review_json();
-
-        if ( is_wp_error( $review_json ) ) {
-
-            add_settings_error(
-
-                'google_reviews_option_name',
-                esc_attr( 'settings_updated' ),
-                $review_json->get_error_message()
-
-            );
-
-        }
-
-        update_option('gr_latest_results_free', json_encode($result));
-    }
-
-    /**
-     * Parse json results and check for errors
-     * @return mixed|WP_Error
-     */
-
-    public static function parse_review_json() {
-
-		if ( grwp_fs()->is__premium_only() ) {
-
-			$business  = get_option('google_reviews_option_name');
-            $data_id = isset($business['serp_data_id']) && $business['serp_data_id'] ? $business['serp_data_id'] : null;
-
-            $raw = get_option('gr_latest_results');
-
-            if ( isset($raw[$data_id]) && $raw[$data_id] ) {
-                $reviewArr = json_decode($raw[$data_id], true);
-                $reviews   = $reviewArr;
-            } else {
-                $reviews = null;
-            }
-
-		} else {
-
-			$raw =  get_option('gr_latest_results_free');
-
-            if ($raw == null || $raw == '') {
-                return new WP_Error(
-                    'REQUEST_DENIED',
-                    'Result was emtpy.'
-                );
-            }
-
-	        $reviewArr     = json_decode($raw, true);
-	        $reviewArrBody = json_decode($reviewArr['body'], true);
-
-	        if ($reviewArrBody['status'] === 'REQUEST_DENIED') {
-	            return new WP_Error(
-	                'REQUEST_DENIED',
-	                $reviewArrBody['error_message']
-	            );
-	        }
-	        if ($reviewArrBody['status'] === 'INVALID_REQUEST') {
-	            return new WP_Error(
-	                'INVALID_REQUEST',
-	                __('Invalid request. Please check your place ID for errors.', 'google-reviews')
-	            );
-	        }
-
-	        $reviews = $reviewArrBody['result']['reviews'];
-
-		}
-
-        return $reviews;
-
-    }
 
 	private function time_elapsed_string($datetime, $full = false) {
 		$now = new DateTime;
@@ -277,7 +148,7 @@ class GRWP_Google_Reviews {
 		}
 
 		if (!$full) $string = array_slice($string, 0, 1);
-		return $string ? implode(', ', $string) . __( 'ago', 'google-reviews' ) : __( 'just now', 'google-reviews' );
+		return $string ? implode(', ', $string) . __( ' ago', 'google-reviews' ) : __( 'just now', 'google-reviews' );
 	}
 
     /**
@@ -333,7 +204,13 @@ class GRWP_Google_Reviews {
         	}
 
         } else {
-        	$reviews = $this->parse_review_json();
+            if ( grwp_fs()->is__premium_only() ) {
+                require_once GR_BASE_PATH_ADMIN . 'includes/pro/class-pro-api-service.php';
+                $reviews = Pro_API_Service::parse_pro_review_json();
+            } else {
+                require_once GR_BASE_PATH_ADMIN . 'includes/free/class-free-api-service.php';
+                $reviews = Free_API_Service::parse_free_review_json();
+            }
         }
 
         if ( is_wp_error($reviews) || $reviews == '' || $reviews == null ) {
@@ -424,8 +301,6 @@ class GRWP_Google_Reviews {
 
             $google_svg = plugin_dir_url(__FILE__) . 'img/google-logo-svg.svg';
 
-
-
             // if is slider
             if ( $display_type === 'slider' && $review_type_override !== 'grid' ){
 
@@ -462,26 +337,12 @@ class GRWP_Google_Reviews {
         $db_grid_columns = isset($this->options['grid_columns']) ? $this->options['grid_columns'] : 3;
         $columns_css = '';
 
-        /*
-        for ($x = 0; $x < $db_grid_columns; $x++){
-            $columns_css .= '1fr ';
-        }
-        */
-
         // add slider styles if is slider
         if ( $display_type === 'slider' && $review_type_override !== 'grid'){
             ob_start();
             require 'partials/slider/style.php';
             $output .= ob_get_clean();
         }
-        // else add grid styles
-        /*
-        else {
-            ob_start();
-            require 'partials/grid/style.php';
-            $output .= ob_get_clean();
-        }
-        */
 
         $output .= '</div>';
 
@@ -528,8 +389,6 @@ class GRWP_Google_Reviews {
 		 * side of the site.
 		 */
 		require_once GR_BASE_PATH_PUBLIC . 'class-google-reviews-public.php';
-
-
 
 		$this->loader = new GRWP_Google_Reviews_Loader();
 
@@ -586,8 +445,8 @@ class GRWP_Google_Reviews {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
-		$this->loader->add_action( 'wp_ajax_handle_serp_business_search', $plugin_public, 'handle_serp_business_search' );
-        $this->loader->add_action( 'wp_ajax_nopriv_handle_serp_business_search', $plugin_public, 'handle_serp_business_search' );
+        //$this->loader->add_action( 'wp_ajax_handle_serp_business_search', $plugin_public, 'handle_serp_business_search' );
+        //$this->loader->add_action( 'wp_ajax_nopriv_handle_serp_business_search', $plugin_public, 'handle_serp_business_search' );
 
 	}
 

@@ -77,7 +77,5 @@ else {
 
     require GR_BASE_PATH_PUBLIC . 'includes/class-google-reviews.php';
     require GR_BASE_PATH_PUBLIC . 'includes/startup-helpers.php';
-    require GR_BASE_PATH_PUBLIC . 'includes/rest-endpoints.php';
-
 
 }

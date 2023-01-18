@@ -12,10 +12,11 @@ function add_reviews_rest_endpoint() {
 
 function reviews_rest_endpoint_callback ($request) {
 
-    $answer = GRWP_Google_Reviews::get_reviews();
+    $answer = Pro_API_Service::get_reviews_pro_api();
 
     $response = new WP_REST_Response($answer);
     $response->set_status(200);
     return $response;
+
 }
 
