@@ -277,7 +277,7 @@ class GRWP_Google_Reviews {
 		}
 
 		if (!$full) $string = array_slice($string, 0, 1);
-		return $string ? implode(', ', $string) . ' class-google-reviews.php' . __( 'ago', 'google-reviews' ) : __( 'just now', 'google-reviews' );
+		return $string ? implode(', ', $string) . __( 'ago', 'google-reviews' ) : __( 'just now', 'google-reviews' );
 	}
 
     /**

@@ -34,11 +34,19 @@ class GRWP_Google_ReviewsAdmin {
         add_action( 'admin_menu', array( $this, 'gr_add_plugin_pages' ) );
         add_action( 'admin_init', array( $this, 'google_reviews_page_init' ) );
 
-        // only for free version
-        if ( ! grwp_fs()->is__premium_only() ) {
+        // only for Pro version
+        if ( grwp_fs()->is__premium_only() ) {
 
-            require_once $this->dir . 'includes/free/class-free-api-service.php';
-            $free_api_service = new Free_API_Service();
+            require_once GR_BASE_PATH_ADMIN . 'includes/pro/class-pro-api-service.php';
+            new Pro_API_Service();
+
+        }
+
+        // free version
+        else {
+
+            require_once GR_BASE_PATH_ADMIN . 'includes/free/class-free-api-service.php';
+            new Free_API_Service();
 
         }
 

@@ -27,7 +27,7 @@ Class Pro_Menu_Pages {
         global $allowed_html;
 
         echo wp_kses('<div class="wrap">', $allowed_html);
-        require_once GR_BASE_PATH_ADMIN .'includes/how-to-premium.php';
+        require_once GR_BASE_PATH_ADMIN .'includes/pro/how-to-pro.php';
         echo wp_kses('</div>', $allowed_html);
     }
 }
