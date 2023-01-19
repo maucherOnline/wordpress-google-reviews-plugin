@@ -9,7 +9,7 @@
  * Plugin Name:       Embedder for Google Reviews
  * Plugin URI:        https://paretodigital.io
  * Description:       This Google Reviews Plugin pulls reviews from Google profiles and displays them on your website.
- * Version:           1.3.8
+ * Version:           1.4
  * Requires at least: 5.4
  * Requires PHP:      7.4
  * Tested up to:      6.1.1
@@ -21,10 +21,7 @@
  * Domain Path:       /languages
  */
 
-if ( function_exists( 'grwp_fs' ) ) {
-    grwp_fs()->set_basename( true, __FILE__ );
-}
-else {
+function startup_fs() {
     // Create a helper function for easy SDK access.
     function grwp_fs() {
         global $grwp_fs;
@@ -39,7 +36,7 @@ else {
                 'premium_slug'        => 'embedder-for-google-reviews-pro',
                 'type'                => 'plugin',
                 'public_key'          => 'pk_6823179f29a329a909c59a7a25a0a',
-                'is_premium'          => true,
+                'is_premium'          => false,
                 'premium_suffix'      => 'Premium',
                 // If your plugin is a serviceware, set this option to false.
                 'has_premium_version' => true,
@@ -69,13 +66,22 @@ else {
     grwp_fs();
     // Signal that SDK was initiated.
     do_action( 'grwp_fs_loaded' );
+}
+
+
+if ( function_exists( 'grwp_fs' ) ) {
+    grwp_fs()->set_basename( true, __FILE__ );
+}
+else {
+    startup_fs();
+
+    define( 'GRWP_GOOGLE_REVIEWS_VERSION', '1.4' );
 
     // Base path to plugin for includes
     define('GR_BASE_PATH', plugin_dir_path( __FILE__ ) );
     define('GR_BASE_PATH_ADMIN', plugin_dir_path( __FILE__ ) .'admin/' );
     define('GR_BASE_PATH_PUBLIC', plugin_dir_path( __FILE__ ) .'public/' );
 
-    require GR_BASE_PATH_PUBLIC . 'includes/class-google-reviews.php';
-    require GR_BASE_PATH_PUBLIC . 'includes/startup-helpers.php';
-
+    require_once GR_BASE_PATH_PUBLIC . 'includes/startup-helpers.php';
 }
+

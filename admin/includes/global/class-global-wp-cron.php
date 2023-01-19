@@ -7,12 +7,12 @@ Class Global_WP_Cron {
         add_action ( 'get_google_reviews', [ $this, 'get_reviews' ]);
 
         if (!wp_next_scheduled('get_google_reviews')) {
-            wp_schedule_event( time(), 'weekly', 'get_google_reviews' );
+            wp_schedule_event( time(), 'weekly', 'get_reviews' );
         }
 
     }
 
-    public function get_reviews() {
+    public static function get_reviews() {
 
         if ( grwp_fs()->is__premium_only() ) {
             Pro_API_Service::get_reviews_pro_api();

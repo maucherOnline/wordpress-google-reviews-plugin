@@ -4,14 +4,20 @@ Class Pro_API_Service {
 
     public function __construct() {
 
+        // Business search ajax handler
         add_action('wp_ajax_handle_serp_business_search', [$this, 'handle_serp_business_search']);
         add_action('wp_ajax_nopriv_handle_serp_business_search', [$this, 'handle_serp_business_search']);
 
+        // Pull reviews ajax handler
+        add_action('wp_ajax_handle_get_reviews_pro_api', [$this, 'get_reviews_pro_api']);
+        add_action('wp_ajax_nopriv_handle_get_reviews_pro_api', [$this, 'get_reviews_pro_api']);
+
     }
+
 
     /**
      * Get reviews from Pro API
-     * @return void
+     * @return WP_REST_Response
      */
     public static function get_reviews_pro_api() {
 
@@ -48,6 +54,11 @@ Class Pro_API_Service {
         update_option( 'gr_latest_results', [
             $data_id => json_encode( $get_reviews->results )
         ]);
+
+        $response = new WP_REST_Response();
+        $response->set_status(200);
+
+        return $response;
 
     }
 

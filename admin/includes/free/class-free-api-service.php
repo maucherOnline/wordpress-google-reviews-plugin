@@ -34,6 +34,7 @@ Class Free_API_Service {
         }
 
         update_option('gr_latest_results_free', json_encode($result));
+
     }
 
     /**
