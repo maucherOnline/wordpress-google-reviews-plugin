@@ -21,6 +21,40 @@
  * Domain Path:       /languages
  */
 
+// Base path to plugin for includes
+define('GR_BASE_PATH', plugin_dir_path( __FILE__ ) );
+define('GR_BASE_PATH_ADMIN', plugin_dir_path( __FILE__ ) .'admin/' );
+define('GR_BASE_PATH_PUBLIC', plugin_dir_path( __FILE__ ) .'public/' );
+
+/**
+ * The code that runs during plugin activation.
+ */
+function grwp_activate_google_reviews() {
+    require_once GR_BASE_PATH_ADMIN . 'includes/hooks/class-google-reviews-activator.php';
+    GRWP_Google_Reviews_Activator::activate();
+}
+
+/**
+ * The code that runs during plugin deactivation.
+ */
+function grwp_deactivate_google_reviews() {
+    require_once GR_BASE_PATH_ADMIN . 'includes/hooks/class-google-reviews-deactivator.php';
+    GRWP_Google_Reviews_Deactivator::deactivate();
+}
+
+/**
+ * The code that runs during plugin deletion.
+ */
+function grwp_uninstall_google_reviews() {
+    require_once GR_BASE_PATH_ADMIN . 'includes/hooks/class-google-reviews-uninstaller.php';
+    GRWP_Google_Reviews_Uninstaller::uninstall();
+}
+
+// Register hooks
+register_activation_hook( __FILE__, 'grwp_activate_google_reviews' );
+register_deactivation_hook( __FILE__, 'grwp_deactivate_google_reviews' );
+register_uninstall_hook( __FILE__, 'grwp_uninstall_google_reviews' );
+
 function startup_fs() {
     // Create a helper function for easy SDK access.
     function grwp_fs() {
@@ -68,7 +102,6 @@ function startup_fs() {
     do_action( 'grwp_fs_loaded' );
 }
 
-
 if ( function_exists( 'grwp_fs' ) ) {
     grwp_fs()->set_basename( true, __FILE__ );
 }
@@ -77,11 +110,11 @@ else {
 
     define( 'GRWP_GOOGLE_REVIEWS_VERSION', '1.4' );
 
-    // Base path to plugin for includes
-    define('GR_BASE_PATH', plugin_dir_path( __FILE__ ) );
-    define('GR_BASE_PATH_ADMIN', plugin_dir_path( __FILE__ ) .'admin/' );
-    define('GR_BASE_PATH_PUBLIC', plugin_dir_path( __FILE__ ) .'public/' );
-
-    require_once GR_BASE_PATH_PUBLIC . 'includes/startup-helpers.php';
+    // Start plugin
+    require_once GR_BASE_PATH_PUBLIC . 'includes/class-google-reviews-loader.php';
+    $plugin = new GRWP_Google_Reviews_Startup();
+    $plugin->run();
 }
+
+
 

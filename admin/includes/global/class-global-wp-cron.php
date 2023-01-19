@@ -4,11 +4,7 @@ Class Global_WP_Cron {
 
     public function __construct() {
 
-        add_action ( 'get_google_reviews', [ $this, 'get_reviews' ]);
-
-        if (!wp_next_scheduled('get_google_reviews')) {
-            wp_schedule_event( time(), 'weekly', 'get_reviews' );
-        }
+        add_action ( 'get_google_reviews', [$this, 'get_reviews'] );
 
     }
 

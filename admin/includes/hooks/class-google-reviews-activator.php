@@ -32,6 +32,14 @@ class GRWP_Google_Reviews_Activator {
 	public static function activate() {
         add_option('gr_latest_results','');
         add_option('gr_latest_results_free','');
+
+
+
+        if ( ! wp_next_scheduled('get_google_reviews' ) ) {
+
+            wp_schedule_event( time(), 'weekly', 'get_google_reviews' );
+
+        }
 	}
 
 }
