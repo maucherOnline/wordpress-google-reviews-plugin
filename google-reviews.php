@@ -21,94 +21,110 @@
  * Domain Path:       /languages
  */
 
-// Base path to plugin for includes
-define('GR_BASE_PATH', plugin_dir_path( __FILE__ ) );
-define('GR_BASE_PATH_ADMIN', plugin_dir_path( __FILE__ ) .'admin/' );
-define('GR_BASE_PATH_PUBLIC', plugin_dir_path( __FILE__ ) .'public/' );
 
-/**
- * The code that runs during plugin activation.
- */
-function grwp_activate_google_reviews() {
-    require_once GR_BASE_PATH_ADMIN . 'includes/hooks/class-google-reviews-activator.php';
-    //GRWP_Google_Reviews_Activator::activate();
-}
+// Important check to prevent conflicts between free and pro versions upon activation
+if ( ! function_exists('grwp_fs') ) {
 
-/**
- * The code that runs during plugin deactivation.
- */
-function grwp_deactivate_google_reviews() {
-    require_once GR_BASE_PATH_ADMIN . 'includes/hooks/class-google-reviews-deactivator.php';
-    GRWP_Google_Reviews_Deactivator::deactivate();
-}
+    function startup_fs()
+    {
+        // Create a helper function for easy SDK access.
 
-/**
- * The code that runs during plugin deletion.
- */
-function grwp_uninstall_google_reviews() {
-    require_once GR_BASE_PATH_ADMIN . 'includes/hooks/class-google-reviews-uninstaller.php';
-    GRWP_Google_Reviews_Uninstaller::uninstall();
-}
+        function grwp_fs()
+        {
+            global $grwp_fs;
 
-// Register hooks
-register_activation_hook( __FILE__, 'grwp_activate_google_reviews' );
-register_deactivation_hook( __FILE__, 'grwp_deactivate_google_reviews' );
-register_uninstall_hook( __FILE__, 'grwp_uninstall_google_reviews' );
+            if (!isset($grwp_fs)) {
+                // Include Freemius SDK.
+                require_once dirname(__FILE__) . '/freemius/start.php';
 
-function startup_fs() {
-    // Create a helper function for easy SDK access.
-    function grwp_fs() {
-        global $grwp_fs;
+                $grwp_fs = fs_dynamic_init(array(
+                    'id' => '10211',
+                    'slug' => 'embedder-for-google-reviews',
+                    'premium_slug' => 'embedder-for-google-reviews-pro',
+                    'type' => 'plugin',
+                    'public_key' => 'pk_6823179f29a329a909c59a7a25a0a',
+                    'is_premium' => false,
+                    'premium_suffix' => 'Premium',
+                    // If your plugin is a serviceware, set this option to false.
+                    'has_premium_version' => true,
+                    'has_addons' => false,
+                    'has_paid_plans' => true,
+                    'trial' => array(
+                        'days' => 4,
+                        'is_require_payment' => true,
+                    ),
+                    'has_affiliation' => 'all',
+                    'menu' => array(
+                        'slug' => 'google-reviews',
+                        'first-path' => 'admin.php?page=google-reviews',
+                        'contact' => false,
+                        'support' => false,
+                    ),
+                    // Set the SDK to work in a sandbox mode (for development & testing).
+                    // IMPORTANT: MAKE SURE TO REMOVE SECRET KEY BEFORE DEPLOYMENT.
+                    'secret_key' => 'sk_n1k[Rs%2sq?HC_3k23p=Gw88*{gMm',
+                ));
+            }
 
-        if ( ! isset( $grwp_fs ) ) {
-            // Include Freemius SDK.
-            require_once dirname(__FILE__) . '/freemius/start.php';
-
-            $grwp_fs = fs_dynamic_init( array(
-                'id'                  => '10211',
-                'slug'                => 'embedder-for-google-reviews',
-                'premium_slug'        => 'embedder-for-google-reviews-pro',
-                'type'                => 'plugin',
-                'public_key'          => 'pk_6823179f29a329a909c59a7a25a0a',
-                'is_premium'          => false,
-                'premium_suffix'      => 'Premium',
-                // If your plugin is a serviceware, set this option to false.
-                'has_premium_version' => true,
-                'has_addons'          => false,
-                'has_paid_plans'      => true,
-                'trial'               => array(
-                    'days'               => 4,
-                    'is_require_payment' => true,
-                ),
-                'has_affiliation'     => 'all',
-                'menu'                => array(
-                    'slug'           => 'google-reviews',
-                    'first-path'     => 'admin.php?page=google-reviews',
-                    'contact'        => false,
-                    'support'        => false,
-                ),
-                // Set the SDK to work in a sandbox mode (for development & testing).
-                // IMPORTANT: MAKE SURE TO REMOVE SECRET KEY BEFORE DEPLOYMENT.
-                'secret_key'          => 'sk_n1k[Rs%2sq?HC_3k23p=Gw88*{gMm',
-            ) );
+            return $grwp_fs;
         }
 
-        return $grwp_fs;
+        // Init Freemius.
+        grwp_fs();
+        // Signal that SDK was initiated.
+        do_action('grwp_fs_loaded');
     }
 
-    // Init Freemius.
-    grwp_fs();
-    // Signal that SDK was initiated.
-    do_action( 'grwp_fs_loaded' );
 }
 
 if ( function_exists( 'grwp_fs' ) ) {
     grwp_fs()->set_basename( true, __FILE__ );
 }
 else {
+
+    /**
+     * No code must be present outside of this block.
+     * Else, pro plugin activation will throw an error while free version is activated
+     */
+
+    // start freemius sdk
     startup_fs();
 
     define( 'GRWP_GOOGLE_REVIEWS_VERSION', '1.4' );
+
+    // Base path to plugin for includes
+    define('GR_BASE_PATH', plugin_dir_path( __FILE__ ) );
+    define('GR_BASE_PATH_ADMIN', plugin_dir_path( __FILE__ ) .'admin/' );
+    define('GR_BASE_PATH_PUBLIC', plugin_dir_path( __FILE__ ) .'public/' );
+
+    /**
+     * The code that runs during plugin activation.
+     */
+    function grwp_activate_google_reviews() {
+        require_once GR_BASE_PATH_ADMIN . 'includes/hooks/class-google-reviews-activator.php';
+        //GRWP_Google_Reviews_Activator::activate();
+    }
+
+    /**
+     * The code that runs during plugin deactivation.
+     */
+    function grwp_deactivate_google_reviews() {
+        require_once GR_BASE_PATH_ADMIN . 'includes/hooks/class-google-reviews-deactivator.php';
+        GRWP_Google_Reviews_Deactivator::deactivate();
+    }
+
+    /**
+     * The code that runs during plugin deletion.
+     */
+    function grwp_uninstall_google_reviews() {
+        require_once GR_BASE_PATH_ADMIN . 'includes/hooks/class-google-reviews-uninstaller.php';
+        GRWP_Google_Reviews_Uninstaller::uninstall();
+    }
+
+    // Register hooks
+    register_activation_hook( __FILE__, 'grwp_activate_google_reviews' );
+    register_deactivation_hook( __FILE__, 'grwp_deactivate_google_reviews' );
+    register_uninstall_hook( __FILE__, 'grwp_uninstall_google_reviews' );
 
     // Start plugin
     require_once GR_BASE_PATH_PUBLIC . 'includes/class-google-reviews-loader.php';
