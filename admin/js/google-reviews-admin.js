@@ -132,8 +132,8 @@
 		    }
 		});
 
-		// pull reviews button
-		$('.button.pull-reviews').on('click', function () {
+		// PRO: pull reviews button
+		$('.button.pull-reviews.pro').on('click', function () {
 
 			const $that = $(this);
 			const $submit = $('#submit');
@@ -162,6 +162,41 @@
 
 			});
 		});
+
+		 // FREE: pull reviews button
+		 $('.button.pull-reviews.free').on('click', function () {
+
+			 const $that = $(this);
+			 const $submit = $('#submit');
+			 const place_id = $('input[name="google_reviews_option_name[gmb_id_1]"]').val();
+			 const language = $('select#reviews_language_3').val();
+
+			 $.ajax({
+				 url: js_global.wp_ajax_url,
+				 data: {
+					 action: 'get_reviews_free_api',
+					 place_id: place_id,
+					 language: language
+				 },
+				 beforeSend: function () {
+					 $that
+						 .addClass('pulling')
+						 .attr('disabled', true);
+				 },
+				 success: function(response) {
+					 console.log(response);
+				 },
+				 complete: function () {
+					 $that
+						 .removeClass('pulling')
+						 .attr('disabled', false);
+
+					 $submit.click();
+				 }
+
+
+			 });
+		 });
 
 	 });
 })( jQuery );

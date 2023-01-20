@@ -78,7 +78,7 @@ Class Pro_Settings {
                        autocomplete="off"
                        placeholder="<?php _e('Search for your business', 'google-reviews');?>"
                 />
-                <a class="button pull-reviews"><?php _e('Pull reviews', 'google-reviews');?></a>
+                <a class="button pull-reviews pro"><?php _e('Pull reviews', 'google-reviews');?></a>
 
                 <fieldset class="serp-results"></fieldset><!-- /.serp-results -->
             </div><!-- /.serp-search -->

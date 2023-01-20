@@ -122,6 +122,9 @@ body.grwp-is-loading:after {
   width: 100%;
   max-width: 700px;
 }
+.form-table .regular-text.free {
+  max-width: 604px;
+}
 
 .form-table .shortcode-container {
   color: black;

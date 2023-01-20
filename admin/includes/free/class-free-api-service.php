@@ -3,7 +3,11 @@
 Class Free_API_Service {
 
     public function __construct() {
-        add_action('updated_option', array($this, 'on_saving_options'), 10, 3);
+
+        // Pull reviews ajax handler
+        add_action('wp_ajax_get_reviews_free_api', [$this, 'get_reviews_free_api']);
+        add_action('wp_ajax_nopriv_get_reviews_free_api', [$this, 'get_reviews_free_api']);
+
     }
 
     /**
@@ -12,59 +16,40 @@ Class Free_API_Service {
      */
     public static function get_reviews_free_api() {
 
-        $google_reviews_options = get_option( 'google_reviews_option_name' );
-        $gmb_id_1  = $google_reviews_options['gmb_id_1'];
-        $reviews_language = $google_reviews_options['reviews_language_3'];
-        $url = 'https://api.reviewsembedder.com/free-api.php?gmb='.$gmb_id_1.'&language='.$reviews_language;
+        // ChIJI5n1ruzXmUcRw9tApHpHqmo
+
+        $place_id = isset( $_GET['place_id'] ) ? sanitize_text_field($_GET['place_id']) : '';
+        $language = isset( $_GET['language'] ) ? sanitize_text_field($_GET['language']) : 'en';
+
+        $url = 'https://api.reviewsembedder.com/free-api.php?gmb='.$place_id.'&language='.$language;
 
         $result = wp_remote_get($url);
 
-        $review_json = Free_API_Service::parse_free_review_json();
+        $get_results = json_decode( wp_remote_retrieve_body( $result ) );
 
-        if ( is_wp_error( $review_json ) ) {
+        if ( isset( $get_results->error_message ) ) {
 
-            add_settings_error(
+            wp_send_json_error( array(
+                'html' => $get_results->error_message
+            ) );
 
-                'google_reviews_option_name',
-                esc_attr( 'settings_updated' ),
-                $review_json->get_error_message()
-
-            );
+            die();
 
         }
 
-        update_option('gr_latest_results_free', json_encode($result));
+        else if ( isset( $get_results->result ) ) {
 
-    }
+            update_option('gr_latest_results_free', json_encode($get_results->result));
 
-    /**
-     * Check for errors in the saved free API response
-     * @param $option_name
-     * @param $before
-     * @param $after
-     */
-    public function on_saving_options($option_name, $before, $after) {
+            wp_send_json_success( array(
+                'html' => $get_results->result
+            ) );
 
-        // get newest results if free API  settings were changed
-        if ($option_name === 'google_reviews_option_name') {
-
-            Free_API_Service::get_reviews_free_api();
-
-            $review_json = Free_API_Service::parse_free_review_json();
-
-            if ( is_wp_error( $review_json ) ) {
-
-                add_settings_error(
-
-                    'google_reviews_option_name',
-                    esc_attr( 'settings_updated' ),
-                    $review_json->get_error_message()
-
-                );
-
-            }
+            die();
 
         }
+
+        die();
 
     }
 
@@ -75,33 +60,10 @@ Class Free_API_Service {
     public static function parse_free_review_json() {
 
         $raw =  get_option('gr_latest_results_free');
+        $reviewArr = json_decode($raw, true);
 
-        if ($raw == null || $raw == '') {
-            return new WP_Error(
-                'REQUEST_DENIED',
-                'Result was emtpy.'
-            );
-        }
-
-        $reviewArr     = json_decode($raw, true);
-        $reviewArrBody = json_decode($reviewArr['body'], true);
-
-        if ($reviewArrBody['status'] === 'REQUEST_DENIED') {
-            return new WP_Error(
-                'REQUEST_DENIED',
-                $reviewArrBody['error_message']
-            );
-        }
-        if ($reviewArrBody['status'] === 'INVALID_REQUEST') {
-            return new WP_Error(
-                'INVALID_REQUEST',
-                __('Invalid request. Please check your place ID for errors.', 'google-reviews')
-            );
-        }
-
-        $reviews = $reviewArrBody['result']['reviews'];
-
-        return $reviews;
+        return $reviewArr['reviews'];
 
     }
+
 }

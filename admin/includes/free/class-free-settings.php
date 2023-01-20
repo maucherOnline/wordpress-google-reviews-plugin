@@ -23,10 +23,14 @@ Class Free_Settings {
      * Echo place ID field
      */
     public function gmb_id_1_callback() {
-        global $allowed_html;
+        global $allowed_html; ?>
 
+        <div class="serp-container">
+            <div class="serp-search">
+
+        <?php
         printf(
-            '<input class="regular-text" 
+            '<input class="regular-text free" 
                             type="text" 
                             name="google_reviews_option_name[gmb_id_1]" 
                             id="gmb_id_1" 
@@ -34,8 +38,14 @@ Class Free_Settings {
                             placeholder="%s">',
             isset( $this->google_reviews_options['gmb_id_1'] ) ? esc_attr( $this->google_reviews_options['gmb_id_1']) : '',
             __( 'Paste the Place ID of your business here.', 'google-reviews' )
-        );
+        ); ?>
 
+                <a class="button pull-reviews free"><?php _e('Pull reviews', 'google-reviews');?></a>
+            </div>
+        </div>
+
+
+        <?php
         $echo = '<p>Search for your business and copy/paste the Place ID into the field above.';
         $echo .= '<br><br><iframe height="200" style="height: 200px; width: 100%; max-width: 700px;display:block;" src="https://geo-devrel-javascript-samples.web.app/samples/places-placeid-finder/app/dist/" allow="fullscreen; "></iframe>';
         echo wp_kses($echo, $allowed_html);
