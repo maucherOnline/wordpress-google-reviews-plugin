@@ -10,7 +10,7 @@ Class Free_API_Service {
      * Get reviews from Free API
      * @return void
      */
-    static function get_reviews_free_api() {
+    public static function get_reviews_free_api() {
 
         $google_reviews_options = get_option( 'google_reviews_option_name' );
         $gmb_id_1  = $google_reviews_options['gmb_id_1'];

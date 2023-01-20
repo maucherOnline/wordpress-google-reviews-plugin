@@ -34,7 +34,6 @@ class GRWP_Google_ReviewsAdmin {
         add_action( 'admin_menu', array( $this, 'gr_add_plugin_pages' ) );
         add_action( 'admin_init', array( $this, 'google_reviews_page_init' ) );
 
-
         // only for Pro version
         if ( grwp_fs()->is__premium_only() ) {
 
@@ -50,10 +49,6 @@ class GRWP_Google_ReviewsAdmin {
             new Free_API_Service();
 
         }
-
-        require_once GR_BASE_PATH_ADMIN . 'includes/global/class-global-wp-cron.php';
-        new Global_WP_Cron();
-
 
         $this->plugin_name = $plugin_name;
         $this->version = $version;

@@ -31,7 +31,7 @@ define('GR_BASE_PATH_PUBLIC', plugin_dir_path( __FILE__ ) .'public/' );
  */
 function grwp_activate_google_reviews() {
     require_once GR_BASE_PATH_ADMIN . 'includes/hooks/class-google-reviews-activator.php';
-    GRWP_Google_Reviews_Activator::activate();
+    //GRWP_Google_Reviews_Activator::activate();
 }
 
 /**
@@ -70,7 +70,7 @@ function startup_fs() {
                 'premium_slug'        => 'embedder-for-google-reviews-pro',
                 'type'                => 'plugin',
                 'public_key'          => 'pk_6823179f29a329a909c59a7a25a0a',
-                'is_premium'          => false,
+                'is_premium'          => true,
                 'premium_suffix'      => 'Premium',
                 // If your plugin is a serviceware, set this option to false.
                 'has_premium_version' => true,
@@ -114,7 +114,5 @@ else {
     require_once GR_BASE_PATH_PUBLIC . 'includes/class-google-reviews-loader.php';
     $plugin = new GRWP_Google_Reviews_Startup();
     $plugin->run();
+
 }
-
-
-

@@ -31,6 +31,8 @@ class GRWP_Google_Reviews_Deactivator {
 	 */
 	public static function deactivate() {
 
+        wp_clear_scheduled_hook( 'get_google_reviews' );
+
 	}
 
 }
