@@ -14,12 +14,20 @@ Class Free_API_Service {
      * Get reviews from Free API
      * @return void
      */
-    public static function get_reviews_free_api() {
+    public static function get_reviews_free_api( $is_cron = false ) {
 
-        // ChIJI5n1ruzXmUcRw9tApHpHqmo
+        // ChIJI5n1ruzXmUcRw9tApHpHqmo pareto
+        // ChIJJwjoDJHYmUcR_6mBMvnMeO4 obi
 
-        $place_id = isset( $_GET['place_id'] ) ? sanitize_text_field($_GET['place_id']) : '';
-        $language = isset( $_GET['language'] ) ? sanitize_text_field($_GET['language']) : 'en';
+        if ( ! $is_cron ) {
+            $place_id = isset($_GET['place_id']) ? sanitize_text_field($_GET['place_id']) : '';
+            $language = isset($_GET['language']) ? sanitize_text_field($_GET['language']) : 'en';
+        }
+        else {
+            $google_reviews_options = get_option( 'google_reviews_option_name' );
+            $place_id = $google_reviews_options['gmb_id_1'];
+            $language = $google_reviews_options['reviews_language_3'] ?? 'en';
+        }
 
         $url = 'https://api.reviewsembedder.com/free-api.php?gmb='.$place_id.'&language='.$language;
 
@@ -29,15 +37,19 @@ Class Free_API_Service {
 
         if ( isset( $get_results->error_message ) ) {
 
-            wp_send_json_error( array(
-                'html' => $get_results->error_message
-            ) );
+            if ( ! $is_cron ) {
+
+                wp_send_json_error(array(
+                    'html' => $get_results->error_message
+                ));
+
+            }
 
             die();
 
         }
 
-        else if ( isset( $get_results->result ) ) {
+        else if ( isset( $get_results->result ) && ! $is_cron ) {
 
             update_option('gr_latest_results_free', json_encode($get_results->result));
 
@@ -47,6 +59,11 @@ Class Free_API_Service {
 
             die();
 
+        }
+
+        // only run if $is_cron == true and no errors detected
+        else {
+            update_option('gr_latest_results_free', json_encode($get_results->result));
         }
 
         die();

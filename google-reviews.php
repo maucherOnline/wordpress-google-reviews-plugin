@@ -102,7 +102,7 @@ else {
      */
     function grwp_activate_google_reviews() {
         require_once GR_BASE_PATH_ADMIN . 'includes/hooks/class-google-reviews-activator.php';
-        //GRWP_Google_Reviews_Activator::activate();
+        GRWP_Google_Reviews_Activator::activate();
     }
 
     /**
