@@ -87,7 +87,7 @@ Class Pro_Settings {
         </div><!-- /.serp-container -->
 
         <p>
-            <?php _e( 'Details like country, state, city and/or phone number may help for achieving more accurate results.', 'google-reviews' ); ?>
+            <?php _e( 'Details like country, state, city and/or phone number may help achieving more accurate results.', 'google-reviews' ); ?>
         </p>
 
         <?php
