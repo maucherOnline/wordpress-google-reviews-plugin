@@ -30,106 +30,100 @@
 	 */
 
 	 $(document).ready(function(){
-		function debounce(func, wait, immediate) {
-			let timeout;
 
-			return function() {
-				const context = this
-				const args    = arguments;
-				const later   = function() {
-					timeout = null;
+		const $search = $('.js-serp-business-search');
+		const $searchButtonPro = $('.button.search-business.pro');
+		const $pullButtonPro = $('.button.pull-reviews.pro');
+		const $buttonRow = $('.serp-container .button-row');
 
-					if ( ! immediate) {
-						func.apply(context, args);
-					}
-				};
+		// remove disabled attribute when search field is changed
+		$search.on('keyup change', function () {
+			$searchButtonPro.removeAttr('disabled');
+		});
 
-				const callNow = immediate && ! timeout;
+		 $searchButtonPro.click(function () {
 
-				clearTimeout(timeout);
+			const $that = $(this);
 
-				timeout = setTimeout(later, wait);
+			if ($that.attr('disabled')) {
+				return;
+			}
 
-				if (callNow) {
-					func.apply(context, args);
-				}
-			};
-		}
+			const $error = $('#error');
 
-		 $('.js-serp-business-search').on('keyup', debounce( function(){
-		 	const $this = $(this);
-
-		 	if ( $('body').hasClass('grwp-is-loading') || ! $this.val() ) {
-		 		return;
-		 	}
-
-		 	$this.siblings('.serp-results').slideUp();
-
-		 	$.ajax({
+			$.ajax({
 				url: js_global.wp_ajax_url,
 				data: {
 					action: 'handle_serp_business_search',
-					search: $this.val(),
+					search: $search.val(),
 					language: js_global.language
 				},
 				beforeSend: function () {
-					$('body').addClass('grwp-is-loading');
+					$buttonRow
+						.addClass('busy');
+
+					$searchButtonPro
+						.attr('disabled', true);
 				},
 				success: function (response) {
 					if ( ! response.success ) {
-						$this.addClass('has-error');
-						$this.parent().siblings('.serp-error').html(response.data.html).fadeIn();
+						$search.addClass('has-error');
+						$error.html(response.data.html);
 					} else {
-						if ( $this.hasClass('has-error') ) {
-							$this.removeClass('has-error');
-							console.log($this.parent().siblings('.serp-error'));
-							$this.parent().siblings('.serp-error').fadeOut().empty();
+						if ( $search.hasClass('has-error') ) {
+							$search.removeClass('has-error');
+							$error.fadeOut().empty();
 						}
 
-						$this.siblings('.serp-results').html(response.data.html).slideDown();
+						$search.siblings('.serp-results').html(response.data.html).slideDown();
 					}
 				},
 				complete: function () {
-					$('body').removeClass('grwp-is-loading');
+
+					$buttonRow
+						.removeClass('busy');
+
+					$searchButtonPro
+						.removeAttr('disabled');
 				}
 			});
-		 }, 500));
+		});
 
-		 $('.serp-search').on('click', '.js-serp-result', function(){
-		 	const $this = $(this);
+		$('.serp-search').on('click', '.js-serp-result', function(){
+			const $this = $(this);
 
-		 	$this.closest('.serp-results').slideUp();
+			$this.closest('.serp-results').slideUp();
 
-		 	$('.js-serp-data-id').attr('value', $this.val());
-		 	$('.js-serp-business-search').val($.trim($this.parent().text()));
+			$('.js-serp-data-id').attr('value', $this.val());
+			$('.js-serp-business-search').val($.trim($this.parent().text()));
 
-	 		$('.button.pull-reviews').attr('disabled', true);
-		 	$('#submit').click();
-		 });
+			$('.button.pull-reviews').attr('disabled', true);
+			$('#submit').click();
+		});
 
-		 $('.js-serp-business-search').on('click', function(){
-		 	const $this             = $(this);
-		 	const $resultsContainer = $('.serp-results');
+		$('.js-serp-business-search').on('click', function(){
+			const $this             = $(this);
+			const $resultsContainer = $('.serp-results');
 
-		 	if ( ! $resultsContainer.children().length || ! $this.text().length ) {
-		 		return;
-		 	}
+			if ( ! $resultsContainer.children().length || ! $this.text().length ) {
+				return;
+			}
 
-		 	$resultsContainer.slideDown();
-		 });
+			$resultsContainer.slideDown();
+		});
 
-		 $('.js-serp-business-search').on('search', function(){
-		 	$('.js-serp-data-id').attr('value', '');
-		 	$('.serp-results').slideUp();
-		 });
+		$('.js-serp-business-search').on('search', function(){
+			$('.js-serp-data-id').attr('value', '');
+			$('.serp-results').slideUp();
+			});
 
 		$(document).on('click', function(e) {
-		    const $container        = $('.serp-search');
-		    const $resultsContainer = $('.serp-results');
+			const $container        = $('.serp-search');
+			const $resultsContainer = $('.serp-results');
 
-		    if ( ! $(e.target).closest($container).length ) {
-		        $resultsContainer.slideUp();
-		    }
+			if ( ! $(e.target).closest($container).length ) {
+				$resultsContainer.slideUp();
+			}
 		});
 
 		// PRO: pull reviews button
@@ -144,8 +138,10 @@
 					action: 'handle_get_reviews_pro_api'
 				},
 				beforeSend: function () {
-					$that
-						.addClass('pulling')
+					$buttonRow
+						.addClass('busy');
+
+					$pullButtonPro
 						.attr('disabled', true);
 				},
 				success: function(response) {
@@ -155,54 +151,56 @@
 
 				},
 				complete: function () {
-					$that
-						.removeClass('pulling')
-						.attr('disabled', false);
+					$buttonRow
+						.removeClass('busy');
 
-					$submit.click();
+					$pullButtonPro
+						.removeAttr('disabled');
+
+					//$submit.click();
 				}
 			});
 		});
 
-		 // FREE: pull reviews button
-		 $('.button.pull-reviews.free').on('click', function () {
+		// FREE: pull reviews button
+		$('.button.pull-reviews.free').on('click', function () {
 
-			 const $that = $(this);
-			 const $submit = $('#submit');
-			 const place_id = $('input[name="google_reviews_option_name[gmb_id_1]"]').val();
-			 const language = $('select#reviews_language_3').val();
-			 const $errors = $('#errors');
+			const $that = $(this);
+			const $submit = $('#submit');
+			const place_id = $('input[name="google_reviews_option_name[gmb_id_1]"]').val();
+			const language = $('select#reviews_language_3').val();
+			const $errors = $('#errors');
 
-			 $.ajax({
-				 url: js_global.wp_ajax_url,
-				 data: {
-					 action: 'get_reviews_free_api',
-					 place_id: place_id,
-					 language: language
-				 },
-				 beforeSend: function () {
-					 $that
-						 .addClass('pulling')
-						 .attr('disabled', true);
-				 },
-				 success: function(response) {
+			$.ajax({
+			 url: js_global.wp_ajax_url,
+			 data: {
+				 action: 'get_reviews_free_api',
+				 place_id: place_id,
+				 language: language
+			 },
+			 beforeSend: function () {
+				 $that
+					 .addClass('pulling')
+					 .attr('disabled', true);
+			 },
+			 success: function(response) {
 
-				 },
-				 error: function(XMLHttpRequest, textStatus, errorThrown) {
-					 const message = errorThrown + ' - Please double-check your Place ID.';
-					 $errors.text(message);
-				 },
-				 complete: function (XMLHttpRequest, textStatus) {
-					 $that
-						 .removeClass('pulling')
-						 .attr('disabled', false);
+			 },
+			 error: function(XMLHttpRequest, textStatus, errorThrown) {
+				 const message = errorThrown + ' - Please double-check your Place ID.';
+				 $errors.text(message);
+			 },
+			 complete: function (XMLHttpRequest, textStatus) {
+				 $that
+					 .removeClass('pulling')
+					 .attr('disabled', false);
 
-					 if (textStatus !== 'error') {
-						 $submit.click();
-					 }
+				 if (textStatus !== 'error') {
+					 $submit.click();
 				 }
-			 });
-		 });
+			 }
+			});
+		});
 
 	 });
 })( jQuery );

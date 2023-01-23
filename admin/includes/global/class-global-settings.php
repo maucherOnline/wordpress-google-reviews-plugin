@@ -70,28 +70,6 @@ Class Global_Settings {
             'google_reviews_style_layout_setting_section' // section
         );
 
-
-
-        /*
-        if(strtolower($this->google_reviews_options['style_2']) === 'grid'){
-	        add_settings_field(
-		        'grid_columns', // id
-		        'Grid Columns', // title
-		        array( $this, 'grid_columns_callback' ), // callback
-		        'google-reviews-admin', // page
-		        'google_reviews_style_layout_setting_section' // section
-	        );
-        }else{
-	        add_settings_field(
-		        'slide_duration', // id
-		        __( 'Slide duration (milliseconds)', 'google-reviews' ), // title
-		        array( $this, 'slide_duration_callback' ), // callback
-		        'google-reviews-admin', // page
-		        'google_reviews_style_layout_setting_section' // section
-	        );
-        }
-        */
-
         add_settings_field(
             'layout_style', // id
             __( 'Design type', 'google-reviews' ), // title
@@ -100,14 +78,19 @@ Class Global_Settings {
             'google_reviews_style_layout_setting_section' // section
         );
 
-        add_settings_field(
-            'reviews_instructions', // id
+        /**
+         * Embeddding instructions
+         */
+        add_settings_section(
+            'google_reviews_embedding_instructions_section', // id
             __( 'Embedding instructions', 'google-reviews' ), // title
             array( $this, 'reviews_instructions_callback' ), // callback
-            'google-reviews-admin', // page
-            'google_reviews_style_layout_setting_section' // section
+            'google-reviews-admin' // page
         );
+
     }
+
+
 
     /**
      * Sanitize user input

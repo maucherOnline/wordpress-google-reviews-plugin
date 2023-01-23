@@ -16,7 +16,7 @@
       width: calc(100% - 96px);
       max-width: 400px;
     }
-    .button.pull-reviews {
+    .button.pull-reviews.free {
       display: inline-block;
       width: 100%;
       max-width: 90px;
@@ -24,6 +24,30 @@
       position: relative;
 
       &.pulling {
+        &:after {
+          content: ' ';
+          display: block;
+          width: 14px;
+          height: 14px;
+          margin: 8px;
+          border-radius: 50%;
+          border: 3px solid #2271b1;
+          border-color: #2271b1 transparent #2271b1 transparent;
+          animation: lds-dual-ring 1.2s linear infinite;
+          position: absolute;
+          right: -39px;
+          top: -5px;
+          cursor: auto;
+        }
+      }
+    }
+
+    // pro only
+    .button-row {
+      display: inline;
+      position: relative;
+
+      &.busy {
         &:after {
           content: ' ';
           display: block;
@@ -135,7 +159,7 @@ body.grwp-is-loading:after {
   }
 }
 
-.form-table .shortcode-container {
+.shortcode-container {
   color: black;
   cursor: text;
   border: 1px solid #1f6bae;
