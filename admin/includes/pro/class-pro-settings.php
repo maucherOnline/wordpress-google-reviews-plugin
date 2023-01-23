@@ -66,7 +66,19 @@ Class Pro_Settings {
      */
     public function serp_business_name_callback() {
         ob_start();
-        $search_disabled = isset($this->google_reviews_options['serp_business_name']) && $this->google_reviews_options['serp_business_name'] !== '' ? 'disabled' : '';
+
+        $search_disabled = '';
+        $pull_button_disabled = '';
+
+        if ( isset($this->google_reviews_options['serp_business_name'])
+            && $this->google_reviews_options['serp_business_name'] !== '' ) {
+            $search_disabled = 'disabled';
+        }
+
+        if ( ! isset($this->google_reviews_options['serp_business_name']) ) {
+            $pull_button_disabled = 'disabled';
+        }
+
         ?>
 
         <div class="serp-container">
@@ -83,7 +95,7 @@ Class Pro_Settings {
                     <a class="button search-business pro" <?php echo $search_disabled; ?>>
                         <?php _e('Search business', 'google-reviews');?>
                     </a>
-                    <a class="button pull-reviews pro">
+                    <a class="button pull-reviews pro" <?php echo $pull_button_disabled; ?>>
                         <?php _e('Pull reviews', 'google-reviews');?>
                     </a>
                 </div>

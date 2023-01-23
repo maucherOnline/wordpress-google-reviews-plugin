@@ -62,9 +62,10 @@ if ( ! function_exists('grwp_fs') ) {
                     ),
                     // Set the SDK to work in a sandbox mode (for development & testing).
                     // IMPORTANT: MAKE SURE TO REMOVE SECRET KEY BEFORE DEPLOYMENT.
-                    'secret_key' => 'sk_n1k[Rs%2sq?HC_3k23p=Gw88*{gMm',
+                    'secret_key' => 'sk_kHyh8$^{Y;t{NIraPW)d6eNQ]S[9O',
                 ));
             }
+
 
             return $grwp_fs;
         }

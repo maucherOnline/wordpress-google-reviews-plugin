@@ -132,6 +132,11 @@
 		// PRO: pull reviews button
 		 $pullButtonPro.on('click', function () {
 
+			 const $that = $(this);
+			 if ($that.attr('disabled')) {
+				 return;
+			 }
+
 			const $submit = $('#submit');
 
 			$.ajax({
