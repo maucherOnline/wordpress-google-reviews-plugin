@@ -89,10 +89,9 @@ Class Pro_Settings {
                 </div>
                 <fieldset class="serp-results"></fieldset><!-- /.serp-results -->
             </div><!-- /.serp-search -->
-
-            <p id="error"> </p><!-- /.serp-error -->
         </div><!-- /.serp-container -->
 
+        <p id="errors"></p>
         <p>
             <?php _e( 'Details like country, state, city and/or phone number may help achieving more accurate results.', 'google-reviews' ); ?>
         </p>

@@ -41,15 +41,15 @@
 			$searchButtonPro.removeAttr('disabled');
 		});
 
+		// Search for business
 		 $searchButtonPro.click(function () {
 
 			const $that = $(this);
+		 	const $error = $('#errors');
 
 			if ($that.attr('disabled')) {
 				return;
 			}
-
-			const $error = $('#error');
 
 			$.ajax({
 				url: js_global.wp_ajax_url,
@@ -78,6 +78,9 @@
 						$search.siblings('.serp-results').html(response.data.html).slideDown();
 					}
 				},
+				error: function (XMLHttpRequest, textStatus, errorThrown) {
+					console.log(errorThrown);
+				},
 				complete: function () {
 
 					$buttonRow
@@ -101,7 +104,7 @@
 			$('#submit').click();
 		});
 
-		$('.js-serp-business-search').on('click', function(){
+		 $search.on('click', function(){
 			const $this             = $(this);
 			const $resultsContainer = $('.serp-results');
 
@@ -112,7 +115,7 @@
 			$resultsContainer.slideDown();
 		});
 
-		$('.js-serp-business-search').on('search', function(){
+		 $search.on('search', function(){
 			$('.js-serp-data-id').attr('value', '');
 			$('.serp-results').slideUp();
 			});
@@ -127,9 +130,8 @@
 		});
 
 		// PRO: pull reviews button
-		$('.button.pull-reviews.pro').on('click', function () {
+		 $pullButtonPro.on('click', function () {
 
-			const $that = $(this);
 			const $submit = $('#submit');
 
 			$.ajax({
@@ -145,7 +147,11 @@
 						.attr('disabled', true);
 				},
 				success: function(response) {
-					console.log(response);
+					if ( ! response.success ) {
+						$error.html(response.data.html);
+					} else {
+
+					}
 				},
 				error: function (XMLHttpRequest, textStatus, errorThrown) {
 
@@ -157,12 +163,15 @@
 					$pullButtonPro
 						.removeAttr('disabled');
 
-					//$submit.click();
+					$submit.click();
 				}
 			});
 		});
 
-		// FREE: pull reviews button
+
+		 /**
+		  * FREE: pull reviews button
+		  */
 		$('.button.pull-reviews.free').on('click', function () {
 
 			const $that = $(this);

@@ -145,7 +145,7 @@ body.grwp-is-loading:after {
   max-width: 604px;
 }
 
-.shortcode-container {
+#instructions .shortcode-container {
   color: black;
   cursor: text;
   border: 1px solid #1f6bae;

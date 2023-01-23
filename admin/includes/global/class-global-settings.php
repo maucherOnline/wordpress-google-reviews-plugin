@@ -84,8 +84,16 @@ Class Global_Settings {
         add_settings_section(
             'google_reviews_embedding_instructions_section', // id
             __( 'Embedding instructions', 'google-reviews' ), // title
-            array( $this, 'reviews_instructions_callback' ), // callback
+            array( $this, 'reviews_instructions_section' ), // callback
             'google-reviews-admin' // page
+        );
+
+        add_settings_field(
+            'embedding_instructions', // id
+            __( 'Shortcode', 'google-reviews' ), // title
+            array( $this, 'reviews_instructions_callback' ), // callback
+            'google-reviews-admin', // page
+            'google_reviews_embedding_instructions_section' // section
         );
 
     }
@@ -328,7 +336,7 @@ Class Global_Settings {
      */
     public function reviews_instructions_callback() {
         ?>
-        <div>
+        <div id="instructions">
             <p>
                 <?php _e( 'Use this shortcode to show your reviews on pages and posts:', 'google-reviews' ); ?>
             </p>
@@ -336,5 +344,9 @@ Class Global_Settings {
         </div>
 
         <?php
+    }
+
+    public function reviews_instructions_section() {
+
     }
 }
