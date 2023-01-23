@@ -143,4 +143,9 @@ body.grwp-is-loading:after {
   border: 1px solid #1f6bae;
 }
 
+.form-table #errors {
+  color: red;
+  font-weight: 600;
+}
+
 /*# sourceMappingURL=google-reviews-admin.css.map */

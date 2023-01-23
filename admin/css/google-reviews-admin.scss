@@ -40,8 +40,6 @@
           cursor: auto;
         }
       }
-
-
     }
   }
 }
@@ -151,4 +149,9 @@ body.grwp-is-loading:after {
 }
 .form-table input[type="search"] {
   border: 1px solid #1f6bae;
+}
+
+.form-table #errors {
+  color: red;
+  font-weight: 600;
 }

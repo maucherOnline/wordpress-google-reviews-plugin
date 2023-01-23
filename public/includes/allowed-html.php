@@ -23,7 +23,9 @@ $allowed_html = [
         'href'      => [],
         'target'    => [],
     ],
-    'p' => [],
+    'p' => [
+        'id'    => [],
+    ],
     'span' => [
         'class' => [],
         'id'    => [],

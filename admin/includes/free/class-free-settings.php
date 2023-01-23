@@ -46,7 +46,8 @@ Class Free_Settings {
 
 
         <?php
-        $echo = '<p>Search for your business and copy/paste the Place ID into the field above.';
+        $echo = '<p id="errors"></p>';
+        $echo .= '<p>Search for your business and copy/paste the Place ID into the field above.</p>';
         $echo .= '<br><br><iframe height="200" style="height: 200px; width: 100%; max-width: 700px;display:block;" src="https://geo-devrel-javascript-samples.web.app/samples/places-placeid-finder/app/dist/" allow="fullscreen; "></iframe>';
         echo wp_kses($echo, $allowed_html);
 

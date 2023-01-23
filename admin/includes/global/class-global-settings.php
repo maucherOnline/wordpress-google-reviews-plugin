@@ -64,7 +64,7 @@ Class Global_Settings {
         // add style and layout settings field
         add_settings_field(
             'style_2', // id
-            __( 'Style', 'google-reviews' ), // title
+            __( 'Layout type', 'google-reviews' ), // title
             array( $this, 'style_2_callback' ), // callback
             'google-reviews-admin', // page
             'google_reviews_style_layout_setting_section' // section
@@ -94,7 +94,7 @@ Class Global_Settings {
 
         add_settings_field(
             'layout_style', // id
-            __( 'Layout style', 'google-reviews' ), // title
+            __( 'Design type', 'google-reviews' ), // title
             array( $this, 'layout_style_callback' ), // callback
             'google-reviews-admin', // page
             'google_reviews_style_layout_setting_section' // section

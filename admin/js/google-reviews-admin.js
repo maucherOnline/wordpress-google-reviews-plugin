@@ -151,6 +151,9 @@
 				success: function(response) {
 					console.log(response);
 				},
+				error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+				},
 				complete: function () {
 					$that
 						.removeClass('pulling')
@@ -158,8 +161,6 @@
 
 					$submit.click();
 				}
-
-
 			});
 		});
 
@@ -170,6 +171,7 @@
 			 const $submit = $('#submit');
 			 const place_id = $('input[name="google_reviews_option_name[gmb_id_1]"]').val();
 			 const language = $('select#reviews_language_3').val();
+			 const $errors = $('#errors');
 
 			 $.ajax({
 				 url: js_global.wp_ajax_url,
@@ -184,17 +186,21 @@
 						 .attr('disabled', true);
 				 },
 				 success: function(response) {
-					 console.log(response);
+
 				 },
-				 complete: function () {
+				 error: function(XMLHttpRequest, textStatus, errorThrown) {
+					 const message = errorThrown + ' - Please double-check your Place ID.';
+					 $errors.text(message);
+				 },
+				 complete: function (XMLHttpRequest, textStatus) {
 					 $that
 						 .removeClass('pulling')
 						 .attr('disabled', false);
 
-					 $submit.click();
+					 if (textStatus !== 'error') {
+						 $submit.click();
+					 }
 				 }
-
-
 			 });
 		 });
 

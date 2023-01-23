@@ -35,13 +35,11 @@ Class Free_API_Service {
 
         $get_results = json_decode( wp_remote_retrieve_body( $result ) );
 
-        if ( isset( $get_results->error_message ) ) {
+        if ( isset( $get_results->status) && $get_results->status == 'INVALID_REQUEST' ) {
 
             if ( ! $is_cron ) {
 
-                wp_send_json_error(array(
-                    'html' => $get_results->error_message
-                ));
+                wp_send_json_error(new WP_Error($get_results->status), 404);
 
             }
 
@@ -78,8 +76,9 @@ Class Free_API_Service {
 
         $raw =  get_option('gr_latest_results_free');
         $reviewArr = json_decode($raw, true);
+        $result = isset($reviewArr['reviews']) ? $reviewArr['reviews'] : [];
 
-        return $reviewArr['reviews'];
+        return $result;
 
     }
 
