@@ -35,6 +35,7 @@
 		const $searchButtonPro = $('.button.search-business.pro');
 		const $pullButtonPro = $('.button.pull-reviews.pro');
 		const $buttonRow = $('.serp-container .button-row');
+		const $error = $('#errors');
 
 		// remove disabled attribute when search field is changed
 		$search.on('keyup change', function () {
@@ -45,7 +46,6 @@
 		 $searchButtonPro.click(function () {
 
 			const $that = $(this);
-		 	const $error = $('#errors');
 
 			if ($that.attr('disabled')) {
 				return;
@@ -152,11 +152,14 @@
 						.attr('disabled', true);
 				},
 				success: function(response) {
+					/*
 					if ( ! response.success ) {
 						$error.html(response.data.html);
 					} else {
 
 					}
+					*/
+
 				},
 				error: function (XMLHttpRequest, textStatus, errorThrown) {
 

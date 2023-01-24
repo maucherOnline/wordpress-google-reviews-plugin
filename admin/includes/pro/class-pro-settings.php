@@ -70,13 +70,17 @@ Class Pro_Settings {
         $search_disabled = '';
         $pull_button_disabled = '';
 
+        // If business is already saved, disable 'Search business' button
         if ( isset($this->google_reviews_options['serp_business_name'])
             && $this->google_reviews_options['serp_business_name'] !== '' ) {
             $search_disabled = 'disabled';
         }
 
-        if ( ! isset($this->google_reviews_options['serp_business_name']) ) {
+        // If business name has not yet been saved, disable both buttons
+        if ( ! isset($this->google_reviews_options['serp_business_name'])
+        || $this->google_reviews_options['serp_business_name'] == '' ) {
             $pull_button_disabled = 'disabled';
+            $search_disabled = 'disabled';
         }
 
         ?>
