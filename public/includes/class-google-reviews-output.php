@@ -134,7 +134,7 @@ class GRWP_Google_Reviews_Output {
             }
         }
 
-        if ( is_wp_error($reviews) || $reviews == '' || $reviews == null ) {
+        if ( is_wp_error($reviews) || $reviews == '' || $reviews == null || ! is_array($reviews) ) {
             return __( 'No reviews available', 'google-reviews' );
         }
 
@@ -156,6 +156,7 @@ class GRWP_Google_Reviews_Output {
         // loop through reviews
         $output = '<div id="g-review" class="' . $layout_stlye .'">';
         $slider_output = '';
+
         foreach ( $reviews as $review ) {
 
             // dummy content not necessary for premium version

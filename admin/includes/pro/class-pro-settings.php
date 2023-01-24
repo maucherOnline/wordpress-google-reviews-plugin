@@ -83,6 +83,13 @@ Class Pro_Settings {
             $search_disabled = 'disabled';
         }
 
+        // If reviews have already been pulled, disable 'Pull reviews' button
+        require_once GR_BASE_PATH_ADMIN . 'includes/pro/class-pro-api-service.php';
+        $reviews = Pro_API_Service::parse_pro_review_json();
+        if ($reviews !== null) {
+            $pull_button_disabled = 'disabled';
+        }
+
         ?>
 
         <div class="serp-container">

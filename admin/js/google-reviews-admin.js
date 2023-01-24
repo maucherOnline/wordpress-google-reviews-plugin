@@ -1,34 +1,6 @@
 (function( $ ) {
 	'use strict';
 
-	/**
-	 * All of the code for your admin-facing JavaScript source
-	 * should reside in this file.
-	 *
-	 * Note: It has been assumed you will write jQuery code here, so the
-	 * $ function reference has been prepared for usage within the scope
-	 * of this function.
-	 *
-	 * This enables you to define handlers, for when the DOM is ready:
-	 *
-	 * $(function() {
-	 *
-	 * });
-	 *
-	 * When the window is loaded:
-	 *
-	 * $( window ).load(function() {
-	 *
-	 * });
-	 *
-	 * ...and/or other possibilities.
-	 *
-	 * Ideally, it is not considered best practise to attach more than a
-	 * single DOM-ready or window-load handler for a particular page.
-	 * Although scripts in the WordPress core, Plugins and Themes may be
-	 * practising this, we should strive to set a better example in our own work.
-	 */
-
 	 $(document).ready(function(){
 
 		const $search = $('.js-serp-business-search');
@@ -41,6 +13,13 @@
 		$search.on('keyup change', function () {
 			$searchButtonPro.removeAttr('disabled');
 		});
+
+		// prevent 'enter' from submitting form
+		$search.on('keypress', function(e) {
+			if (e.keyCode == '10' || e.keyCode == '13') {
+				e.preventDefault();
+			}
+		})
 
 		// Search for business
 		 $searchButtonPro.click(function () {
@@ -66,8 +45,17 @@
 						.attr('disabled', true);
 				},
 				success: function (response) {
-					if ( ! response.success ) {
-						$search.addClass('has-error');
+
+					if ( ! response ) {
+						$error.html('Error in search response. Please try again.');
+					}
+					else if (undefined === response.data || undefined === response.data.html) {
+						$error.html('Search response failed. Please try again.');
+					}
+					else if (response && response.data.html === '') {
+						$error.html('Results empty. Please try again.');
+					}
+					else if ( ! response.success ) {
 						$error.html(response.data.html);
 					} else {
 						if ( $search.hasClass('has-error') ) {
@@ -79,13 +67,11 @@
 					}
 				},
 				error: function (XMLHttpRequest, textStatus, errorThrown) {
-					console.log(errorThrown);
+
 				},
 				complete: function () {
-
 					$buttonRow
 						.removeClass('busy');
-
 					$searchButtonPro
 						.removeAttr('disabled');
 				}
@@ -138,6 +124,7 @@
 			 }
 
 			const $submit = $('#submit');
+			 let has_error = false;
 
 			$.ajax({
 				url: js_global.wp_ajax_url,
@@ -152,26 +139,39 @@
 						.attr('disabled', true);
 				},
 				success: function(response) {
-					/*
-					if ( ! response.success ) {
-						$error.html(response.data.html);
-					} else {
-
+					// if everything's ok, do nothing
+					if (response === "0") {
+						return false;
 					}
-					*/
-
+					else if (! response) {
+						$error.html('Error in reviews response. Please try again.');
+						has_error = true;
+					}
+					else if (undefined === response.data || undefined === response.data.html) {
+						$error.html('Reviews response failed. Please try again.');
+						has_error = true;
+					}
+					else if (response && response.data.html === '') {
+						$error.html('Reviews results empty. Please try again.');
+						has_error = true;
+					}
+					else if ( ! response.success ) {
+						$error.html(response.data.html);
+						has_error = true;
+					}
 				},
 				error: function (XMLHttpRequest, textStatus, errorThrown) {
 
 				},
-				complete: function () {
+				complete: function (jqXHR, textStatus) {
 					$buttonRow
 						.removeClass('busy');
-
-					$pullButtonPro
-						.removeAttr('disabled');
-
-					$submit.click();
+					if (!has_error) {
+						$submit.click();
+					} else {
+						$pullButtonPro
+							.removeAttr('disabled');
+					}
 				}
 			});
 		});
@@ -218,6 +218,5 @@
 			 }
 			});
 		});
-
 	 });
 })( jQuery );
