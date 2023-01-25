@@ -6,7 +6,7 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Stable tag: 1.4.2
-Tags: google reviews, google, reviews, rating, widget, reviews plugin, google business, testimonial, testimonials, google places reviews, map reviews, google my business
+Tags: google reviews, google, reviews, rating, reviews plugin
 
 == Description ==
 With a few easy clicks, display your Google Reviews for free, and improve your website user experience and conversions.
