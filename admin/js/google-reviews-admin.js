@@ -6,8 +6,11 @@
 		const $search = $('.js-serp-business-search');
 		const $searchButtonPro = $('.button.search-business.pro');
 		const $pullButtonPro = $('.button.pull-reviews.pro');
+		const $pullButtonFee = $('.button.pull-reviews.free');
 		const $buttonRow = $('.serp-container .button-row');
 		const $error = $('#errors');
+		const $languageDropdown = $('#reviews_language_3');
+		const $submitButton = $('input[type="submit"]');
 
 		// remove disabled attribute when search field is changed
 		$search.on('keyup change', function () {
@@ -115,6 +118,26 @@
 			}
 		});
 
+		// save dropdown language on change
+		 $languageDropdown.change(function() {
+			 const language = $(this).val();
+
+			 $.ajax({
+				 url: js_global.wp_ajax_url,
+				 data: {
+					 action: 'handle_language_saving',
+					 search: language,
+				 },
+				 beforeSend: function () {
+					 disableButtonsWhileSaving();
+				 },
+				 complete: function () {
+					 enableButtonsAfterSaving()
+				 }
+			 });
+
+		 });
+
 		// PRO: pull reviews button
 		 $pullButtonPro.on('click', function () {
 
@@ -180,7 +203,7 @@
 		 /**
 		  * FREE: pull reviews button
 		  */
-		$('.button.pull-reviews.free').on('click', function () {
+		 $pullButtonFee.on('click', function () {
 
 			const $that = $(this);
 			const $submit = $('#submit');
@@ -218,5 +241,25 @@
 			 }
 			});
 		});
+
+		 // disable buttons when ajax saving
+		 function disableButtonsWhileSaving() {
+			 $submitButton
+				 .attr('disabled', true);
+			 $pullButtonPro
+				 .attr('disabled', true);
+			 $pullButtonFee
+				 .attr('disabled', true);
+		 }
+
+		 // enable buttons after ajax saving
+		 function enableButtonsAfterSaving() {
+			 $pullButtonPro
+				 .removeAttr('disabled');
+			 $submitButton
+				 .removeAttr('disabled');
+			 $pullButtonFee
+				 .removeAttr('disabled');
+		 }
 	 });
 })( jQuery );

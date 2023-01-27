@@ -12,8 +12,56 @@ Class Pro_API_Service {
         add_action('wp_ajax_handle_get_reviews_pro_api', [$this, 'get_reviews_pro_api']);
         add_action('wp_ajax_nopriv_handle_get_reviews_pro_api', [$this, 'get_reviews_pro_api']);
 
+        // Save language ajax handler
+        add_action('wp_ajax_handle_language_saving', [$this, 'handle_language_saving']);
+        add_action('wp_ajax_nopriv_handle_language_saving', [$this, 'handle_language_saving']);
+
+        // Save location ajax handler
+        add_action('wp_ajax_handle_location_saving', [$this, 'handle_location_saving']);
+        add_action('wp_ajax_nopriv_handle_location_saving', [$this, 'handle_location_saving']);
     }
 
+    /**
+     * Handle location saving via ajax
+     */
+    public static function handle_location_saving() {
+
+        $locationID = isset($_GET['location_id']) ? sanitize_text_field($_GET['location_id']) : '';
+        $response = new WP_REST_Response();
+
+        if ( $locationID == '' ) {
+            $response->set_status(404);
+        } else {
+
+            $google_reviews_options = get_option( 'google_reviews_option_name' );
+            $google_reviews_options['serp_data_id'] = $locationID;
+            update_option('google_reviews_option_name', $google_reviews_options);
+
+            $response->set_status(200);
+        }
+
+        return $response;
+
+    }
+
+    /**
+     * Handle language saving via ajax
+     * @return WP_REST_Response
+     */
+    public static function handle_language_saving( $arg ) {
+
+        $language = isset($_GET['search']) ? sanitize_text_field($_GET['search']) : 'en';
+
+        $google_reviews_options = get_option( 'google_reviews_option_name' );
+        $google_reviews_options["reviews_language_3"] = $language;
+
+        update_option('google_reviews_option_name', $google_reviews_options);
+
+        $response = new WP_REST_Response();
+        $response->set_status(200);
+
+        return $response;
+    }
 
     /**
      * Get reviews from Pro API
