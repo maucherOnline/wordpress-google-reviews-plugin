@@ -26,15 +26,18 @@ Class Pro_API_Service {
      */
     public static function handle_location_saving() {
 
-        $locationID = isset($_GET['location_id']) ? sanitize_text_field($_GET['location_id']) : '';
+        $data_id = isset($_GET['data_id']) ? sanitize_text_field($_GET['data_id']) : '';
+        $location_name = isset($_GET['location_name']) ? sanitize_text_field($_GET['location_name']) : '';
+
         $response = new WP_REST_Response();
 
-        if ( $locationID == '' ) {
+        if ( $data_id == '' || $location_name == '' ) {
             $response->set_status(404);
         } else {
 
             $google_reviews_options = get_option( 'google_reviews_option_name' );
-            $google_reviews_options['serp_data_id'] = $locationID;
+            $google_reviews_options['serp_data_id'] = $data_id;
+            $google_reviews_options['serp_business_name'] = $location_name;
             update_option('google_reviews_option_name', $google_reviews_options);
 
             $response->set_status(200);

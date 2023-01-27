@@ -1,265 +1,278 @@
-(function( $ ) {
-	'use strict';
+(function ($) {
+    'use strict';
 
-	 $(document).ready(function(){
+    $(document).ready(function () {
 
-		const $search = $('.js-serp-business-search');
-		const $searchButtonPro = $('.button.search-business.pro');
-		const $pullButtonPro = $('.button.pull-reviews.pro');
-		const $pullButtonFee = $('.button.pull-reviews.free');
-		const $buttonRow = $('.serp-container .button-row');
-		const $error = $('#errors');
-		const $languageDropdown = $('#reviews_language_3');
-		const $submitButton = $('input[type="submit"]');
+        const $search = $('.js-serp-business-search');
+        const $searchButtonPro = $('.button.search-business.pro');
+        const $pullButtonPro = $('.button.pull-reviews.pro');
+        const $pullButtonFee = $('.button.pull-reviews.free');
+        const $buttonRow = $('.serp-container .button-row');
+        const $error = $('#errors');
+        const $languageDropdown = $('#reviews_language_3');
+        const $submitButton = $('input[type="submit"]');
 
-		// remove disabled attribute when search field is changed
-		$search.on('keyup change', function () {
-			$searchButtonPro.removeAttr('disabled');
-		});
+        // remove disabled attribute when search field is changed
+        $search.on('keyup change', function () {
+            $searchButtonPro.removeAttr('disabled');
+        });
 
-		// prevent 'enter' from submitting form
-		$search.on('keypress', function(e) {
-			if (e.keyCode == '10' || e.keyCode == '13') {
-				e.preventDefault();
-			}
-		})
+        // prevent 'enter' from submitting form
+        $search.on('keypress', function (e) {
+            if (e.keyCode == '10' || e.keyCode == '13') {
+                e.preventDefault();
+            }
+        })
 
-		// Search for business
-		 $searchButtonPro.click(function () {
+        // Search for business
+        $searchButtonPro.click(function () {
 
-			const $that = $(this);
+            const $that = $(this);
 
-			if ($that.attr('disabled')) {
-				return;
-			}
+            if ($that.attr('disabled')) {
+                return;
+            }
 
-			$.ajax({
-				url: js_global.wp_ajax_url,
-				data: {
-					action: 'handle_serp_business_search',
-					search: $search.val(),
-					language: js_global.language
-				},
-				beforeSend: function () {
-					$buttonRow
-						.addClass('busy');
+            $.ajax({
+                url: js_global.wp_ajax_url,
+                data: {
+                    action: 'handle_serp_business_search',
+                    search: $search.val(),
+                    language: js_global.language
+                },
+                beforeSend: function () {
+                    $buttonRow
+                        .addClass('busy');
 
-					$searchButtonPro
-						.attr('disabled', true);
-				},
-				success: function (response) {
+                    $searchButtonPro
+                        .attr('disabled', true);
+                },
+                success: function (response) {
 
-					if ( ! response ) {
-						$error.html('Error in search response. Please try again.');
-					}
-					else if (undefined === response.data || undefined === response.data.html) {
-						$error.html('Search response failed. Please try again.');
-					}
-					else if (response && response.data.html === '') {
-						$error.html('Results empty. Please try again.');
-					}
-					else if ( ! response.success ) {
-						$error.html(response.data.html);
-					} else {
-						if ( $search.hasClass('has-error') ) {
-							$search.removeClass('has-error');
-							$error.fadeOut().empty();
-						}
+                    if (!response) {
+                        $error.html('Error in search response. Please try again.');
+                    } else if (undefined === response.data || undefined === response.data.html) {
+                        $error.html('Search response failed. Please try again.');
+                    } else if (response && response.data.html === '') {
+                        $error.html('Results empty. Please try again.');
+                    } else if (!response.success) {
+                        $error.html(response.data.html);
+                    } else {
+                        if ($search.hasClass('has-error')) {
+                            $search.removeClass('has-error');
+                            $error.fadeOut().empty();
+                        }
 
-						$search.siblings('.serp-results').html(response.data.html).slideDown();
-					}
-				},
-				error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        $search.siblings('.serp-results').html(response.data.html).slideDown();
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
 
-				},
-				complete: function () {
-					$buttonRow
-						.removeClass('busy');
-					$searchButtonPro
-						.removeAttr('disabled');
-				}
-			});
-		});
+                },
+                complete: function () {
+                    $buttonRow
+                        .removeClass('busy');
+                    $searchButtonPro
+                        .removeAttr('disabled');
+                }
+            });
+        });
 
-		$('.serp-search').on('click', '.js-serp-result', function(){
-			const $this = $(this);
+        // handle clicks on location dropdown (selection)
+        $('.serp-search').on('click', '.js-serp-result', function () {
+            const $this = $(this);
+            const data_id = $this.val();
+            const location_name = $this.parent().text();
 
-			$this.closest('.serp-results').slideUp();
+            $this.closest('.serp-results').slideUp();
 
-			$('.js-serp-data-id').attr('value', $this.val());
-			$('.js-serp-business-search').val($.trim($this.parent().text()));
+            $('.js-serp-data-id').attr('value', $this.val());
+            $('.js-serp-business-search').val($.trim($this.parent().text()));
 
-			$('.button.pull-reviews').attr('disabled', true);
-			$('#submit').click();
-		});
+            $('.button.pull-reviews').attr('disabled', true);
 
-		 $search.on('click', function(){
-			const $this             = $(this);
-			const $resultsContainer = $('.serp-results');
+            $.ajax({
+                url: js_global.wp_ajax_url,
+                data: {
+                    action: 'handle_location_saving',
+                    data_id: data_id,
+                    location_name: location_name
+                },
+                beforeSend: function () {
+                    disableButtonsWhileSaving();
+                    $searchButtonPro
+                        .attr('disabled', true);
+                },
+                complete: function () {
+                    enableButtonsAfterSaving()
+                }
+            });
 
-			if ( ! $resultsContainer.children().length || ! $this.text().length ) {
-				return;
-			}
+        });
 
-			$resultsContainer.slideDown();
-		});
+        $search.on('click', function () {
+            const $this = $(this);
+            const $resultsContainer = $('.serp-results');
 
-		 $search.on('search', function(){
-			$('.js-serp-data-id').attr('value', '');
-			$('.serp-results').slideUp();
-			});
+            if (!$resultsContainer.children().length || !$this.text().length) {
+                return;
+            }
 
-		$(document).on('click', function(e) {
-			const $container        = $('.serp-search');
-			const $resultsContainer = $('.serp-results');
+            $resultsContainer.slideDown();
+        });
 
-			if ( ! $(e.target).closest($container).length ) {
-				$resultsContainer.slideUp();
-			}
-		});
+        $search.on('search', function () {
+            $('.js-serp-data-id').attr('value', '');
+            $('.serp-results').slideUp();
+        });
 
-		// save dropdown language on change
-		 $languageDropdown.change(function() {
-			 const language = $(this).val();
+        $(document).on('click', function (e) {
+            const $container = $('.serp-search');
+            const $resultsContainer = $('.serp-results');
 
-			 $.ajax({
-				 url: js_global.wp_ajax_url,
-				 data: {
-					 action: 'handle_language_saving',
-					 search: language,
-				 },
-				 beforeSend: function () {
-					 disableButtonsWhileSaving();
-				 },
-				 complete: function () {
-					 enableButtonsAfterSaving()
-				 }
-			 });
+            if (!$(e.target).closest($container).length) {
+                $resultsContainer.slideUp();
+            }
+        });
 
-		 });
+        // save dropdown language on change
+        $languageDropdown.change(function () {
+            const language = $(this).val();
 
-		// PRO: pull reviews button
-		 $pullButtonPro.on('click', function () {
+            $.ajax({
+                url: js_global.wp_ajax_url,
+                data: {
+                    action: 'handle_language_saving',
+                    search: language,
+                },
+                beforeSend: function () {
+                    disableButtonsWhileSaving();
+                },
+                complete: function () {
+                    enableButtonsAfterSaving()
+                }
+            });
 
-			 const $that = $(this);
-			 if ($that.attr('disabled')) {
-				 return;
-			 }
+        });
 
-			const $submit = $('#submit');
-			 let has_error = false;
+        // PRO: pull reviews button
+        $pullButtonPro.on('click', function () {
 
-			$.ajax({
-				url: js_global.wp_ajax_url,
-				data: {
-					action: 'handle_get_reviews_pro_api'
-				},
-				beforeSend: function () {
-					$buttonRow
-						.addClass('busy');
+            const $that = $(this);
+            if ($that.attr('disabled')) {
+                return;
+            }
 
-					$pullButtonPro
-						.attr('disabled', true);
-				},
-				success: function(response) {
-					// if everything's ok, do nothing
-					if (response === "0") {
-						return false;
-					}
-					else if (! response) {
-						$error.html('Error in reviews response. Please try again.');
-						has_error = true;
-					}
-					else if (undefined === response.data || undefined === response.data.html) {
-						$error.html('Reviews response failed. Please try again.');
-						has_error = true;
-					}
-					else if (response && response.data.html === '') {
-						$error.html('Reviews results empty. Please try again.');
-						has_error = true;
-					}
-					else if ( ! response.success ) {
-						$error.html(response.data.html);
-						has_error = true;
-					}
-				},
-				error: function (XMLHttpRequest, textStatus, errorThrown) {
+            const $submit = $('#submit');
+            let has_error = false;
 
-				},
-				complete: function (jqXHR, textStatus) {
-					$buttonRow
-						.removeClass('busy');
-					if (!has_error) {
-						$submit.click();
-					} else {
-						$pullButtonPro
-							.removeAttr('disabled');
-					}
-				}
-			});
-		});
+            $.ajax({
+                url: js_global.wp_ajax_url,
+                data: {
+                    action: 'handle_get_reviews_pro_api'
+                },
+                beforeSend: function () {
+                    $buttonRow
+                        .addClass('busy');
+
+                    $pullButtonPro
+                        .attr('disabled', true);
+                },
+                success: function (response) {
+                    // if everything's ok, do nothing
+                    if (response === "0") {
+                        return false;
+                    } else if (!response) {
+                        $error.html('Error in reviews response. Please try again.');
+                        has_error = true;
+                    } else if (undefined === response.data || undefined === response.data.html) {
+                        $error.html('Reviews response failed. Please try again.');
+                        has_error = true;
+                    } else if (response && response.data.html === '') {
+                        $error.html('Reviews results empty. Please try again.');
+                        has_error = true;
+                    } else if (!response.success) {
+                        $error.html(response.data.html);
+                        has_error = true;
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                },
+                complete: function (jqXHR, textStatus) {
+                    $buttonRow
+                        .removeClass('busy');
+                    if (!has_error) {
+                        $submit.click();
+                    } else {
+                        $pullButtonPro
+                            .removeAttr('disabled');
+                    }
+                }
+            });
+        });
 
 
-		 /**
-		  * FREE: pull reviews button
-		  */
-		 $pullButtonFee.on('click', function () {
+        /**
+         * FREE: pull reviews button
+         */
+        $pullButtonFee.on('click', function () {
 
-			const $that = $(this);
-			const $submit = $('#submit');
-			const place_id = $('input[name="google_reviews_option_name[gmb_id_1]"]').val();
-			const language = $('select#reviews_language_3').val();
-			const $errors = $('#errors');
+            const $that = $(this);
+            const $submit = $('#submit');
+            const place_id = $('input[name="google_reviews_option_name[gmb_id_1]"]').val();
+            const language = $('select#reviews_language_3').val();
+            const $errors = $('#errors');
 
-			$.ajax({
-			 url: js_global.wp_ajax_url,
-			 data: {
-				 action: 'get_reviews_free_api',
-				 place_id: place_id,
-				 language: language
-			 },
-			 beforeSend: function () {
-				 $that
-					 .addClass('pulling')
-					 .attr('disabled', true);
-			 },
-			 success: function(response) {
+            $.ajax({
+                url: js_global.wp_ajax_url,
+                data: {
+                    action: 'get_reviews_free_api',
+                    place_id: place_id,
+                    language: language
+                },
+                beforeSend: function () {
+                    $that
+                        .addClass('pulling')
+                        .attr('disabled', true);
+                },
+                success: function (response) {
 
-			 },
-			 error: function(XMLHttpRequest, textStatus, errorThrown) {
-				 const message = errorThrown + ' - Please double-check your Place ID.';
-				 $errors.text(message);
-			 },
-			 complete: function (XMLHttpRequest, textStatus) {
-				 $that
-					 .removeClass('pulling')
-					 .attr('disabled', false);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    const message = errorThrown + ' - Please double-check your Place ID.';
+                    $errors.text(message);
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                    $that
+                        .removeClass('pulling')
+                        .attr('disabled', false);
 
-				 if (textStatus !== 'error') {
-					 $submit.click();
-				 }
-			 }
-			});
-		});
+                    if (textStatus !== 'error') {
+                        $submit.click();
+                    }
+                }
+            });
+        });
 
-		 // disable buttons when ajax saving
-		 function disableButtonsWhileSaving() {
-			 $submitButton
-				 .attr('disabled', true);
-			 $pullButtonPro
-				 .attr('disabled', true);
-			 $pullButtonFee
-				 .attr('disabled', true);
-		 }
+        // disable buttons when ajax saving
+        function disableButtonsWhileSaving() {
+            $submitButton
+                .attr('disabled', true);
+            $pullButtonPro
+                .attr('disabled', true);
+            $pullButtonFee
+                .attr('disabled', true);
+        }
 
-		 // enable buttons after ajax saving
-		 function enableButtonsAfterSaving() {
-			 $pullButtonPro
-				 .removeAttr('disabled');
-			 $submitButton
-				 .removeAttr('disabled');
-			 $pullButtonFee
-				 .removeAttr('disabled');
-		 }
-	 });
-})( jQuery );
+        // enable buttons after ajax saving
+        function enableButtonsAfterSaving() {
+            $pullButtonPro
+                .removeAttr('disabled');
+            $submitButton
+                .removeAttr('disabled');
+            $pullButtonFee
+                .removeAttr('disabled');
+        }
+    });
+})(jQuery);

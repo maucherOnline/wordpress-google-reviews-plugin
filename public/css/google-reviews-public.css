@@ -11,7 +11,7 @@
 #g-review .g-review {
   padding: 24px;
   background: #FFFFFF 0% 0% no-repeat padding-box;
-  box-shadow: 0 7px 20px #00000029;
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.1607843137);
   border-radius: 16px;
   opacity: 1;
   box-sizing: border-box;
@@ -53,7 +53,7 @@
   margin-left: 15px;
   font: normal normal normal 14px/17px Roboto;
   letter-spacing: 0;
-  color: #0000004D;
+  color: rgba(0, 0, 0, 0.3019607843);
 }
 #g-review .g-review .gr-inner-body {
   margin-top: 10px;
@@ -63,7 +63,7 @@
   text-align: left;
   font: normal normal normal 14px/19px Roboto;
   letter-spacing: 0;
-  color: #00000099;
+  color: rgba(0, 0, 0, 0.6);
   line-height: 1.6;
 }
 #g-review .g-review .gr-inner-body .mCSB_scrollTools {
@@ -447,6 +447,14 @@ body #g-review.layout_style-4 .g-review {
   padding-top: 25px;
 }
 #g-review.layout_style-5 .swiper .swiper-slide .g-review {
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+/* ------------------------------------------------------------------------- */
+/* G Review Grid 6 */
+/* ------------------------------------------------------------------------- */
+#g-review.layout_style-6 .swiper .swiper-slide .g-review {
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
 }
