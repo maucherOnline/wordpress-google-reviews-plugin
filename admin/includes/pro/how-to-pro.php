@@ -10,9 +10,9 @@
     <li>Choose your business from the list</li>
     <li>Select your preferred language</li>
     <li>Click the 'Pull reviews' button</li>
-    <li>Wait until the process is finished. The page refreshed automatically</li>
-    <li>Your reviews should be displayed</li>
-    <li>Then you can configure styling and layout options</li>
-    <li>Hit 'Save' to see layout and styling changes</li>
-    <li>Use the shortcode [google-reviews] to show your reviews on pages, posts, Elementor, Beaver Builder, Bakery Builder etc.</li>
+    <li>Wait until the process is finished. The page refreshes automatically</li>
+    <li>Your reviews should be displayed by now. If not, refresh the page and click the 'Pull reviews' button again</li>
+    <li>When your reviews are showing you can configure styling and layout options</li>
+    <li>Hit 'Save' to see layout and styling changes applied</li>
+    <li>Use the shortcode <code>[google-reviews]</code> to show your reviews on pages, posts, Elementor, Beaver Builder, Bakery Builder etc.</li>
 </ol>
