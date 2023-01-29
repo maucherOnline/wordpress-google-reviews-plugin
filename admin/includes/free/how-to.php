@@ -3,16 +3,22 @@
 ?>
 <h1>How to use the free version</h1>
 <ol>
-    <li>Search for your business
-        <a href="https://developers.google.com/maps/documentation/places/web-service/place-id#find-id" target="_blank">
-            here</a></li>
-    <li>Copy the business' Place ID</li>
-    <li>Paste the business' Place ID into the Place ID field</li>
-    <li>Choose your preferred language</li>
-    <li>Configure styling and layout</li>
-    <li>Hit 'save'</li>
     <li>Remove checkmark at 'Show Dummy Content'</li>
-    <li>The plugin will pull your reviews now</li>
+    <li>Search for your business in our map search.
+        <ul>
+            <li>If this is not available, you can search for your business here: <a href="https://developers.google.com/maps/documentation/places/web-service/place-id#find-id" target="_blank">
+                    here</a></li>
+        </ul>
+    </li>
+    <li>Copy the Place ID of your business</li>
+    <li>Paste the Place ID into the Place ID field</li>
+    <li>Choose your preferred language</li>
+    <li>Click the 'Pull reviews' button</li>
+    <li>Wait until the process is finished. The page will refresh automatically</li>
+    <li>Now you should already see your reviews</li>
+    <li>Configure styling and layout options</li>
+    <li>Hit 'save'</li>
+    <li>You will see your changes after saving</li>
     <li>Use the shortcode [google-reviews] to show your reviews on pages, posts, Elementor, Beaver Builder,
         Bakery Builder etc.</li>
     <li><strong>Note:</strong> the free Google API only allows for pulling 5 reviews. To get around this, please
