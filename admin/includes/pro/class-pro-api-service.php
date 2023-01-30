@@ -81,6 +81,8 @@ Class Pro_API_Service {
             return;
         }
 
+        $site = urlencode(get_site_url());
+
         $install_id = grwp_fs()->get_site()->id;
         $secret_key = base64_encode( grwp_fs()->get_site()->secret_key );
 
@@ -92,7 +94,7 @@ Class Pro_API_Service {
             )
         ) );
 
-        $license_request_url = sprintf( 'https://api.reviewsembedder.com/get-reviews.php?install_id=%s&data_id=%s&language=%s', $install_id, $data_id, $reviews_language );
+        $license_request_url = sprintf( 'https://api.reviewsembedder.com/get-reviews.php?install_id=%s&data_id=%s&language=%s&site=%s', $install_id, $data_id, $reviews_language, $site );
 
         $get_reviews = wp_remote_get( $license_request_url, array(
             'headers' => array(

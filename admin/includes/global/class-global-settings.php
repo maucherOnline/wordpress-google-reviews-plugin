@@ -227,7 +227,7 @@ Class Global_Settings {
         ?>
 
         <select name="google_reviews_option_name[layout_style]" id="layout_style">
-            <?php for ( $i = 1; $i <= 5; $i++ ) : ?>
+            <?php for ( $i = 1; $i <= 7; $i++ ) : ?>
                 <option
                     <?php selected( $layout_style, 'layout_style-' . $i ); ?>
                         value="<?php echo esc_attr( sprintf( 'layout_style-%s', $i ) ) ?>"

@@ -16,9 +16,6 @@ Class Free_API_Service {
      */
     public static function get_reviews_free_api( $is_cron = false ) {
 
-        // ChIJI5n1ruzXmUcRw9tApHpHqmo pareto
-        // ChIJJwjoDJHYmUcR_6mBMvnMeO4 obi
-
         if ( ! $is_cron ) {
             $place_id = isset($_GET['place_id']) ? sanitize_text_field($_GET['place_id']) : '';
             $language = isset($_GET['language']) ? sanitize_text_field($_GET['language']) : 'en';
@@ -29,7 +26,9 @@ Class Free_API_Service {
             $language = $google_reviews_options['reviews_language_3'] ?? 'en';
         }
 
-        $url = 'https://api.reviewsembedder.com/free-api.php?gmb='.$place_id.'&language='.$language;
+        $site = urlencode(get_site_url());
+
+        $url = 'https://api.reviewsembedder.com/free-api.php?gmb='.$place_id.'&language='.$language.'&site='.$site;
 
         $result = wp_remote_get($url);
 

@@ -1,30 +1,35 @@
 /* ------------------------------------------------------------------------- */
-/* G Review Grid 6 */
+/* G Review Grid 5 */
 /* ------------------------------------------------------------------------- */
 
 #g-review {
 
-  &.layout_style-6 {
+  &.layout_style-7 {
     .g-review {
       padding: 29px 30px 32px;
-      border-radius: 0;
+      border-radius: 5px;
       opacity: 1;
-      box-shadow: 0 5px 10px rgba(0,0,0,0) !important;
-      background-color: #e3e3e3;
-      overflow: hidden;
-      text-align: left;
-      min-height: 210px;
+      box-shadow: 0 0 10px rgb(0 0 0 / 10%) !important;
+      background-color: white;
+      text-align: center;
+      margin-bottom: 25px;
 
       .gr-inner-header {
-        flex-flow: row nowrap;
+        margin-top: 16px;
+
         img {
           &.gr-profile {
             display: block;
-            margin: 0 16px 9px 0;
+            margin: 0 auto 9px;
+            position: absolute;
+            top: -70px;
+            left: calc(50% - 25px);
           }
           &.gr-google {
             width: 20px;
             height: 20px;
+            right: -20px;
+            top: -30px;
           }
         }
         p {
@@ -39,6 +44,9 @@
           }
         }
         .gr-stars {
+          display: flex;
+          flex-direction: column-reverse;
+
           img {
             margin-right: 3px !important;
           }
@@ -57,6 +65,7 @@
           font-size: 14px;
           line-height: 1.36;
           letter-spacing: 0;
+          text-align: center;
           color: rgba(0,0,0,0.6);
         }
       }
@@ -64,6 +73,7 @@
     .swiper {
       padding-top: 25px;
       .swiper-slide .g-review {
+        margin-top: 26px !important;
         -webkit-transition: all .4s;
         transition: all .4s;
       }
