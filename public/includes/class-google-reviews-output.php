@@ -191,6 +191,10 @@ class GRWP_Google_Reviews_Output {
                         continue;
                     }
 
+                    // Todo: step over rating if review has no text
+
+                    // Todo: step over rating if review contains certain words
+
                 }
             }
 

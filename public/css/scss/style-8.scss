@@ -40,6 +40,7 @@
         .gr-stars {
           img {
             margin-right: 7px !important;
+            filter: hue-rotate(45deg);
           }
           .time {
             margin-left: 5px;

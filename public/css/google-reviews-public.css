@@ -615,6 +615,7 @@ body #g-review.layout_style-4 .g-review {
 }
 #g-review.layout_style-8 .g-review .gr-inner-header .gr-stars img {
   margin-right: 7px !important;
+  filter: hue-rotate(45deg);
 }
 #g-review.layout_style-8 .g-review .gr-inner-header .gr-stars .time {
   margin-left: 5px;
