@@ -1,35 +1,29 @@
 /* ------------------------------------------------------------------------- */
-/* G Review Grid 7 */
+/* G Review Grid 5 */
 /* ------------------------------------------------------------------------- */
 
 #g-review {
 
-  &.layout_style-7 {
+  &.layout_style-8 {
     .g-review {
       padding: 29px 30px 32px;
-      border-radius: 5px;
+      border-radius: 16px;
       opacity: 1;
-      box-shadow: 0 0 10px rgb(0 0 0 / 10%) !important;
-      background-color: white;
+      box-shadow: 0 5px 10px rgba(0,0,0,0) !important;
+      background: black;
+      overflow: hidden;
       text-align: center;
-      margin-bottom: 25px;
 
       .gr-inner-header {
-        margin-top: 16px;
-
         img {
           &.gr-profile {
             display: block;
             margin: 0 auto 9px;
-            position: absolute;
-            top: -70px;
-            left: calc(50% - 25px);
+            filter: grayscale(.8);
           }
           &.gr-google {
             width: 20px;
             height: 20px;
-            right: -20px;
-            top: -30px;
           }
         }
         p {
@@ -40,18 +34,16 @@
           a {
             display: block;
             margin-bottom: 4px;
-            color: black;
+            color: white;
           }
         }
         .gr-stars {
-          display: flex;
-          flex-direction: column-reverse;
-
           img {
-            margin-right: 3px !important;
+            margin-right: 7px !important;
           }
           .time {
             margin-left: 5px;
+            color: #9f9f9f;
           }
         }
       }
@@ -66,14 +58,26 @@
           line-height: 1.36;
           letter-spacing: 0;
           text-align: center;
-          color: rgba(0,0,0,0.6);
+          color: white;
+        }
+
+        .mCSB_scrollTools {
+          background: rgb(255 255 255 / 16%) !important;
+          .mCSB_draggerContainer {
+            .mCSB_dragger {
+              .mCSB_dragger_bar {
+                background: rgb(255 255 255 / 20%) !important;
+              }
+              .mCSB_draggerRail {
+              }
+            }
+          }
         }
       }
     }
     .swiper {
       padding-top: 25px;
       .swiper-slide .g-review {
-        margin-top: 26px !important;
         -webkit-transition: all .4s;
         transition: all .4s;
       }
