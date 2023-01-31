@@ -168,9 +168,11 @@ body.grwp-is-loading:after {
 
 .form-table select,
 .form-table input[type="text"],
-.form-table input[type="number"] {
+.form-table input[type="number"],
+.form-table textarea {
   min-width: 200px;
 }
+
 .form-table input[type="search"] {
   border: 1px solid #1f6bae;
 }

@@ -78,6 +78,30 @@ Class Global_Settings {
             'google_reviews_style_layout_setting_section' // section
         );
 
+        add_settings_field(
+            'filter_below_5_stars', // id
+            __('Minimum rating (stars)', 'google-reviews'), // title
+            array($this, 'filter_below_5_stars_callback'), // callback
+            'google-reviews-admin', // page
+            'google_reviews_style_layout_setting_section' // section
+        );
+
+        add_settings_field(
+            'exclude_reviews_without_text', // id
+            __('Exclude reviews without text', 'google-reviews'), // title
+            array($this, 'exclude_reviews_without_text_callback'), // callback
+            'google-reviews-admin', // page
+            'google_reviews_style_layout_setting_section' // section
+        );
+
+        add_settings_field(
+            'filter_words', // id
+            __('Filter by words (comma separated)', 'google-reviews'), // title
+            array($this, 'filter_words_callback'), // callback
+            'google-reviews-admin', // page
+            'google_reviews_style_layout_setting_section' // section
+        );
+
         /**
          * Embeddding instructions
          */
@@ -145,7 +169,15 @@ Class Global_Settings {
         }
 
         if ( isset( $input['filter_below_5_stars'] ) ) {
-            $sanitary_values['filter_below_5_stars'] = $input['filter_below_5_stars'];
+            $sanitary_values['filter_below_5_stars'] = sanitize_text_field($input['filter_below_5_stars']);
+        }
+
+        if ( isset( $input['exclude_reviews_without_text'] ) ) {
+            $sanitary_values['exclude_reviews_without_text'] = $input['exclude_reviews_without_text'];
+        }
+
+        if ( isset( $input['filter_words'] ) ) {
+            $sanitary_values['filter_words'] = $input['filter_words'];
         }
 
         if ( isset( $input['reviews_language_3'] ) ) {
@@ -159,6 +191,10 @@ Class Global_Settings {
         // additional output possible
     }
 
+    /**
+     * Show dummy content
+     * @return void
+     */
     public function show_dummy_content_callback() {
         global $allowed_html;
         ob_start();
@@ -179,6 +215,83 @@ Class Global_Settings {
         $html = ob_get_clean();
 
         echo wp_kses($html, $allowed_html);
+    }
+
+    /**
+     * Filter below 5 stars
+     * @return void
+     */
+    public function filter_below_5_stars_callback() {
+        global $allowed_html;
+
+        ob_start();
+        ?>
+
+        <input type="number"
+               name="google_reviews_option_name[filter_below_5_stars]"
+               id="filter_below_5_stars"
+               min="1"
+               max="5"
+               step="1"
+               value="<?php echo esc_attr( ! empty( $this->google_reviews_options['filter_below_5_stars'] ) ? $this->google_reviews_options['filter_below_5_stars'] : '5' ); ?>"
+        />
+
+        <?php
+        $html = ob_get_clean();
+
+        echo wp_kses($html, $allowed_html);
+
+    }
+
+    /**
+     * Exclude reviews without text
+     * @return void
+     */
+    public function exclude_reviews_without_text_callback() {
+        global $allowed_html;
+
+        ob_start(); ?>
+
+        <input type="checkbox"
+               name="google_reviews_option_name[exclude_reviews_without_text]"
+               value="1"
+               id="exclude_reviews_without_text"
+               <?php echo esc_attr( ! empty( $this->google_reviews_options['exclude_reviews_without_text'] ) ? 'checked' : '' ); ?>
+        >
+
+        <span>
+            <?php _e( 'Yes', 'google-reviews' ); ?>
+        </span>
+
+        <?php
+
+        $html = ob_get_clean();
+
+        echo wp_kses($html, $allowed_html);
+
+    }
+
+    /**
+     * Filter specific words
+     * @return void
+     */
+    public function filter_words_callback() {
+        global $allowed_html;
+
+        ob_start();
+        ?>
+
+        <textarea
+           name="google_reviews_option_name[filter_words]"
+           id="filter_words"
+           rows="2"
+        ><?php echo esc_attr( ! empty( $this->google_reviews_options['filter_words'] ) ? $this->google_reviews_options['filter_words'] : '' ); ?></textarea>
+
+        <?php
+        $html = ob_get_clean();
+
+        echo wp_kses($html, $allowed_html);
+
     }
 
     /**

@@ -154,7 +154,8 @@ body.grwp-is-loading:after {
 
 .form-table select,
 .form-table input[type=text],
-.form-table input[type=number] {
+.form-table input[type=number],
+.form-table textarea {
   min-width: 200px;
 }
 

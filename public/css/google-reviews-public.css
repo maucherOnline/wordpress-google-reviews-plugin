@@ -592,6 +592,7 @@ body #g-review.layout_style-4 .g-review {
   background: black;
   overflow: hidden;
   text-align: center;
+  min-height: 256px;
 }
 #g-review.layout_style-8 .g-review .gr-inner-header img.gr-profile {
   display: block;

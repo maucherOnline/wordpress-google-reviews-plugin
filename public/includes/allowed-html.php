@@ -49,6 +49,12 @@ $allowed_html = [
         'min'       => [],
         'max'       => [],
         'step'      => [],
-
     ],
+    'textarea' => [
+        'id'    => [],
+        'name'    => [],
+        'value'    => [],
+        'rows'    => [],
+        'cols'    => [],
+    ]
 ];

@@ -107,7 +107,6 @@ class GRWP_Google_Reviews_Output {
             }
         }
 
-
         // prevent php notice if undefined
         $showdummy = isset($this->options['show_dummy_content']) ? true : false;
 
@@ -162,10 +161,35 @@ class GRWP_Google_Reviews_Output {
 
         foreach ( $reviews as $review ) {
 
-            // dummy content not necessary for premium version
-            if ( grwp_fs()->is__premium_only() ) {
+            // assign dummy content
+            if  ( $showdummy ) {
 
-                if ( $showdummy ) {
+                $name = $review['author_name'];
+                $author_url = $review['author_url'];
+                $profile_photo_url = $review['profile_photo_url'];
+                $rating = $review['rating'];
+                $text = $review['text'];
+
+                $time = date('m/d/Y', $review['time']);
+
+            }
+
+            // else, use real content, but...
+            else {
+
+                // use different array keys for pro version results
+                if ( grwp_fs()->is__premium_only() ) {
+
+                    $name              = $review['user']['name'];
+                    $author_url        = $review['user']['link'];
+                    $profile_photo_url = $review['user']['thumbnail'];
+                    $rating            = $review['rating'];
+                    $text              = $review['snippet'];
+
+                }
+
+                // use different array keys for free version results
+                else {
 
                     $name = $review['author_name'];
                     $author_url = $review['author_url'];
@@ -175,39 +199,47 @@ class GRWP_Google_Reviews_Output {
 
                     $time = date('m/d/Y', $review['time']);
 
+
+                }
+            }
+
+            // step over rating if minimum stars are not met
+            if ( isset($this->options['filter_below_5_stars'])
+                && $this->options['filter_below_5_stars'] ) {
+
+                $min_rating = intval($this->options['filter_below_5_stars']);
+                if ($rating < $min_rating) {
+                    continue;
                 }
 
-                else {
+            }
 
-                    $name              = $review['user']['name'];
-                    $author_url        = $review['user']['link'];
-                    $profile_photo_url = $review['user']['thumbnail'];
-                    $rating            = $review['rating'];
-                    $text              = $review['snippet'];
+            // step over rating if review has no text
+            if ( isset( $this->options['exclude_reviews_without_text'] )
+                && $this->options['exclude_reviews_without_text'] ) {
 
-                    // step over rating if minimum stars are not met
-                    $min_rating = intval($this->options['filter_below_5_stars']);
-                    if ( $rating < $min_rating ) {
-                        continue;
+                if ($text == '') {
+                    continue;
+                }
+
+            }
+
+            // step over rating if review contains certain words
+            if ( isset( $this->options['filter_words'] )
+                && $this->options['filter_words'] !== '' ) {
+
+                $words_str = rtrim($this->options['filter_words'], ',');
+                $words_arr = explode(',', $words_str);
+                foreach ($words_arr as $word) {
+                    $word = trim($word);
+
+                    if (str_contains($text, $word) ) {
+                        continue 2;
                     }
-
-                    // Todo: step over rating if review has no text
-
-                    // Todo: step over rating if review contains certain words
-
                 }
+
             }
 
-            // but for free version...
-            else {
-                $name = $review['author_name'];
-                $author_url = $review['author_url'];
-                $profile_photo_url = $review['profile_photo_url'];
-                $rating = $review['rating'];
-                $text = $review['text'];
-
-                $time = date('m/d/Y', $review['time']);
-            }
 
             // count and prepare stars
             $star = '<img src="'. esc_attr(plugin_dir_url( __FILE__ )).'img/svg-star.svg" alt="" />';
@@ -218,14 +250,21 @@ class GRWP_Google_Reviews_Output {
             $star_output .= '</span>';
 
             // prepare time elapsed string
-            if ( grwp_fs()->is__premium_only() ) {
-                if ( $showdummy ) {
-                    $star_output .= '<span class="time">' . $this->time_elapsed_string( date('Y-m-d h:i:s', $review['time']) ) .'</span>';
-                } else {
-                    $star_output .= '<span class="time">' . $review['date'] .'</span>';
-                }
-            } else {
+            if ( $showdummy ) {
                 $star_output .= '<span class="time">' . $this->time_elapsed_string( date('Y-m-d h:i:s', $review['time']) ) .'</span>';
+            }
+
+            else {
+
+                // time string for pro version
+                if (grwp_fs()->is__premium_only()) {
+                    $star_output .= '<span class="time">' . $review['date'] . '</span>';
+                }
+
+                // time string for free version
+                else {
+                    $star_output .= '<span class="time">' . $this->time_elapsed_string(date('Y-m-d h:i:s', $review['time'])) . '</span>';
+                }
             }
 
             $google_svg = plugin_dir_url(__FILE__) . 'img/google-logo-svg.svg';
