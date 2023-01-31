@@ -32,10 +32,18 @@ class GRWP_Google_Reviews_Activator {
 	public static function activate() {
 
         // add dummy content setting as default
-        $google_reviews_options = get_option( 'google_reviews_option_name' );
-        if ( ! $google_reviews_options ) {
+        if ( ! get_option( 'google_reviews_option_name' ) ) {
+
             $google_reviews_options = [];
-            $google_reviews_options['dummy_content'] = '1';
+            $google_reviews_options['show_dummy_content'] = '1';
+            $google_reviews_options['serp_business_name'] = '';
+            $google_reviews_options['serp_data_id'] = '';
+            $google_reviews_options['style_2'] = 'Slider';
+            $google_reviews_options['layout_style'] = 'layout_style-1';
+            $google_reviews_options['filter_below_5_stars'] = '5';
+            $google_reviews_options['filter_words'] = '';
+            $google_reviews_options['reviews_language_3'] = 'en';
+
             add_option('google_reviews_option_name', $google_reviews_options);
         }
 
