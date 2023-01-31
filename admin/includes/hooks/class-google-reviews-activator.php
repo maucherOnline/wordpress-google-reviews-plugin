@@ -40,7 +40,7 @@ class GRWP_Google_Reviews_Activator {
             $google_reviews_options['serp_data_id'] = '';
             $google_reviews_options['style_2'] = 'Slider';
             $google_reviews_options['layout_style'] = 'layout_style-1';
-            $google_reviews_options['filter_below_5_stars'] = '5';
+            $google_reviews_options['filter_below_5_stars'] = '1';
             $google_reviews_options['filter_words'] = '';
             $google_reviews_options['reviews_language_3'] = 'en';
 
