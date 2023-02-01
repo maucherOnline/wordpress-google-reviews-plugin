@@ -11,6 +11,7 @@
         const $error = $('#errors');
         const $languageDropdown = $('#reviews_language_3');
         const $submitButton = $('input[type="submit"]');
+        const $showDummyContent = $('#show_dummy_content');
 
         // remove disabled attribute when search field is changed
         $search.on('keyup change', function () {
@@ -102,6 +103,7 @@
                     disableButtonsWhileSaving();
                     $searchButtonPro
                         .attr('disabled', true);
+                    $error.hide();
                 },
                 complete: function () {
                     enableButtonsAfterSaving()
@@ -126,6 +128,7 @@
             $('.serp-results').slideUp();
         });
 
+        // remove list, when user clicks anywhere else
         $(document).on('click', function (e) {
             const $container = $('.serp-search');
             const $resultsContainer = $('.serp-results');
@@ -203,6 +206,9 @@
                     $buttonRow
                         .removeClass('busy');
                     if (!has_error) {
+                        if ( $showDummyContent.is(':checked') ) {
+                            $showDummyContent.click();
+                        }
                         $submit.click();
                     } else {
                         $pullButtonPro
@@ -249,6 +255,10 @@
                         .attr('disabled', false);
 
                     if (textStatus !== 'error') {
+
+                        if ( $showDummyContent.is(':checked') ) {
+                            $showDummyContent.click();
+                        }
                         $submit.click();
                     }
                 }
