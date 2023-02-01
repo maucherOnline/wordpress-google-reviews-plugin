@@ -102,7 +102,7 @@ class GRWP_Google_Reviews_Output {
                 elseif ( $review_style_override == '5') $review_style_override = 'layout_style-5';
                 elseif ( $review_style_override == '6') $review_style_override = 'layout_style-6';
                 elseif ( $review_style_override == '7') $review_style_override = 'layout_style-7';
-                elseif ( $review_style_override == '8') $review_style_override = 'layout_style-7';
+                elseif ( $review_style_override == '8') $review_style_override = 'layout_style-8';
                 else $review_style_override = '';
             }
         }
