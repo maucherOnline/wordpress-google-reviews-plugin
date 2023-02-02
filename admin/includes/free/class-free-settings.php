@@ -17,6 +17,39 @@ Class Free_Settings {
             'google-reviews-admin', // page
             'google_reviews_setting_section' // section
         );
+
+        add_settings_field(
+            'video_intro', // id
+            '', // title
+            array( $this, 'video_intro_callback' ), // callback
+            'google-reviews-admin', // page
+            'google_reviews_setting_section' // section
+        );
+    }
+
+    /**
+     * Show modal with video introduction
+     */
+    public function video_intro_callback() { ?>
+        <div id="how_to_modal" class="modal hide">
+
+            <!-- Modal content -->
+            <div class="modal-inner">
+                <div class="modal-content">
+                    <span id="modal_close" class="close">&times;</span>
+                    <h3><?php _e('How to use this plugin', 'google-reviews'); ?></h3>
+                    <p><?php _e('Explained in less than 1 minute...', 'google-reviews'); ?></p>
+                    <div class="responsive_iframe">
+                        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/L6-uNN96ljA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-overlay"></div>
+
+        </div>
+
+        <?php
     }
 
     /**

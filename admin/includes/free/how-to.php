@@ -24,3 +24,6 @@
         <a href="<?php echo get_site_url().'/wp-admin/admin.php?page=google-reviews-pricing'; ?>">
             upgrade to the PRO version</a>, which will pull all your reviews</li>
 </ol>
+
+<h1>Video tutorial</h1>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/L6-uNN96ljA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

@@ -181,3 +181,111 @@ body.grwp-is-loading:after {
   color: red;
   font-weight: 600;
 }
+
+#how_to_modal {
+  display: flex;
+  position: fixed;
+  z-index: 2;
+  flex-direction: column;
+  justify-content: center;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+
+  &.hide {
+    display: none;
+  }
+
+  .modal-inner {
+
+    z-index: 998;
+    width: 100%;
+    margin: 15% auto;
+    max-width: 860px;
+
+    .modal-content {
+      background-color: #dbdbdb;
+      padding: 2rem 4rem 2rem 4rem;
+      border: 1px solid #dbdbdb;
+      text-align: center;
+      position: relative;
+      font-weight: 400;
+      @media (max-width: 768px) {
+        font-size: 18px;
+        padding: 3rem 2rem;
+      }
+
+      .responsive_iframe {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        padding-top: 56.25%;
+
+        iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .close {
+        color: black;
+        float: right;
+        font-size: 50px;
+        position: absolute;
+        top: -10px;
+        right: 15px;
+        @media (max-width: 560px) {
+          font-size: 50px;
+          top: -10px;
+        }
+
+        &:hover,
+        &:focus {
+          color: black;
+          text-decoration: none;
+          cursor: pointer;
+        }
+      }
+
+      h3 {
+        font-size: 28px;
+        color: black;
+        margin: 0;
+        @media (max-width: 560px) {
+
+        }
+      }
+
+      p {
+        font-size: 21px;
+        font-weight: 400;
+        margin-bottom: 1rem;
+        @media (max-width: 560px) {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    backdrop-filter: blur(3px);
+    z-index: -1;
+  }
+
+}
+
