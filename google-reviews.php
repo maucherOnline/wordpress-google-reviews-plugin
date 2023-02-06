@@ -43,7 +43,7 @@ if ( ! function_exists('grwp_fs') ) {
                     'premium_slug' => 'embedder-for-google-reviews-pro',
                     'type' => 'plugin',
                     'public_key' => 'pk_6823179f29a329a909c59a7a25a0a',
-                    'is_premium' => false,
+                    'is_premium' => true,
                     'premium_suffix' => 'Premium',
                     // If your plugin is a serviceware, set this option to false.
                     'has_premium_version' => true,
@@ -131,5 +131,12 @@ else {
     require_once GR_BASE_PATH_PUBLIC . 'includes/class-google-reviews-loader.php';
     $plugin = new GRWP_Google_Reviews_Startup();
     $plugin->run();
+
+    // temporary from v1.4.5: remove old wp cron for free users
+    if ( ! grwp_fs()->is__premium_only() ) {
+        if ( wp_next_scheduled('get_google_reviews') ) {
+            wp_clear_scheduled_hook( 'get_google_reviews' );
+        }
+    }
 
 }

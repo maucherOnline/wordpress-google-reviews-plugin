@@ -57,14 +57,16 @@ class GRWP_Google_Reviews_Activator {
             add_option('gr_latest_results_free', '');
         }
 
-        // add wp cron
-        if ( ! wp_next_scheduled('get_google_reviews' ) ) {
+        // add wp cron for pro users
+        if ( grwp_fs()->is__premium_only() ) {
 
-            wp_schedule_event( time(), 'weekly', 'get_google_reviews' );
+            if ( ! wp_next_scheduled('get_google_reviews') ) {
+
+                wp_schedule_event(time(), 'weekly', 'get_google_reviews');
+
+            }
 
         }
-
-
 
 	}
 
