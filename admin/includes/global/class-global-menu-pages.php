@@ -42,27 +42,35 @@ Class Global_Menu_Pages {
 
             <form method="post" action="options.php">
                 <nav class="nav-tab-wrapper">
-                    <a href="?page=google-reviews" class="nav-tab <?php if($tab===null):?>nav-tab-active<?php endif; ?>">Connect Google</a>
-                    <a href="?page=google-reviews&tab=display_settings" class="nav-tab <?php if($tab==='display_settings'):?>nav-tab-active<?php endif; ?>">Display Settings</a>
+                    <a href="#connect_settings"
+                       class="nav-tab">
+                        Connect Google
+                    </a>
+                    <a href="#display_settings"
+                       class="nav-tab">
+                        Display Settings
+                    </a>
+                    <a href="#embedding_instructions"
+                       class="nav-tab">
+                        Embedding Instructions
+                    </a>
                 </nav>
 
                 <div class="tab-content">
                     <?php
                     settings_fields( 'google_reviews_option_group' );
                     do_settings_sections( 'google-reviews-admin' );
+                    submit_button();
                     ?>
                 </div>
-                <?php
-
-                submit_button();
-
-                ?>
             </form>
 
-            <h2>
-                <?php _e( 'Preview', 'google-reviews' ); ?>
-            </h2>
-            <?php echo wp_kses(do_shortcode('[google-reviews]'), $allowed_html); ?>
+            <div class="preview_section">
+                <h2>
+                    <?php _e( 'Preview', 'google-reviews' ); ?>
+                </h2>
+                <?php echo wp_kses(do_shortcode('[google-reviews]'), $allowed_html); ?>
+            </div>
         </div>
     <?php }
 }

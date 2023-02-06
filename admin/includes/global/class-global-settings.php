@@ -29,7 +29,7 @@ Class Global_Settings {
 
         add_settings_section(
             'google_reviews_setting_section', // id
-            __( 'Global settings for showing reviews', 'google-reviews' ), // title
+            '', // title
             array( $this, 'google_reviews_section_info' ), // callback
             $this->settings_slug // page
         );
@@ -67,8 +67,8 @@ Class Global_Settings {
         // add style and layout settings section
         add_settings_section(
             'google_reviews_style_layout_setting_section', // id
-            __( 'Display settings', 'google-reviews' ), // title
-            array( $this, 'google_reviews_section_info' ), // callback
+            '', // title
+            array( $this, 'google_reviews_display_section_info' ), // callback
             $this->settings_slug // page
         );
 
@@ -120,7 +120,7 @@ Class Global_Settings {
 
         add_settings_section(
             'google_reviews_embedding_instructions_section', // id
-            __( 'Embedding instructions', 'google-reviews' ), // title
+            '', // title
             array( $this, 'reviews_instructions_section' ), // callback
             $this->settings_slug // page
         );
@@ -200,8 +200,16 @@ Class Global_Settings {
         return $sanitary_values;
     }
 
-    public function google_reviews_section_info() {
-        // additional output possible
+    public function google_reviews_section_info() { ?>
+        <h2 id="connect_settings"><?php _e( 'Global settings for showing reviews', 'google-reviews' ); ?></h2>
+
+        <?php
+    }
+
+    public function google_reviews_display_section_info() { ?>
+        <h2 id="display_settings"><?php _e( 'Display settings', 'google-reviews' );?></h2>
+
+        <?php
     }
 
     /**
@@ -456,11 +464,15 @@ Class Global_Settings {
         </select> <?php
     }
 
+    public function reviews_instructions_section() { ?>
+        <h2 id="embedding_instructions"><?php _e( 'Embedding instructions', 'google-reviews' ); ?></h2>
+        <?php
+    }
+
     /**
      * Echo shortcode instructions
      */
-    public function reviews_instructions_callback() {
-        ?>
+    public function reviews_instructions_callback() { ?>
         <div id="instructions">
             <p>
                 <?php _e( 'Use this shortcode to show your reviews on pages and posts:', 'google-reviews' ); ?>
@@ -471,7 +483,4 @@ Class Global_Settings {
         <?php
     }
 
-    public function reviews_instructions_section() {
-
-    }
 }

@@ -182,6 +182,19 @@ body.grwp-is-loading:after {
   font-weight: 600;
 }
 
+.wrap form {
+  min-height: 650px;
+}
+.preview_section {
+  background-color: white;
+  padding: 2rem;
+  box-shadow: inset 0 0 3px grey;
+
+  h2 {
+    margin-top: 0;
+  }
+}
+
 #how_to_modal {
   display: flex;
   position: fixed;
