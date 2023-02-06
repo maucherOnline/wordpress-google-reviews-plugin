@@ -1,19 +1,26 @@
 <?php
 
 Class Global_Settings {
+
     private $google_reviews_options;
+    private $settings_slug;
 
     public function __construct() {
+
         $this->google_reviews_options = get_option( 'google_reviews_option_name' );
-        $this->add_settings();
+        $this->settings_slug = 'google-reviews-admin';
+
+        $this->add_api_settings();
+        $this->add_display_settings();
+        $this->add_embedding_instructions();
 
     }
 
-    private function add_settings() {
+    /**
+     * API settings
+     */
+    private function add_api_settings() {
 
-        /**
-         * API settings
-         */
         register_setting(
             'google_reviews_option_group', // option_group
             'google_reviews_option_name', // option_name
@@ -24,14 +31,14 @@ Class Global_Settings {
             'google_reviews_setting_section', // id
             __( 'Global settings for showing reviews', 'google-reviews' ), // title
             array( $this, 'google_reviews_section_info' ), // callback
-            'google-reviews-admin' // page
+            $this->settings_slug // page
         );
 
         add_settings_field(
             'show_dummy_content', // id
             __( 'Show dummy content', 'google-reviews' ), // title
             array( $this, 'show_dummy_content_callback' ), // callback
-            'google-reviews-admin', // page
+            $this->settings_slug, // page
             'google_reviews_setting_section' // section
         );
 
@@ -39,13 +46,17 @@ Class Global_Settings {
             'reviews_language_3', // id
             __( 'Reviews language', 'google-reviews' ), // title
             array( $this, 'reviews_language_3_callback' ), // callback
-            'google-reviews-admin', // page
+            $this->settings_slug, // page
             'google_reviews_setting_section' // section
         );
 
-        /**
-         * Display settings
-         */
+    }
+
+    /**
+     * Display settings
+     */
+    private function add_display_settings() {
+
         // settings for styles and layout
         register_setting(
             'google_reviews_style_group', // option_group
@@ -58,15 +69,14 @@ Class Global_Settings {
             'google_reviews_style_layout_setting_section', // id
             __( 'Display settings', 'google-reviews' ), // title
             array( $this, 'google_reviews_section_info' ), // callback
-            'google-reviews-admin' // page
+            $this->settings_slug // page
         );
 
-        // add style and layout settings field
         add_settings_field(
             'style_2', // id
             __( 'Layout type', 'google-reviews' ), // title
             array( $this, 'style_2_callback' ), // callback
-            'google-reviews-admin', // page
+            $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section
         );
 
@@ -74,7 +84,7 @@ Class Global_Settings {
             'layout_style', // id
             __( 'Design type', 'google-reviews' ), // title
             array( $this, 'layout_style_callback' ), // callback
-            'google-reviews-admin', // page
+            $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section
         );
 
@@ -82,7 +92,7 @@ Class Global_Settings {
             'filter_below_5_stars', // id
             __('Minimum rating (stars)', 'google-reviews'), // title
             array($this, 'filter_below_5_stars_callback'), // callback
-            'google-reviews-admin', // page
+            $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section
         );
 
@@ -90,7 +100,7 @@ Class Global_Settings {
             'exclude_reviews_without_text', // id
             __('Exclude reviews without text', 'google-reviews'), // title
             array($this, 'exclude_reviews_without_text_callback'), // callback
-            'google-reviews-admin', // page
+            $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section
         );
 
@@ -98,25 +108,28 @@ Class Global_Settings {
             'filter_words', // id
             __('Filter by words (comma separated)', 'google-reviews'), // title
             array($this, 'filter_words_callback'), // callback
-            'google-reviews-admin', // page
+            $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section
         );
+    }
 
-        /**
-         * Embeddding instructions
-         */
+    /**
+     * Embeddding instructions
+     */
+    private function add_embedding_instructions() {
+
         add_settings_section(
             'google_reviews_embedding_instructions_section', // id
             __( 'Embedding instructions', 'google-reviews' ), // title
             array( $this, 'reviews_instructions_section' ), // callback
-            'google-reviews-admin' // page
+            $this->settings_slug // page
         );
 
         add_settings_field(
             'embedding_instructions', // id
             __( 'Shortcode', 'google-reviews' ), // title
             array( $this, 'reviews_instructions_callback' ), // callback
-            'google-reviews-admin', // page
+            $this->settings_slug, // page
             'google_reviews_embedding_instructions_section' // section
         );
 
@@ -336,7 +349,6 @@ Class Global_Settings {
             $layout_style = '1';
         }
 
-        $layout_styles_count = 4;
         ?>
 
         <select name="google_reviews_option_name[layout_style]" id="layout_style">

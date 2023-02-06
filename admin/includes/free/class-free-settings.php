@@ -81,7 +81,7 @@ Class Free_Settings {
         <?php
         $echo = '<p id="errors"></p>';
         $echo .= '<p>Search for your business and copy/paste the Place ID into the field above.</p>';
-        $echo .= '<br><br><iframe height="200" style="height: 200px; width: 100%; max-width: 700px;display:block;" src="https://geo-devrel-javascript-samples.web.app/samples/places-placeid-finder/app/dist/" allow="fullscreen; "></iframe>';
+        $echo .= '<br><br><iframe id="mapFrame" height="200" style="height: 200px; width: 100%; max-width: 700px;display:block;" src="https://geo-devrel-javascript-samples.web.app/samples/places-placeid-finder/app/dist/" allow="fullscreen;"></iframe>';
         echo wp_kses($echo, $allowed_html);
 
         //printf(__('<br><br><a href="%s" target="_blank">Head over to Google</a> and search for your business. Then copy the Place ID and paste it in the field above.', 'google-reviews'), 'https://developers.google.com/maps/documentation/places/web-service/place-id#find-id');

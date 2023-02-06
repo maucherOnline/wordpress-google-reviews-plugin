@@ -36,7 +36,8 @@ $allowed_html = [
         'width'     => [],
         'height'    => [],
         'style'     => [],
-        'allow'     => []
+        'allow'     => [],
+        'id'     => []
 
     ],
     'input' => [

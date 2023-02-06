@@ -26,21 +26,39 @@ Class Global_Menu_Pages {
     public function google_reviews_create_admin_page() {
         global $allowed_html;
 
+        $default_tab = null;
+        $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
+
         ?>
 
         <div class="wrap">
             <h2>
                 <?php _e( 'Google Reviews', 'google-reviews' ); ?>
             </h2>
-            <?php settings_errors(); ?>
+
+            <?php
+                settings_errors();
+            ?>
 
             <form method="post" action="options.php">
+                <nav class="nav-tab-wrapper">
+                    <a href="?page=google-reviews" class="nav-tab <?php if($tab===null):?>nav-tab-active<?php endif; ?>">Connect Google</a>
+                    <a href="?page=google-reviews&tab=display_settings" class="nav-tab <?php if($tab==='display_settings'):?>nav-tab-active<?php endif; ?>">Display Settings</a>
+                </nav>
+
+                <div class="tab-content">
+                    <?php
+                    settings_fields( 'google_reviews_option_group' );
+                    do_settings_sections( 'google-reviews-admin' );
+                    ?>
+                </div>
                 <?php
-                settings_fields( 'google_reviews_option_group' );
+
                 submit_button();
-                do_settings_sections( 'google-reviews-admin' );
+
                 ?>
             </form>
+
             <h2>
                 <?php _e( 'Preview', 'google-reviews' ); ?>
             </h2>

@@ -13,6 +13,7 @@
         const $submitButton = $('input[type="submit"]');
         const $showDummyContent = $('#show_dummy_content');
 
+
         // remove disabled attribute when search field is changed
         $search.on('keyup change', function () {
             $searchButtonPro.removeAttr('disabled');
