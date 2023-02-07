@@ -16,12 +16,12 @@
         function handle_tabs() {
             // Hide all additional settings on pageload
             const $connectSettings = $('#connect_settings, #connect_settings + table.form-table');
-            const $connectTab = $('.nav-tab-wrapper > a[href="#connect_settings"]');
+            const $connectTab = $('.nav-tab-wrapper.menu > a[href="#connect_settings"]');
             const $displaySettings = $('#display_settings, #display_settings + table.form-table');
-            const $displayTab = $('.nav-tab-wrapper > a[href="#display_settings"]');
+            const $displayTab = $('.nav-tab-wrapper.menu > a[href="#display_settings"]');
             const $embeddingInstructions = $('#embedding_instructions, #embedding_instructions + table.form-table');
-            const $embeddingInstructionsTab = $('.nav-tab-wrapper > a[href="#embedding_instructions"]');
-            const $navTabs = $('.nav-tab-wrapper > .nav-tab');
+            const $embeddingInstructionsTab = $('.nav-tab-wrapper.menu > a[href="#embedding_instructions"]');
+            const $navTabs = $('.nav-tab-wrapper.menu > .nav-tab:not(.upgrade)');
 
             $displaySettings.hide();
             $embeddingInstructions.hide();

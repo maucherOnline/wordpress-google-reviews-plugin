@@ -83,7 +83,7 @@
   display: flex;
   flex-direction: column;
   margin: 5px 0 0 2px;
-  max-height: 500px;
+  max-height: 400px;
   max-width: 348px;
   overflow: auto;
   background-color: #f4f4f4;
@@ -184,6 +184,13 @@ body.grwp-is-loading:after {
 
 .wrap form {
   min-height: 650px;
+
+  .nav-tab-wrapper {
+    .upgrade {
+      color: rgb(0 0 0 / 80%);
+      font-weight: 700 !important;
+    }
+  }
 }
 .preview_section {
   background-color: white;
@@ -215,16 +222,21 @@ body.grwp-is-loading:after {
 
     z-index: 998;
     width: 100%;
-    margin: 15% auto;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
     max-width: 860px;
 
     .modal-content {
-      background-color: #dbdbdb;
       padding: 2rem 4rem 2rem 4rem;
-      border: 1px solid #dbdbdb;
+      background-color: #dbdbdb;
+      background: linear-gradient(45deg, #a5a5a5, #eeeeee);
+      font-weight: 400;
+      border: none;
       text-align: center;
       position: relative;
-      font-weight: 400;
+
       @media (max-width: 768px) {
         font-size: 18px;
         padding: 3rem 2rem;
