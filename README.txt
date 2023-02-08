@@ -15,7 +15,7 @@ Our Google Reviews plugin displays customer reviews with newly and easily implem
 ⚡ PRO Version to **pull ALL reviews**
 [https://reviewsembedder.com](https://reviewsembedder.com?utm_source=wp_dir&utm_medium=link&utm_campaign=01)
 
-[youtube https://www.youtube.com/watch?v=L6-uNN96ljA]
+[youtube https://www.youtube.com/watch?v=y3xwRn7Shfo]
 
 == Top Features of this Google Reviews Plugin ==
 The Google Reviews WordPress plugin has different styles and layouts and offers easy installation and integration.
