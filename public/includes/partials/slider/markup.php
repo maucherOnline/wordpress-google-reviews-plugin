@@ -39,7 +39,7 @@
                 </a>
                 <br>
                 <span class="gr-stars">
-                    <?php echo wp_kses($star_output, $allowed_html); ?>
+                    <?php echo wp_kses($star_output, $this->allowed_html); ?>
                 </span>
             </p>
         </div>

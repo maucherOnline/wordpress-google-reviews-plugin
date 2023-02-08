@@ -11,18 +11,33 @@ class GRWP_Google_Reviews_Output {
 	 */
 	protected $options = null;
 
+    /**
+     * Whether to show dummy content
+     * @var bool
+     */
+    protected bool $showdummy = false;
+
+    /**
+     * Allowed HTML and HTML attributes
+     * @var array
+     */
+    protected array $allowed_html;
+
 	public function __construct() {
 
         require_once __DIR__ .'/allowed-html.php';
 
+        global $allowed_html;
+        $this->allowed_html = $allowed_html;
+
 		$this->options = get_option( 'google_reviews_option_name' );
+        $this->showdummy = isset( $this->options['show_dummy_content'] );
 
         add_shortcode('google-reviews', [ $this, 'reviews_shortcode' ] );
 
     }
 
-
-	private function time_elapsed_string($datetime, $full = false) {
+    protected function time_elapsed_string($datetime, $full = false) {
 		$now = new DateTime;
 		$ago = new DateTime($datetime);
 		$diff = $now->diff($ago);
@@ -73,96 +88,165 @@ class GRWP_Google_Reviews_Output {
 	}
 
     /**
-     * Put together shortcode / html output
-     * @return string|void
+     * Get type override value from shortcode attributes
+     * @param array $atts
+     * @return string
      */
-    public function reviews_shortcode($atts = null) {
+    protected function get_review_type_override( array $atts ) : string {
 
-        global $allowed_html;
+        $result = '';
+        if ( isset( $atts['type'] ) ) {
+            $result = $atts['type'] === 'grid' ? 'grid' : '';
+        }
 
-        $review_type_override = '';
+        return $result;
+    }
+
+    /**
+     * Get style override value from shortcode attributes
+     * @param array $atts
+     * @return string
+     */
+    protected function get_review_style_override( array $atts ) : string {
+
         $review_style_override = '';
 
-        // check if shortcode attributes are provided
-        if ( $atts ) {
+        if ( isset($atts['style']) ) {
+            $override = $atts['style'];
 
-            if ( isset($atts['type']) ) {
-                $review_type_override = $atts['type'] == 'grid' ? 'grid' : '';
-            }
-            if ( isset($atts['style']) ) {
-                $review_style_override = $atts['style'];
-            }
-
-            // map shortcode value to proper css class
-            if ( $review_style_override ) {
-                if ( $review_style_override == '1') $review_style_override = 'layout_style-1';
-                elseif ( $review_style_override == '2') $review_style_override = 'layout_style-2';
-                elseif ( $review_style_override == '3') $review_style_override = 'layout_style-3';
-                elseif ( $review_style_override == '4') $review_style_override = 'layout_style-4';
-                elseif ( $review_style_override == '5') $review_style_override = 'layout_style-5';
-                elseif ( $review_style_override == '6') $review_style_override = 'layout_style-6';
-                elseif ( $review_style_override == '7') $review_style_override = 'layout_style-7';
-                elseif ( $review_style_override == '8') $review_style_override = 'layout_style-8';
-                else $review_style_override = '';
-            }
-        }
-
-        // prevent php notice if undefined
-        $showdummy = isset($this->options['show_dummy_content']) ? true : false;
-
-        if ( $showdummy ) {
-        	$reviews = array( array(
-        		'author_name'               => __( 'Lorem Ipsum', 'google-reviews' ),
-        		'author_url'                => '#',
-        		'language'                  => 'en',
-        		'profile_photo_url'         => plugin_dir_url(__FILE__) . 'img/sample-photo.png',
-        		'rating'                    => 5,
-        		'relative_time_description' => __( 'three months ago', 'google-reviews' ),
-        		'text'                      => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'google-reviews' ),
-        		'time'                      => '1643630205'
-        	) );
-
-        	for ( $i = 0; $i <= 4; $i++ ) {
-        		$reviews[] = $reviews[0];
-        	}
-
-        } else {
-            if ( grwp_fs()->is__premium_only() ) {
-                require_once GR_BASE_PATH_ADMIN . 'includes/pro/class-pro-api-service.php';
-                $reviews = Pro_API_Service::parse_pro_review_json();
-            } else {
-                require_once GR_BASE_PATH_ADMIN . 'includes/free/class-free-api-service.php';
-                $reviews = Free_API_Service::parse_free_review_json();
+            switch ( $override ) {
+                case '1':
+                    $review_style_override = 'layout_style-1';
+                    break;
+                case '2':
+                    $review_style_override = 'layout_style-2';
+                    break;
+                case '3':
+                    $review_style_override = 'layout_style-3';
+                    break;
+                case '4':
+                    $review_style_override = 'layout_style-4';
+                    break;
+                case '5':
+                    $review_style_override = 'layout_style-5';
+                    break;
+                case '6':
+                    $review_style_override = 'layout_style-6';
+                    break;
+                case '7':
+                    $review_style_override = 'layout_style-7';
+                    break;
+                case '8':
+                    $review_style_override = 'layout_style-8';
+                    break;
             }
         }
 
-        if ( is_wp_error($reviews) || $reviews == '' || $reviews == null || ! is_array($reviews) ) {
-            return __( 'No reviews available', 'google-reviews' );
-        }
-
-        return $this->reviews_output($reviews, $showdummy, $review_type_override, $allowed_html, $review_style_override);
+        return $review_style_override;
 
     }
 
-    private function reviews_output( $reviews, $showdummy, $review_type_override, $allowed_html, $review_style_override ) {
+    /**
+     * Get dummy review content
+     * @return array[]
+     */
+    protected function get_dummy_content() : array {
+
+        $reviews = array( array(
+            'author_name'               => __( 'Lorem Ipsum', 'google-reviews' ),
+            'author_url'                => '#',
+            'language'                  => 'en',
+            'profile_photo_url'         => plugin_dir_url(__FILE__) . 'img/sample-photo.png',
+            'rating'                    => 5,
+            'relative_time_description' => __( 'three months ago', 'google-reviews' ),
+            'text'                      => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'google-reviews' ),
+            'time'                      => '1643630205'
+        ) );
+
+        for ( $i = 0; $i <= 4; $i++ ) {
+            $reviews[] = $reviews[0];
+        }
+
+        return $reviews;
+
+    }
+
+    /**
+     * Put together shortcode / html output
+     * @param array|null $atts
+     * @return string
+     */
+    public function reviews_shortcode( $atts = null ) : string {
+
+        // get style/type override values
+        $review_type_override = '';
+        $review_style_override = '';
+
+        if ( $atts ) {
+
+            $review_type_override = $this->get_review_type_override( $atts );
+            $review_style_override = $this->get_review_style_override( $atts );
+
+        }
+
+        // if dummy setting is active, get dummy content
+        if ( $this->showdummy ) {
+
+            $reviews = $this->get_dummy_content();
+
+        }
+
+        // else get real reviews
+        else {
+
+            if ( grwp_fs()->is__premium_only() ) {
+
+                require_once GR_BASE_PATH_ADMIN . 'includes/pro/class-pro-api-service.php';
+                $reviews = Pro_API_Service::parse_pro_review_json();
+
+            }
+
+            else {
+
+                require_once GR_BASE_PATH_ADMIN . 'includes/free/class-free-api-service.php';
+                $reviews = Free_API_Service::parse_free_review_json();
+
+            }
+
+        }
+
+        // error handling
+        if ( is_wp_error( $reviews ) || $reviews == '' || $reviews == null || ! is_array( $reviews ) ) {
+
+            return __( 'No reviews available', 'google-reviews' );
+
+        }
+
+        return $this->reviews_output( $reviews, $review_type_override, $review_style_override );
+
+    }
+
+    private function reviews_output( $reviews, $review_type_override, $review_style_override ) {
 
         // check if style settings are overwritten by shortcode settings
-        $layout_stlye = $this->options['layout_style'];
-        if ( $review_style_override !== null && $review_style_override !== '' ) {
-            $layout_stlye = $review_style_override;
+        $layout_style = $this->options['layout_style'];
+        if ( $review_style_override !== '' ) {
+
+            $layout_style = $review_style_override;
+
         }
 
         // get style type
         $display_type = strtolower($this->options['style_2']);
 
         // loop through reviews
-        $output = '<div id="g-review" class="' . $layout_stlye .'">';
+        $output = '<div id="g-review" class="' . $layout_style .'">';
         $slider_output = '';
 
         foreach ( $reviews as $review ) {
 
             // assign dummy content
-            if  ( $showdummy ) {
+            if  ( $this->showdummy ) {
 
                 $name = $review['author_name'];
                 $author_url = $review['author_url'];
@@ -250,7 +334,7 @@ class GRWP_Google_Reviews_Output {
             $star_output .= '</span>';
 
             // prepare time elapsed string
-            if ( $showdummy ) {
+            if ( $this->showdummy ) {
                 $star_output .= '<span class="time">' . $this->time_elapsed_string( date('Y-m-d h:i:s', $review['time']) ) .'</span>';
             }
 
@@ -294,7 +378,7 @@ class GRWP_Google_Reviews_Output {
 
             ob_start();
             require 'partials/slider/slider-header.php';
-            echo wp_kses($slider_output, $allowed_html);
+            echo wp_kses($slider_output, $this->allowed_html);
             require 'partials/slider/slider-footer.php';
 
             $output .= ob_get_clean();
@@ -314,7 +398,7 @@ class GRWP_Google_Reviews_Output {
 
         $output .= '</div>';
 
-        return wp_kses($output, $allowed_html);
+        return wp_kses($output, $this->allowed_html);
 
     }
 
