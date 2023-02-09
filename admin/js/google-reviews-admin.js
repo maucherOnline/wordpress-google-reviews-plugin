@@ -276,6 +276,7 @@
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
 
+                    const test = 1;
                 },
                 complete: function (jqXHR, textStatus) {
                     $buttonRow
