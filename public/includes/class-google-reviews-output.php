@@ -172,22 +172,10 @@ class GRWP_Google_Reviews_Output {
     }
 
     /**
-     * Put together shortcode / html output
-     * @param array|null $atts
-     * @return string
+     * Prepare review data
+     * @return void|array
      */
-    public function reviews_shortcode( $atts = null ) : string {
-
-        // get style/type override values
-        $review_type_override = '';
-        $review_style_override = '';
-
-        if ( $atts ) {
-
-            $review_type_override = $this->get_review_type_override( $atts );
-            $review_style_override = $this->get_review_style_override( $atts );
-
-        }
+    private function get_review_data() {
 
         // if dummy setting is active, get dummy content
         if ( $this->showdummy ) {
@@ -215,6 +203,17 @@ class GRWP_Google_Reviews_Output {
 
         }
 
+        return $reviews;
+
+    }
+
+
+
+
+    private function reviews_html( $widget_type, $style_type ) {
+
+        $reviews = $this->get_review_data();
+
         // error handling
         if ( is_wp_error( $reviews ) || $reviews == '' || $reviews == null || ! is_array( $reviews ) ) {
 
@@ -222,25 +221,8 @@ class GRWP_Google_Reviews_Output {
 
         }
 
-        return $this->reviews_output( $reviews, $review_type_override, $review_style_override );
-
-    }
-
-    private function reviews_output( $reviews, $review_type_override, $review_style_override ) {
-
-        // check if style settings are overwritten by shortcode settings
-        $layout_style = $this->options['layout_style'];
-        if ( $review_style_override !== '' ) {
-
-            $layout_style = $review_style_override;
-
-        }
-
-        // get style type
-        $display_type = strtolower($this->options['style_2']);
-
         // loop through reviews
-        $output = '<div id="g-review" class="' . $layout_style .'">';
+        $output = sprintf('<div id="g-review" class="%s">', $style_type);
         $slider_output = '';
 
         foreach ( $reviews as $review ) {
@@ -253,8 +235,7 @@ class GRWP_Google_Reviews_Output {
                 $profile_photo_url = $review['profile_photo_url'];
                 $rating = $review['rating'];
                 $text = $review['text'];
-
-                $time = date('m/d/Y', $review['time']);
+                $time = $this->time_elapsed_string( date('Y-m-d h:i:s', $review['time']) );
 
             }
 
@@ -269,7 +250,7 @@ class GRWP_Google_Reviews_Output {
                     $profile_photo_url = $review['user']['thumbnail'];
                     $rating            = $review['rating'];
                     $text              = $review['snippet'];
-
+                    $time              = $review['date'];
                 }
 
                 // use different array keys for free version results
@@ -280,11 +261,10 @@ class GRWP_Google_Reviews_Output {
                     $profile_photo_url = $review['profile_photo_url'];
                     $rating = $review['rating'];
                     $text = $review['text'];
-
-                    $time = date('m/d/Y', $review['time']);
-
+                    $time = $this->time_elapsed_string(date('Y-m-d h:i:s', $review['time']));
 
                 }
+
             }
 
             // step over rating if minimum stars are not met
@@ -302,7 +282,7 @@ class GRWP_Google_Reviews_Output {
             if ( isset( $this->options['exclude_reviews_without_text'] )
                 && $this->options['exclude_reviews_without_text'] ) {
 
-                if ($text == '') {
+                if ( $text == '' ) {
                     continue;
                 }
 
@@ -326,35 +306,19 @@ class GRWP_Google_Reviews_Output {
 
 
             // count and prepare stars
-            $star = '<img src="'. esc_attr(plugin_dir_url( __FILE__ )).'img/svg-star.svg" alt="" />';
+            $star = sprintf('<img src="%simg/svg-star.svg" alt="" />', esc_attr(plugin_dir_url( __FILE__ )));
             $star_output = '<span class="stars-wrapper">';
             for ($i = 1; $i <= $rating; $i++) {
                 $star_output .= $star;
             }
             $star_output .= '</span>';
 
-            // prepare time elapsed string
-            if ( $this->showdummy ) {
-                $star_output .= '<span class="time">' . $this->time_elapsed_string( date('Y-m-d h:i:s', $review['time']) ) .'</span>';
-            }
-
-            else {
-
-                // time string for pro version
-                if (grwp_fs()->is__premium_only()) {
-                    $star_output .= '<span class="time">' . $review['date'] . '</span>';
-                }
-
-                // time string for free version
-                else {
-                    $star_output .= '<span class="time">' . $this->time_elapsed_string(date('Y-m-d h:i:s', $review['time'])) . '</span>';
-                }
-            }
+            $star_output .= sprintf('<span class="time">%s</span>', $time);
 
             $google_svg = plugin_dir_url(__FILE__) . 'img/google-logo-svg.svg';
 
             // if is slider
-            if ( $display_type === 'slider' && $review_type_override !== 'grid' ){
+            if ( $widget_type === 'slider' ){
 
                 $slide_duration = $this->options['slide_duration'] ?? '';
 
@@ -374,7 +338,7 @@ class GRWP_Google_Reviews_Output {
         }
 
         // add swiper header and footer if is slider
-        if ( $display_type === 'slider' && $review_type_override !== 'grid' ) {
+        if ( $widget_type === 'slider' ) {
 
             ob_start();
             require 'partials/slider/slider-header.php';
@@ -390,7 +354,7 @@ class GRWP_Google_Reviews_Output {
         $columns_css = '';
 
         // add slider styles if is slider
-        if ( $display_type === 'slider' && $review_type_override !== 'grid'){
+        if ( $widget_type === 'slider' ){
             ob_start();
             require 'partials/slider/style.php';
             $output .= ob_get_clean();
@@ -399,6 +363,44 @@ class GRWP_Google_Reviews_Output {
         $output .= '</div>';
 
         return wp_kses($output, $this->allowed_html);
+
+    }
+
+    /**
+     * Parse shortcode data, return html
+     * @param array|null $atts
+     * @return string
+     */
+    public function reviews_shortcode( $atts = null ) : string {
+
+        // get style/type override values
+        $review_type_override = '';
+        $review_style_override = '';
+
+        if ( $atts ) {
+
+            $review_type_override = $this->get_review_type_override( $atts );
+            $review_style_override = $this->get_review_style_override( $atts );
+
+        }
+
+        // check if style type is overwritten by shortcode attributes
+        $style_type = $this->options['layout_style'];
+        if ( $review_style_override !== '' ) {
+
+            $style_type = $review_style_override;
+
+        }
+
+        // check if widget type is overwritten by shortcode attributes
+        $widget_type = strtolower($this->options['style_2']);
+        if ( $review_type_override !== '' ) {
+
+            $widget_type = $review_type_override;
+
+        }
+
+        return $this->reviews_html( $widget_type, $style_type );
 
     }
 
