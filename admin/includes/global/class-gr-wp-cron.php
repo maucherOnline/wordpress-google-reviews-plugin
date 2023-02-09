@@ -22,11 +22,6 @@ class GR_WP_Cron {
             require_once GR_BASE_PATH_ADMIN . 'includes/pro/class-pro-api-service.php';
             Pro_API_Service::get_reviews_pro_api();
 
-        } else {
-
-            require_once GR_BASE_PATH_ADMIN . 'includes/free/class-free-api-service.php';
-            Free_API_Service::get_reviews_free_api(true);
-
         }
 
     }

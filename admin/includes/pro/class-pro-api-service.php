@@ -102,16 +102,85 @@ Class Pro_API_Service {
             )
         ) );
 
-
-
-        $get_reviews = json_decode( wp_remote_retrieve_body( $get_reviews ) );
-
-        update_option( 'gr_latest_results', [
-            $data_id => json_encode( $get_reviews->results )
-        ]);
-
         $response = new WP_REST_Response();
-        $response->set_status(200);
+
+        // check for errors in response
+        if ( is_wp_error( $get_reviews ) ) {
+
+            wp_send_json_error( array(
+                'html' => $get_reviews->get_error_message()
+            ) );
+
+            die();
+
+        }
+
+        // check for empty response
+        else if ( ! $get_reviews ) {
+
+            $message = 'Response was empty.';
+            wp_send_json_error( array(
+                'html' => $message
+            ) );
+
+            die();
+
+        }
+
+        // check if response body is there
+        else if ( ! isset($get_reviews['body']) ) {
+
+            $message = 'No response body found.';
+            wp_send_json_error( array(
+                'html' => $message
+            ) );
+
+            die();
+
+        }
+
+        // if response body available, proceed
+        else {
+
+            // check, if body is null
+            $body = json_decode($get_reviews['body']);
+            if ( $body->results === null) {
+
+                $message = 'Response was empty.';
+                wp_send_json_error( array(
+                    'html' => $message
+                ) );
+
+                die();
+
+            }
+
+            // check, if 0 reviews returned
+            else if ( count($body->results) === 0  ) {
+
+                $message = 'No reviews found.';
+                wp_send_json_error( array(
+                    'html' => $message
+                ) );
+
+                die();
+
+            }
+
+            // if response is fine, update the database
+            else {
+
+                $get_reviews = json_decode( wp_remote_retrieve_body( $get_reviews ) );
+
+                update_option( 'gr_latest_results', [
+                    $data_id => json_encode( $get_reviews->results )
+                ]);
+
+                $response->set_status(200);
+
+            }
+
+        }
 
         return $response;
 
