@@ -142,23 +142,13 @@ Class Pro_API_Service {
         // if response body available, proceed
         else {
 
-            // check, if body is null
+
             $body = json_decode($get_reviews['body']);
+
+            // check, if body is null
             if ( $body->results === null) {
 
                 $message = 'Response was empty.';
-                wp_send_json_error( array(
-                    'html' => $message
-                ) );
-
-                die();
-
-            }
-
-            // check, if 0 reviews returned
-            else if ( count($body->results) === 0  ) {
-
-                $message = 'No reviews found.';
                 wp_send_json_error( array(
                     'html' => $message
                 ) );
