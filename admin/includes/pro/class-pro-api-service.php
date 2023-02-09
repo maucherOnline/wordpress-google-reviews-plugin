@@ -102,6 +102,8 @@ Class Pro_API_Service {
             )
         ) );
 
+
+
         $get_reviews = json_decode( wp_remote_retrieve_body( $get_reviews ) );
 
         update_option( 'gr_latest_results', [
