@@ -102,6 +102,11 @@ class GRWP_Google_Reviews_Output {
         return $result;
     }
 
+
+    protected function get_star_output() {
+
+    }
+
     /**
      * Get style override value from shortcode attributes
      * @param array $atts
@@ -172,60 +177,59 @@ class GRWP_Google_Reviews_Output {
     }
 
     /**
-     * Prepare review data
-     * @return void|array
+     * Check if review should be left out, due to global settings
+     * @param $rating
+     * @param $text
+     * @return bool
      */
-    private function get_review_data() {
+    private function step_over_review( $rating, $text ) {
 
-        // if dummy setting is active, get dummy content
-        if ( $this->showdummy ) {
+        // step over rating if minimum stars are not met
+        if ( isset($this->options['filter_below_5_stars'])
+            && $this->options['filter_below_5_stars'] ) {
 
-            $reviews = $this->get_dummy_content();
-
-        }
-
-        // else get real reviews
-        else {
-
-            if ( grwp_fs()->is__premium_only() ) {
-
-                require_once GR_BASE_PATH_ADMIN . 'includes/pro/class-pro-api-service.php';
-                $reviews = Pro_API_Service::parse_pro_review_json();
-
-            }
-
-            else {
-
-                require_once GR_BASE_PATH_ADMIN . 'includes/free/class-free-api-service.php';
-                $reviews = Free_API_Service::parse_free_review_json();
-
+            $min_rating = intval($this->options['filter_below_5_stars']);
+            if ($rating < $min_rating) {
+                return true;
             }
 
         }
 
-        return $reviews;
+        // step over rating if review has no text
+        if ( isset( $this->options['exclude_reviews_without_text'] )
+            && $this->options['exclude_reviews_without_text'] ) {
+
+            if ( $text == '' ) {
+                return true;
+            }
+
+        }
+
+        // step over rating if review contains certain words
+        if ( isset( $this->options['filter_words'] )
+            && $this->options['filter_words'] !== '' ) {
+
+            $words_str = rtrim($this->options['filter_words'], ',');
+            $words_arr = explode(',', $words_str);
+            foreach ($words_arr as $word) {
+                $word = trim($word);
+
+                if (str_contains($text, $word) ) {
+                    return true;
+                }
+            }
+
+        }
+
+        return false;
 
     }
 
+    private function map_review_data( $reviews_raw ) {
 
-
-
-    private function reviews_html( $widget_type, $style_type ) {
-
-        $reviews = $this->get_review_data();
-
-        // error handling
-        if ( is_wp_error( $reviews ) || $reviews == '' || $reviews == null || ! is_array( $reviews ) ) {
-
-            return __( 'No reviews available', 'google-reviews' );
-
-        }
-
-        // loop through reviews
-        $output = sprintf('<div id="g-review" class="%s">', $style_type);
-        $slider_output = '';
-
-        foreach ( $reviews as $review ) {
+        // map reviews from different raw data to universal format
+        $reviews = [];
+        foreach ( $reviews_raw as $review ) {
 
             // assign dummy content
             if  ( $this->showdummy ) {
@@ -267,102 +271,175 @@ class GRWP_Google_Reviews_Output {
 
             }
 
-            // step over rating if minimum stars are not met
-            if ( isset($this->options['filter_below_5_stars'])
-                && $this->options['filter_below_5_stars'] ) {
+            // check if rating should be left out, due to global settings
+            if ( $this->step_over_review($rating, $text) ) {
+                continue;
+            }
 
-                $min_rating = intval($this->options['filter_below_5_stars']);
-                if ($rating < $min_rating) {
-                    continue;
-                }
+            $reviews[] = [
+                'name'                 => $name,
+                'author_url'           => $author_url,
+                'profile_photo_url'    => $profile_photo_url,
+                'rating'               => $rating,
+                'text'                 => $text,
+                'time'                 => $time
+            ];
+
+        }
+
+        return $reviews;
+
+    }
+
+    /**
+     * Prepare raw review data
+     * @return void|array
+     */
+    private function get_review_data() {
+
+        // if dummy setting is active, get dummy content
+        if ( $this->showdummy ) {
+
+            $reviews_raw = $this->get_dummy_content();
+
+        }
+
+        // else get real reviews
+        else {
+
+            if ( grwp_fs()->is__premium_only() ) {
+
+                require_once GR_BASE_PATH_ADMIN . 'includes/pro/class-pro-api-service.php';
+                $reviews_raw = Pro_API_Service::parse_pro_review_json();
 
             }
 
-            // step over rating if review has no text
-            if ( isset( $this->options['exclude_reviews_without_text'] )
-                && $this->options['exclude_reviews_without_text'] ) {
+            else {
 
-                if ( $text == '' ) {
-                    continue;
-                }
+                require_once GR_BASE_PATH_ADMIN . 'includes/free/class-free-api-service.php';
+                $reviews_raw = Free_API_Service::parse_free_review_json();
 
             }
 
-            // step over rating if review contains certain words
-            if ( isset( $this->options['filter_words'] )
-                && $this->options['filter_words'] !== '' ) {
+        }
 
-                $words_str = rtrim($this->options['filter_words'], ',');
-                $words_arr = explode(',', $words_str);
-                foreach ($words_arr as $word) {
-                    $word = trim($word);
+        return $this->map_review_data($reviews_raw);
 
-                    if (str_contains($text, $word) ) {
-                        continue 2;
-                    }
-                }
+    }
 
-            }
 
+    /**
+     * Grid HTML
+     * @return string
+     */
+    private function grid_html( $style_type ) {
+
+        $reviews = $this->get_review_data();
+
+        // error handling
+        if ( is_wp_error( $reviews ) || $reviews == '' || $reviews == null || ! is_array( $reviews ) ) {
+
+            return __( 'No reviews available', 'google-reviews' );
+
+        }
+
+        // loop through reviews
+        $output = sprintf('<div id="g-review" class="%s">', $style_type);
+        $slider_output = '';
+
+        foreach ( $reviews as $review ) {
 
             // count and prepare stars
             $star = sprintf('<img src="%simg/svg-star.svg" alt="" />', esc_attr(plugin_dir_url( __FILE__ )));
             $star_output = '<span class="stars-wrapper">';
-            for ($i = 1; $i <= $rating; $i++) {
+            for ($i = 1; $i <= $review['rating']; $i++) {
                 $star_output .= $star;
             }
             $star_output .= '</span>';
 
-            $star_output .= sprintf('<span class="time">%s</span>', $time);
+            $star_output .= sprintf('<span class="time">%s</span>', $review['time']);
 
             $google_svg = plugin_dir_url(__FILE__) . 'img/google-logo-svg.svg';
 
-            // if is slider
-            if ( $widget_type === 'slider' ){
-
-                $slide_duration = $this->options['slide_duration'] ?? '';
-
-                ob_start();
-                require 'partials/slider/markup.php';
-                $slider_output .= ob_get_clean();
-
-            }
-            // if is grid
-            else {
-
-                ob_start();
-                require 'partials/grid/markup.php';
-                $output .= ob_get_clean();
-
-            }
-        }
-
-        // add swiper header and footer if is slider
-        if ( $widget_type === 'slider' ) {
-
             ob_start();
-            require 'partials/slider/slider-header.php';
-            echo wp_kses($slider_output, $this->allowed_html);
-            require 'partials/slider/slider-footer.php';
-
+            require 'partials/grid/markup.php';
             $output .= ob_get_clean();
 
-        }
-
-        // set grid columns
-        $db_grid_columns = isset($this->options['grid_columns']) ? $this->options['grid_columns'] : 3;
-        $columns_css = '';
-
-        // add slider styles if is slider
-        if ( $widget_type === 'slider' ){
-            ob_start();
-            require 'partials/slider/style.php';
-            $output .= ob_get_clean();
         }
 
         $output .= '</div>';
 
         return wp_kses($output, $this->allowed_html);
+    }
+
+    /**
+     * Slider HTML
+     * @return string
+     */
+    private function slider_html( $style_type ) {
+
+        $reviews = $this->get_review_data();
+
+        // error handling
+        if ( is_wp_error( $reviews ) || $reviews == '' || $reviews == null || ! is_array( $reviews ) ) {
+
+            return __( 'No reviews available', 'google-reviews' );
+
+        }
+
+        // loop through reviews
+        $output = sprintf('<div id="g-review" class="%s">', $style_type);
+        $slider_output = '';
+
+        foreach ( $reviews as $review ) {
+
+            // count and prepare stars
+            $star = sprintf('<img src="%simg/svg-star.svg" alt="" />', esc_attr(plugin_dir_url( __FILE__ )));
+            $star_output = '<span class="stars-wrapper">';
+            for ($i = 1; $i <= $review['rating']; $i++) {
+                $star_output .= $star;
+            }
+            $star_output .= '</span>';
+
+            $star_output .= sprintf('<span class="time">%s</span>', $review['time']);
+
+            $google_svg = plugin_dir_url(__FILE__) . 'img/google-logo-svg.svg';
+
+            $slide_duration = $this->options['slide_duration'] ?? '';
+
+            ob_start();
+            require 'partials/slider/markup.php';
+            $slider_output .= ob_get_clean();
+
+
+        }
+
+        ob_start();
+        require 'partials/slider/slider-header.php';
+        echo wp_kses($slider_output, $this->allowed_html);
+        require 'partials/slider/slider-footer.php';
+
+        $output .= ob_get_clean();
+
+        $output .= '</div>';
+
+        return wp_kses($output, $this->allowed_html);
+    }
+
+
+    /**
+     * Returns the correct HTML markup for each widget type
+     * @param $widget_type
+     * @param $style_type
+     * @return string|void
+     */
+    private function reviews_html( $widget_type, $style_type ) {
+
+        if ( $widget_type === 'slider' ) {
+            return $this->slider_html( $style_type );
+        }
+
+        return $this->grid_html( $style_type );
 
     }
 
