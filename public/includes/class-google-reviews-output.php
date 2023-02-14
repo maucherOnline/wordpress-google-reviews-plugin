@@ -23,6 +23,21 @@ class GRWP_Google_Reviews_Output {
      */
     protected array $allowed_html;
 
+    /**
+     * Gobal reviews data
+     * @var array|null
+     */
+    protected array $reviews;
+
+    /**
+     * Flag if reviews are erroneous
+     * @var bool
+     */
+    protected bool $reviews_have_error = false;
+
+    /**
+     * Constructor method
+     */
 	public function __construct() {
 
         require_once __DIR__ .'/allowed-html.php';
@@ -32,12 +47,28 @@ class GRWP_Google_Reviews_Output {
 
 		$this->options = get_option( 'google_reviews_option_name' );
         $this->showdummy = isset( $this->options['show_dummy_content'] );
+        $this->reviews = $this->get_review_data();
+
+        // check for errors and set flag
+        if ( is_wp_error( $this->reviews )
+            || $this->reviews == ''
+            || $this->reviews == null
+            || ! is_array( $this->reviews )) {
+            $this->reviews_have_error = true;
+        }
 
         add_shortcode('google-reviews', [ $this, 'reviews_shortcode' ] );
 
     }
 
-    protected function time_elapsed_string($datetime, $full = false) {
+    /**
+     * Prepare time string for reviews
+     * @param $datetime
+     * @param $full
+     * @return string|null
+     * @throws Exception
+     */
+    protected function time_elapsed_string( $datetime, $full = false ) {
 		$now = new DateTime;
 		$ago = new DateTime($datetime);
 		$diff = $now->diff($ago);
@@ -92,7 +123,7 @@ class GRWP_Google_Reviews_Output {
      * @param array $atts
      * @return string
      */
-    protected function get_review_type_override( array $atts ) : string {
+    protected function get_review_type_override( array $atts ) {
 
         $result = '';
         if ( isset( $atts['type'] ) ) {
@@ -102,8 +133,24 @@ class GRWP_Google_Reviews_Output {
         return $result;
     }
 
+    /**
+     * Count and prepare stars
+     * @param $review
+     * @return string
+     */
+    protected function get_star_output( $review ) {
 
-    protected function get_star_output() {
+        $path = esc_attr( plugin_dir_url( __FILE__ ) );
+        $star = sprintf('<img src="%simg/svg-star.svg" alt="" />', $path);
+        $star_output = '<span class="stars-wrapper">';
+        for ( $i = 1; $i <= $review['rating']; $i++ ) {
+            $star_output .= $star;
+        }
+        $star_output .= '</span>';
+
+        $star_output .= sprintf('<span class="time">%s</span>', $review['time']);
+
+        return $star_output;
 
     }
 
@@ -112,7 +159,7 @@ class GRWP_Google_Reviews_Output {
      * @param array $atts
      * @return string
      */
-    protected function get_review_style_override( array $atts ) : string {
+    protected function get_review_style_override( array $atts ) {
 
         $review_style_override = '';
 
@@ -155,7 +202,7 @@ class GRWP_Google_Reviews_Output {
      * Get dummy review content
      * @return array[]
      */
-    protected function get_dummy_content() : array {
+    protected function get_dummy_content() {
 
         $reviews = array( array(
             'author_name'               => __( 'Lorem Ipsum', 'google-reviews' ),
@@ -182,7 +229,7 @@ class GRWP_Google_Reviews_Output {
      * @param $text
      * @return bool
      */
-    private function step_over_review( $rating, $text ) {
+    protected function step_over_review( $rating, $text ) {
 
         // step over rating if minimum stars are not met
         if ( isset($this->options['filter_below_5_stars'])
@@ -225,7 +272,12 @@ class GRWP_Google_Reviews_Output {
 
     }
 
-    private function map_review_data( $reviews_raw ) {
+    /**
+     * Prepare and map review data
+     * @param $reviews_raw
+     * @return array
+     */
+    protected function map_review_data( $reviews_raw ) {
 
         // map reviews from different raw data to universal format
         $reviews = [];
@@ -292,10 +344,10 @@ class GRWP_Google_Reviews_Output {
     }
 
     /**
-     * Prepare raw review data
+     * Get raw review data from database
      * @return void|array
      */
-    private function get_review_data() {
+    protected function get_review_data() {
 
         // if dummy setting is active, get dummy content
         if ( $this->showdummy ) {
@@ -327,39 +379,28 @@ class GRWP_Google_Reviews_Output {
 
     }
 
-
     /**
      * Grid HTML
      * @return string
      */
-    private function grid_html( $style_type ) {
-
-        $reviews = $this->get_review_data();
+    protected function grid_html( $style_type ) {
 
         // error handling
-        if ( is_wp_error( $reviews ) || $reviews == '' || $reviews == null || ! is_array( $reviews ) ) {
+        if ( $this->reviews_have_error ) {
 
             return __( 'No reviews available', 'google-reviews' );
 
         }
 
+        $google_svg = plugin_dir_url(__FILE__) . 'img/google-logo-svg.svg';
+
         // loop through reviews
         $output = sprintf('<div id="g-review" class="%s">', $style_type);
         $slider_output = '';
 
-        foreach ( $reviews as $review ) {
+        foreach ( $this->reviews as $review ) {
 
-            // count and prepare stars
-            $star = sprintf('<img src="%simg/svg-star.svg" alt="" />', esc_attr(plugin_dir_url( __FILE__ )));
-            $star_output = '<span class="stars-wrapper">';
-            for ($i = 1; $i <= $review['rating']; $i++) {
-                $star_output .= $star;
-            }
-            $star_output .= '</span>';
-
-            $star_output .= sprintf('<span class="time">%s</span>', $review['time']);
-
-            $google_svg = plugin_dir_url(__FILE__) . 'img/google-logo-svg.svg';
+            $star_output = $this->get_star_output($review);
 
             ob_start();
             require 'partials/grid/markup.php';
@@ -369,41 +410,31 @@ class GRWP_Google_Reviews_Output {
 
         $output .= '</div>';
 
-        return wp_kses($output, $this->allowed_html);
+        return wp_kses( $output, $this->allowed_html );
     }
 
     /**
      * Slider HTML
      * @return string
      */
-    private function slider_html( $style_type ) {
-
-        $reviews = $this->get_review_data();
+    protected function slider_html( $style_type ) {
 
         // error handling
-        if ( is_wp_error( $reviews ) || $reviews == '' || $reviews == null || ! is_array( $reviews ) ) {
+        if ( $this->reviews_have_error ) {
 
             return __( 'No reviews available', 'google-reviews' );
 
         }
 
+        $google_svg = plugin_dir_url(__FILE__) . 'img/google-logo-svg.svg';
+
         // loop through reviews
         $output = sprintf('<div id="g-review" class="%s">', $style_type);
         $slider_output = '';
 
-        foreach ( $reviews as $review ) {
+        foreach ( $this->reviews as $review ) {
 
-            // count and prepare stars
-            $star = sprintf('<img src="%simg/svg-star.svg" alt="" />', esc_attr(plugin_dir_url( __FILE__ )));
-            $star_output = '<span class="stars-wrapper">';
-            for ($i = 1; $i <= $review['rating']; $i++) {
-                $star_output .= $star;
-            }
-            $star_output .= '</span>';
-
-            $star_output .= sprintf('<span class="time">%s</span>', $review['time']);
-
-            $google_svg = plugin_dir_url(__FILE__) . 'img/google-logo-svg.svg';
+            $star_output = $this->get_star_output($review);
 
             $slide_duration = $this->options['slide_duration'] ?? '';
 
@@ -416,31 +447,14 @@ class GRWP_Google_Reviews_Output {
 
         ob_start();
         require 'partials/slider/slider-header.php';
-        echo wp_kses($slider_output, $this->allowed_html);
+        echo wp_kses( $slider_output, $this->allowed_html );
         require 'partials/slider/slider-footer.php';
 
         $output .= ob_get_clean();
 
         $output .= '</div>';
 
-        return wp_kses($output, $this->allowed_html);
-    }
-
-
-    /**
-     * Returns the correct HTML markup for each widget type
-     * @param $widget_type
-     * @param $style_type
-     * @return string|void
-     */
-    private function reviews_html( $widget_type, $style_type ) {
-
-        if ( $widget_type === 'slider' ) {
-            return $this->slider_html( $style_type );
-        }
-
-        return $this->grid_html( $style_type );
-
+        return wp_kses( $output, $this->allowed_html );
     }
 
     /**
@@ -477,7 +491,11 @@ class GRWP_Google_Reviews_Output {
 
         }
 
-        return $this->reviews_html( $widget_type, $style_type );
+        if ( $widget_type === 'slider' ) {
+            return $this->slider_html( $style_type );
+        }
+
+        return $this->grid_html( $style_type );
 
     }
 
