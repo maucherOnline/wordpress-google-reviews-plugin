@@ -5,12 +5,6 @@
  */
 class GRWP_Google_Reviews_Output {
 
-	/**
-	 * Plugin Options/settings.
-	 * @var null
-	 */
-	protected $options = null;
-
     /**
      * Whether to show dummy content
      * @var bool
@@ -56,8 +50,6 @@ class GRWP_Google_Reviews_Output {
             || ! is_array( $this->reviews )) {
             $this->reviews_have_error = true;
         }
-
-        add_shortcode('google-reviews', [ $this, 'reviews_shortcode' ] );
 
     }
 
@@ -119,21 +111,6 @@ class GRWP_Google_Reviews_Output {
 	}
 
     /**
-     * Get type override value from shortcode attributes
-     * @param array $atts
-     * @return string
-     */
-    protected function get_review_type_override( array $atts ) {
-
-        $result = '';
-        if ( isset( $atts['type'] ) ) {
-            $result = $atts['type'] === 'grid' ? 'grid' : '';
-        }
-
-        return $result;
-    }
-
-    /**
      * Count and prepare stars
      * @param $review
      * @return string
@@ -151,50 +128,6 @@ class GRWP_Google_Reviews_Output {
         $star_output .= sprintf('<span class="time">%s</span>', $review['time']);
 
         return $star_output;
-
-    }
-
-    /**
-     * Get style override value from shortcode attributes
-     * @param array $atts
-     * @return string
-     */
-    protected function get_review_style_override( array $atts ) {
-
-        $review_style_override = '';
-
-        if ( isset($atts['style']) ) {
-            $override = $atts['style'];
-
-            switch ( $override ) {
-                case '1':
-                    $review_style_override = 'layout_style-1';
-                    break;
-                case '2':
-                    $review_style_override = 'layout_style-2';
-                    break;
-                case '3':
-                    $review_style_override = 'layout_style-3';
-                    break;
-                case '4':
-                    $review_style_override = 'layout_style-4';
-                    break;
-                case '5':
-                    $review_style_override = 'layout_style-5';
-                    break;
-                case '6':
-                    $review_style_override = 'layout_style-6';
-                    break;
-                case '7':
-                    $review_style_override = 'layout_style-7';
-                    break;
-                case '8':
-                    $review_style_override = 'layout_style-8';
-                    break;
-            }
-        }
-
-        return $review_style_override;
 
     }
 
@@ -376,126 +309,6 @@ class GRWP_Google_Reviews_Output {
         }
 
         return $this->map_review_data($reviews_raw);
-
-    }
-
-    /**
-     * Grid HTML
-     * @return string
-     */
-    protected function grid_html( $style_type ) {
-
-        // error handling
-        if ( $this->reviews_have_error ) {
-
-            return __( 'No reviews available', 'google-reviews' );
-
-        }
-
-        $google_svg = plugin_dir_url(__FILE__) . 'img/google-logo-svg.svg';
-
-        // loop through reviews
-        $output = sprintf('<div id="g-review" class="%s">', $style_type);
-        $slider_output = '';
-
-        foreach ( $this->reviews as $review ) {
-
-            $star_output = $this->get_star_output($review);
-
-            ob_start();
-            require 'partials/grid/markup.php';
-            $output .= ob_get_clean();
-
-        }
-
-        $output .= '</div>';
-
-        return wp_kses( $output, $this->allowed_html );
-    }
-
-    /**
-     * Slider HTML
-     * @return string
-     */
-    protected function slider_html( $style_type ) {
-
-        // error handling
-        if ( $this->reviews_have_error ) {
-
-            return __( 'No reviews available', 'google-reviews' );
-
-        }
-
-        $google_svg = plugin_dir_url(__FILE__) . 'img/google-logo-svg.svg';
-
-        // loop through reviews
-        $output = sprintf('<div id="g-review" class="%s">', $style_type);
-        $slider_output = '';
-
-        foreach ( $this->reviews as $review ) {
-
-            $star_output = $this->get_star_output($review);
-
-            $slide_duration = $this->options['slide_duration'] ?? '';
-
-            ob_start();
-            require 'partials/slider/markup.php';
-            $slider_output .= ob_get_clean();
-
-
-        }
-
-        ob_start();
-        require 'partials/slider/slider-header.php';
-        echo wp_kses( $slider_output, $this->allowed_html );
-        require 'partials/slider/slider-footer.php';
-
-        $output .= ob_get_clean();
-
-        $output .= '</div>';
-
-        return wp_kses( $output, $this->allowed_html );
-    }
-
-    /**
-     * Parse shortcode data, return html
-     * @param array|null $atts
-     * @return string
-     */
-    public function reviews_shortcode( $atts = null ) : string {
-
-        // get style/type override values
-        $review_type_override = '';
-        $review_style_override = '';
-
-        if ( $atts ) {
-
-            $review_type_override = $this->get_review_type_override( $atts );
-            $review_style_override = $this->get_review_style_override( $atts );
-
-        }
-
-        // check if style type is overwritten by shortcode attributes
-        $style_type = $this->options['layout_style'];
-        if ( $review_style_override !== '' ) {
-
-            $style_type = $review_style_override;
-
-        }
-
-        // check if widget type is overwritten by shortcode attributes
-        $widget_type = strtolower($this->options['style_2']);
-        if ( $review_type_override !== '' ) {
-
-            $widget_type = $review_type_override;
-
-        }
-
-        if ( $widget_type === 'slider' ) {
-            return $this->slider_html( $style_type );
-        }
-
-        return $this->grid_html( $style_type );
 
     }
 

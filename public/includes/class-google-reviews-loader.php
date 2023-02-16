@@ -50,8 +50,12 @@ Class GRWP_Google_Reviews_Startup {
         $this->define_admin_hooks();
         $this->define_public_hooks();
 
-        require GR_BASE_PATH_PUBLIC . 'includes/class-google-reviews-output.php';
-        new GRWP_Google_Reviews_Output();
+        require GR_BASE_PATH_PUBLIC . 'includes/class-grwp-google-reviews-output.php';
+        require GR_BASE_PATH_PUBLIC . 'includes/class-grwp-shortcode.php';
+        require GR_BASE_PATH_PUBLIC . 'includes/class-grwp-reviews-widget-grid.php';
+        require GR_BASE_PATH_PUBLIC . 'includes/class-grwp-reviews-widget-slider.php';
+
+        new GRWP_Shortcode();
 
     }
 
