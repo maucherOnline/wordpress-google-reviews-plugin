@@ -1,6 +1,6 @@
 <?php
 
-Class Pro_API_Service {
+Class GRWP_Pro_API_Service {
 
     public function __construct() {
 

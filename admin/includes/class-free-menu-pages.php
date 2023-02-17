@@ -31,7 +31,7 @@ Class Free_Menu_Pages {
         $imgpath = plugin_dir_url(__FILE__) .'img/';
 
         echo wp_kses('<div class="wrap">', $allowed_html);
-        require_once plugin_dir_path(__FILE__) .'how-to.php';
+        require_once GR_BASE_PATH_ADMIN .'/includes/free/how-to.php';
         echo wp_kses('</div>', $allowed_html);
     }
 

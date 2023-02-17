@@ -1,6 +1,6 @@
 <?php
 
-class GR_WP_Cron {
+class GRWP_WP_Cron {
 
     protected static $instance = null;
 
@@ -20,7 +20,7 @@ class GR_WP_Cron {
         if ( grwp_fs()->is__premium_only() ) {
 
             require_once GR_BASE_PATH_ADMIN . 'includes/pro/class-pro-api-service.php';
-            Pro_API_Service::get_reviews_pro_api();
+            GRWP_Pro_API_Service::get_reviews_pro_api();
 
         }
 

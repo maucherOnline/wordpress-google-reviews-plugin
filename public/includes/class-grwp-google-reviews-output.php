@@ -294,15 +294,13 @@ class GRWP_Google_Reviews_Output {
 
             if ( grwp_fs()->is__premium_only() ) {
 
-                require_once GR_BASE_PATH_ADMIN . 'includes/pro/class-pro-api-service.php';
-                $reviews_raw = Pro_API_Service::parse_pro_review_json();
+                $reviews_raw = GRWP_Pro_API_Service::parse_pro_review_json();
 
             }
 
             else {
 
-                require_once GR_BASE_PATH_ADMIN . 'includes/free/class-free-api-service.php';
-                $reviews_raw = Free_API_Service::parse_free_review_json();
+                $reviews_raw = GRWP_Free_API_Service::parse_free_review_json();
 
             }
 

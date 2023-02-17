@@ -50,11 +50,6 @@ Class GRWP_Google_Reviews_Startup {
         $this->define_admin_hooks();
         $this->define_public_hooks();
 
-        require GR_BASE_PATH_PUBLIC . 'includes/class-grwp-google-reviews-output.php';
-        require GR_BASE_PATH_PUBLIC . 'includes/class-grwp-shortcode.php';
-        require GR_BASE_PATH_PUBLIC . 'includes/class-grwp-reviews-widget-grid.php';
-        require GR_BASE_PATH_PUBLIC . 'includes/class-grwp-reviews-widget-slider.php';
-
         new GRWP_Shortcode();
 
     }
@@ -82,13 +77,13 @@ Class GRWP_Google_Reviews_Startup {
          * The class responsible for orchestrating the actions and filters of the
          * core plugin.
          */
-        require_once GR_BASE_PATH_ADMIN . 'includes/hooks/class-google-reviews-loader.php';
+        require_once GR_BASE_PATH_ADMIN . 'includes/class-google-reviews-loader.php';
 
         /**
          * The class responsible for defining internationalization functionality
          * of the plugin.
          */
-        require_once GR_BASE_PATH_ADMIN . 'includes/hooks/class-google-reviews-i18n.php';
+        require_once GR_BASE_PATH_ADMIN . 'includes/class-google-reviews-i18n.php';
 
         /**
          * The class responsible for defining all actions that occur in the admin area.

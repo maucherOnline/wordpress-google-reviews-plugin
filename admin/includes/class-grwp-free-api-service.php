@@ -1,6 +1,6 @@
 <?php
 
-Class Free_API_Service {
+Class GRWP_Free_API_Service {
 
     public function __construct() {
 

@@ -45,8 +45,7 @@ class GRWP_Google_Reviews_Public {
 		add_action('admin_enqueue_scripts', [$this, 'enqueue_scripts']);
 
         // Provide hook for wp cron actions
-        require_once GR_BASE_PATH_ADMIN . 'includes/global/class-gr-wp-cron.php';
-        add_action('plugins_loaded', array ( GR_WP_Cron::get_instance(), 'plugin_setup' ) );
+        add_action('plugins_loaded', array ( GRWP_WP_Cron::get_instance(), 'plugin_setup' ) );
 
 	}
 
