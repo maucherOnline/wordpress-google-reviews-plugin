@@ -1,6 +1,6 @@
 <?php
 
-Class Pro_Settings {
+Class GRWP_Pro_Settings {
 
     private $google_reviews_options;
 

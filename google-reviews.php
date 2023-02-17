@@ -97,26 +97,29 @@ else {
     define('GR_BASE_PATH', plugin_dir_path( __FILE__ ) );
     define('GR_BASE_PATH_ADMIN', plugin_dir_path( __FILE__ ) .'admin/' );
     define('GR_BASE_PATH_PUBLIC', plugin_dir_path( __FILE__ ) .'public/' );
+    define('GR_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ));
 
     // Register class autoloader
-    spl_autoload_register(function ($class) {
+    spl_autoload_register( function ( $class ) {
+
         $className = strtolower(str_replace('_', '-', $class));
         $adminfile = GR_BASE_PATH_ADMIN.'includes/class-'.$className.'.php';
-        if (is_readable($adminfile)) {
+        if ( is_readable($adminfile) ) {
             require_once $adminfile;
         }
 
         $publicfile = GR_BASE_PATH_PUBLIC.'includes/class-'.$className.'.php';
-        if (is_readable($publicfile)) {
+        if ( is_readable($publicfile) ) {
             require_once $publicfile;
         }
+
     });
 
     /**
      * The code that runs during plugin activation.
      */
     function grwp_activate_google_reviews() {
-        require_once GR_BASE_PATH_ADMIN . 'includes/class-google-reviews-activator.php';
+        require_once GR_BASE_PATH_ADMIN . 'includes/class-grwp-activator.php';
         GRWP_Google_Reviews_Activator::activate();
     }
 
@@ -124,7 +127,7 @@ else {
      * The code that runs during plugin deactivation.
      */
     function grwp_deactivate_google_reviews() {
-        require_once GR_BASE_PATH_ADMIN . 'includes/class-google-reviews-deactivator.php';
+        require_once GR_BASE_PATH_ADMIN . 'includes/class-grwp-deactivator.php';
         GRWP_Google_Reviews_Deactivator::deactivate();
     }
 
@@ -132,7 +135,7 @@ else {
      * The code that runs during plugin deletion.
      */
     function grwp_uninstall_google_reviews() {
-        require_once GR_BASE_PATH_ADMIN . 'includes/class-google-reviews-uninstaller.php';
+        require_once GR_BASE_PATH_ADMIN . 'includes/class-grwp-uninstaller.php';
         GRWP_Google_Reviews_Uninstaller::uninstall();
     }
 

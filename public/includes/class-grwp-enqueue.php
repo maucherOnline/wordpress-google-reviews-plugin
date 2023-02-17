@@ -19,13 +19,11 @@
  * @subpackage Google_Reviews/public
  * @author     David Maucher <hallo@maucher-online.com>
  */
-class GRWP_Google_Reviews_Public {
+class GRWP_Enqueue {
 
 	private $plugin_name;
 
 	private $version;
-
-	private $options = null;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -35,8 +33,6 @@ class GRWP_Google_Reviews_Public {
 	 * @param      string    $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-
-		$this->options = get_option( 'google_reviews_option_name' );
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
@@ -68,9 +64,9 @@ class GRWP_Google_Reviews_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/google-reviews-public.css', array(), $this->version, 'all' );
-        wp_enqueue_style('swiperjs', plugin_dir_url(__FILE__) . 'css/swiper-bundle.min.css', [], '8.15');
-		wp_enqueue_style('mcustomscrollbar',  plugin_dir_url( __FILE__ ) . 'css/jquery.mCustomScrollbar.css', array(), $this->version, 'all');
+		wp_enqueue_style( $this->plugin_name, GR_PLUGIN_DIR_URL . 'public/css/google-reviews-public.css', array(), $this->version, 'all' );
+        wp_enqueue_style('swiperjs', GR_PLUGIN_DIR_URL . 'public/css/swiper-bundle.min.css', [], '8.15');
+		wp_enqueue_style('mcustomscrollbar',  GR_PLUGIN_DIR_URL . 'public/css/jquery.mCustomScrollbar.css', array(), $this->version, 'all');
 	}
 
 	/**
@@ -92,11 +88,11 @@ class GRWP_Google_Reviews_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/google-reviews-public.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script('matchheight', plugin_dir_url(__FILE__) . 'js/jquery.matchHeight.js', ['jquery'], '1.0.0', true);
-        wp_enqueue_script('swiperjs', plugin_dir_url(__FILE__) . 'js/swiper-bundle.min.js', ['jquery'], '8.15', true);
-        wp_enqueue_script('sliderjs', plugin_dir_url(__FILE__) . 'js/slider.js', ['jquery'], time(), true);
-		wp_enqueue_script('mcustomscrollbar', plugin_dir_url( __FILE__ ) . 'js/jquery.mCustomScrollbar.min.js', ['jquery'], time(), true);
+		wp_enqueue_script( $this->plugin_name, GR_PLUGIN_DIR_URL . 'public/js/google-reviews-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script('matchheight', GR_PLUGIN_DIR_URL . 'public/js/jquery.matchHeight.js', ['jquery'], '1.0.0', true);
+        wp_enqueue_script('swiperjs', GR_PLUGIN_DIR_URL . 'public/js/swiper-bundle.min.js', ['jquery'], '8.15', true);
+        wp_enqueue_script('sliderjs', GR_PLUGIN_DIR_URL . 'public/js/slider.js', ['jquery'], time(), true);
+		wp_enqueue_script('mcustomscrollbar', GR_PLUGIN_DIR_URL . 'public/js/jquery.mCustomScrollbar.min.js', ['jquery'], time(), true);
 	}
 
 }

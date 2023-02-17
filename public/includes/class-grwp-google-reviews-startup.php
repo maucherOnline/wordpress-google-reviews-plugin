@@ -77,13 +77,13 @@ Class GRWP_Google_Reviews_Startup {
          * The class responsible for orchestrating the actions and filters of the
          * core plugin.
          */
-        require_once GR_BASE_PATH_ADMIN . 'includes/class-google-reviews-loader.php';
+        require_once GR_BASE_PATH_ADMIN . 'includes/class-grwp-loader.php';
 
         /**
          * The class responsible for defining internationalization functionality
          * of the plugin.
          */
-        require_once GR_BASE_PATH_ADMIN . 'includes/class-google-reviews-i18n.php';
+        require_once GR_BASE_PATH_ADMIN . 'includes/class-grwp-i18n.php';
 
         /**
          * The class responsible for defining all actions that occur in the admin area.
@@ -94,9 +94,9 @@ Class GRWP_Google_Reviews_Startup {
          * The class responsible for defining all actions that occur in the public-facing
          * side of the site.
          */
-        require_once GR_BASE_PATH_PUBLIC . 'class-google-reviews-enqueue.php';
+        require_once GR_BASE_PATH_PUBLIC . 'includes/class-grwp-enqueue.php';
 
-        $this->loader = new GRWP_Google_Reviews_Loader();
+        $this->loader = new GRWP_Loader();
 
     }
 
@@ -111,7 +111,7 @@ Class GRWP_Google_Reviews_Startup {
      */
     private function set_locale() {
 
-        $plugin_i18n = new GRWP_Google_Reviews_i18n ();
+        $plugin_i18n = new GRWP_i18n ();
 
         $this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -146,7 +146,7 @@ Class GRWP_Google_Reviews_Startup {
      */
     private function define_public_hooks() {
 
-        $plugin_public = new GRWP_Google_Reviews_Public( $this->get_plugin_name(), $this->get_version() );
+        $plugin_public = new GRWP_Enqueue( $this->get_plugin_name(), $this->get_version() );
 
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );

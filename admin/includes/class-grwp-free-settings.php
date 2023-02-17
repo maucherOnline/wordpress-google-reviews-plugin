@@ -1,6 +1,6 @@
 <?php
 
-Class Free_Settings {
+Class GRWP_Free_Settings {
 
     private $google_reviews_options;
 

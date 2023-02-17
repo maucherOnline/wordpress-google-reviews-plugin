@@ -112,19 +112,19 @@ class GRWP_Google_ReviewsAdmin {
     public function gr_add_plugin_pages() {
 
         // Parent for free and pro version
-        new Global_Menu_Pages();
+        new GRWP_Global_Menu_Pages();
 
         // Pro version only
         if ( grwp_fs()->is__premium_only() ) {
 
-            new Pro_Menu_Pages();
+            new GRWP_Pro_Menu_Pages();
 
         }
 
         // Free version only
         else {
 
-            new Free_Menu_Pages();
+            new GRWP_Free_Menu_Pages();
 
         }
 
@@ -136,19 +136,19 @@ class GRWP_Google_ReviewsAdmin {
     public function google_reviews_page_init() {
 
         // Global settings
-        new Global_Settings();
+        new GRWP_Global_Settings();
 
         // Settings for pro version
         if ( grwp_fs()->is__premium_only() ) {
 
-            new Pro_Settings();
+            new GRWP_Pro_Settings();
 
         }
 
         // Settings for free version
         else {
 
-            new Free_Settings();
+            new GRWP_Free_Settings();
 
         }
 

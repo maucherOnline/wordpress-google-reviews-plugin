@@ -1,6 +1,6 @@
 <?php
 
-Class Free_Menu_Pages {
+Class GRWP_Free_Menu_Pages {
 
     public function __construct() {
 

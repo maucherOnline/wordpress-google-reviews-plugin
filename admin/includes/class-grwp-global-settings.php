@@ -1,6 +1,6 @@
 <?php
 
-Class Global_Settings {
+Class GRWP_Global_Settings {
 
     private $google_reviews_options;
     private $settings_slug;
