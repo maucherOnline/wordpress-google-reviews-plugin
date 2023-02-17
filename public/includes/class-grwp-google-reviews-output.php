@@ -306,7 +306,7 @@ class GRWP_Google_Reviews_Output {
 
         }
 
-        return $this->map_review_data($reviews_raw);
+        return $this->map_review_data( $reviews_raw );
 
     }
 

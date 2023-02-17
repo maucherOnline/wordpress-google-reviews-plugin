@@ -478,6 +478,13 @@ Class GRWP_Global_Settings {
                 <?php _e( 'Use this shortcode to show your reviews on pages and posts:', 'google-reviews' ); ?>
             </p>
             <input class="shortcode-container" type="text" disabled="" value="[google-reviews]">
+            <p>
+                <?php
+                echo sprintf(
+                        __('<a href="%s" target="_blank">See</a>, how to overwrite styles and widget types.','google-reviews'),
+                        "https://reviewsembedder.com/docs/how-to-overwrite-styles/?utm_source=wp_backend&utm_medium=instructions&utm_campaign=overwrite_styles_types");
+                ?>
+            </p>
         </div>
 
         <?php

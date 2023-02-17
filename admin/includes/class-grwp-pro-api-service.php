@@ -244,7 +244,7 @@ Class GRWP_Pro_API_Service {
             $reviewArr = json_decode($raw[$data_id], true);
             $reviews   = $reviewArr;
         } else {
-            $reviews = null;
+            $reviews = [];
         }
 
         return $reviews;
