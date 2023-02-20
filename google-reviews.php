@@ -150,7 +150,7 @@ else {
     // temporary from v1.4.5: remove old wp cron for free users
     if ( ! grwp_fs()->is__premium_only() ) {
         if ( wp_next_scheduled('get_google_reviews') ) {
-            wp_clear_scheduled_hook( 'get_google_reviews' );
+            //wp_clear_scheduled_hook( 'get_google_reviews' );
         }
     }
 

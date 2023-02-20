@@ -19,7 +19,7 @@
  * @subpackage Google_Reviews/public
  * @author     David Maucher <hallo@maucher-online.com>
  */
-class GRWP_Enqueue {
+class GRWP_Google_Reviews_Public {
 
 	private $plugin_name;
 
@@ -37,11 +37,10 @@ class GRWP_Enqueue {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
-		add_action('admin_enqueue_scripts', [$this, 'enqueue_styles']);
-		add_action('admin_enqueue_scripts', [$this, 'enqueue_scripts']);
+        require_once GR_BASE_PATH_ADMIN .'/includes/class-grwp-wp-cron.php';
 
         // Provide hook for wp cron actions
-        add_action('plugins_loaded', array ( GRWP_WP_Cron::get_instance(), 'plugin_setup' ) );
+        add_action( 'plugins_loaded', array ( GRWP_WP_Cron::get_instance(), 'plugin_setup' ) );
 
 	}
 

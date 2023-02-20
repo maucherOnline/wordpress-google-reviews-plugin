@@ -9,7 +9,7 @@
  * @package    Google_Reviews
  * @subpackage Google_Reviews/admin
  */
-class GRWP_Google_ReviewsAdmin {
+class GRWP_Google_Reviews_Admin {
 
     private $google_reviews_options;
 

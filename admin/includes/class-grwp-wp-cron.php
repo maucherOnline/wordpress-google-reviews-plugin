@@ -12,7 +12,7 @@ class GRWP_WP_Cron {
     }
 
     public function plugin_setup() {
-        add_action( 'get_google_reviews', array($this, 'wp_cron_reviews' ) );
+        add_action( 'get_google_reviews', array( $this, 'wp_cron_reviews' ) );
     }
 
     public function wp_cron_reviews() {
