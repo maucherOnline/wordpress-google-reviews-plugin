@@ -37,11 +37,6 @@ class GRWP_Google_Reviews_Public {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
-        require_once GR_BASE_PATH_ADMIN .'/includes/class-grwp-wp-cron.php';
-
-        // Provide hook for wp cron actions
-        add_action( 'plugins_loaded', array ( GRWP_WP_Cron::get_instance(), 'plugin_setup' ) );
-
 	}
 
 	/**
