@@ -9,7 +9,7 @@
  * @package    Google_Reviews
  * @subpackage Google_Reviews/admin
  */
-class GRWP_Google_ReviewsAdmin {
+class GRWP_Google_Reviews_Admin {
 
     private $google_reviews_options;
 
@@ -37,16 +37,14 @@ class GRWP_Google_ReviewsAdmin {
         // only for Pro version
         if ( grwp_fs()->is__premium_only() ) {
 
-            require_once GR_BASE_PATH_ADMIN . 'includes/pro/class-pro-api-service.php';
-            new Pro_API_Service();
+            new GRWP_Pro_API_Service();
 
         }
 
         // free version
         else {
 
-            require_once GR_BASE_PATH_ADMIN . 'includes/free/class-free-api-service.php';
-            new Free_API_Service();
+            new GRWP_Free_API_Service();
 
         }
 
@@ -114,22 +112,19 @@ class GRWP_Google_ReviewsAdmin {
     public function gr_add_plugin_pages() {
 
         // Parent for free and pro version
-        require_once $this->dir . 'includes/global/class-global-menu-pages.php';
-        new Global_Menu_Pages();
+        new GRWP_Global_Menu_Pages();
 
         // Pro version only
         if ( grwp_fs()->is__premium_only() ) {
 
-            require_once $this->dir . 'includes/pro/class-pro-menu-pages.php';
-            new Pro_Menu_Pages();
+            new GRWP_Pro_Menu_Pages();
 
         }
 
         // Free version only
         else {
 
-            require_once $this->dir . 'includes/free/class-free-menu-pages.php';
-            new Free_Menu_Pages();
+            new GRWP_Free_Menu_Pages();
 
         }
 
@@ -141,22 +136,19 @@ class GRWP_Google_ReviewsAdmin {
     public function google_reviews_page_init() {
 
         // Global settings
-        require_once $this->dir . '/includes/global/class-global-settings.php';
-        new Global_Settings();
+        new GRWP_Global_Settings();
 
         // Settings for pro version
         if ( grwp_fs()->is__premium_only() ) {
 
-            require_once $this->dir . '/includes/pro/class-pro-settings.php';
-            new Pro_Settings();
+            new GRWP_Pro_Settings();
 
         }
 
         // Settings for free version
         else {
 
-            require_once $this->dir . '/includes/free/class-free-settings.php';
-            new Free_Settings();
+            new GRWP_Free_Settings();
 
         }
 

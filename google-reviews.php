@@ -9,7 +9,7 @@
  * Plugin Name:       Embedder for Google Reviews
  * Plugin URI:        https://paretodigital.io
  * Description:       This Google Reviews Plugin pulls reviews from Google profiles and displays them on your website.
- * Version:           1.4.2
+ * Version:           1.4.8
  * Requires at least: 5.4
  * Requires PHP:      7.4
  * Tested up to:      6.1.1
@@ -91,18 +91,34 @@ else {
     // start freemius sdk
     startup_fs();
 
-    define( 'GRWP_GOOGLE_REVIEWS_VERSION', '1.4' );
+    define( 'GRWP_GOOGLE_REVIEWS_VERSION', '1.4.8' );
 
     // Base path to plugin for includes
-    define('GR_BASE_PATH', plugin_dir_path( __FILE__ ) );
-    define('GR_BASE_PATH_ADMIN', plugin_dir_path( __FILE__ ) .'admin/' );
-    define('GR_BASE_PATH_PUBLIC', plugin_dir_path( __FILE__ ) .'public/' );
+    define( 'GR_BASE_PATH', plugin_dir_path( __FILE__ ) );
+    define( 'GR_BASE_PATH_ADMIN', plugin_dir_path( __FILE__ ) .'admin/' );
+    define( 'GR_BASE_PATH_PUBLIC', plugin_dir_path( __FILE__ ) .'public/' );
+    define( 'GR_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
+
+    // Register class autoloader
+    spl_autoload_register( function ( $class ) {
+
+        $className = strtolower(str_replace('_', '-', $class));
+        $adminfile = GR_BASE_PATH_ADMIN.'includes/class-'.$className.'.php';
+        if ( is_readable($adminfile) ) {
+            require_once $adminfile;
+        }
+
+        $publicfile = GR_BASE_PATH_PUBLIC.'includes/class-'.$className.'.php';
+        if ( is_readable($publicfile) ) {
+            require_once $publicfile;
+        }
+
+    });
 
     /**
      * The code that runs during plugin activation.
      */
     function grwp_activate_google_reviews() {
-        require_once GR_BASE_PATH_ADMIN . 'includes/hooks/class-google-reviews-activator.php';
         GRWP_Google_Reviews_Activator::activate();
     }
 
@@ -110,7 +126,6 @@ else {
      * The code that runs during plugin deactivation.
      */
     function grwp_deactivate_google_reviews() {
-        require_once GR_BASE_PATH_ADMIN . 'includes/hooks/class-google-reviews-deactivator.php';
         GRWP_Google_Reviews_Deactivator::deactivate();
     }
 
@@ -118,7 +133,6 @@ else {
      * The code that runs during plugin deletion.
      */
     function grwp_uninstall_google_reviews() {
-        require_once GR_BASE_PATH_ADMIN . 'includes/hooks/class-google-reviews-uninstaller.php';
         GRWP_Google_Reviews_Uninstaller::uninstall();
     }
 
@@ -127,9 +141,14 @@ else {
     register_deactivation_hook( __FILE__, 'grwp_deactivate_google_reviews' );
     register_uninstall_hook( __FILE__, 'grwp_uninstall_google_reviews' );
 
-    // Start plugin
-    require_once GR_BASE_PATH_PUBLIC . 'includes/class-google-reviews-loader.php';
     $plugin = new GRWP_Google_Reviews_Startup();
     $plugin->run();
+
+    // temporary from v1.4.5: remove old wp cron for free users
+    if ( ! grwp_fs()->is__premium_only() ) {
+        if ( wp_next_scheduled('get_google_reviews') ) {
+            wp_clear_scheduled_hook( 'get_google_reviews' );
+        }
+    }
 
 }

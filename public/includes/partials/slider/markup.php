@@ -2,16 +2,12 @@
 	if (! defined('ABSPATH'))
 		exit;
 
-
 /**
  * @var string $star_output
- * @var string $text
- * @var string $profile_photo_url
  * @var string $google_svg
- * @var string $author_url
- * @var string $name
  * @var number $slide_duration
  * @var array  $allowed_html
+ * @var array  $review
  */
 ?>
 
@@ -20,7 +16,7 @@
         <div class="gr-inner-header">
             <img
                     class="gr-profile"
-                    src="<?php echo esc_attr($profile_photo_url); ?>"
+                    src="<?php echo esc_attr($review['profile_photo_url']); ?>"
                     width="50"
                     height="50"
                     alt=""
@@ -33,19 +29,19 @@
                     class="gr-google"
             />
             <p>
-                <a href="<?php echo esc_attr($author_url); ?>"
+                <a href="<?php echo esc_attr($review['author_url']); ?>"
                    target="_blank">
-                    <?php echo esc_html($name); ?>
+                    <?php echo esc_html($review['name']); ?>
                 </a>
                 <br>
                 <span class="gr-stars">
-                    <?php echo wp_kses($star_output, $allowed_html); ?>
+                    <?php echo wp_kses($star_output, $this->allowed_html); ?>
                 </span>
             </p>
         </div>
 
         <div class="gr-inner-body">
-            <p><?php echo esc_html($text); ?></p>
+            <p><?php echo esc_html($review['text']); ?></p>
         </div>
     </div>
 </div>

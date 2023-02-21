@@ -5,15 +5,17 @@ Tested up to: 6.1.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.4.2
+Stable tag: 1.4.8
 Tags: google reviews, google, reviews, rating, reviews plugin
 
 == Description ==
 With a few easy clicks, display your Google Reviews for free, and improve your website user experience and conversions.
 Our Google Reviews plugin displays customer reviews with newly and easily implemented widgets.
 
-⚡ PRO Version to **pull ALL reviews**
-[https://reviewsembedder.com](https://reviewsembedder.com)
+⚡ PRO Version to **display ALL reviews**
+[https://reviewsembedder.com](https://reviewsembedder.com?utm_source=wp_dir&utm_medium=link&utm_campaign=01)
+
+[youtube https://www.youtube.com/watch?v=y3xwRn7Shfo]
 
 == Top Features of this Google Reviews Plugin ==
 The Google Reviews WordPress plugin has different styles and layouts and offers easy installation and integration.
@@ -52,7 +54,7 @@ The Google Reviews WordPress plugin has different styles and layouts and offers 
 💪 **Ultra-fast loading times** - Not only is the embedding process of our widget easy, but its loading time is ultra-fast to ensure the best customer experience.
 
 == PRO Features of the paid version ==
-With [the pro version](https://reviewsembedder.com), you can pull all Google reviews of a business instead of only 5.
+With [the pro version](https://reviewsembedder.com?utm_source=wp_dir&utm_medium=link&utm_campaign=02), you can pull all Google reviews of a business instead of only 5.
 Showing a more significant number of positive comments will make your business website more attractive to your customers and further build trust.
 The premium version also includes additional premium settings with more customization options to increase your sales and conversions.
 The plugin also has a special word filter that enables you to search for powerful and positive words amongst all the reviews and filter reviews by rating option, which will only show 5 or 4-star reviews.
@@ -115,7 +117,7 @@ Here are the most common questions associated with Google Review Plugins and rev
 If you have any problem whatsoever or didn't find the answer you were looking for, make sure to contact our support at WordPress.org support forums.
 
 == ⚡ PRO Version to pull ALL reviews ⚡ ==
-[https://reviewsembedder.com](https://reviewsembedder.com)
+[https://reviewsembedder.com](https://reviewsembedder.com?utm_source=wp_dir&utm_medium=link&utm_campaign=03)
 
 == Frequently Asked Questions ==
 

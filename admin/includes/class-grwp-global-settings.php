@@ -1,19 +1,26 @@
 <?php
 
-Class Global_Settings {
+Class GRWP_Global_Settings {
+
     private $google_reviews_options;
+    private $settings_slug;
 
     public function __construct() {
+
         $this->google_reviews_options = get_option( 'google_reviews_option_name' );
-        $this->add_settings();
+        $this->settings_slug = 'google-reviews-admin';
+
+        $this->add_api_settings();
+        $this->add_display_settings();
+        $this->add_embedding_instructions();
 
     }
 
-    private function add_settings() {
+    /**
+     * API settings
+     */
+    private function add_api_settings() {
 
-        /**
-         * API settings
-         */
         register_setting(
             'google_reviews_option_group', // option_group
             'google_reviews_option_name', // option_name
@@ -22,16 +29,16 @@ Class Global_Settings {
 
         add_settings_section(
             'google_reviews_setting_section', // id
-            __( 'Global settings for showing reviews', 'google-reviews' ), // title
+            '', // title
             array( $this, 'google_reviews_section_info' ), // callback
-            'google-reviews-admin' // page
+            $this->settings_slug // page
         );
 
         add_settings_field(
             'show_dummy_content', // id
             __( 'Show dummy content', 'google-reviews' ), // title
             array( $this, 'show_dummy_content_callback' ), // callback
-            'google-reviews-admin', // page
+            $this->settings_slug, // page
             'google_reviews_setting_section' // section
         );
 
@@ -39,13 +46,17 @@ Class Global_Settings {
             'reviews_language_3', // id
             __( 'Reviews language', 'google-reviews' ), // title
             array( $this, 'reviews_language_3_callback' ), // callback
-            'google-reviews-admin', // page
+            $this->settings_slug, // page
             'google_reviews_setting_section' // section
         );
 
-        /**
-         * Display settings
-         */
+    }
+
+    /**
+     * Display settings
+     */
+    private function add_display_settings() {
+
         // settings for styles and layout
         register_setting(
             'google_reviews_style_group', // option_group
@@ -56,17 +67,16 @@ Class Global_Settings {
         // add style and layout settings section
         add_settings_section(
             'google_reviews_style_layout_setting_section', // id
-            __( 'Display settings', 'google-reviews' ), // title
-            array( $this, 'google_reviews_section_info' ), // callback
-            'google-reviews-admin' // page
+            '', // title
+            array( $this, 'google_reviews_display_section_info' ), // callback
+            $this->settings_slug // page
         );
 
-        // add style and layout settings field
         add_settings_field(
             'style_2', // id
             __( 'Layout type', 'google-reviews' ), // title
             array( $this, 'style_2_callback' ), // callback
-            'google-reviews-admin', // page
+            $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section
         );
 
@@ -74,25 +84,52 @@ Class Global_Settings {
             'layout_style', // id
             __( 'Design type', 'google-reviews' ), // title
             array( $this, 'layout_style_callback' ), // callback
-            'google-reviews-admin', // page
+            $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section
         );
 
-        /**
-         * Embeddding instructions
-         */
+        add_settings_field(
+            'filter_below_5_stars', // id
+            __('Minimum rating (stars)', 'google-reviews'), // title
+            array($this, 'filter_below_5_stars_callback'), // callback
+            $this->settings_slug, // page
+            'google_reviews_style_layout_setting_section' // section
+        );
+
+        add_settings_field(
+            'exclude_reviews_without_text', // id
+            __('Exclude reviews without text', 'google-reviews'), // title
+            array($this, 'exclude_reviews_without_text_callback'), // callback
+            $this->settings_slug, // page
+            'google_reviews_style_layout_setting_section' // section
+        );
+
+        add_settings_field(
+            'filter_words', // id
+            __('Filter by words (comma separated)', 'google-reviews'), // title
+            array($this, 'filter_words_callback'), // callback
+            $this->settings_slug, // page
+            'google_reviews_style_layout_setting_section' // section
+        );
+    }
+
+    /**
+     * Embeddding instructions
+     */
+    private function add_embedding_instructions() {
+
         add_settings_section(
             'google_reviews_embedding_instructions_section', // id
-            __( 'Embedding instructions', 'google-reviews' ), // title
+            '', // title
             array( $this, 'reviews_instructions_section' ), // callback
-            'google-reviews-admin' // page
+            $this->settings_slug // page
         );
 
         add_settings_field(
             'embedding_instructions', // id
             __( 'Shortcode', 'google-reviews' ), // title
             array( $this, 'reviews_instructions_callback' ), // callback
-            'google-reviews-admin', // page
+            $this->settings_slug, // page
             'google_reviews_embedding_instructions_section' // section
         );
 
@@ -145,7 +182,15 @@ Class Global_Settings {
         }
 
         if ( isset( $input['filter_below_5_stars'] ) ) {
-            $sanitary_values['filter_below_5_stars'] = $input['filter_below_5_stars'];
+            $sanitary_values['filter_below_5_stars'] = sanitize_text_field($input['filter_below_5_stars']);
+        }
+
+        if ( isset( $input['exclude_reviews_without_text'] ) ) {
+            $sanitary_values['exclude_reviews_without_text'] = $input['exclude_reviews_without_text'];
+        }
+
+        if ( isset( $input['filter_words'] ) ) {
+            $sanitary_values['filter_words'] = $input['filter_words'];
         }
 
         if ( isset( $input['reviews_language_3'] ) ) {
@@ -155,10 +200,22 @@ Class Global_Settings {
         return $sanitary_values;
     }
 
-    public function google_reviews_section_info() {
-        // additional output possible
+    public function google_reviews_section_info() { ?>
+        <h2 id="connect_settings"><?php _e( 'Global settings for showing reviews', 'google-reviews' ); ?></h2>
+
+        <?php
     }
 
+    public function google_reviews_display_section_info() { ?>
+        <h2 id="display_settings"><?php _e( 'Display settings', 'google-reviews' );?></h2>
+
+        <?php
+    }
+
+    /**
+     * Show dummy content
+     * @return void
+     */
     public function show_dummy_content_callback() {
         global $allowed_html;
         ob_start();
@@ -179,6 +236,83 @@ Class Global_Settings {
         $html = ob_get_clean();
 
         echo wp_kses($html, $allowed_html);
+    }
+
+    /**
+     * Filter below 5 stars
+     * @return void
+     */
+    public function filter_below_5_stars_callback() {
+        global $allowed_html;
+
+        ob_start();
+        ?>
+
+        <input type="number"
+               name="google_reviews_option_name[filter_below_5_stars]"
+               id="filter_below_5_stars"
+               min="1"
+               max="5"
+               step="1"
+               value="<?php echo esc_attr( ! empty( $this->google_reviews_options['filter_below_5_stars'] ) ? $this->google_reviews_options['filter_below_5_stars'] : '5' ); ?>"
+        />
+
+        <?php
+        $html = ob_get_clean();
+
+        echo wp_kses($html, $allowed_html);
+
+    }
+
+    /**
+     * Exclude reviews without text
+     * @return void
+     */
+    public function exclude_reviews_without_text_callback() {
+        global $allowed_html;
+
+        ob_start(); ?>
+
+        <input type="checkbox"
+               name="google_reviews_option_name[exclude_reviews_without_text]"
+               value="1"
+               id="exclude_reviews_without_text"
+               <?php echo esc_attr( ! empty( $this->google_reviews_options['exclude_reviews_without_text'] ) ? 'checked' : '' ); ?>
+        >
+
+        <span>
+            <?php _e( 'Yes', 'google-reviews' ); ?>
+        </span>
+
+        <?php
+
+        $html = ob_get_clean();
+
+        echo wp_kses($html, $allowed_html);
+
+    }
+
+    /**
+     * Filter specific words
+     * @return void
+     */
+    public function filter_words_callback() {
+        global $allowed_html;
+
+        ob_start();
+        ?>
+
+        <textarea
+           name="google_reviews_option_name[filter_words]"
+           id="filter_words"
+           rows="2"
+        ><?php echo esc_attr( ! empty( $this->google_reviews_options['filter_words'] ) ? $this->google_reviews_options['filter_words'] : '' ); ?></textarea>
+
+        <?php
+        $html = ob_get_clean();
+
+        echo wp_kses($html, $allowed_html);
+
     }
 
     /**
@@ -223,11 +357,10 @@ Class Global_Settings {
             $layout_style = '1';
         }
 
-        $layout_styles_count = 4;
         ?>
 
         <select name="google_reviews_option_name[layout_style]" id="layout_style">
-            <?php for ( $i = 1; $i <= 5; $i++ ) : ?>
+            <?php for ( $i = 1; $i <= 8; $i++ ) : ?>
                 <option
                     <?php selected( $layout_style, 'layout_style-' . $i ); ?>
                         value="<?php echo esc_attr( sprintf( 'layout_style-%s', $i ) ) ?>"
@@ -331,22 +464,30 @@ Class Global_Settings {
         </select> <?php
     }
 
+    public function reviews_instructions_section() { ?>
+        <h2 id="embedding_instructions"><?php _e( 'Embedding instructions', 'google-reviews' ); ?></h2>
+        <?php
+    }
+
     /**
      * Echo shortcode instructions
      */
-    public function reviews_instructions_callback() {
-        ?>
+    public function reviews_instructions_callback() { ?>
         <div id="instructions">
             <p>
                 <?php _e( 'Use this shortcode to show your reviews on pages and posts:', 'google-reviews' ); ?>
             </p>
             <input class="shortcode-container" type="text" disabled="" value="[google-reviews]">
+            <p>
+                <?php
+                echo sprintf(
+                        __('<a href="%s" target="_blank">See</a>, how to overwrite styles and widget types.','google-reviews'),
+                        "https://reviewsembedder.com/docs/how-to-overwrite-styles/?utm_source=wp_backend&utm_medium=instructions&utm_campaign=overwrite_styles_types");
+                ?>
+            </p>
         </div>
 
         <?php
     }
 
-    public function reviews_instructions_section() {
-
-    }
 }

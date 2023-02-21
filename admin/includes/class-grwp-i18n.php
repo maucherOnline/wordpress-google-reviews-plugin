@@ -24,7 +24,7 @@
  * @subpackage Google_Reviews/includes
  * @author     David Maucher <hallo@maucher-online.com>
  */
-class GRWP_Google_Reviews_i18n  {
+class GRWP_i18n  {
 
 
 	/**

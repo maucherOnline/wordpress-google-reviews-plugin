@@ -30,13 +30,16 @@ $allowed_html = [
         'class' => [],
         'id'    => [],
     ],
+    'strong' => [],
+    'h4' => [],
     'br' => [],
     'iframe' => [
         'src'       => [],
         'width'     => [],
         'height'    => [],
         'style'     => [],
-        'allow'     => []
+        'allow'     => [],
+        'id'     => []
 
     ],
     'input' => [
@@ -49,6 +52,12 @@ $allowed_html = [
         'min'       => [],
         'max'       => [],
         'step'      => [],
-
     ],
+    'textarea' => [
+        'id'    => [],
+        'name'    => [],
+        'value'    => [],
+        'rows'    => [],
+        'cols'    => [],
+    ]
 ];

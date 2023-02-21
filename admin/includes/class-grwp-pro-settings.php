@@ -1,6 +1,6 @@
 <?php
 
-Class Pro_Settings {
+Class GRWP_Pro_Settings {
 
     private $google_reviews_options;
 
@@ -12,6 +12,7 @@ Class Pro_Settings {
     }
 
     private function add_settings() {
+
         add_settings_field(
             'serp_business_name', // id
             __( 'Search for your business:', 'google-reviews' ), // title
@@ -29,36 +30,9 @@ Class Pro_Settings {
             array( 'class' => 'hidden' )
         );
 
-        add_settings_field(
-            'filter_below_5_stars', // id
-            __('Minimum rating (stars)', 'google-reviews'), // title
-            array($this, 'filter_below_5_stars_callback'), // callback
-            'google-reviews-admin', // page
-            'google_reviews_style_layout_setting_section' // section
-        );
     }
 
-    public function filter_below_5_stars_callback() {
-        global $allowed_html;
 
-        ob_start();
-        ?>
-
-        <input type="number"
-               name="google_reviews_option_name[filter_below_5_stars]"
-               id="filter_below_5_stars"
-               min="1"
-               max="5"
-               step="1"
-               value="<?php echo esc_attr( ! empty( $this->google_reviews_options['filter_below_5_stars'] ) ? $this->google_reviews_options['filter_below_5_stars'] : '5' ); ?>"
-        />
-
-        <?php
-        $html = ob_get_clean();
-
-        echo wp_kses($html, $allowed_html);
-
-    }
 
 
     /**
@@ -84,8 +58,7 @@ Class Pro_Settings {
         }
 
         // If reviews have already been pulled, disable 'Pull reviews' button
-        require_once GR_BASE_PATH_ADMIN . 'includes/pro/class-pro-api-service.php';
-        $reviews = Pro_API_Service::parse_pro_review_json();
+        $reviews = GRWP_Pro_API_Service::parse_pro_review_json();
         if ($reviews !== null) {
             $pull_button_disabled = 'disabled';
         }
