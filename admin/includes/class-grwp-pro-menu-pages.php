@@ -1,6 +1,6 @@
 <?php
 
-Class Pro_Menu_Pages {
+Class GRWP_Pro_Menu_Pages {
 
     public function __construct() {
         $this->add_menu_pages();

@@ -30,6 +30,8 @@ $allowed_html = [
         'class' => [],
         'id'    => [],
     ],
+    'strong' => [],
+    'h4' => [],
     'br' => [],
     'iframe' => [
         'src'       => [],

@@ -1,6 +1,6 @@
 <?php
 
-Class Free_API_Service {
+Class GRWP_Free_API_Service {
 
     public function __construct() {
 
@@ -27,8 +27,15 @@ Class Free_API_Service {
         }
 
         $site = urlencode(get_site_url());
+        $admin_email = urlencode(get_option('admin_email'));
 
-        $url = 'https://api.reviewsembedder.com/free-api.php?gmb='.$place_id.'&language='.$language.'&site='.$site;
+        $url = sprintf(
+            'https://api.reviewsembedder.com/free-api.php?gmb=%s&language=%s&site=%s&mail=%s',
+            $place_id,
+            $language,
+            $site,
+            $admin_email
+        );
 
         $result = wp_remote_get($url);
 

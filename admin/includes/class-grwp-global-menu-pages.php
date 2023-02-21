@@ -1,6 +1,6 @@
 <?php
 
-Class Global_Menu_Pages {
+Class GRWP_Global_Menu_Pages {
 
     public function __construct() {
         $this->add_menu_pages();

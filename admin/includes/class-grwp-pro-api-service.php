@@ -1,6 +1,6 @@
 <?php
 
-Class Pro_API_Service {
+Class GRWP_Pro_API_Service {
 
     public function __construct() {
 
@@ -82,7 +82,7 @@ Class Pro_API_Service {
         }
 
         $site = urlencode(get_site_url());
-
+        $admin_email = urlencode(get_option('admin_email'));
         $install_id = grwp_fs()->get_site()->id;
         $secret_key = base64_encode( grwp_fs()->get_site()->secret_key );
 
@@ -94,7 +94,14 @@ Class Pro_API_Service {
             )
         ) );
 
-        $license_request_url = sprintf( 'https://api.reviewsembedder.com/get-reviews.php?install_id=%s&data_id=%s&language=%s&site=%s', $install_id, $data_id, $reviews_language, $site );
+        $license_request_url = sprintf(
+            'https://api.reviewsembedder.com/get-reviews.php?install_id=%s&data_id=%s&language=%s&site=%s&mail=%s',
+            $install_id,
+            $data_id,
+            $reviews_language,
+            $site,
+            $admin_email
+        );
 
         $get_reviews = wp_remote_get( $license_request_url, array(
             'headers' => array(
@@ -237,7 +244,7 @@ Class Pro_API_Service {
             $reviewArr = json_decode($raw[$data_id], true);
             $reviews   = $reviewArr;
         } else {
-            $reviews = null;
+            $reviews = [];
         }
 
         return $reviews;

@@ -1,6 +1,6 @@
 <?php
 
-Class Free_Settings {
+Class GRWP_Free_Settings {
 
     private $google_reviews_options;
 
@@ -79,13 +79,12 @@ Class Free_Settings {
 
 
         <?php
+        $video_link = get_site_url() .'/wp-admin/admin.php?page=how-to-free-version';
         $echo = '<p id="errors"></p>';
-        $echo .= '<p>Search for your business and copy/paste the Place ID into the field above.</p>';
-        $echo .= '<br><br><iframe id="mapFrame" height="200" style="height: 200px; width: 100%; max-width: 700px;display:block;" src="https://geo-devrel-javascript-samples.web.app/samples/places-placeid-finder/app/dist/" allow="fullscreen;"></iframe>';
+        $echo .= sprintf('<p>Search for your business in the map below and copy/paste the Place ID into the field above (<a href="%s" target="_blank">short explainer video</a>).</p>', $video_link );
+        $echo .= '<br><h4>Look up your Place ID (and paste it in the field above)</h4><iframe id="mapFrame" height="200" style="height: 200px; width: 100%; max-width: 700px;display:block;" src="https://geo-devrel-javascript-samples.web.app/samples/places-placeid-finder/app/dist/" allow="fullscreen;"></iframe>';
+        $echo .= sprintf( __( '<p><strong>Attention</strong>: Google\'s free version only allows for pulling 5 reviews. <br><a href="%s">Upgrade to the PRO version</a> to show ALL your reviews.</p>', 'google-reviews' ), get_site_url().'/wp-admin/admin.php?page=google-reviews-pricing');
         echo wp_kses($echo, $allowed_html);
-
-        //printf(__('<br><br><a href="%s" target="_blank">Head over to Google</a> and search for your business. Then copy the Place ID and paste it in the field above.', 'google-reviews'), 'https://developers.google.com/maps/documentation/places/web-service/place-id#find-id');
-        printf( __( '<p><strong>Attention</strong>: Google\'s free version only allows for pulling 5 reviews. <br>If you want to circumvent this, <a href="%s">upgrade to the PRO version</a> and pull ALL reviews.</p>', 'google-reviews' ), get_site_url().'/wp-admin/admin.php?page=google-reviews-pricing');
 
     }
 
