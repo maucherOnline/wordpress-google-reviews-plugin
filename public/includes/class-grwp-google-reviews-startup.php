@@ -94,7 +94,7 @@ Class GRWP_Google_Reviews_Startup {
          * The class responsible for defining all actions that occur in the public-facing
          * side of the site.
          */
-        require_once GR_BASE_PATH_PUBLIC . 'includes/class-grwp-enqueue.php';
+        require_once GR_BASE_PATH_PUBLIC . 'includes/class-grwp-google-reviews-public.php';
 
         $this->loader = new GRWP_Loader();
 
@@ -128,10 +128,16 @@ Class GRWP_Google_Reviews_Startup {
 
         if ( is_admin() ) {
 
-            $plugin_admin = new GRWP_Google_ReviewsAdmin($this->get_plugin_name(), $this->get_version());
+            $plugin_admin = new GRWP_Google_Reviews_Admin($this->get_plugin_name(), $this->get_version());
 
             $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
             $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
+
+            // load public styles and scripts for backend preview
+            $plugin_public = new GRWP_Google_Reviews_Public( $this->get_plugin_name(), $this->get_version() );
+
+            $this->loader->add_action( 'admin_enqueue_scripts', $plugin_public, 'enqueue_styles' );
+            $this->loader->add_action( 'admin_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
         }
 
@@ -146,10 +152,13 @@ Class GRWP_Google_Reviews_Startup {
      */
     private function define_public_hooks() {
 
-        $plugin_public = new GRWP_Enqueue( $this->get_plugin_name(), $this->get_version() );
+        $plugin_public = new GRWP_Google_Reviews_Public( $this->get_plugin_name(), $this->get_version() );
 
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+        // Provide hook for wp cron actions
+        $this->loader->add_action( 'plugins_loaded', GRWP_WP_Cron::get_instance(), 'plugin_setup' );
 
     }
 
