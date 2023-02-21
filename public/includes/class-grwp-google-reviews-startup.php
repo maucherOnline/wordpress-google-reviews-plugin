@@ -41,7 +41,7 @@ Class GRWP_Google_Reviews_Startup {
             $this->version = '1.0.0';
         }
 
-        require_once __DIR__ .'/allowed-html.php';
+        require_once __DIR__ . '/allowed-html.php';
 
         $this->plugin_name = 'google-reviews';
 
