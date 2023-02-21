@@ -9,25 +9,25 @@ class GRWP_Google_Reviews_Output {
      * Whether to show dummy content
      * @var bool
      */
-    protected bool $showdummy = false;
+    protected $showdummy = false;
 
     /**
      * Allowed HTML and HTML attributes
      * @var array
      */
-    protected array $allowed_html;
+    protected $allowed_html;
 
     /**
      * Gobal reviews data
      * @var array|null
      */
-    protected array $reviews;
+    protected $reviews;
 
     /**
      * Flag if reviews are erroneous
      * @var bool
      */
-    protected bool $reviews_have_error = false;
+    protected $reviews_have_error = false;
 
     /**
      * Constructor method
