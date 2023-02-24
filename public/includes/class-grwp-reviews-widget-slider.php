@@ -17,7 +17,7 @@ class GRWP_Reviews_Widget_Slider
 
         }
 
-        $google_svg = plugin_dir_url(__FILE__) . 'img/google-logo-svg.svg';
+        $google_svg =  GR_PLUGIN_DIR_URL . 'dist/images/google-logo-svg.svg';
 
         // loop through reviews
         $output = sprintf('<div id="g-review" class="%s">', $style_type);

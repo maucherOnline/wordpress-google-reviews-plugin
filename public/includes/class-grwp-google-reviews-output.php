@@ -117,8 +117,8 @@ class GRWP_Google_Reviews_Output {
      */
     protected function get_star_output( $review ) {
 
-        $path = esc_attr( plugin_dir_url( __FILE__ ) );
-        $star = sprintf('<img src="%simg/svg-star.svg" alt="" />', $path);
+        $path = esc_attr( GR_PLUGIN_DIR_URL );
+        $star = sprintf('<img src="%sdist/images/svg-star.svg" alt="" />', $path);
         $star_output = '<span class="stars-wrapper">';
         for ( $i = 1; $i <= $review['rating']; $i++ ) {
             $star_output .= $star;
@@ -141,7 +141,7 @@ class GRWP_Google_Reviews_Output {
             'author_name'               => __( 'Lorem Ipsum', 'google-reviews' ),
             'author_url'                => '#',
             'language'                  => 'en',
-            'profile_photo_url'         => plugin_dir_url(__FILE__) . 'img/sample-photo.png',
+            'profile_photo_url'         => GR_PLUGIN_DIR_URL . 'dist/images/sample-photo.png',
             'rating'                    => 5,
             'relative_time_description' => __( 'three months ago', 'google-reviews' ),
             'text'                      => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'google-reviews' ),

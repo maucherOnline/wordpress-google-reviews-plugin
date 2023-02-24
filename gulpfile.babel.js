@@ -7,6 +7,8 @@ import concat from 'gulp-concat';
 import yargs from 'yargs';
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
+import clean from 'gulp-clean';
+import imagemin from 'gulp-imagemin';
 
 const PRODUCTION = yargs.argv.prod;
 const sass = gulpSass(dartSass);
@@ -28,13 +30,13 @@ export const stylesPublic = () => {
             .pipe(postcss(autoPrefixerPlugins))
             .pipe(cleanCss({compatibility:'ie8'}))
             .pipe(concat('google-reviews-public.css'))
-            .pipe(dest('public/css'))
+            .pipe(dest('dist/css'))
     } else {
         return src(publicSCSSglob, { sourcemaps: true })
             .pipe(sass.sync().on('error', sass.logError))
             .pipe(cleanCss({compatibility:'ie8'}))
             .pipe(concat('google-reviews-public.css'))
-            .pipe(dest('public/css', { sourcemaps: '.' }))
+            .pipe(dest('dist/css', { sourcemaps: '.' }))
     }
 
 }
@@ -46,15 +48,30 @@ export const stylesAdmin = () => {
             .pipe(sass.sync().on('error', sass.logError))
             .pipe(cleanCss({compatibility: 'ie8'}))
             .pipe(concat('google-reviews-admin.css'))
-            .pipe(dest('admin/css'))
+            .pipe(dest('dist/css'))
     } else {
         return src(adminSCSSglob, { sourcemaps: true })
             .pipe(sass.sync().on('error', sass.logError))
             .pipe(cleanCss({compatibility: 'ie8'}))
             .pipe(concat('google-reviews-admin.css'))
-            .pipe(dest('admin/css', { sourcemaps: '.' }))
+            .pipe(dest('dist/css', { sourcemaps: '.' }))
     }
 
+}
+
+/**
+ * Minify images and copy them to dist
+ * @returns {*}
+ */
+export const images = () => {
+    if (PRODUCTION) {
+        return src('src/images/**/*.{jpg,jpeg,png,svg,gif}')
+            .pipe(imagemin())
+            .pipe(dest('dist/images'));
+    } else {
+        return src('src/images/**/*.{jpg,jpeg,png,svg,gif}')
+            .pipe(dest('dist/images'));
+    }
 }
 
 /**
@@ -63,7 +80,36 @@ export const stylesAdmin = () => {
 export const watchForChanges = () => {
     watch(publicSCSSglob, stylesPublic);
     watch(adminSCSSglob, stylesAdmin);
+    watch('src/images/**/*.{jpg,jpeg,png,svg,gif}', images);
+
 }
 
-export const build = series(stylesPublic, stylesAdmin);
+/**
+ * Clean dist dir
+ * @returns {*}
+ */
+export const cleanDist = () => {
+    return src('dist', {
+        read: false,
+        allowEmpty: true
+    }).pipe(clean());
+}
+
+export const copy = () => {
+    return src([
+        'admin/**/*',
+        'dist/**/*',
+        'freemius/**/*',
+        'languages/**/*',
+        'public/**/*',
+        'google-reviews.php',
+        'index.php',
+        'LICENSE.txt',
+        'README.txt'
+    ])
+        .pipe(dest('ready'));
+}
+
+export const build = series(cleanDist, parallel(stylesPublic, stylesAdmin, images));
+export const dev = series(cleanDist, parallel(stylesPublic, stylesAdmin, images), watchForChanges);
 export default build;
