@@ -106,10 +106,14 @@ export const copy = () => {
         'index.php',
         'LICENSE.txt',
         'README.txt'
-    ])
+    ], {base: '.'})
         .pipe(dest('ready'));
 }
 
 export const build = series(cleanDist, parallel(stylesPublic, stylesAdmin, images));
+
+export const deployable = series(cleanDist, parallel(stylesPublic, stylesAdmin, images), copy);
 export const dev = series(cleanDist, parallel(stylesPublic, stylesAdmin, images), watchForChanges);
+
+
 export default build;
