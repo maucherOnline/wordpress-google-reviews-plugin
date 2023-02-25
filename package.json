@@ -4,6 +4,7 @@
     "@babel/preset-env": "^7.20.2",
     "@babel/register": "^7.21.0",
     "autoprefixer": "^10.0.2",
+    "babel-loader": "^9.1.2",
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
     "gulp-clean-css": "^4.3.0",
@@ -15,6 +16,10 @@
     "gulp-zip": "^5.1.0",
     "postcss": "^8.4.21",
     "sass": "^1.58.3",
+    "webpack-stream": "^7.0.0",
     "yargs": "^17.7.1"
+  },
+  "dependencies": {
+    "gulp-wp-pot": "^2.5.0"
   }
 }

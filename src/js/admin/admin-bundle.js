@@ -1,0 +1,1 @@
+import './google-reviews-admin';

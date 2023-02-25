@@ -10,6 +10,8 @@ import autoprefixer from 'autoprefixer';
 import clean from 'gulp-clean';
 import imagemin from 'gulp-imagemin';
 import zip from 'gulp-zip';
+import webpack from 'webpack-stream';
+import wpPot from "gulp-wp-pot";
 
 const PRODUCTION = yargs.argv.prod;
 const sass = gulpSass(dartSass);
@@ -76,13 +78,79 @@ export const images = () => {
 }
 
 /**
+ * Bundle public JS files
+ * @returns {*}
+ */
+export const scriptsPublic = () => {
+    return src('src/js/public/public-bundle.js')
+        .pipe(webpack({
+            module: {
+                rules: [
+                    {
+                        test: /\.js$/,
+                        use: {
+                            loader: 'babel-loader',
+                            options: {
+                                presets: []
+                            }
+                        }
+                    }
+                ]
+            },
+            mode: PRODUCTION ? 'production' : 'development',
+            devtool: !PRODUCTION ? 'inline-source-map' : false,
+            externals: {
+                jquery: 'jQuery'
+            },
+            output: {
+                filename: 'public-bundle.js'
+            },
+        }))
+        .pipe(dest('dist/js'));
+}
+
+/**
+ * Bundle admin files
+ * @returns {*}
+ */
+export const scriptsAdmin = () => {
+    return src('src/js/admin/admin-bundle.js')
+        .pipe(webpack({
+            module: {
+                rules: [
+                    {
+                        test: /\.js$/,
+                        use: {
+                            loader: 'babel-loader',
+                            options: {
+                                presets: []
+                            }
+                        }
+                    }
+                ]
+            },
+            mode: PRODUCTION ? 'production' : 'development',
+            devtool: !PRODUCTION ? 'inline-source-map' : false,
+            externals: {
+                jquery: 'jQuery'
+            },
+            output: {
+                filename: 'admin-bundle.js'
+            },
+        }))
+        .pipe(dest('dist/js'));
+}
+
+
+/**
  * Filewatchers
  */
 export const watchForChanges = () => {
     watch(publicSCSSglob, stylesPublic);
     watch(adminSCSSglob, stylesAdmin);
     watch('src/images/**/*.{jpg,jpeg,png,svg,gif}', images);
-
+    watch('src/admin/js/**/*.js', scriptsAdmin);
+    watch('src/public/js/**/*.js', scriptsPublic);
 }
 
 /**
@@ -96,13 +164,6 @@ export const cleanDist = () => {
     }).pipe(clean());
 }
 
-export const cleanDeployable = () => {
-  return src('deployable', {
-      read: false,
-      allowEmpty: true
-  }).pipe(clean());
-};
-
 export const makeDeployable = () => {
     return src([
         'admin/**/*',
@@ -115,14 +176,27 @@ export const makeDeployable = () => {
         'LICENSE.txt',
         'README.txt'
     ], {base: '.'})
-        .pipe(dest('deployable'))
         .pipe(zip('google-reviews-embedder-master.zip'))
         .pipe(dest('.'));
 }
 
-export const build = series(cleanDist, parallel(stylesPublic, stylesAdmin, images));
+/**
+ * Create POT file
+ * @returns {*}
+ */
+export const pot = () => {
+    return src("**/*.php")
+        .pipe(
+            wpPot({
+                domain: "google-reviews",
+                package: "google-reviews"
+            })
+        )
+        .pipe(dest(`languages/google-reviews.pot`));
+};
 
-export const deployable = series(cleanDist, parallel(stylesPublic, stylesAdmin, images), makeDeployable, cleanDeployable);
-export const dev = series(cleanDist, parallel(stylesPublic, stylesAdmin, images), watchForChanges);
+export const build = series(cleanDist, parallel(stylesPublic, stylesAdmin, scriptsAdmin, scriptsPublic, images), pot);
+export const deployable = series(cleanDist, parallel(stylesPublic, stylesAdmin, scriptsAdmin, scriptsPublic, images), pot, makeDeployable);
+export const dev = series(cleanDist, parallel(stylesPublic, stylesAdmin, scriptsAdmin, scriptsPublic, images), watchForChanges);
 
 export default build;

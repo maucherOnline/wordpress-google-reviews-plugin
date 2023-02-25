@@ -62,7 +62,7 @@ class GRWP_Google_Reviews_Admin {
      */
     public function enqueue_styles() {
 
-        wp_enqueue_style( 'admin-' . $this->plugin_name, plugin_dir_url( __FILE__ ) . 'dist/css/google-reviews-admin.css', array(), $this->version, 'all' );
+        wp_enqueue_style( 'admin-' . $this->plugin_name, GR_PLUGIN_DIR_URL . 'dist/css/google-reviews-admin.css', array(), $this->version, 'all' );
 
     }
 
@@ -73,7 +73,7 @@ class GRWP_Google_Reviews_Admin {
      */
     public function enqueue_scripts() {
 
-        wp_enqueue_script( 'admin-' . $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/google-reviews-admin.js', array( 'jquery' ), $this->version, false );
+        wp_enqueue_script( 'admin-' . $this->plugin_name, GR_PLUGIN_DIR_URL . 'dist/js/admin-bundle.js', array( 'jquery' ), $this->version, false );
 
         if ( isset($this->google_reviews_options['reviews_language_3']) ) {
 

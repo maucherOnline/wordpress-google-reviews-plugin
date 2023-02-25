@@ -1,9 +1,12 @@
-(function( $ ) {
-    'use strict';
+import $ from 'jquery';
 
-    let swiper;
+let swiper;
+
+$(document).ready(function() {
 
     if ( $('.reviews_embedder_slider').length ) {
+
+        console.log('loaded');
 
         $('.reviews_embedder_slider').each(function (i, slider) {
 
@@ -37,5 +40,4 @@
         });
 
     }
-
-})( jQuery );
+});
