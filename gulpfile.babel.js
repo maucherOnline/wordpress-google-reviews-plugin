@@ -9,6 +9,7 @@ import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
 import clean from 'gulp-clean';
 import imagemin from 'gulp-imagemin';
+import zip from 'gulp-zip';
 
 const PRODUCTION = yargs.argv.prod;
 const sass = gulpSass(dartSass);
@@ -95,7 +96,14 @@ export const cleanDist = () => {
     }).pipe(clean());
 }
 
-export const copy = () => {
+export const cleanDeployable = () => {
+  return src('deployable', {
+      read: false,
+      allowEmpty: true
+  }).pipe(clean());
+};
+
+export const makeDeployable = () => {
     return src([
         'admin/**/*',
         'dist/**/*',
@@ -107,13 +115,14 @@ export const copy = () => {
         'LICENSE.txt',
         'README.txt'
     ], {base: '.'})
-        .pipe(dest('ready'));
+        .pipe(dest('deployable'))
+        .pipe(zip('google-reviews-embedder-master.zip'))
+        .pipe(dest('.'));
 }
 
 export const build = series(cleanDist, parallel(stylesPublic, stylesAdmin, images));
 
-export const deployable = series(cleanDist, parallel(stylesPublic, stylesAdmin, images), copy);
+export const deployable = series(cleanDist, parallel(stylesPublic, stylesAdmin, images), makeDeployable, cleanDeployable);
 export const dev = series(cleanDist, parallel(stylesPublic, stylesAdmin, images), watchForChanges);
-
 
 export default build;
