@@ -43,7 +43,7 @@ if ( ! function_exists('grwp_fs') ) {
                     'premium_slug' => 'embedder-for-google-reviews-pro',
                     'type' => 'plugin',
                     'public_key' => 'pk_6823179f29a329a909c59a7a25a0a',
-                    'is_premium' => true,
+                    'is_premium' => false,
                     'premium_suffix' => 'Premium',
                     // If your plugin is a serviceware, set this option to false.
                     'has_premium_version' => true,
@@ -98,6 +98,7 @@ else {
     define( 'GR_BASE_PATH_ADMIN', plugin_dir_path( __FILE__ ) .'admin/' );
     define( 'GR_BASE_PATH_PUBLIC', plugin_dir_path( __FILE__ ) .'public/' );
     define( 'GR_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
+    define( 'GR_PLUGIN_REL_PATH', dirname( plugin_basename( __FILE__ ) ) );
 
     // Register class autoloader
     spl_autoload_register( function ( $class ) {
