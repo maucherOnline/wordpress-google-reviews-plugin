@@ -4,7 +4,7 @@ class GRWP_Reviews_Widget_Grid
     extends
     GRWP_Google_Reviews_Output {
 
-    public function render( $style_type ) {
+    public function render( $style_type, $max_reviews = null ) {
 
         // error handling
         if ( $this->reviews_have_error ) {
@@ -19,13 +19,20 @@ class GRWP_Reviews_Widget_Grid
         $output = sprintf('<div id="g-review" class="%s">', $style_type);
         $slider_output = '';
 
+        $count = 0;
         foreach ( $this->reviews as $review ) {
+
+            if ( $max_reviews && is_numeric( $max_reviews ) && intval($max_reviews) <= $count ) {
+                break;
+            }
 
             $star_output = $this->get_star_output($review);
 
             ob_start();
             require 'partials/grid/markup.php';
             $output .= ob_get_clean();
+
+            $count++;
 
         }
 

@@ -86,12 +86,14 @@ class GRWP_Shortcode {
         // get style/type override values
         $review_type_override = '';
         $review_style_override = '';
+        $max_reviews = null;
 
         if ( $atts ) {
 
             $review_type_override = $this->get_review_type_override( $atts );
             $review_style_override = $this->get_review_style_override( $atts );
 
+            $max_reviews = isset($atts['max_reviews']) ? $atts['max_reviews'] : null;
         }
 
         // check if style type is overwritten by shortcode attributes
@@ -112,11 +114,11 @@ class GRWP_Shortcode {
 
         if ( $widget_type === 'slider' ) {
             $slider = new GRWP_Reviews_Widget_Slider();
-            return $slider->render( $style_type );
+            return $slider->render( $style_type, $max_reviews );
         }
 
         $grid = new GRWP_Reviews_Widget_Grid();
-        return $grid->render( $style_type );
+        return $grid->render( $style_type, $max_reviews );
 
     }
 
