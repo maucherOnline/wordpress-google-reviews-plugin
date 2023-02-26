@@ -3,17 +3,24 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: grwp\n"
+"Project-Id-Version: undefined\n"
+"POT-Creation-Date: 2023-02-26 10:10+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-02-26 10:10+0000\n"
-"Project-Id-Version: undefined\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Basepath: ..\n"
-"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
+"_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;"
+"esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: admin/includes/class-grwp-free-settings.php:15
 msgid "Place ID"
@@ -21,29 +28,41 @@ msgstr ""
 
 #: admin/includes/class-grwp-free-settings.php:40
 msgid "How to use this plugin"
-msgstr ""
+msgstr "Wie es funktioniert"
 
 #: admin/includes/class-grwp-free-settings.php:41
 msgid "Explained in less than 1 minute..."
-msgstr ""
+msgstr "Erklärt in weniger als 1 Minute..."
 
 #: admin/includes/class-grwp-free-settings.php:73
 msgid "Paste the Place ID of your business here."
-msgstr ""
+msgstr "Füge die Place ID des Unternehmens hier ein."
 
-#: admin/includes/class-grwp-free-settings.php:76, admin/includes/class-grwp-pro-settings.php:83
+#: admin/includes/class-grwp-free-settings.php:76,
+#: admin/includes/class-grwp-pro-settings.php:83
 msgid "Pull reviews"
-msgstr ""
+msgstr "Bewertungen laden"
 
 #: admin/includes/class-grwp-free-settings.php:86
-msgid "<p><strong>Attention</strong>: Google's free version only allows for pulling 5 reviews. <br><a href=\"%s\">Upgrade to the PRO version</a> to show ALL your reviews.</p>"
+msgid ""
+"<p><strong>Attention</strong>: Google's free version only allows for pulling "
+"5 reviews. <br><a href=\"%s\">Upgrade to the PRO version</a> to show ALL "
+"your reviews.</p>"
 msgstr ""
+"<p><strong>Achtung</strong>: Die kostenlose Version stellt nur 5 Bewertungen "
+"bereit. <br><a href=\"%s\">Jetzt auf die PRO Version upgraden</a>, um ALLE "
+"Bewertungen anzuzeigen.</p>"
 
 #: admin/includes/class-grwp-free-settings.php:100
-msgid "<div><p>Head over to <a href=\"%s\" target=\"_blank\">Google Developer Console</a> and create an API key. See short <a href=\"%s\" target=\"_self\">explainer video here.</a></p></div>"
+msgid ""
+"<div><p>Head over to <a href=\"%s\" target=\"_blank\">Google Developer "
+"Console</a> and create an API key. See short <a href=\"%s\" "
+"target=\"_self\">explainer video here.</a></p></div>"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:12, admin/includes/class-grwp-global-menu-pages.php:13, admin/includes/class-grwp-global-menu-pages.php:36
+#: admin/includes/class-grwp-global-menu-pages.php:12,
+#: admin/includes/class-grwp-global-menu-pages.php:13,
+#: admin/includes/class-grwp-global-menu-pages.php:36
 msgid "Google Reviews"
 msgstr ""
 
@@ -111,7 +130,8 @@ msgstr ""
 msgid "Display settings"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:232, admin/includes/class-grwp-global-settings.php:284
+#: admin/includes/class-grwp-global-settings.php:232,
+#: admin/includes/class-grwp-global-settings.php:284
 msgid "Yes"
 msgstr ""
 
@@ -132,7 +152,9 @@ msgid "Use this shortcode to show your reviews on pages and posts:"
 msgstr ""
 
 #: admin/includes/class-grwp-global-settings.php:484
-msgid "<a href=\"%s\" target=\"_blank\">See</a>, how to overwrite styles and widget types."
+msgid ""
+"<a href=\"%s\" target=\"_blank\">See</a>, how to overwrite styles and widget "
+"types."
 msgstr ""
 
 #: admin/includes/class-grwp-pro-settings.php:18
@@ -148,7 +170,9 @@ msgid "Search business"
 msgstr ""
 
 #: admin/includes/class-grwp-pro-settings.php:92
-msgid "Details like country, state, city and/or phone number may help achieving more accurate results."
+msgid ""
+"Details like country, state, city and/or phone number may help achieving "
+"more accurate results."
 msgstr ""
 
 #: public/includes/class-grwp-google-reviews-output.php:73
@@ -224,9 +248,14 @@ msgid "three months ago"
 msgstr ""
 
 #: public/includes/class-grwp-google-reviews-output.php:147
-msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+msgid ""
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
+"tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "
+"quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo "
+"consequat."
 msgstr ""
 
-#: public/includes/class-grwp-reviews-widget-grid.php:12, public/includes/class-grwp-reviews-widget-slider.php:16
+#: public/includes/class-grwp-reviews-widget-grid.php:12,
+#: public/includes/class-grwp-reviews-widget-slider.php:16
 msgid "No reviews available"
 msgstr ""

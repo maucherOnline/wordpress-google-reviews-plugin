@@ -88,16 +88,4 @@ Class GRWP_Free_Settings {
 
     }
 
-    /**
-     * Deprecated
-     * Echo API key field
-     */
-    public function api_key_0_callback() {
-        printf(
-            '<input class="regular-text" type="text" name="google_reviews_option_name[api_key_0]" id="api_key_0" value="%s">',
-            isset( $this->google_reviews_options['api_key_0'] ) ? esc_attr( $this->google_reviews_options['api_key_0']) : ''
-        );
-        printf( __( '<div><p>Head over to <a href="%s" target="_blank">Google Developer Console</a> and create an API key. See short <a href="%s" target="_self">explainer video here.</a></p></div>', 'grwp' ), 'https://console.cloud.google.com/apis/dashboard', 'https://www.youtube.com/watch?v=feM25lZkLkA' );
-    }
-
 }
