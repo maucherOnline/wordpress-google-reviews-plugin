@@ -12,19 +12,20 @@ import imagemin from 'gulp-imagemin';
 import zip from 'gulp-zip';
 import webpack from 'webpack-stream';
 import wpPot from "gulp-wp-pot";
+import pkg from './package.json';
 
 const PRODUCTION = yargs.argv.prod;
 const sass = gulpSass(dartSass);
 
 const autoPrefixerPlugins = [
-    autoprefixer({browsers: ['last 1 version']}),
+    autoprefixer(),
 ];
 
 const publicSCSSglob = 'src/scss/public/**/*.scss';
 const adminSCSSglob = 'src/scss/admin/**/*.scss';
 
 // https://css-tricks.com/gulp-for-wordpress-creating-the-tasks/
-// https://stackoverflow.com/questions/68417640/gulp-sass-5-does-not-have-a-default-sass-compiler-please-set-one-yourself
+
 export const stylesPublic = () => {
 
     if (PRODUCTION) {
@@ -151,6 +152,7 @@ export const watchForChanges = () => {
     watch('src/images/**/*.{jpg,jpeg,png,svg,gif}', images);
     watch('src/admin/js/**/*.js', scriptsAdmin);
     watch('src/public/js/**/*.js', scriptsPublic);
+    watch(['src/**/*','!src/{images,js,scss}','!src/{images,js,scss}/**/*'], copyVendor);
 }
 
 /**
@@ -164,7 +166,7 @@ export const cleanDist = () => {
     }).pipe(clean());
 }
 
-export const makeDeployable = () => {
+export const compress = () => {
     return src([
         'admin/**/*',
         'dist/**/*',
@@ -181,6 +183,15 @@ export const makeDeployable = () => {
 }
 
 /**
+ * Copy vendor files from src to dist
+ * @returns {*}
+ */
+export const copyVendor = () => {
+    return src(['src/**/*','!src/{images,js,scss}','!src/{images,js,scss}/**/*'])
+        .pipe(dest('dist'));
+}
+
+/**
  * Create POT file
  * @returns {*}
  */
@@ -188,15 +199,14 @@ export const pot = () => {
     return src("**/*.php")
         .pipe(
             wpPot({
-                domain: "google-reviews",
-                package: "google-reviews"
+                domain: pkg.name,
             })
         )
-        .pipe(dest(`languages/google-reviews.pot`));
+        .pipe(dest(`languages/${pkg.name}.pot`));
 };
 
-export const build = series(cleanDist, parallel(stylesPublic, stylesAdmin, scriptsAdmin, scriptsPublic, images), pot);
-export const deployable = series(cleanDist, parallel(stylesPublic, stylesAdmin, scriptsAdmin, scriptsPublic, images), pot, makeDeployable);
-export const dev = series(cleanDist, parallel(stylesPublic, stylesAdmin, scriptsAdmin, scriptsPublic, images), watchForChanges);
+export const build = series(cleanDist, parallel(stylesPublic, stylesAdmin, scriptsAdmin, scriptsPublic, images, copyVendor), pot);
+export const deployable = series(build, compress);
+export const dev = series(cleanDist, parallel(stylesPublic, stylesAdmin, scriptsAdmin, scriptsPublic, images, copyVendor), watchForChanges);
 
 export default build;

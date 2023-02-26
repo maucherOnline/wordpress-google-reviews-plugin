@@ -9,8 +9,8 @@ Class GRWP_Global_Menu_Pages {
     private function add_menu_pages() {
 
         add_menu_page(
-            __( 'Google Reviews', 'google-reviews' ), // page_title
-            __( 'Google Reviews', 'google-reviews' ), // menu_title
+            __( 'Google Reviews', 'grwp' ), // page_title
+            __( 'Google Reviews', 'grwp' ), // menu_title
             'manage_options', // capability
             'google-reviews', // menu_slug
             array( $this, 'google_reviews_create_admin_page' ), // function
@@ -33,7 +33,7 @@ Class GRWP_Global_Menu_Pages {
 
         <div class="wrap">
             <h2>
-                <?php _e( 'Google Reviews', 'google-reviews' ); ?>
+                <?php _e( 'Google Reviews', 'grwp' ); ?>
             </h2>
 
             <?php
@@ -44,20 +44,20 @@ Class GRWP_Global_Menu_Pages {
                 <nav class="nav-tab-wrapper menu">
                     <a href="#connect_settings"
                        class="nav-tab">
-                        <?php _e('Connect Google', 'google-reviews'); ?>
+                        <?php _e('Connect Google', 'grwp'); ?>
                     </a>
                     <a href="#display_settings"
                        class="nav-tab">
-                        <?php _e('Display Settings', 'google-reviews'); ?>
+                        <?php _e('Display Settings', 'grwp'); ?>
                     </a>
                     <a href="#embedding_instructions"
                        class="nav-tab">
-                        <?php _e('Embedding Instructions', 'google-reviews'); ?>
+                        <?php _e('Embedding Instructions', 'grwp'); ?>
                     </a>
                     <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
                     <a href="admin.php?page=google-reviews-pricing"
                        class="nav-tab upgrade">
-                        <?php _e('Upgrade to', 'google-reviews'); ?> <span><?php _e('PRO', 'google-reviews'); ?></span>
+                        <?php _e('Upgrade to', 'grwp'); ?> <span><?php _e('PRO', 'grwp'); ?></span>
                     </a>
                     <?php endif; ?>
                 </nav>
@@ -73,7 +73,7 @@ Class GRWP_Global_Menu_Pages {
 
             <div class="preview_section">
                 <h2>
-                    <?php _e( 'Preview', 'google-reviews' ); ?>
+                    <?php _e( 'Preview', 'grwp' ); ?>
                 </h2>
                 <?php echo wp_kses(do_shortcode('[google-reviews]'), $allowed_html); ?>
             </div>

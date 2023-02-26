@@ -9,7 +9,7 @@ class GRWP_Reviews_Widget_Grid
         // error handling
         if ( $this->reviews_have_error ) {
 
-            return __( 'No reviews available', 'google-reviews' );
+            return __( 'No reviews available', 'grwp' );
 
         }
 

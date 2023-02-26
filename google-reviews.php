@@ -17,7 +17,7 @@
  * Author URI:        https://reviewsembedder.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       embedder-for-google-reviews
+ * Text Domain:       grwp
  * Domain Path:       /languages
  */
 
