@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: undefined\n"
-"POT-Creation-Date: 2023-02-27 10:50+0100\n"
+"POT-Creation-Date: 2023-02-27 20:05+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,6 +20,13 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: admin/includes/class-grwp-free-menu-pages.php:14
+#: admin/includes/class-grwp-free-menu-pages.php:15
+#: admin/includes/class-grwp-pro-menu-pages.php:13
+#: admin/includes/class-grwp-pro-menu-pages.php:14
+msgid "How to"
+msgstr "So geht's"
 
 #: admin/includes/class-grwp-free-settings.php:15
 msgid "Place ID"
@@ -191,11 +198,6 @@ msgstr ""
 "<a href=\"%s\" target=\"_blank\">So werden</a> Styles, Widget Typen und "
 "andere Einstellungen überschrieben."
 
-#: admin/includes/class-grwp-pro-menu-pages.php:13
-#: admin/includes/class-grwp-pro-menu-pages.php:14
-msgid "How to"
-msgstr "So geht's"
-
 #: admin/includes/class-grwp-pro-settings.php:18
 msgid "Search for your business:"
 msgstr "Suche nach dem Unternehmen:"
@@ -213,8 +215,8 @@ msgid ""
 "Details like country, state, city and/or phone number may help achieving "
 "more accurate results."
 msgstr ""
-"Details wie Land, Stadt und/oder die Telefonnummer können helfen, um "
-"präzisere Ergebnisse zu liefern."
+"Details wie Land, Stadt und/oder die Telefonnummer helfen dabei, präzisere "
+"Ergebnisse zu erhalten."
 
 #: admin/includes/free/how-to.php:8
 msgid "How to use the free version"
@@ -245,21 +247,21 @@ msgstr "Kopiere die Place ID des Unternehmens"
 msgid "Paste the Place ID into the Place ID field"
 msgstr "Place ID des Unternehmens ins Place ID Feld einfügen"
 
-#: admin/includes/free/how-to.php:28
+#: admin/includes/free/how-to.php:28 admin/includes/pro/how-to-pro.php:10
 msgid "Choose your preferred language"
 msgstr "Wähle die bevorzugte Sprache"
 
-#: admin/includes/free/how-to.php:29
+#: admin/includes/free/how-to.php:29 admin/includes/pro/how-to-pro.php:11
 msgid "Click the 'Pull reviews' button"
 msgstr "Klicke den 'Bewertungen laden' Button"
 
-#: admin/includes/free/how-to.php:30
+#: admin/includes/free/how-to.php:30 admin/includes/pro/how-to-pro.php:12
 msgid "Wait until the process is finished. The page will refresh automatically"
 msgstr ""
 "Warte, bis der Prozess fertig ist. Die Seite wird sich automatisch "
 "aktualisiren"
 
-#: admin/includes/free/how-to.php:31
+#: admin/includes/free/how-to.php:31 admin/includes/pro/how-to-pro.php:13
 msgid ""
 "Now you should already see your reviews. If not, click the 'Pull reviews' "
 "button again"
@@ -267,19 +269,19 @@ msgstr ""
 "Jetzt solltest du bereits die Bewertungen sehen können. Wenn nicht, klicke "
 "den 'Bewertungen laden' Button noch einmal"
 
-#: admin/includes/free/how-to.php:32
+#: admin/includes/free/how-to.php:32 admin/includes/pro/how-to-pro.php:14
 msgid "Configure styling and layout options"
 msgstr "Konfiguriere die Styling- und Layout-Optionen"
 
-#: admin/includes/free/how-to.php:33
+#: admin/includes/free/how-to.php:33 admin/includes/pro/how-to-pro.php:15
 msgid "Hit 'save'"
 msgstr "Klicke 'Änderungen speichern'"
 
-#: admin/includes/free/how-to.php:34
+#: admin/includes/free/how-to.php:34 admin/includes/pro/how-to-pro.php:16
 msgid "You will see your changes applied right after saving"
 msgstr "Deine Änderungen werden direkt nach dem Speichern übernommen"
 
-#: admin/includes/free/how-to.php:35
+#: admin/includes/free/how-to.php:35 admin/includes/pro/how-to-pro.php:17
 msgid ""
 "Use the shortcode <code>[google-reviews]</code> to show your reviews on "
 "pages, posts, Elementor, Beaver Builder, Bakery Builder etc."
@@ -308,9 +310,25 @@ msgstr ""
 "bereit. Um ALLE Bewertungen anzuzeigen, <a href=\"%s\">upgrade bitte zur PRO "
 "Version</a>"
 
-#: admin/includes/free/how-to.php:58
+#: admin/includes/free/how-to.php:58 admin/includes/pro/how-to-pro.php:20
 msgid "Video tutorial"
 msgstr "Video-Anleitung"
+
+#: admin/includes/pro/how-to-pro.php:5
+msgid "How to use the premium version"
+msgstr "Wie es funktioniert"
+
+#: admin/includes/pro/how-to-pro.php:7
+msgid "Enter your business name"
+msgstr "Gib den Unternehmensnamen ein"
+
+#: admin/includes/pro/how-to-pro.php:8
+msgid "Click 'Search business'"
+msgstr "Klicke auf 'Unternehmen suchen'"
+
+#: admin/includes/pro/how-to-pro.php:9
+msgid "Choose your business from the list"
+msgstr "Wähle dein Unternehmen aus der Liste aus"
 
 #: public/includes/class-grwp-google-reviews-output.php:73
 msgid "year"
