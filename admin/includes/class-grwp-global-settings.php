@@ -481,7 +481,7 @@ Class GRWP_Global_Settings {
             <p>
                 <?php
                 echo sprintf(
-                        __('<a href="%s" target="_blank">See</a>, how to overwrite styles and widget types.','grwp'),
+                        __('<a href="%s" target="_blank">See</a>, how to overwrite styles, widget types and other settings.','grwp'),
                         "https://reviewsembedder.com/docs/how-to-overwrite-styles/?utm_source=wp_backend&utm_medium=instructions&utm_campaign=overwrite_styles_types");
                 ?>
             </p>

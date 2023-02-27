@@ -306,6 +306,8 @@
             const language = $('select#reviews_language_3').val();
             const $errors = $('#errors');
 
+            if (place_id === '') return false;
+
             $.ajax({
                 url: js_global.wp_ajax_url,
                 data: {

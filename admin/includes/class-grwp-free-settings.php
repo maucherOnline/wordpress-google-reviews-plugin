@@ -80,11 +80,47 @@ Class GRWP_Free_Settings {
 
         <?php
         $video_link = get_site_url() .'/wp-admin/admin.php?page=how-to-free-version';
-        $echo = '<p id="errors"></p>';
-        $echo .= sprintf('<p>Search for your business in the map below and copy/paste the Place ID into the field above (<a href="%s" target="_blank">short explainer video</a>).</p>', $video_link );
-        $echo .= '<br><h4>Look up your Place ID (and paste it in the field above)</h4><iframe id="mapFrame" height="200" style="height: 200px; width: 100%; max-width: 700px;display:block;" src="https://geo-devrel-javascript-samples.web.app/samples/places-placeid-finder/app/dist/" allow="fullscreen;"></iframe>';
-        $echo .= sprintf( __( '<p><strong>Attention</strong>: Google\'s free version only allows for pulling 5 reviews. <br><a href="%s">Upgrade to the PRO version</a> to show ALL your reviews.</p>', 'grwp' ), get_site_url().'/wp-admin/admin.php?page=google-reviews-pricing');
-        echo wp_kses($echo, $allowed_html);
+
+        ?>
+        <p id="errors"></p>
+        <p>
+            <?php
+
+            echo
+            wp_kses(
+                sprintf(
+                        __('Search for your business in the map below and copy/paste the Place ID into the field above (<a href="%s" target="_blank">short explainer video</a>).', 'grwp'),
+                        $video_link
+                ),
+                $allowed_html
+            );
+            ?>
+        </p>
+        <br>
+        <h4>
+            <?php
+                _e('Look up your Place ID and paste it in the field above.', 'grwp');
+            ?>
+        </h4>
+        <iframe id="mapFrame" height="200" style="height: 200px; width: 100%; max-width: 700px;display:block;" src="https://geo-devrel-javascript-samples.web.app/samples/places-placeid-finder/app/dist/" allow="fullscreen;"></iframe>
+        <p>
+            <?php
+                _e( '<strong>Attention</strong>: Google\'s free version only allows for pulling 5 reviews.', 'grwp')
+            ?>
+        </p>
+        <p>
+            <?php
+                echo
+                wp_kses(
+                    sprintf(
+                            __('<a href="%s">Upgrade to the PRO version</a> to show ALL your reviews.', 'grwp' ),
+                        get_site_url().'/wp-admin/admin.php?page=google-reviews-pricing'
+                    ),
+                    $allowed_html
+                );
+            ?>
+        </p>
+        <?php
 
     }
 

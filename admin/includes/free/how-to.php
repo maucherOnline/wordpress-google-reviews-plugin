@@ -1,29 +1,59 @@
 <?php
+global $allowed_html;
+$upgrade_link = get_site_url().'/wp-admin/admin.php?page=google-reviews-pricing';
+$developer_console_link = 'https://developers.google.com/maps/documentation/places/web-service/place-id#find-id';
+$docs_link = 'https://reviewsembedder.com/docs/how-to-overwrite-styles/?utm_source=wp_backend&utm_medium=how_to_page&utm_campaign=documentation';
 
 ?>
-<h1>How to use the free version</h1>
+<h1><?php _e('How to use the free version', 'grwp'); ?></h1>
 <ol>
-    <li>Remove checkmark at 'Show Dummy Content'</li>
-    <li>Search for your business in our map search.
+    <li><?php _e('Remove checkmark at "Show Dummy Content"', 'grwp'); ?></li>
+    <li><?php _e('Search for your business in our map search.', 'grwp'); ?>
         <ul>
-            <li>If this is not available, you can search for your business <a href="https://developers.google.com/maps/documentation/places/web-service/place-id#find-id" target="_blank">
-                    here</a></li>
+            <li>
+            <?php
+            echo
+            wp_kses(
+                sprintf(
+                        __('If this is not available, you can search for your business <a href="%s" target="_blank">here</a>', 'grwp'),
+                $developer_console_link
+                ), $allowed_html
+            );
+            ?>
+            </li>
         </ul>
     </li>
-    <li>Copy the Place ID of your business</li>
-    <li>Paste the Place ID into the Place ID field</li>
-    <li>Choose your preferred language</li>
-    <li>Click the 'Pull reviews' button</li>
-    <li>Wait until the process is finished. The page will refresh automatically</li>
-    <li>Now you should already see your reviews. If not, click the 'Pull reviews' button again</li>
-    <li>Configure styling and layout options</li>
-    <li>Hit 'save'</li>
-    <li>You will see your changes applied right after saving</li>
-    <li>Use the shortcode <code>[google-reviews]</code> to show your reviews on pages, posts, Elementor, Beaver Builder, Bakery Builder etc.</li>
-    <li><strong>Note:</strong> the free Google API only allows for pulling 5 reviews. To get around this, please
-        <a href="<?php echo get_site_url().'/wp-admin/admin.php?page=google-reviews-pricing'; ?>">
-            upgrade to the PRO version</a>, which will pull all your reviews</li>
+    <li><?php _e('Copy the Place ID of your business', 'grwp'); ?></li>
+    <li><?php _e('Paste the Place ID into the Place ID field', 'grwp'); ?></li>
+    <li><?php _e('Choose your preferred language', 'grwp'); ?></li>
+    <li><?php _e('Click the \'Pull reviews\' button', 'grwp'); ?></li>
+    <li><?php _e('Wait until the process is finished. The page will refresh automatically', 'grwp'); ?></li>
+    <li><?php _e('Now you should already see your reviews. If not, click the \'Pull reviews\' button again', 'grwp'); ?></li>
+    <li><?php _e('Configure styling and layout options', 'grwp'); ?></li>
+    <li><?php _e('Hit \'save\'', 'grwp'); ?></li>
+    <li><?php _e('You will see your changes applied right after saving', 'grwp'); ?></li>
+    <li><?php _e('Use the shortcode <code>[google-reviews]</code> to show your reviews on pages, posts, Elementor, Beaver Builder, Bakery Builder etc.', 'grwp'); ?></li>
+    <li>
+        <?php
+        echo
+        wp_kses(
+            sprintf(
+                __('Check the <a href="%s" target="_blank">documentation</a>, to learn how to modify the shortcode output', 'grwp'),
+                $docs_link)
+            , $allowed_html
+        );
+                ?>
+    </li>
+    <li>
+<?php
+echo
+wp_kses(
+sprintf(__('<strong>Note:</strong> the free Google API only allows for pulling 5 reviews. To get around this, please <a href="%s">upgrade to the PRO version</a>, which will pull all your reviews', 'grwp'), $upgrade_link),
+    $allowed_html
+);
+?>
+    </li>
 </ol>
 
-<h1>Video tutorial</h1>
+<h1><?php _e('Video tutorial', 'grwp'); ?></h1>
 <iframe style="display: block;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/y3xwRn7Shfo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

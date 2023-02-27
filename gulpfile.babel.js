@@ -150,8 +150,8 @@ export const watchForChanges = () => {
     watch(publicSCSSglob, stylesPublic);
     watch(adminSCSSglob, stylesAdmin);
     watch('src/images/**/*.{jpg,jpeg,png,svg,gif}', images);
-    watch('src/admin/js/**/*.js', scriptsAdmin);
-    watch('src/public/js/**/*.js', scriptsPublic);
+    watch('src/js/admin/**/*.js', scriptsAdmin);
+    watch('src/js/public/**/*.js', scriptsPublic);
     watch(['src/**/*','!src/{images,js,scss}','!src/{images,js,scss}/**/*'], copyVendor);
 }
 
