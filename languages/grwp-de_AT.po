@@ -336,7 +336,7 @@ msgstr "Jahr"
 
 #: public/includes/class-grwp-google-reviews-output.php:74
 msgid "years"
-msgstr "Jahre"
+msgstr "Jahren"
 
 #: public/includes/class-grwp-google-reviews-output.php:77
 msgid "month"
@@ -344,7 +344,7 @@ msgstr "Monat"
 
 #: public/includes/class-grwp-google-reviews-output.php:78
 msgid "months"
-msgstr "Monate"
+msgstr "Monaten"
 
 #: public/includes/class-grwp-google-reviews-output.php:81
 msgid "week"
@@ -360,7 +360,7 @@ msgstr "Tag"
 
 #: public/includes/class-grwp-google-reviews-output.php:86
 msgid "days"
-msgstr "Tage"
+msgstr "Tagen"
 
 #: public/includes/class-grwp-google-reviews-output.php:89
 msgid "hour"
@@ -388,7 +388,7 @@ msgstr "Sekunden"
 
 #: public/includes/class-grwp-google-reviews-output.php:110
 msgid " ago"
-msgstr " vergangen"
+msgstr "vor "
 
 #: public/includes/class-grwp-google-reviews-output.php:110
 msgid "just now"

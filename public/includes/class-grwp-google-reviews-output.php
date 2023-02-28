@@ -107,7 +107,20 @@ class GRWP_Google_Reviews_Output {
 		}
 
 		if (!$full) $string = array_slice($string, 0, 1);
-		return $string ? implode(', ', $string) . __( ' ago', 'grwp' ) : __( 'just now', 'grwp' );
+
+        // standard time string for English
+        $time_string = $string ? implode(', ', $string) . __( ' ago', 'grwp' ) : __( 'just now', 'grwp' );
+
+        // reverse string arrangement for non English sites
+        $language_code = get_locale();
+        if ( substr($language_code, 0, 3) !== 'en_') {
+            $time_string = $string ? __( ' ago', 'grwp' ) . implode(', ', $string) : __( 'just now', 'grwp' );
+        }
+
+        // allow filtering for edge cases
+        $time_string = apply_filters( 'grwp_filter_time_string', $time_string, $string, $diff );
+
+        return $time_string;
 	}
 
     /**

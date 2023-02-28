@@ -184,7 +184,9 @@
   }
 
   .wrap form {
-    min-height: 650px;
+    .tab-content {
+      min-height: 650px;
+    }
 
     .nav-tab-wrapper {
       .upgrade {

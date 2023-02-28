@@ -11,3 +11,7 @@
 3. grwp-de_CH_formal
 4. grwp-de_CH_informal
 5. grwp-de_DE_formal
+
+## Other language files
+1. grwp-es_ES
+2. grwp-fr_FR

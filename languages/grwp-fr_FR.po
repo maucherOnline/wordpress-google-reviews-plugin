@@ -34,28 +34,23 @@ msgid "Place ID"
 msgstr "ID de lieu"
 
 #: admin/includes/class-grwp-free-settings.php:40
-#, fuzzy
 msgid "How to use this plugin"
-msgstr "Comment utiliser ce plugin"
+msgstr "Comment utiliser ce Plugin"
 
 #: admin/includes/class-grwp-free-settings.php:41
-#, fuzzy
 msgid "Explained in less than 1 minute..."
-msgstr "Expliqué en moins d'une minute..."
+msgstr "Expliqué en moins d'une minute…"
 
 #: admin/includes/class-grwp-free-settings.php:73
-#, fuzzy
 msgid "Paste the Place ID of your business here."
 msgstr "Collez ici l'identifiant du lieu de votre entreprise."
 
 #: admin/includes/class-grwp-free-settings.php:76,
 #: admin/includes/class-grwp-pro-settings.php:83
-#, fuzzy
 msgid "Pull reviews"
 msgstr "Critiques de tirage"
 
 #: admin/includes/class-grwp-free-settings.php:92
-#, fuzzy
 msgid ""
 "Search for your business in the map below and copy/paste the Place ID into "
 "the field above (<a href=\"%s\" target=\"_blank\">short explainer video</a>)."
@@ -65,12 +60,10 @@ msgstr ""
 "target=\"_blank\">(courte vidéo explicative</a>)."
 
 #: admin/includes/class-grwp-free-settings.php:102
-#, fuzzy
 msgid "Look up your Place ID and paste it in the field above."
 msgstr "Recherchez votre ID de lieu et collez-le dans le champ ci-dessus."
 
 #: admin/includes/class-grwp-free-settings.php:108
-#, fuzzy
 msgid ""
 "<strong>Attention</strong>: Google's free version only allows for pulling 5 "
 "reviews."
@@ -79,7 +72,6 @@ msgstr ""
 "que 5 avis."
 
 #: admin/includes/class-grwp-free-settings.php:116
-#, fuzzy
 msgid "<a href=\"%s\">Upgrade to the PRO version</a> to show ALL your reviews."
 msgstr ""
 "<a href=\"%s\">Passez à la version PRO</a> pour afficher TOUS vos avis."
@@ -99,7 +91,6 @@ msgid "Display Settings"
 msgstr "Paramètres d'affichage"
 
 #: admin/includes/class-grwp-global-menu-pages.php:55
-#, fuzzy
 msgid "Embedding Instructions"
 msgstr "Instructions d'incorporation"
 
@@ -116,12 +107,10 @@ msgid "Preview"
 msgstr "Aperçu"
 
 #: admin/includes/class-grwp-global-settings.php:39
-#, fuzzy
 msgid "Show dummy content"
-msgstr "Afficher le contenu factice"
+msgstr "Afficher le contenu fctice"
 
 #: admin/includes/class-grwp-global-settings.php:47
-#, fuzzy
 msgid "Reviews language"
 msgstr "Critique de la langue"
 
@@ -134,17 +123,14 @@ msgid "Design type"
 msgstr "Type de design"
 
 #: admin/includes/class-grwp-global-settings.php:93
-#, fuzzy
 msgid "Minimum rating (stars)"
 msgstr "Classement minimum (étoiles)"
 
 #: admin/includes/class-grwp-global-settings.php:101
-#, fuzzy
 msgid "Exclude reviews without text"
 msgstr "Exclure les commentaires sans texte"
 
 #: admin/includes/class-grwp-global-settings.php:109
-#, fuzzy
 msgid "Filter by words (comma separated)"
 msgstr "Filtrer par mots (séparés par des virgules)"
 
@@ -153,7 +139,6 @@ msgid "Shortcode"
 msgstr "Shortcode"
 
 #: admin/includes/class-grwp-global-settings.php:204
-#, fuzzy
 msgid "Global settings for showing reviews"
 msgstr "Paramètres globaux pour l'affichage des avis"
 
@@ -175,18 +160,15 @@ msgid "Grid"
 msgstr "Grille"
 
 #: admin/includes/class-grwp-global-settings.php:468
-#, fuzzy
 msgid "Embedding instructions"
 msgstr "Instructions d'incorporation"
 
 #: admin/includes/class-grwp-global-settings.php:478
-#, fuzzy
 msgid "Use this shortcode to show your reviews on pages and posts:"
 msgstr ""
 "Utilisez ce code court pour afficher vos avis sur les pages et les articles :"
 
 #: admin/includes/class-grwp-global-settings.php:484
-#, fuzzy
 msgid ""
 "<a href=\"%s\" target=\"_blank\">See</a>, how to overwrite styles, widget "
 "types and other settings."
@@ -195,22 +177,18 @@ msgstr ""
 "types de widgets et autres paramètres."
 
 #: admin/includes/class-grwp-pro-settings.php:18
-#, fuzzy
 msgid "Search for your business:"
 msgstr "Recherchez votre entreprise :"
 
 #: admin/includes/class-grwp-pro-settings.php:76
-#, fuzzy
 msgid "Search for your business"
 msgstr "Recherchez votre entreprise"
 
 #: admin/includes/class-grwp-pro-settings.php:80
-#, fuzzy
 msgid "Search business"
 msgstr "Recherche d'entreprises"
 
 #: admin/includes/class-grwp-pro-settings.php:92
-#, fuzzy
 msgid ""
 "Details like country, state, city and/or phone number may help achieving "
 "more accurate results."
@@ -219,22 +197,18 @@ msgstr ""
 "peuvent aider à obtenir des résultats plus précis."
 
 #: admin/includes/free/how-to.php:8
-#, fuzzy
 msgid "How to use the free version"
 msgstr "Comment utiliser la version gratuite"
 
 #: admin/includes/free/how-to.php:10
-#, fuzzy
 msgid "Remove checkmark at \"Show Dummy Content\""
 msgstr "Enlevez la coche de \"Show Dummy Content\""
 
 #: admin/includes/free/how-to.php:11
-#, fuzzy
 msgid "Search for your business in our map search."
 msgstr "Recherchez votre entreprise dans notre recherche par carte."
 
 #: admin/includes/free/how-to.php:18
-#, fuzzy
 msgid ""
 "If this is not available, you can search for your business <a href=\"%s\" "
 "target=\"_blank\">here</a>"
@@ -243,34 +217,28 @@ msgstr ""
 "href=\"%s\" target=\"_blank\">ici</a>"
 
 #: admin/includes/free/how-to.php:26
-#, fuzzy
 msgid "Copy the Place ID of your business"
 msgstr "Copiez l'ID du lieu de votre entreprise"
 
 #: admin/includes/free/how-to.php:27
-#, fuzzy
 msgid "Paste the Place ID into the Place ID field"
 msgstr "Collez l'ID du lieu dans le champ ID du lieu"
 
 #: admin/includes/free/how-to.php:28, admin/includes/pro/how-to-pro.php:10
-#, fuzzy
 msgid "Choose your preferred language"
 msgstr "Choisissez votre langue préférée"
 
 #: admin/includes/free/how-to.php:29, admin/includes/pro/how-to-pro.php:11
-#, fuzzy
 msgid "Click the 'Pull reviews' button"
 msgstr "Cliquez sur le bouton \"Pull reviews\""
 
 #: admin/includes/free/how-to.php:30, admin/includes/pro/how-to-pro.php:12
-#, fuzzy
 msgid "Wait until the process is finished. The page will refresh automatically"
 msgstr ""
 "Attendez que le processus soit terminé. La page se rafraîchira "
 "automatiquement"
 
 #: admin/includes/free/how-to.php:31, admin/includes/pro/how-to-pro.php:13
-#, fuzzy
 msgid ""
 "Now you should already see your reviews. If not, click the 'Pull reviews' "
 "button again"
@@ -279,22 +247,18 @@ msgstr ""
 "cliquez à nouveau sur le bouton \"Pull reviews\""
 
 #: admin/includes/free/how-to.php:32, admin/includes/pro/how-to-pro.php:14
-#, fuzzy
 msgid "Configure styling and layout options"
 msgstr "Configurer les options de style et de mise en page"
 
 #: admin/includes/free/how-to.php:33, admin/includes/pro/how-to-pro.php:15
-#, fuzzy
 msgid "Hit 'save'"
 msgstr "Cliquez sur \"Enregistrer\""
 
 #: admin/includes/free/how-to.php:34, admin/includes/pro/how-to-pro.php:16
-#, fuzzy
 msgid "You will see your changes applied right after saving"
 msgstr "Vous verrez vos modifications appliquées juste après avoir enregistré"
 
 #: admin/includes/free/how-to.php:35, admin/includes/pro/how-to-pro.php:17
-#, fuzzy
 msgid ""
 "Use the shortcode <code>[google-reviews]</code> to show your reviews on "
 "pages, posts, Elementor, Beaver Builder, Bakery Builder etc."
@@ -303,7 +267,6 @@ msgstr ""
 "sur les pages, les articles, Elementor, Beaver Builder, Bakery Builder, etc."
 
 #: admin/includes/free/how-to.php:41
-#, fuzzy
 msgid ""
 "Check the <a href=\"%s\" target=\"_blank\">documentation</a>, to learn how "
 "to modify the shortcode output"
@@ -312,7 +275,6 @@ msgstr ""
 "comment modifier la sortie du shortcode"
 
 #: admin/includes/free/how-to.php:51
-#, fuzzy
 msgid ""
 "<strong>Note:</strong> the free Google API only allows for pulling 5 "
 "reviews. To get around this, please <a href=\"%s\">upgrade to the PRO "
@@ -327,22 +289,18 @@ msgid "Video tutorial"
 msgstr "Tutoriel vidéo"
 
 #: admin/includes/pro/how-to-pro.php:5
-#, fuzzy
 msgid "How to use the premium version"
 msgstr "Comment utiliser la version premium"
 
 #: admin/includes/pro/how-to-pro.php:7
-#, fuzzy
 msgid "Enter your business name"
 msgstr "Entrez le nom de votre entreprise"
 
 #: admin/includes/pro/how-to-pro.php:8
-#, fuzzy
 msgid "Click 'Search business'"
 msgstr "Cliquez sur \"Rechercher une entreprise\""
 
 #: admin/includes/pro/how-to-pro.php:9
-#, fuzzy
 msgid "Choose your business from the list"
 msgstr "Choisissez votre entreprise dans la liste"
 
@@ -404,7 +362,7 @@ msgstr "secondes"
 
 #: public/includes/class-grwp-google-reviews-output.php:110
 msgid " ago"
-msgstr " depuis"
+msgstr "depuis "
 
 #: public/includes/class-grwp-google-reviews-output.php:110
 msgid "just now"
@@ -415,7 +373,6 @@ msgid "Lorem Ipsum"
 msgstr "Loren Ipsum"
 
 #: public/includes/class-grwp-google-reviews-output.php:146
-#, fuzzy
 msgid "three months ago"
 msgstr "il y a trois mois"
 
@@ -433,6 +390,5 @@ msgstr ""
 
 #: public/includes/class-grwp-reviews-widget-grid.php:12,
 #: public/includes/class-grwp-reviews-widget-slider.php:16
-#, fuzzy
 msgid "No reviews available"
 msgstr "Aucune critique disponible"
