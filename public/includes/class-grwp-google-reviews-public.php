@@ -81,10 +81,8 @@ class GRWP_Google_Reviews_Public {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, GR_PLUGIN_DIR_URL . 'dist/js/public-bundle.js', array( 'jquery' ), $this->version, false );
-
-		wp_enqueue_script('matchheight', GR_PLUGIN_DIR_URL . 'dist/vendor/jquery.matchHeight.js', ['jquery'], '1.0.0', true);
         wp_enqueue_script('swiperjs', GR_PLUGIN_DIR_URL . 'dist/vendor/swiper-bundle.min.js', ['jquery'], '8.15', true);
-		wp_enqueue_script('mcustomscrollbar', GR_PLUGIN_DIR_URL . 'dist/vendor/jquery.mCustomScrollbar.min.js', ['jquery'], time(), true);
+		wp_enqueue_script('mcustomscrollbar', GR_PLUGIN_DIR_URL . 'dist/vendor/jquery.mCustomScrollbar.min.js', ['jquery'], '1.0', true);
 	}
 
 }

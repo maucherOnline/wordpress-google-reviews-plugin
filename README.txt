@@ -215,3 +215,7 @@ Statistically, 86% of customers hesitate to purchase from companies with negativ
 * Added screenshots
 = 1.3.2 =
 * Added free API
+= 1.4.9 =
+* Added translation files
+* Added custom build, compression, etc.
+* Performance improvements

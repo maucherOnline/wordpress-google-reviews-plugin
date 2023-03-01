@@ -2,6 +2,11 @@
   "name": "grwp",
   "version": "1.0.0",
   "author": "David Maucher <hallo@maucher-online.com>",
+  "scripts": {
+    "build": "gulp build --prod",
+    "dev": "gulp dev",
+    "deployable": "gulp deployable"
+  },
   "devDependencies": {
     "@babel/core": "^7.21.0",
     "@babel/preset-env": "^7.20.2",
