@@ -10,8 +10,8 @@ if (! defined('ABSPATH'))
 
 <!-- If we need navigation buttons -->
 <div class="slider-prev-next-wrapper">
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
+    <div class="grwp-swiper-button-next"></div>
+    <div class="grwp-swiper-button-prev"></div>
 </div>
 
 </div> <!--swiper-->

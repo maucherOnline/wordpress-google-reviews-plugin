@@ -5,7 +5,7 @@
   "scripts": {
     "build": "gulp build --prod",
     "dev": "gulp dev",
-    "deployable": "gulp deployable"
+    "deployable": "gulp deployable --prod"
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",
@@ -17,10 +17,13 @@
     "gulp-clean": "^0.4.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-concat": "^2.6.1",
+    "gulp-if": "^3.0.0",
     "gulp-imagemin": "^7.0.1",
+    "gulp-minify": "^3.1.0",
     "gulp-postcss": "^9.0.1",
     "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^3.0.0",
+    "gulp-wp-pot": "^2.5.0",
     "gulp-zip": "^5.1.0",
     "postcss": "^8.4.21",
     "sass": "^1.58.3",
@@ -29,7 +32,7 @@
     "yargs": "^17.7.1"
   },
   "dependencies": {
-    "gulp-wp-pot": "^2.5.0"
+    "swiper": "^9.1.0"
   },
   "browserslist": [
     "last 2 versions"

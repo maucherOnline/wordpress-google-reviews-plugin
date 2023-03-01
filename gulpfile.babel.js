@@ -12,7 +12,9 @@ import imagemin from 'gulp-imagemin';
 import zip from 'gulp-zip';
 import webpack from 'webpack-stream';
 import wpPot from "gulp-wp-pot";
+import minify from "gulp-minify";
 import pkg from './package.json';
+import gulpif from 'gulp-if';
 
 const PRODUCTION = yargs.argv.prod;
 const sass = gulpSass(dartSass);
@@ -107,7 +109,7 @@ export const scriptsPublic = () => {
                 filename: 'public-bundle.js'
             },
         }))
-        .pipe(dest('dist/js'));
+        .pipe(dest('dist/js'))
 }
 
 /**
@@ -178,7 +180,7 @@ export const compress = () => {
         'LICENSE.txt',
         'README.txt'
     ], {base: '.'})
-        .pipe(zip('google-reviews-embedder-master.zip'))
+        .pipe(zip('embedder-for-google-reviews.zip'))
         .pipe(dest('.'));
 }
 

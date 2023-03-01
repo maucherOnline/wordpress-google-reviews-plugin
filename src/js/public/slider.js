@@ -1,19 +1,18 @@
 import $ from 'jquery';
-
-let swiper;
+import Swiper, {Navigation} from 'swiper';
 
 $(document).ready(function() {
 
-    if ( $('.reviews_embedder_slider').length ) {
+    const $grwp_swiper_container = $('.reviews_embedder_slider');
+    if ( $grwp_swiper_container.length ) {
 
-        console.log('loaded');
 
-        $('.reviews_embedder_slider').each(function (i, slider) {
+        $grwp_swiper_container.each(function (i, slider) {
 
-            swiper = new Swiper(slider, {
-                cssMode: true,
+            const grwp_swiper = new Swiper(slider, {
+                modules: [ Navigation ],
                 slidesPerView: 1,
-                spaceBetween: 0,
+                spaceBetween: 30,
                 autoplay: false,
                 loop: true,
                 breakpointsBase: 'container',
@@ -33,8 +32,8 @@ $(document).ready(function() {
                 },
                 // Navigation arrows
                 navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
+                    nextEl: '.grwp-swiper-button-next',
+                    prevEl: '.grwp-swiper-button-prev',
                 },
             });
         });
