@@ -78,6 +78,15 @@
     }
   }
 
+  .close-icon {
+    display: block;
+    position: absolute;
+    right: 15px;
+    top: 8px;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+  }
 
   .serp-results {
     position: absolute;

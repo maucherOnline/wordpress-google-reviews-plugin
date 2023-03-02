@@ -103,23 +103,6 @@ Class GRWP_Free_Settings {
             ?>
         </h4>
         <iframe id="mapFrame" height="200" style="height: 200px; width: 100%; max-width: 700px;display:block;" src="https://geo-devrel-javascript-samples.web.app/samples/places-placeid-finder/app/dist/" allow="fullscreen;"></iframe>
-        <p>
-            <?php
-                _e( '<strong>Attention</strong>: Google\'s free version only allows for pulling 5 reviews.', 'grwp')
-            ?>
-        </p>
-        <p>
-            <?php
-                echo
-                wp_kses(
-                    sprintf(
-                            __('<a href="%s">Upgrade to the PRO version</a> to show ALL your reviews.', 'grwp' ),
-                        get_site_url().'/wp-admin/admin.php?page=google-reviews-pricing'
-                    ),
-                    $allowed_html
-                );
-            ?>
-        </p>
         <?php
 
     }

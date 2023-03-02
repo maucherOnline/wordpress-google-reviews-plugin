@@ -11,23 +11,19 @@ $(document).ready(function() {
 
             const grwp_swiper = new Swiper(slider, {
                 modules: [ Navigation ],
-                slidesPerView: 1,
-                spaceBetween: 30,
+                spaceBetween: 15,
                 autoplay: false,
                 loop: true,
                 breakpointsBase: 'container',
                 breakpoints: {
                     690: {
                         slidesPerView: 2,
-                        spaceBetween: 0
                     },
                     1024: {
                         slidesPerView: 3,
-                        spaceBetween: 0
                     },
                     1200: {
                         slidesPerView: 4,
-                        spaceBetween: 0
                     }
                 },
                 // Navigation arrows
@@ -37,6 +33,5 @@ $(document).ready(function() {
                 },
             });
         });
-
     }
 });

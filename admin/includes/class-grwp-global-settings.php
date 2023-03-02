@@ -34,6 +34,14 @@ Class GRWP_Global_Settings {
             $this->settings_slug // page
         );
 
+	    add_settings_field(
+		    'show_upgrade_message', // id
+		    '', // title
+		    array( $this, 'show_upgrade_message_callback' ), // callback
+		    $this->settings_slug, // page
+		    'google_reviews_setting_section' // section
+	    );
+
         add_settings_field(
             'show_dummy_content', // id
             __( 'Show dummy content', 'grwp' ), // title
@@ -50,6 +58,63 @@ Class GRWP_Global_Settings {
             'google_reviews_setting_section' // section
         );
 
+    }
+
+    public function show_upgrade_message_callback() {
+	    global $allowed_html;
+        ?>
+
+        <span class="dashicons dashicons-no close-icon"></span>
+        <p>
+		    <?php
+		    _e( '<strong>Attention</strong>: Google\'s free version only allows for pulling 5 reviews.', 'grwp')
+		    ?>
+        </p>
+        <p>
+		    <?php
+		    echo
+		    wp_kses(
+			    sprintf(
+				    __('<a href="%s">Upgrade to the PRO version</a> to show ALL your reviews.', 'grwp' ),
+				    grwp_fs()->get_upgrade_url()
+			    ),
+			    $allowed_html
+		    );
+		    ?>
+        </p>
+        <style>
+            .form-table > tbody > tr:first-of-type {
+                height: 5rem;
+            }
+            .form-table > tbody > tr:first-of-type td {
+                width: 100%;
+                max-width: 900px;
+                text-align: center;
+                background-color: white;
+                border: 1px solid black;
+                padding: 1rem !important;
+                display: block;
+                margin: 0;
+                position: absolute;
+                left: 0;
+            }
+            .form-table > tbody > tr:first-of-type td p {
+                margin-top: 0;
+                margin-bottom: 5px;
+            }
+        </style>
+        <script>
+            $messageRow = jQuery('.form-table > tbody > tr:first-of-type ');
+            if (localStorage.hideUpgradeMessage) {
+                $messageRow.hide();
+            }
+            jQuery('.close-icon').click(function() {
+                $messageRow.hide('slow');
+                localStorage.hideUpgradeMessage = true;
+            })
+        </script>
+
+        <?php
     }
 
     /**
