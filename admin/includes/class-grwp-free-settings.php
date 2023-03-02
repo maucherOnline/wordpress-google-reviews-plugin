@@ -12,7 +12,7 @@ Class GRWP_Free_Settings {
     private function add_settings() {
         add_settings_field(
             'gmb_id_1', // id
-            __( 'Place ID', 'google-reviews' ), // title
+            __( 'Place ID', 'grwp' ), // title
             array( $this, 'gmb_id_1_callback' ), // callback
             'google-reviews-admin', // page
             'google_reviews_setting_section' // section
@@ -37,8 +37,8 @@ Class GRWP_Free_Settings {
             <div class="modal-inner">
                 <div class="modal-content">
                     <span id="modal_close" class="close">&times;</span>
-                    <h3><?php _e('How to use this plugin', 'google-reviews'); ?></h3>
-                    <p><?php _e('Explained in less than 1 minute...', 'google-reviews'); ?></p>
+                    <h3><?php _e('How to use this plugin', 'grwp'); ?></h3>
+                    <p><?php _e('Explained in less than 1 minute...', 'grwp'); ?></p>
                     <div class="responsive_iframe">
                         <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/y3xwRn7Shfo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
@@ -70,34 +70,58 @@ Class GRWP_Free_Settings {
                             value="%s"
                             placeholder="%s">',
             isset( $this->google_reviews_options['gmb_id_1'] ) ? esc_attr( $this->google_reviews_options['gmb_id_1']) : '',
-            __( 'Paste the Place ID of your business here.', 'google-reviews' )
+            __( 'Paste the Place ID of your business here.', 'grwp' )
         ); ?>
 
-                <a class="button pull-reviews free"><?php _e('Pull reviews', 'google-reviews');?></a>
+                <a class="button pull-reviews free"><?php _e('Pull reviews', 'grwp');?></a>
             </div>
         </div>
 
 
         <?php
         $video_link = get_site_url() .'/wp-admin/admin.php?page=how-to-free-version';
-        $echo = '<p id="errors"></p>';
-        $echo .= sprintf('<p>Search for your business in the map below and copy/paste the Place ID into the field above (<a href="%s" target="_blank">short explainer video</a>).</p>', $video_link );
-        $echo .= '<br><h4>Look up your Place ID (and paste it in the field above)</h4><iframe id="mapFrame" height="200" style="height: 200px; width: 100%; max-width: 700px;display:block;" src="https://geo-devrel-javascript-samples.web.app/samples/places-placeid-finder/app/dist/" allow="fullscreen;"></iframe>';
-        $echo .= sprintf( __( '<p><strong>Attention</strong>: Google\'s free version only allows for pulling 5 reviews. <br><a href="%s">Upgrade to the PRO version</a> to show ALL your reviews.</p>', 'google-reviews' ), get_site_url().'/wp-admin/admin.php?page=google-reviews-pricing');
-        echo wp_kses($echo, $allowed_html);
 
-    }
+        ?>
+        <p id="errors"></p>
+        <p>
+            <?php
 
-    /**
-     * Deprecated
-     * Echo API key field
-     */
-    public function api_key_0_callback() {
-        printf(
-            '<input class="regular-text" type="text" name="google_reviews_option_name[api_key_0]" id="api_key_0" value="%s">',
-            isset( $this->google_reviews_options['api_key_0'] ) ? esc_attr( $this->google_reviews_options['api_key_0']) : ''
-        );
-        printf( __( '<div><p>Head over to <a href="%s" target="_blank">Google Developer Console</a> and create an API key. See short <a href="%s" target="_self">explainer video here.</a></p></div>', 'google-reviews' ), 'https://console.cloud.google.com/apis/dashboard', 'https://www.youtube.com/watch?v=feM25lZkLkA' );
+            echo
+            wp_kses(
+                sprintf(
+                        __('Search for your business in the map below and copy/paste the Place ID into the field above (<a href="%s" target="_blank">short explainer video</a>).', 'grwp'),
+                        $video_link
+                ),
+                $allowed_html
+            );
+            ?>
+        </p>
+        <br>
+        <h4>
+            <?php
+                _e('Look up your Place ID and paste it in the field above.', 'grwp');
+            ?>
+        </h4>
+        <iframe id="mapFrame" height="200" style="height: 200px; width: 100%; max-width: 700px;display:block;" src="https://geo-devrel-javascript-samples.web.app/samples/places-placeid-finder/app/dist/" allow="fullscreen;"></iframe>
+        <p>
+            <?php
+                _e( '<strong>Attention</strong>: Google\'s free version only allows for pulling 5 reviews.', 'grwp')
+            ?>
+        </p>
+        <p>
+            <?php
+                echo
+                wp_kses(
+                    sprintf(
+                            __('<a href="%s">Upgrade to the PRO version</a> to show ALL your reviews.', 'grwp' ),
+                        get_site_url().'/wp-admin/admin.php?page=google-reviews-pricing'
+                    ),
+                    $allowed_html
+                );
+            ?>
+        </p>
+        <?php
+
     }
 
 }

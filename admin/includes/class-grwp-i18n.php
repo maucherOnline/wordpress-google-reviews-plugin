@@ -24,7 +24,7 @@
  * @subpackage Google_Reviews/includes
  * @author     David Maucher <hallo@maucher-online.com>
  */
-class GRWP_i18n  {
+class GRWP_i18n {
 
 
 	/**
@@ -35,9 +35,9 @@ class GRWP_i18n  {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'google-reviews',
+			'grwp',
 			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
+            GR_PLUGIN_REL_PATH . '/languages'
 		);
 
 	}

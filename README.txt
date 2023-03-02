@@ -5,7 +5,7 @@ Tested up to: 6.1.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.4.8
+Stable tag: 1.4.9
 Tags: google reviews, google, reviews, rating, reviews plugin
 
 == Description ==
@@ -215,3 +215,7 @@ Statistically, 86% of customers hesitate to purchase from companies with negativ
 * Added screenshots
 = 1.3.2 =
 * Added free API
+= 1.4.9 =
+* Added translation files
+* Added custom build, compression, etc.
+* Performance improvements

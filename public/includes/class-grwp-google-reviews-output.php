@@ -70,32 +70,32 @@ class GRWP_Google_Reviews_Output {
 
 		$string = array(
 			'y' => array(
-				__( 'year', 'google-reviews' ),
-				__( 'years', 'google-reviews' )
+				__( 'year', 'grwp' ),
+				__( 'years', 'grwp' )
 			),
 			'm' => array(
-				__( 'month', 'google-reviews' ),
-				__( 'months', 'google-reviews' )
+				__( 'month', 'grwp' ),
+				__( 'months', 'grwp' )
 			),
 			'w' => array(
-				__( 'week', 'google-reviews' ),
-				__( 'weeks', 'google-reviews' )
+				__( 'week', 'grwp' ),
+				__( 'weeks', 'grwp' )
 			),
 			'd' => array(
-				__( 'day', 'google-reviews' ),
-				__( 'days', 'google-reviews' )
+				__( 'day', 'grwp' ),
+				__( 'days', 'grwp' )
 			),
 			'h' => array(
-				__( 'hour', 'google-reviews' ),
-				__( 'hours', 'google-reviews' )
+				__( 'hour', 'grwp' ),
+				__( 'hours', 'grwp' )
 			),
 			'i' => array(
-				__( 'minute', 'google-reviews' ),
-				__( 'minutes', 'google-reviews' )
+				__( 'minute', 'grwp' ),
+				__( 'minutes', 'grwp' )
 			),
 			's' => array(
-				__( 'second', 'google-reviews' ),
-				__( 'seconds', 'google-reviews' )
+				__( 'second', 'grwp' ),
+				__( 'seconds', 'grwp' )
 			)
 		);
 		foreach ($string as $k => &$v) {
@@ -107,7 +107,20 @@ class GRWP_Google_Reviews_Output {
 		}
 
 		if (!$full) $string = array_slice($string, 0, 1);
-		return $string ? implode(', ', $string) . __( ' ago', 'google-reviews' ) : __( 'just now', 'google-reviews' );
+
+        // standard time string for English
+        $time_string = $string ? implode(', ', $string) . __( ' ago', 'grwp' ) : __( 'just now', 'grwp' );
+
+        // reverse string arrangement for non English sites
+        $language_code = get_locale();
+        if ( substr($language_code, 0, 3) !== 'en_') {
+            $time_string = $string ? __( ' ago', 'grwp' ) . implode(', ', $string) : __( 'just now', 'grwp' );
+        }
+
+        // allow filtering for edge cases
+        $time_string = apply_filters( 'grwp_filter_time_string', $time_string, $string, $diff );
+
+        return $time_string;
 	}
 
     /**
@@ -117,8 +130,8 @@ class GRWP_Google_Reviews_Output {
      */
     protected function get_star_output( $review ) {
 
-        $path = esc_attr( plugin_dir_url( __FILE__ ) );
-        $star = sprintf('<img src="%simg/svg-star.svg" alt="" />', $path);
+        $path = esc_attr( GR_PLUGIN_DIR_URL );
+        $star = sprintf('<img src="%sdist/images/svg-star.svg" alt="" />', $path);
         $star_output = '<span class="stars-wrapper">';
         for ( $i = 1; $i <= $review['rating']; $i++ ) {
             $star_output .= $star;
@@ -138,13 +151,13 @@ class GRWP_Google_Reviews_Output {
     protected function get_dummy_content() {
 
         $reviews = array( array(
-            'author_name'               => __( 'Lorem Ipsum', 'google-reviews' ),
+            'author_name'               => __( 'Lorem Ipsum', 'grwp' ),
             'author_url'                => '#',
             'language'                  => 'en',
-            'profile_photo_url'         => plugin_dir_url(__FILE__) . 'img/sample-photo.png',
+            'profile_photo_url'         => GR_PLUGIN_DIR_URL . 'dist/images/sample-photo.png',
             'rating'                    => 5,
-            'relative_time_description' => __( 'three months ago', 'google-reviews' ),
-            'text'                      => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'google-reviews' ),
+            'relative_time_description' => __( 'three months ago', 'grwp' ),
+            'text'                      => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'grwp' ),
             'time'                      => '1643630205'
         ) );
 

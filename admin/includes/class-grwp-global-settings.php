@@ -36,7 +36,7 @@ Class GRWP_Global_Settings {
 
         add_settings_field(
             'show_dummy_content', // id
-            __( 'Show dummy content', 'google-reviews' ), // title
+            __( 'Show dummy content', 'grwp' ), // title
             array( $this, 'show_dummy_content_callback' ), // callback
             $this->settings_slug, // page
             'google_reviews_setting_section' // section
@@ -44,7 +44,7 @@ Class GRWP_Global_Settings {
 
         add_settings_field(
             'reviews_language_3', // id
-            __( 'Reviews language', 'google-reviews' ), // title
+            __( 'Reviews language', 'grwp' ), // title
             array( $this, 'reviews_language_3_callback' ), // callback
             $this->settings_slug, // page
             'google_reviews_setting_section' // section
@@ -74,7 +74,7 @@ Class GRWP_Global_Settings {
 
         add_settings_field(
             'style_2', // id
-            __( 'Layout type', 'google-reviews' ), // title
+            __( 'Layout type', 'grwp' ), // title
             array( $this, 'style_2_callback' ), // callback
             $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section
@@ -82,7 +82,7 @@ Class GRWP_Global_Settings {
 
         add_settings_field(
             'layout_style', // id
-            __( 'Design type', 'google-reviews' ), // title
+            __( 'Design type', 'grwp' ), // title
             array( $this, 'layout_style_callback' ), // callback
             $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section
@@ -90,7 +90,7 @@ Class GRWP_Global_Settings {
 
         add_settings_field(
             'filter_below_5_stars', // id
-            __('Minimum rating (stars)', 'google-reviews'), // title
+            __('Minimum rating (stars)', 'grwp'), // title
             array($this, 'filter_below_5_stars_callback'), // callback
             $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section
@@ -98,7 +98,7 @@ Class GRWP_Global_Settings {
 
         add_settings_field(
             'exclude_reviews_without_text', // id
-            __('Exclude reviews without text', 'google-reviews'), // title
+            __('Exclude reviews without text', 'grwp'), // title
             array($this, 'exclude_reviews_without_text_callback'), // callback
             $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section
@@ -106,7 +106,7 @@ Class GRWP_Global_Settings {
 
         add_settings_field(
             'filter_words', // id
-            __('Filter by words (comma separated)', 'google-reviews'), // title
+            __('Filter by words (comma separated)', 'grwp'), // title
             array($this, 'filter_words_callback'), // callback
             $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section
@@ -127,7 +127,7 @@ Class GRWP_Global_Settings {
 
         add_settings_field(
             'embedding_instructions', // id
-            __( 'Shortcode', 'google-reviews' ), // title
+            __( 'Shortcode', 'grwp' ), // title
             array( $this, 'reviews_instructions_callback' ), // callback
             $this->settings_slug, // page
             'google_reviews_embedding_instructions_section' // section
@@ -201,13 +201,13 @@ Class GRWP_Global_Settings {
     }
 
     public function google_reviews_section_info() { ?>
-        <h2 id="connect_settings"><?php _e( 'Global settings for showing reviews', 'google-reviews' ); ?></h2>
+        <h2 id="connect_settings"><?php _e( 'Global settings for showing reviews', 'grwp' ); ?></h2>
 
         <?php
     }
 
     public function google_reviews_display_section_info() { ?>
-        <h2 id="display_settings"><?php _e( 'Display settings', 'google-reviews' );?></h2>
+        <h2 id="display_settings"><?php _e( 'Display settings', 'grwp' );?></h2>
 
         <?php
     }
@@ -229,7 +229,7 @@ Class GRWP_Global_Settings {
         >
 
         <span>
-            <?php _e( 'Yes', 'google-reviews' ); ?>
+            <?php _e( 'Yes', 'grwp' ); ?>
         </span>
 
         <?php
@@ -281,7 +281,7 @@ Class GRWP_Global_Settings {
         >
 
         <span>
-            <?php _e( 'Yes', 'google-reviews' ); ?>
+            <?php _e( 'Yes', 'grwp' ); ?>
         </span>
 
         <?php
@@ -322,11 +322,11 @@ Class GRWP_Global_Settings {
         ?> <select name="google_reviews_option_name[style_2]" id="style_2">
             <?php $selected = (isset( $this->google_reviews_options['style_2'] ) && $this->google_reviews_options['style_2'] === 'Slider') ? 'selected' : '' ; ?>
             <option <?php echo esc_attr($selected); ?>>
-                <?php _e( 'Slider', 'google-reviews' ); ?>
+                <?php _e( 'Slider', 'grwp' ); ?>
             </option>
             <?php $selected = (isset( $this->google_reviews_options['style_2'] ) && $this->google_reviews_options['style_2'] === 'Grid') ? 'selected' : '' ; ?>
             <option <?php echo esc_attr($selected); ?>>
-                <?php _e( 'Grid', 'google-reviews' ); ?>
+                <?php _e( 'Grid', 'grwp' ); ?>
             </option>
         </select> <?php
     }
@@ -365,7 +365,7 @@ Class GRWP_Global_Settings {
                     <?php selected( $layout_style, 'layout_style-' . $i ); ?>
                         value="<?php echo esc_attr( sprintf( 'layout_style-%s', $i ) ) ?>"
                 >
-                    <?php esc_attr_e( __( 'Design', 'google-reviews' ) . ' #' . $i ); ?>
+                    <?php esc_attr_e( __( 'Design', 'grwp' ) . ' #' . $i ); ?>
                 </option>
             <?php endfor; ?>
         </select>
@@ -465,7 +465,7 @@ Class GRWP_Global_Settings {
     }
 
     public function reviews_instructions_section() { ?>
-        <h2 id="embedding_instructions"><?php _e( 'Embedding instructions', 'google-reviews' ); ?></h2>
+        <h2 id="embedding_instructions"><?php _e( 'Embedding instructions', 'grwp' ); ?></h2>
         <?php
     }
 
@@ -475,13 +475,13 @@ Class GRWP_Global_Settings {
     public function reviews_instructions_callback() { ?>
         <div id="instructions">
             <p>
-                <?php _e( 'Use this shortcode to show your reviews on pages and posts:', 'google-reviews' ); ?>
+                <?php _e( 'Use this shortcode to show your reviews on pages and posts:', 'grwp' ); ?>
             </p>
             <input class="shortcode-container" type="text" disabled="" value="[google-reviews]">
             <p>
                 <?php
                 echo sprintf(
-                        __('<a href="%s" target="_blank">See</a>, how to overwrite styles and widget types.','google-reviews'),
+                        __('<a href="%s" target="_blank">See</a>, how to overwrite styles, widget types and other settings.','grwp'),
                         "https://reviewsembedder.com/docs/how-to-overwrite-styles/?utm_source=wp_backend&utm_medium=instructions&utm_campaign=overwrite_styles_types");
                 ?>
             </p>
