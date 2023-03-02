@@ -83,10 +83,10 @@ Class GRWP_Global_Settings {
 		    ?>
         </p>
         <style>
-            .form-table > tbody > tr:first-of-type {
+            .form-table:first-of-type > tbody > tr:first-of-type {
                 height: 5rem;
             }
-            .form-table > tbody > tr:first-of-type td {
+            .form-table:first-of-type > tbody > tr:first-of-type td {
                 width: 100%;
                 max-width: 900px;
                 text-align: center;
@@ -98,7 +98,7 @@ Class GRWP_Global_Settings {
                 position: absolute;
                 left: 0;
             }
-            .form-table > tbody > tr:first-of-type td p {
+            .form-table:first-of-type > tbody > tr:first-of-type td p {
                 margin-top: 0;
                 margin-bottom: 5px;
             }
