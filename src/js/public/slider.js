@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import Swiper, {Navigation} from 'swiper';
 
+
 $(document).ready(function() {
 
     const $grwp_swiper_container = $('.reviews_embedder_slider');
