@@ -1,3 +1,4 @@
+
 (function ($) {
     'use strict';
 
@@ -12,6 +13,8 @@
         const $languageDropdown = $('#reviews_language_3');
         const $submitButton = $('input[type="submit"]');
         const $showDummyContent = $('#show_dummy_content');
+
+
 
         function handle_tabs() {
             // Hide all additional settings on pageload

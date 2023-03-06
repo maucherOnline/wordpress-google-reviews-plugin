@@ -320,8 +320,8 @@ Class GRWP_Global_Settings {
                max="5"
                step="1"
                value="<?php echo esc_attr( ! empty( $this->google_reviews_options['filter_below_5_stars'] ) ? $this->google_reviews_options['filter_below_5_stars'] : '5' ); ?>"
+               <?php echo grwp_fs()->is__premium_only() ? '' : 'disabled'; ?>
         />
-
         <?php
         $html = ob_get_clean();
 
@@ -343,6 +343,7 @@ Class GRWP_Global_Settings {
                value="1"
                id="exclude_reviews_without_text"
                <?php echo esc_attr( ! empty( $this->google_reviews_options['exclude_reviews_without_text'] ) ? 'checked' : '' ); ?>
+               <?php echo grwp_fs()->is__premium_only() ? '' : 'disabled'; ?>
         >
 
         <span>
@@ -371,6 +372,7 @@ Class GRWP_Global_Settings {
            name="google_reviews_option_name[filter_words]"
            id="filter_words"
            rows="2"
+           <?php echo grwp_fs()->is__premium_only() ? '' : 'disabled'; ?>
         ><?php echo esc_attr( ! empty( $this->google_reviews_options['filter_words'] ) ? $this->google_reviews_options['filter_words'] : '' ); ?></textarea>
 
         <?php
