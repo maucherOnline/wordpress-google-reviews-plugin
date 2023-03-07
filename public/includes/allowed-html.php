@@ -52,12 +52,15 @@ $allowed_html = [
         'min'       => [],
         'max'       => [],
         'step'      => [],
+	    'disabled'  => [],
+	    'title'     => [],
     ],
     'textarea' => [
-        'id'    => [],
-        'name'    => [],
-        'value'    => [],
-        'rows'    => [],
-        'cols'    => [],
+        'id'        => [],
+        'name'      => [],
+        'value'     => [],
+        'rows'      => [],
+        'cols'      => [],
+	    'disabled'  => []
     ]
 ];

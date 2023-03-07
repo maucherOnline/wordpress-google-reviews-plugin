@@ -34,13 +34,15 @@ Class GRWP_Global_Settings {
             $this->settings_slug // page
         );
 
-	    add_settings_field(
-		    'show_upgrade_message', // id
-		    '', // title
-		    array( $this, 'show_upgrade_message_callback' ), // callback
-		    $this->settings_slug, // page
-		    'google_reviews_setting_section' // section
-	    );
+	    if ( ! grwp_fs()->is__premium_only() ) {
+            add_settings_field(
+                'show_upgrade_message', // id
+                '', // title
+                array( $this, 'show_upgrade_message_callback' ), // callback
+                $this->settings_slug, // page
+                'google_reviews_setting_section' // section
+            );
+        }
 
         add_settings_field(
             'show_dummy_content', // id
@@ -83,10 +85,10 @@ Class GRWP_Global_Settings {
 		    ?>
         </p>
         <style>
-            .form-table > tbody > tr:first-of-type {
+            .form-table:first-of-type > tbody > tr:first-of-type {
                 height: 5rem;
             }
-            .form-table > tbody > tr:first-of-type td {
+            .form-table:first-of-type > tbody > tr:first-of-type td {
                 width: 100%;
                 max-width: 900px;
                 text-align: center;
@@ -98,7 +100,7 @@ Class GRWP_Global_Settings {
                 position: absolute;
                 left: 0;
             }
-            .form-table > tbody > tr:first-of-type td p {
+            .form-table:first-of-type > tbody > tr:first-of-type td p {
                 margin-top: 0;
                 margin-bottom: 5px;
             }
@@ -312,15 +314,24 @@ Class GRWP_Global_Settings {
 
         ob_start();
         ?>
+        <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
+        <div class="tooltip">
+        <?php endif; ?>
 
-        <input type="number"
-               name="google_reviews_option_name[filter_below_5_stars]"
-               id="filter_below_5_stars"
-               min="1"
-               max="5"
-               step="1"
-               value="<?php echo esc_attr( ! empty( $this->google_reviews_options['filter_below_5_stars'] ) ? $this->google_reviews_options['filter_below_5_stars'] : '5' ); ?>"
-        />
+            <input type="number"
+                   name="google_reviews_option_name[filter_below_5_stars]"
+                   id="filter_below_5_stars"
+                   min="1"
+                   max="5"
+                   step="1"
+                   value="<?php echo esc_attr( ! empty( $this->google_reviews_options['filter_below_5_stars'] ) ? $this->google_reviews_options['filter_below_5_stars'] : '5' ); ?>"
+                   <?php echo ! grwp_fs()->is__premium_only() ? 'disabled' : ''; ?>
+            />
+
+        <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
+            <span class="tooltiptext">PRO Feature <br> <a href="<?php echo grwp_fs()->get_upgrade_url() ?>">⚡ Upgrade now</a></span>
+        </div>
+	    <?php endif; ?>
 
         <?php
         $html = ob_get_clean();
@@ -338,16 +349,26 @@ Class GRWP_Global_Settings {
 
         ob_start(); ?>
 
+        <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
+        <div class="tooltip">
+        <?php endif; ?>
+
         <input type="checkbox"
                name="google_reviews_option_name[exclude_reviews_without_text]"
                value="1"
                id="exclude_reviews_without_text"
                <?php echo esc_attr( ! empty( $this->google_reviews_options['exclude_reviews_without_text'] ) ? 'checked' : '' ); ?>
+               <?php echo grwp_fs()->is__premium_only() ? '' : 'disabled'; ?>
         >
 
         <span>
             <?php _e( 'Yes', 'grwp' ); ?>
         </span>
+
+	    <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
+            <span class="tooltiptext">PRO Feature <br> <a href="<?php echo grwp_fs()->get_upgrade_url() ?>">⚡ Upgrade now</a></span>
+            </div>
+	    <?php endif; ?>
 
         <?php
 
@@ -367,11 +388,21 @@ Class GRWP_Global_Settings {
         ob_start();
         ?>
 
+        <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
+        <div class="tooltip">
+        <?php endif; ?>
+
         <textarea
            name="google_reviews_option_name[filter_words]"
            id="filter_words"
            rows="2"
+           <?php echo grwp_fs()->is__premium_only() ? '' : 'disabled'; ?>
         ><?php echo esc_attr( ! empty( $this->google_reviews_options['filter_words'] ) ? $this->google_reviews_options['filter_words'] : '' ); ?></textarea>
+
+	    <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
+            <span class="tooltiptext">PRO Feature <br> <a href="<?php echo grwp_fs()->get_upgrade_url() ?>">⚡ Upgrade now</a></span>
+            </div>
+	    <?php endif; ?>
 
         <?php
         $html = ob_get_clean();
