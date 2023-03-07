@@ -3,8 +3,9 @@
  * included in this file.
  */
 
-
 .toplevel_page_google-reviews {
+
+  @import "tooltip";
   .serp-container {
     display: flex;
     align-items: center;

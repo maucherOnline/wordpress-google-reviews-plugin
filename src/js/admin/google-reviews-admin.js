@@ -14,8 +14,6 @@
         const $submitButton = $('input[type="submit"]');
         const $showDummyContent = $('#show_dummy_content');
 
-
-
         function handle_tabs() {
             // Hide all additional settings on pageload
             const $connectSettings = $('#connect_settings, #connect_settings + table.form-table');

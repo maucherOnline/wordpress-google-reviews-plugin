@@ -5,7 +5,7 @@ Tested up to: 6.1.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.4.11
+Stable tag: 1.4.12
 Tags: google reviews, google, reviews, rating, reviews plugin
 
 == Description ==
