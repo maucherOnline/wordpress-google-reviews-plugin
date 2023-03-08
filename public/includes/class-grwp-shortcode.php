@@ -69,8 +69,22 @@ class GRWP_Shortcode {
     private function get_review_type_override( array $atts ) {
 
         $result = '';
+
         if ( isset( $atts['type'] ) ) {
-            $result = $atts['type'] === 'grid' ? 'grid' : 'slider';
+
+	        switch ( $atts['type'] ) {
+		        case 'grid':
+					$result = 'grid';
+					break;
+		        case 'slider':
+					$result = 'slider';
+					break;
+		        case 'badge':
+					$result = 'badge';
+					break;
+	        }
+
+            // $result = $atts['type'] === 'grid' ? 'grid' : 'slider';
         }
 
         return $result;
@@ -116,6 +130,11 @@ class GRWP_Shortcode {
             $slider = new GRWP_Reviews_Widget_Slider();
             return $slider->render( $style_type, $max_reviews );
         }
+
+		elseif ( $widget_type === 'badge' ) {
+			$badge = new GRWP_Reviews_Widget_Badge();
+			return $badge->render( $max_reviews );
+		}
 
         $grid = new GRWP_Reviews_Widget_Grid();
         return $grid->render( $style_type, $max_reviews );
