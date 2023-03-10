@@ -45,6 +45,7 @@ class GRWP_Reviews_Widget_Badge
 <?php
         $output .= ob_get_clean();
 		$output .= '</div>';
+        $output .= '<div class="g-review-sidebar right hide"></div>';
 
 		return wp_kses( $output, $this->allowed_html );
 

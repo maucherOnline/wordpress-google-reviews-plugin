@@ -52,7 +52,24 @@
         font-weight: 900;
         line-height: 1;
       }
-
     }
   }
+}
+
+.g-review-sidebar {
+  &.hide {
+    display: none;
+  }
+
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  max-width: 450px !important;
+  background-color: grey;
+
+  &.right {
+    right: 0;
+  }
+
 }
