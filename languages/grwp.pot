@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-03-07 14:39+0000\n"
+"POT-Creation-Date: 2023-03-17 15:14+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -19,31 +19,43 @@ msgstr ""
 msgid "How to"
 msgstr ""
 
-#: admin/includes/class-grwp-free-settings.php:15
-msgid "Place ID"
+#: admin/includes/class-grwp-free-settings.php:25, admin/includes/class-grwp-pro-settings.php:18
+msgid "Search for your business:"
 msgstr ""
 
-#: admin/includes/class-grwp-free-settings.php:40
-msgid "How to use this plugin"
+#: admin/includes/class-grwp-free-settings.php:87, admin/includes/class-grwp-pro-settings.php:76
+msgid "Search for your business"
 msgstr ""
 
-#: admin/includes/class-grwp-free-settings.php:41
-msgid "Explained in less than 1 minute..."
+#: admin/includes/class-grwp-free-settings.php:91, admin/includes/class-grwp-pro-settings.php:80
+msgid "Search business"
 msgstr ""
 
-#: admin/includes/class-grwp-free-settings.php:73
-msgid "Paste the Place ID of your business here."
-msgstr ""
-
-#: admin/includes/class-grwp-free-settings.php:76, admin/includes/class-grwp-pro-settings.php:83
+#: admin/includes/class-grwp-free-settings.php:94, admin/includes/class-grwp-free-settings.php:174, admin/includes/class-grwp-pro-settings.php:83
 msgid "Pull reviews"
 msgstr ""
 
-#: admin/includes/class-grwp-free-settings.php:92
+#: admin/includes/class-grwp-free-settings.php:103, admin/includes/class-grwp-pro-settings.php:92
+msgid "Details like country, state, city and/or phone number may help achieving more accurate results."
+msgstr ""
+
+#: admin/includes/class-grwp-free-settings.php:138
+msgid "How to use this plugin"
+msgstr ""
+
+#: admin/includes/class-grwp-free-settings.php:139
+msgid "Explained in less than 1 minute..."
+msgstr ""
+
+#: admin/includes/class-grwp-free-settings.php:171
+msgid "Paste the Place ID of your business here."
+msgstr ""
+
+#: admin/includes/class-grwp-free-settings.php:190
 msgid "Search for your business in the map below and copy/paste the Place ID into the field above (<a href=\"%s\" target=\"_blank\">short explainer video</a>)."
 msgstr ""
 
-#: admin/includes/class-grwp-free-settings.php:102
+#: admin/includes/class-grwp-free-settings.php:200
 msgid "Look up your Place ID and paste it in the field above."
 msgstr ""
 
@@ -84,7 +96,7 @@ msgid "Reviews language"
 msgstr ""
 
 #: admin/includes/class-grwp-global-settings.php:72
-msgid "<strong>Attention</strong>: Google's free version only allows for pulling 5 reviews."
+msgid "<strong>Attention</strong>: the free version only allows for pulling 20 reviews."
 msgstr ""
 
 #: admin/includes/class-grwp-global-settings.php:80
@@ -147,104 +159,68 @@ msgstr ""
 msgid "<a href=\"%s\" target=\"_blank\">See</a>, how to overwrite styles, widget types and other settings."
 msgstr ""
 
-#: admin/includes/class-grwp-pro-settings.php:18
-msgid "Search for your business:"
-msgstr ""
-
-#: admin/includes/class-grwp-pro-settings.php:76
-msgid "Search for your business"
-msgstr ""
-
-#: admin/includes/class-grwp-pro-settings.php:80
-msgid "Search business"
-msgstr ""
-
-#: admin/includes/class-grwp-pro-settings.php:92
-msgid "Details like country, state, city and/or phone number may help achieving more accurate results."
-msgstr ""
-
 #: admin/includes/free/how-to.php:8
 msgid "How to use the free version"
 msgstr ""
 
-#: admin/includes/free/how-to.php:10
-msgid "Remove checkmark at \"Show Dummy Content\""
-msgstr ""
-
-#: admin/includes/free/how-to.php:11
-msgid "Search for your business in our map search."
-msgstr ""
-
-#: admin/includes/free/how-to.php:18
-msgid "If this is not available, you can search for your business <a href=\"%s\" target=\"_blank\">here</a>"
-msgstr ""
-
-#: admin/includes/free/how-to.php:26
-msgid "Copy the Place ID of your business"
-msgstr ""
-
-#: admin/includes/free/how-to.php:27
-msgid "Paste the Place ID into the Place ID field"
-msgstr ""
-
-#: admin/includes/free/how-to.php:28, admin/includes/pro/how-to-pro.php:10
-msgid "Choose your preferred language"
-msgstr ""
-
-#: admin/includes/free/how-to.php:29, admin/includes/pro/how-to-pro.php:11
-msgid "Click the 'Pull reviews' button"
-msgstr ""
-
-#: admin/includes/free/how-to.php:30, admin/includes/pro/how-to-pro.php:12
-msgid "Wait until the process is finished. The page will refresh automatically"
-msgstr ""
-
-#: admin/includes/free/how-to.php:31, admin/includes/pro/how-to-pro.php:13
-msgid "Now you should already see your reviews. If not, click the 'Pull reviews' button again"
-msgstr ""
-
-#: admin/includes/free/how-to.php:32, admin/includes/pro/how-to-pro.php:14
-msgid "Configure styling and layout options"
-msgstr ""
-
-#: admin/includes/free/how-to.php:33, admin/includes/pro/how-to-pro.php:15
-msgid "Hit 'save'"
-msgstr ""
-
-#: admin/includes/free/how-to.php:34, admin/includes/pro/how-to-pro.php:16
-msgid "You will see your changes applied right after saving"
-msgstr ""
-
-#: admin/includes/free/how-to.php:35, admin/includes/pro/how-to-pro.php:17
-msgid "Use the shortcode <code>[google-reviews]</code> to show your reviews on pages, posts, Elementor, Beaver Builder, Bakery Builder etc."
-msgstr ""
-
-#: admin/includes/free/how-to.php:41
-msgid "Check the <a href=\"%s\" target=\"_blank\">documentation</a>, to learn how to modify the shortcode output"
-msgstr ""
-
-#: admin/includes/free/how-to.php:51
-msgid "<strong>Note:</strong> the free Google API only allows for pulling 5 reviews. To get around this, please <a href=\"%s\">upgrade to the PRO version</a>, which will pull all your reviews"
-msgstr ""
-
-#: admin/includes/free/how-to.php:58, admin/includes/pro/how-to-pro.php:20
-msgid "Video tutorial"
-msgstr ""
-
-#: admin/includes/pro/how-to-pro.php:5
-msgid "How to use the premium version"
-msgstr ""
-
-#: admin/includes/pro/how-to-pro.php:7
+#: admin/includes/free/how-to.php:10, admin/includes/pro/how-to-pro.php:10
 msgid "Enter your business name"
 msgstr ""
 
-#: admin/includes/pro/how-to-pro.php:8
+#: admin/includes/free/how-to.php:11, admin/includes/pro/how-to-pro.php:11
 msgid "Click 'Search business'"
 msgstr ""
 
-#: admin/includes/pro/how-to-pro.php:9
+#: admin/includes/free/how-to.php:12, admin/includes/pro/how-to-pro.php:12
 msgid "Choose your business from the list"
+msgstr ""
+
+#: admin/includes/free/how-to.php:13, admin/includes/pro/how-to-pro.php:13
+msgid "Choose your preferred language"
+msgstr ""
+
+#: admin/includes/free/how-to.php:14, admin/includes/pro/how-to-pro.php:14
+msgid "Click the 'Pull reviews' button"
+msgstr ""
+
+#: admin/includes/free/how-to.php:15, admin/includes/pro/how-to-pro.php:15
+msgid "Wait until the process is finished. The page will refresh automatically"
+msgstr ""
+
+#: admin/includes/free/how-to.php:16, admin/includes/pro/how-to-pro.php:16
+msgid "Now you should already see your reviews. If not, click the 'Pull reviews' button again"
+msgstr ""
+
+#: admin/includes/free/how-to.php:17, admin/includes/pro/how-to-pro.php:17
+msgid "Configure styling and layout options"
+msgstr ""
+
+#: admin/includes/free/how-to.php:18, admin/includes/pro/how-to-pro.php:18
+msgid "Hit 'save'"
+msgstr ""
+
+#: admin/includes/free/how-to.php:19, admin/includes/pro/how-to-pro.php:19
+msgid "You will see your changes applied right after saving"
+msgstr ""
+
+#: admin/includes/free/how-to.php:20, admin/includes/pro/how-to-pro.php:20
+msgid "Use the shortcode <code>[google-reviews]</code> to show your reviews on pages, posts, Elementor, Beaver Builder, Bakery Builder etc."
+msgstr ""
+
+#: admin/includes/free/how-to.php:26, admin/includes/pro/how-to-pro.php:26
+msgid "Check the <a href=\"%s\" target=\"_blank\">documentation</a>, to learn how to modify the shortcode output"
+msgstr ""
+
+#: admin/includes/free/how-to.php:36
+msgid "<strong>Note:</strong> the free version only allows for pulling 20 reviews. To get around this, please <a href=\"%s\">upgrade to the PRO version</a>, which will pull all your reviews"
+msgstr ""
+
+#: admin/includes/free/how-to.php:43, admin/includes/pro/how-to-pro.php:34
+msgid "Video tutorial"
+msgstr ""
+
+#: admin/includes/pro/how-to-pro.php:8
+msgid "How to use the premium version"
 msgstr ""
 
 #: public/includes/class-grwp-google-reviews-output.php:73
