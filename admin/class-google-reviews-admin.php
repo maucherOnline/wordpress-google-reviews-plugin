@@ -34,6 +34,7 @@ class GRWP_Google_Reviews_Admin {
         add_action( 'admin_menu', array( $this, 'gr_add_plugin_pages' ) );
         add_action( 'admin_init', array( $this, 'google_reviews_page_init' ) );
 
+
         // only for Pro version
         if ( grwp_fs()->is__premium_only() ) {
 
@@ -45,6 +46,7 @@ class GRWP_Google_Reviews_Admin {
         else {
 
             new GRWP_Free_API_Service();
+            new GRWP_Free_API_Service_Advanced();
 
         }
 

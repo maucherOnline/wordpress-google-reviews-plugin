@@ -245,26 +245,26 @@ class GRWP_Google_Reviews_Output {
             else {
 
                 // use different array keys for pro version results
-                if ( grwp_fs()->is__premium_only() ) {
+                if ( true ) { // grwp_fs()->is__premium_only()
 
                     $name              = $review['user']['name'];
                     $author_url        = $review['user']['link'];
                     $profile_photo_url = $review['user']['thumbnail'];
-                    $rating            = $review['rating'];
+                    $rating            = isset($review['rating']) ? $review['rating'] : 5;
                     $text              = $review['snippet'];
                     $time              = $review['date'];
                 }
 
                 // use different array keys for free version results
                 else {
-
+	                /*
                     $name = $review['author_name'];
                     $author_url = $review['author_url'];
                     $profile_photo_url = $review['profile_photo_url'];
                     $rating = $review['rating'];
                     $text = $review['text'];
                     $time = $this->time_elapsed_string(date('Y-m-d h:i:s', $review['time']));
-
+*/
                 }
 
             }
@@ -313,7 +313,8 @@ class GRWP_Google_Reviews_Output {
 
             else {
 
-                $reviews_raw = GRWP_Free_API_Service::parse_free_review_json();
+                // $reviews_raw = GRWP_Free_API_Service::parse_free_review_json();
+	            $reviews_raw = GRWP_Pro_API_Service::parse_pro_review_json();
 
             }
 

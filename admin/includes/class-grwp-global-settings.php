@@ -69,7 +69,7 @@ Class GRWP_Global_Settings {
         <span class="dashicons dashicons-no close-icon"></span>
         <p>
 		    <?php
-		    _e( '<strong>Attention</strong>: Google\'s free version only allows for pulling 5 reviews.', 'grwp')
+		    _e( '<strong>Attention</strong>: the free version only allows for pulling 20 reviews.', 'grwp')
 		    ?>
         </p>
         <p>
