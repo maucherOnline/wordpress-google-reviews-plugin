@@ -223,7 +223,7 @@ class GRWP_Google_Reviews_Output {
      * @param $reviews_raw
      * @return array
      */
-    protected function map_review_data( $reviews_raw ) {
+    protected function map_review_data( $reviews_raw, $use_new_api_results ) {
 
         // map reviews from different raw data to universal format
         $reviews = [];
@@ -245,7 +245,7 @@ class GRWP_Google_Reviews_Output {
             else {
 
                 // use different array keys for pro version results
-                if ( true ) { // grwp_fs()->is__premium_only()
+                if ( grwp_fs()->is__premium_only() || $use_new_api_results ) {
 
                     $name              = $review['user']['name'];
                     $author_url        = $review['user']['link'];
@@ -257,14 +257,13 @@ class GRWP_Google_Reviews_Output {
 
                 // use different array keys for free version results
                 else {
-	                /*
+
                     $name = $review['author_name'];
                     $author_url = $review['author_url'];
                     $profile_photo_url = $review['profile_photo_url'];
                     $rating = $review['rating'];
                     $text = $review['text'];
                     $time = $this->time_elapsed_string(date('Y-m-d h:i:s', $review['time']));
-*/
                 }
 
             }
@@ -305,6 +304,7 @@ class GRWP_Google_Reviews_Output {
         // else get real reviews
         else {
 
+			$use_new_api_results = false;
             if ( grwp_fs()->is__premium_only() ) {
 
                 $reviews_raw = GRWP_Pro_API_Service::parse_pro_review_json();
@@ -313,14 +313,17 @@ class GRWP_Google_Reviews_Output {
 
             else {
 
-                // $reviews_raw = GRWP_Free_API_Service::parse_free_review_json();
-	            $reviews_raw = GRWP_Pro_API_Service::parse_pro_review_json();
+                $reviews_raw = GRWP_Free_API_Service::parse_free_review_json();
+				if ( count($reviews_raw) === 0) {
+					$reviews_raw = GRWP_Pro_API_Service::parse_pro_review_json();
+					$use_new_api_results = true;
+				}
 
             }
 
         }
 
-        return $this->map_review_data( $reviews_raw );
+        return $this->map_review_data( $reviews_raw, $use_new_api_results );
 
     }
 
