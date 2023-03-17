@@ -293,6 +293,7 @@ class GRWP_Google_Reviews_Output {
      * @return void|array
      */
     protected function get_review_data() {
+	    $use_new_api_results = false;
 
         // if dummy setting is active, get dummy content
         if ( $this->showdummy ) {
@@ -304,7 +305,6 @@ class GRWP_Google_Reviews_Output {
         // else get real reviews
         else {
 
-			$use_new_api_results = false;
             if ( grwp_fs()->is__premium_only() ) {
 
                 $reviews_raw = GRWP_Pro_API_Service::parse_pro_review_json();

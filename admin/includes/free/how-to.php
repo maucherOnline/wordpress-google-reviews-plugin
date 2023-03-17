@@ -41,4 +41,4 @@ sprintf(__('<strong>Note:</strong> the free version only allows for pulling 20 r
 </ol>
 
 <h1><?php _e('Video tutorial', 'grwp'); ?></h1>
-<iframe style="display: block;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/y3xwRn7Shfo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe style="display:block;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/y2pWCW_cuNk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

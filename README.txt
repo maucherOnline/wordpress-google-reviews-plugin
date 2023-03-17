@@ -5,7 +5,7 @@ Tested up to: 6.1.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.5
+Stable tag: 1.5.1
 Tags: google reviews, google, reviews, rating, reviews plugin
 
 == Description ==
@@ -15,7 +15,7 @@ Our Google Reviews plugin displays customer reviews with newly and easily implem
 ⚡ PRO Version to **display ALL reviews**
 [https://reviewsembedder.com](https://reviewsembedder.com?utm_source=wp_dir&utm_medium=link&utm_campaign=01)
 
-[youtube https://www.youtube.com/watch?v=y3xwRn7Shfo]
+[youtube https://www.youtube.com/watch?v=y2pWCW_cuNk&t=56s]
 
 == Top Features of this Google Reviews Plugin ==
 The Google Reviews WordPress plugin has different styles and layouts and offers easy installation and integration.
