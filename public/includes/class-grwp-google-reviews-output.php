@@ -247,15 +247,15 @@ class GRWP_Google_Reviews_Output {
                 // use different array keys for pro version results
                 if ( grwp_fs()->is__premium_only() || $use_new_api_results ) {
 
-                    $name              = $review['user']['name'];
-                    $author_url        = $review['user']['link'];
-                    $profile_photo_url = $review['user']['thumbnail'];
+                    $name              = isset($review['user']['name']) ? $review['user']['name'] : '';
+                    $author_url        = isset($review['user']['link']) ? $review['user']['link'] : '';
+                    $profile_photo_url = isset($review['user']['thumbnail']) ? $review['user']['thumbnail'] : '';
                     $rating            = isset($review['rating']) ? $review['rating'] : 5;
-                    $text              = $review['snippet'];
-                    $time              = $review['date'];
+                    $text              = isset($review['snippet']) ? $review['snippet'] : '';
+                    $time              = isset($review['date']) ? $review['date'] : '';
                 }
 
-                // use different array keys for free version results
+                // deprecated: use different array keys for free version results
                 else {
 
                     $name = $review['author_name'];
@@ -313,7 +313,10 @@ class GRWP_Google_Reviews_Output {
 
             else {
 
+				// get reviews data from prior versions, if possible
                 $reviews_raw = GRWP_Free_API_Service::parse_free_review_json();
+
+				// if no old reviews data, get new reviews data
 				if ( count($reviews_raw) === 0) {
 					$reviews_raw = GRWP_Pro_API_Service::parse_pro_review_json();
 					$use_new_api_results = true;
