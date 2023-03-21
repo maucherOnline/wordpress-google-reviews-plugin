@@ -1,5 +1,8 @@
 <?php
-
+global $allowed_html;
+$upgrade_link = get_site_url().'/wp-admin/admin.php?page=google-reviews-pricing';
+$developer_console_link = 'https://developers.google.com/maps/documentation/places/web-service/place-id#find-id';
+$docs_link = 'https://reviewsembedder.com/docs/how-to-overwrite-styles/?utm_source=wp_backend&utm_medium=how_to_page&utm_campaign=documentation';
 ?>
 
 <h1><?php _e('How to use the premium version', 'grwp'); ?></h1>
@@ -15,6 +18,17 @@
     <li><?php _e('Hit \'save\'', 'grwp'); ?></li>
     <li><?php _e('You will see your changes applied right after saving', 'grwp'); ?></li>
     <li><?php _e('Use the shortcode <code>[google-reviews]</code> to show your reviews on pages, posts, Elementor, Beaver Builder, Bakery Builder etc.', 'grwp'); ?></li>
+    <li>
+		<?php
+		echo
+		wp_kses(
+			sprintf(
+				__('Check the <a href="%s" target="_blank">documentation</a>, to learn how to modify the shortcode output', 'grwp'),
+				$docs_link)
+			, $allowed_html
+		);
+		?>
+    </li>
 </ol>
 
 <h1><?php _e('Video tutorial', 'grwp'); ?></h1>

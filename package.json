@@ -4,7 +4,7 @@
   "author": "David Maucher <hallo@maucher-online.com>",
   "scripts": {
     "build": "gulp build --prod",
-    "dev": "gulp dev",
+    "dev": "gulp dev --prod=false",
     "deployable": "gulp deployable --prod"
   },
   "devDependencies": {

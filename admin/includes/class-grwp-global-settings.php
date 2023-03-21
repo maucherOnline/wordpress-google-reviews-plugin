@@ -69,7 +69,7 @@ Class GRWP_Global_Settings {
         <span class="dashicons dashicons-no close-icon"></span>
         <p>
 		    <?php
-		    _e( '<strong>Attention</strong>: Google\'s free version only allows for pulling 5 reviews.', 'grwp')
+		    _e( '<strong>Attention</strong>: the free version only allows for pulling 20 reviews.', 'grwp')
 		    ?>
         </p>
         <p>
@@ -324,7 +324,7 @@ Class GRWP_Global_Settings {
                    min="1"
                    max="5"
                    step="1"
-                   value="<?php echo esc_attr( ! empty( $this->google_reviews_options['filter_below_5_stars'] ) ? $this->google_reviews_options['filter_below_5_stars'] : '5' ); ?>"
+                   value="<?php echo esc_attr( ! empty( $this->google_reviews_options['filter_below_5_stars'] ) ? $this->google_reviews_options['filter_below_5_stars'] : '1' ); ?>"
                    <?php echo ! grwp_fs()->is__premium_only() ? 'disabled' : ''; ?>
             />
 

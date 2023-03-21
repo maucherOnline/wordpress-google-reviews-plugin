@@ -223,7 +223,7 @@ class GRWP_Google_Reviews_Output {
      * @param $reviews_raw
      * @return array
      */
-    protected function map_review_data( $reviews_raw ) {
+    protected function map_review_data( $reviews_raw, $use_new_api_results ) {
 
         // map reviews from different raw data to universal format
         $reviews = [];
@@ -245,17 +245,17 @@ class GRWP_Google_Reviews_Output {
             else {
 
                 // use different array keys for pro version results
-                if ( grwp_fs()->is__premium_only() ) {
+                if ( grwp_fs()->is__premium_only() || $use_new_api_results ) {
 
-                    $name              = $review['user']['name'];
-                    $author_url        = $review['user']['link'];
-                    $profile_photo_url = $review['user']['thumbnail'];
-                    $rating            = $review['rating'];
-                    $text              = $review['snippet'];
-                    $time              = $review['date'];
+                    $name              = isset($review['user']['name']) ? $review['user']['name'] : '';
+                    $author_url        = isset($review['user']['link']) ? $review['user']['link'] : '';
+                    $profile_photo_url = isset($review['user']['thumbnail']) ? $review['user']['thumbnail'] : '';
+                    $rating            = isset($review['rating']) ? $review['rating'] : 5;
+                    $text              = isset($review['snippet']) ? $review['snippet'] : '';
+                    $time              = isset($review['date']) ? $review['date'] : '';
                 }
 
-                // use different array keys for free version results
+                // deprecated: use different array keys for free version results
                 else {
 
                     $name = $review['author_name'];
@@ -264,7 +264,6 @@ class GRWP_Google_Reviews_Output {
                     $rating = $review['rating'];
                     $text = $review['text'];
                     $time = $this->time_elapsed_string(date('Y-m-d h:i:s', $review['time']));
-
                 }
 
             }
@@ -294,6 +293,7 @@ class GRWP_Google_Reviews_Output {
      * @return void|array
      */
     protected function get_review_data() {
+	    $use_new_api_results = false;
 
         // if dummy setting is active, get dummy content
         if ( $this->showdummy ) {
@@ -313,13 +313,20 @@ class GRWP_Google_Reviews_Output {
 
             else {
 
+				// get reviews data from prior versions, if possible
                 $reviews_raw = GRWP_Free_API_Service::parse_free_review_json();
+
+				// if no old reviews data, get new reviews data
+				if ( count($reviews_raw) === 0) {
+					$reviews_raw = GRWP_Pro_API_Service::parse_pro_review_json();
+					$use_new_api_results = true;
+				}
 
             }
 
         }
 
-        return $this->map_review_data( $reviews_raw );
+        return $this->map_review_data( $reviews_raw, $use_new_api_results );
 
     }
 

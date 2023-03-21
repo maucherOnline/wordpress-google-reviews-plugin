@@ -7,24 +7,9 @@ $docs_link = 'https://reviewsembedder.com/docs/how-to-overwrite-styles/?utm_sour
 ?>
 <h1><?php _e('How to use the free version', 'grwp'); ?></h1>
 <ol>
-    <li><?php _e('Remove checkmark at "Show Dummy Content"', 'grwp'); ?></li>
-    <li><?php _e('Search for your business in our map search.', 'grwp'); ?>
-        <ul>
-            <li>
-            <?php
-            echo
-            wp_kses(
-                sprintf(
-                        __('If this is not available, you can search for your business <a href="%s" target="_blank">here</a>', 'grwp'),
-                $developer_console_link
-                ), $allowed_html
-            );
-            ?>
-            </li>
-        </ul>
-    </li>
-    <li><?php _e('Copy the Place ID of your business', 'grwp'); ?></li>
-    <li><?php _e('Paste the Place ID into the Place ID field', 'grwp'); ?></li>
+    <li><?php _e('Enter your business name', 'grwp'); ?></li>
+    <li><?php _e('Click \'Search business\'', 'grwp'); ?></li>
+    <li><?php _e('Choose your business from the list', 'grwp'); ?></li>
     <li><?php _e('Choose your preferred language', 'grwp'); ?></li>
     <li><?php _e('Click the \'Pull reviews\' button', 'grwp'); ?></li>
     <li><?php _e('Wait until the process is finished. The page will refresh automatically', 'grwp'); ?></li>
@@ -34,21 +19,21 @@ $docs_link = 'https://reviewsembedder.com/docs/how-to-overwrite-styles/?utm_sour
     <li><?php _e('You will see your changes applied right after saving', 'grwp'); ?></li>
     <li><?php _e('Use the shortcode <code>[google-reviews]</code> to show your reviews on pages, posts, Elementor, Beaver Builder, Bakery Builder etc.', 'grwp'); ?></li>
     <li>
-        <?php
-        echo
-        wp_kses(
-            sprintf(
-                __('Check the <a href="%s" target="_blank">documentation</a>, to learn how to modify the shortcode output', 'grwp'),
-                $docs_link)
-            , $allowed_html
-        );
-                ?>
+		<?php
+		echo
+		wp_kses(
+			sprintf(
+				__('Check the <a href="%s" target="_blank">documentation</a>, to learn how to modify the shortcode output', 'grwp'),
+				$docs_link)
+			, $allowed_html
+		);
+		?>
     </li>
     <li>
 <?php
 echo
 wp_kses(
-sprintf(__('<strong>Note:</strong> the free Google API only allows for pulling 5 reviews. To get around this, please <a href="%s">upgrade to the PRO version</a>, which will pull all your reviews', 'grwp'), $upgrade_link),
+sprintf(__('<strong>Note:</strong> the free version only allows for pulling 20 reviews. To get around this, please <a href="%s">upgrade to the PRO version</a>, which will pull all your reviews', 'grwp'), $upgrade_link),
     $allowed_html
 );
 ?>
@@ -56,4 +41,4 @@ sprintf(__('<strong>Note:</strong> the free Google API only allows for pulling 5
 </ol>
 
 <h1><?php _e('Video tutorial', 'grwp'); ?></h1>
-<iframe style="display: block;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/y3xwRn7Shfo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe style="display:block;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/y2pWCW_cuNk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
