@@ -29,7 +29,7 @@ class GRWP_Reviews_Widget_Grid
             $star_output = $this->get_star_output($review);
 
             ob_start();
-            require 'partials/grid/markup.php';
+            require 'partials/badge/markup.php';
             $output .= ob_get_clean();
 
             $count++;
