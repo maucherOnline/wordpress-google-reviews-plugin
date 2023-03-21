@@ -424,6 +424,22 @@ Class GRWP_Global_Settings {
             <option <?php echo esc_attr($selected); ?>>
                 <?php _e( 'Grid', 'grwp' ); ?>
             </option>
+
+            <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
+
+            <option disabled>
+			    <?php _e( 'Floating Badge (PRO)', 'grwp' ); ?>
+            </option>
+
+            <?php else : ?>
+
+            <?php $selected = (isset( $this->google_reviews_options['style_2'] ) && $this->google_reviews_options['style_2'] === 'Badge') ? 'selected' : '' ; ?>
+            <option <?php echo esc_attr($selected); ?> value="Badge">
+                <?php _e( 'Floating Badge', 'grwp' ); ?>
+            </option>
+
+            <?php endif; ?>
+
         </select> <?php
     }
 

@@ -50,7 +50,6 @@ class GRWP_Reviews_Widget_Badge
         $output .= '<span class="grwp-close"></span></div>';
         $output .= '<div class="grwp-sidebar-inner">';
 
-
 		$google_svg = GR_PLUGIN_DIR_URL . 'dist/images/google-logo-svg.svg';
 
 		$count = 0;

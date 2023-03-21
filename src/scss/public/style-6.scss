@@ -23,8 +23,7 @@
             margin: 0 16px 9px 0;
           }
           &.gr-google {
-            width: 20px;
-            height: 20px;
+
           }
         }
         p {
@@ -34,16 +33,23 @@
           }
           a {
             display: block;
+            padding-right: 26px;
             margin-bottom: 4px;
             color: black;
           }
         }
         .gr-stars {
-          img {
-            margin-right: 3px !important;
-          }
-          .time {
-            margin-left: 5px;
+          display: flex;
+          .stars-wrapper {
+            display: flex;
+
+            img {
+              margin-right: 3px !important;
+            }
+
+            .time {
+
+            }
           }
         }
       }
@@ -59,10 +65,6 @@
         overflow: auto;
 
         p {
-          margin: 18px 0 4px;
-          font-size: 14px;
-          line-height: 1.36;
-          letter-spacing: 0;
           color: rgba(0,0,0,0.6);
         }
       }

@@ -23,8 +23,7 @@
             filter: grayscale(.8);
           }
           &.gr-google {
-            width: 20px;
-            height: 20px;
+
           }
         }
         p {
@@ -44,7 +43,6 @@
             filter: hue-rotate(45deg);
           }
           .time {
-            margin-left: 5px;
             color: #9f9f9f;
           }
         }
@@ -55,11 +53,6 @@
         overflow: auto;
 
         p {
-          margin: 18px 0 4px;
-          font-size: 14px;
-          line-height: 1.36;
-          letter-spacing: 0;
-          text-align: center;
           color: white;
         }
       }

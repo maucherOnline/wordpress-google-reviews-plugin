@@ -27,10 +27,7 @@
             left: calc(50% - 25px);
           }
           &.gr-google {
-            width: 20px;
-            height: 20px;
-            right: -20px;
-            top: -30px;
+
           }
         }
         p {
@@ -52,7 +49,7 @@
             margin-right: 3px !important;
           }
           .time {
-            margin-left: 5px;
+
           }
         }
       }
@@ -62,11 +59,6 @@
         overflow: auto;
 
         p {
-          margin: 18px 0 4px;
-          font-size: 14px;
-          line-height: 1.36;
-          letter-spacing: 0;
-          text-align: center;
           color: rgba(0,0,0,0.6);
         }
       }
