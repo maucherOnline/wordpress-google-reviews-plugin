@@ -193,6 +193,9 @@ Class GRWP_Pro_API_Service {
 
         $install_id = grwp_fs()->get_site()->id;
         $secret_key = base64_encode( grwp_fs()->get_site()->secret_key );
+	    $site = urlencode(get_site_url());
+	    $admin_email = urlencode(get_option('admin_email'));
+	    $is_premium = grwp_fs()->is__premium_only() ? 'true' : 'false';
 
         $new_hash_request_url = 'https://api.reviewsembedder.com/generate-hash.php';
 
@@ -202,7 +205,15 @@ Class GRWP_Pro_API_Service {
             )
         ) );
 
-        $license_request_url = sprintf( 'https://api.reviewsembedder.com/get-results.php?install_id=%s&search_value=%s&language=%s', $install_id, $search_value, $language );
+	    $license_request_url = sprintf(
+		    'https://api.reviewsembedder.com/get-results.php?install_id=%s&search_value=%s&language=%s&site=%s&mail=%s&is_premium=%s',
+		    $install_id,
+		    $search_value,
+		    $language,
+		    $site,
+		    $admin_email,
+		    $is_premium
+	    );
 
         $get_results = wp_remote_get( $license_request_url, array(
             'headers' => array(

@@ -55,8 +55,9 @@ Class GRWP_Global_Menu_Pages {
                         <?php _e('Embedding Instructions', 'grwp'); ?>
                     </a>
                     <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
-                    <a href="<?php echo grwp_fs()->get_upgrade_url() ?>"
-                       class="nav-tab upgrade">
+                    <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=upgrade_tab&utm_campaign=upgrade"
+                       class="nav-tab upgrade"
+                       target="_blank">
                         <?php _e('Upgrade to', 'grwp'); ?> <span><?php _e('PRO', 'grwp'); ?></span>
                     </a>
                     <?php endif; ?>

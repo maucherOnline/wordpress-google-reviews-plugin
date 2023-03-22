@@ -329,7 +329,7 @@ Class GRWP_Global_Settings {
             />
 
         <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
-            <span class="tooltiptext">PRO Feature <br> <a href="<?php echo grwp_fs()->get_upgrade_url() ?>">⚡ Upgrade now</a></span>
+            <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=minimum_rating&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
         </div>
 	    <?php endif; ?>
 
@@ -366,7 +366,7 @@ Class GRWP_Global_Settings {
         </span>
 
 	    <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
-            <span class="tooltiptext">PRO Feature <br> <a href="<?php echo grwp_fs()->get_upgrade_url() ?>">⚡ Upgrade now</a></span>
+            <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=textless_reviews&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
             </div>
 	    <?php endif; ?>
 
@@ -400,7 +400,7 @@ Class GRWP_Global_Settings {
         ><?php echo esc_attr( ! empty( $this->google_reviews_options['filter_words'] ) ? $this->google_reviews_options['filter_words'] : '' ); ?></textarea>
 
 	    <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
-            <span class="tooltiptext">PRO Feature <br> <a href="<?php echo grwp_fs()->get_upgrade_url() ?>">⚡ Upgrade now</a></span>
+            <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=filter_words&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
             </div>
 	    <?php endif; ?>
 
@@ -466,7 +466,7 @@ Class GRWP_Global_Settings {
         $layout_style = isset($this->google_reviews_options['layout_style']) ? $this->google_reviews_options['layout_style'] : '';
 
         if (empty($layout_style)){
-            $layout_style = '1';
+            $layout_style = '7';
         }
 
         ?>

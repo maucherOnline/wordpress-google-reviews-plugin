@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-03-21 08:36+0000\n"
+"POT-Creation-Date: 2023-03-22 11:42+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -59,7 +59,7 @@ msgstr ""
 msgid "Look up your Place ID and paste it in the field above."
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:12, admin/includes/class-grwp-global-menu-pages.php:13, admin/includes/class-grwp-global-menu-pages.php:36
+#: admin/includes/class-grwp-global-menu-pages.php:12, admin/includes/class-grwp-global-menu-pages.php:13, admin/includes/class-grwp-global-menu-pages.php:36, public/includes/class-grwp-reviews-widget-badge.php:48
 msgid "Google Reviews"
 msgstr ""
 
@@ -75,15 +75,15 @@ msgstr ""
 msgid "Embedding Instructions"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:60
+#: admin/includes/class-grwp-global-menu-pages.php:61
 msgid "Upgrade to"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:60
+#: admin/includes/class-grwp-global-menu-pages.php:61
 msgid "PRO"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:76
+#: admin/includes/class-grwp-global-menu-pages.php:77
 msgid "Preview"
 msgstr ""
 
@@ -147,15 +147,23 @@ msgstr ""
 msgid "Grid"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:564
-msgid "Embedding instructions"
+#: admin/includes/class-grwp-global-settings.php:438
+msgid "Floating Badge"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:574
-msgid "Use this shortcode to show your reviews on pages and posts:"
+#: admin/includes/class-grwp-global-settings.php:431
+msgid "Floating Badge (PRO)"
 msgstr ""
 
 #: admin/includes/class-grwp-global-settings.php:580
+msgid "Embedding instructions"
+msgstr ""
+
+#: admin/includes/class-grwp-global-settings.php:590
+msgid "Use this shortcode to show your reviews on pages and posts:"
+msgstr ""
+
+#: admin/includes/class-grwp-global-settings.php:596
 msgid "<a href=\"%s\" target=\"_blank\">See</a>, how to overwrite styles, widget types and other settings."
 msgstr ""
 
@@ -212,7 +220,7 @@ msgid "Check the <a href=\"%s\" target=\"_blank\">documentation</a>, to learn ho
 msgstr ""
 
 #: admin/includes/free/how-to.php:36
-msgid "<strong>Note:</strong> the free version only allows for pulling 20 reviews. To get around this, please <a href=\"%s\">upgrade to the PRO version</a>, which will pull all your reviews"
+msgid "<strong>Note:</strong> the free version only allows for pulling 20 reviews. To get around this, please <a href=\"%s\" target=\"_blank\">upgrade to the PRO version</a>, which will pull all your reviews"
 msgstr ""
 
 #: admin/includes/free/how-to.php:43, admin/includes/pro/how-to-pro.php:34
@@ -299,6 +307,10 @@ msgstr ""
 msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
 msgstr ""
 
-#: public/includes/class-grwp-reviews-widget-grid.php:12, public/includes/class-grwp-reviews-widget-slider.php:16
+#: public/includes/class-grwp-reviews-widget-badge.php:16, public/includes/class-grwp-reviews-widget-grid.php:12, public/includes/class-grwp-reviews-widget-slider.php:16
 msgid "No reviews available"
+msgstr ""
+
+#: public/includes/class-grwp-reviews-widget-badge.php:33
+msgid "Our Google Reviews"
 msgstr ""

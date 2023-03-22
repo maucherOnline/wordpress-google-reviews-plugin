@@ -3,6 +3,7 @@
     position: fixed;
     bottom: 5vw;
     right: 5vw;
+    z-index: 9999;
 
     .g-badge {
       display: block;
@@ -73,14 +74,14 @@
   transition: all .3s ease-in-out;
   background-color: #f2f2f2;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  z-index: 99999;
+  z-index: 100000;
 
   &.right {
     right: 0;
   }
 
   .grwp-header {
-    height: 64px;
+    height: 100px;
     background: white;
     padding: 32px;
     display: flex;
@@ -140,6 +141,8 @@
 
         .gr-profile {
           margin-right: 10px;
+          width: 50px;
+          height: 50px;
         }
 
         .gr-google {

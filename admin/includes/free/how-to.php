@@ -1,6 +1,6 @@
 <?php
 global $allowed_html;
-$upgrade_link = get_site_url().'/wp-admin/admin.php?page=google-reviews-pricing';
+$upgrade_link = 'https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=how_to&utm_campaign=upgrade';
 $developer_console_link = 'https://developers.google.com/maps/documentation/places/web-service/place-id#find-id';
 $docs_link = 'https://reviewsembedder.com/docs/how-to-overwrite-styles/?utm_source=wp_backend&utm_medium=how_to_page&utm_campaign=documentation';
 
@@ -33,7 +33,7 @@ $docs_link = 'https://reviewsembedder.com/docs/how-to-overwrite-styles/?utm_sour
 <?php
 echo
 wp_kses(
-sprintf(__('<strong>Note:</strong> the free version only allows for pulling 20 reviews. To get around this, please <a href="%s">upgrade to the PRO version</a>, which will pull all your reviews', 'grwp'), $upgrade_link),
+sprintf(__('<strong>Note:</strong> the free version only allows for pulling 20 reviews. To get around this, please <a href="%s" target="_blank">upgrade to the PRO version</a>, which will pull all your reviews', 'grwp'), $upgrade_link),
     $allowed_html
 );
 ?>
