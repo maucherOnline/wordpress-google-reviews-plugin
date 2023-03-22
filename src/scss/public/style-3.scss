@@ -2,64 +2,64 @@
 /* G Review Grid 3 */
 /* ------------------------------------------------------------------------- */
 
-body #g-review.layout_style-3 .g-review {
-  padding: 29px 30px 32px;
-  border-radius: 16px;
-  opacity: 1;
-  border: 1px solid rgba(0,0,0,0.2);
-  box-shadow: 0 5px 10px rgba(0,0,0,0) !important;
-  overflow: hidden;
-  text-align: center;
-}
+#g-review {
+  &.layout_style-3 {
+    .g-review {
+      padding: 29px 30px 32px;
+      border-radius: 16px;
+      opacity: 1;
+      border: 1px solid rgba(0,0,0,0.2);
+      box-shadow: 0 5px 10px rgba(0,0,0,0) !important;
+      overflow: hidden;
+      text-align: center;
 
-body #g-review.layout_style-3 .gr-inner-header img.gr-profile {
-  display: block;
-  margin: 0 auto 9px;
-}
+      .gr-inner-header {
+        .gr-profile {
+          display: block;
+          margin: 0 auto 9px;
+        }
+        .gr-google {
 
-body #g-review.layout_style-3 .gr-inner-header p {
-  flex-basis: 100%;
-}
+        }
 
-body #g-review.layout_style-3 .gr-inner-header p br {
-  display: none;
-}
+        p {
+          flex-basis: 100%;
 
-body #g-review.layout_style-3 .gr-inner-header p a {
-  display: block;
-  margin-bottom: 4px;
-}
+          br {
+            display: none;
+          }
 
-body #g-review.layout_style-3 .g-review .gr-stars img {
-  margin-right: 7px !important;
-}
+          a {
+            display: block;
+            margin-bottom: 4px;
+          }
 
-body #g-review.layout_style-3 .g-review .gr-stars .time {
-  margin-left: 5px;
-}
+          .gr-stars {
+            img {
+              margin-right: 7px !important;
+            }
+          }
+        }
+      }
 
-body #g-review.layout_style-3 .gr-inner-header img.gr-google {
-  width: 20px;
-  height: 20px;
-}
-body #g-review.layout_style-3 .gr-inner-body {
-  max-height: 76px;
-  overflow: auto;
-}
-body #g-review.layout_style-3 .gr-inner-body p {
-  margin: 18px 0 4px;
-  font-size: 14px;
-  line-height: 1.36;
-  letter-spacing: 0;
-  text-align: center;
-  color: rgba(0,0,0,0.6);
-}
+      .gr-inner-body {
+        max-height: 76px;
+        overflow: auto;
 
-body #g-review.layout_style-3 .swiper {
-  padding-top: 25px;
-}
+        p {
+          color: rgba(0,0,0,0.6);
+        }
+      }
+    }
 
-body #g-review.layout_style-3 .swiper .swiper-slide .g-review {
-  -webkit-transition: all .4s;
-  transition: all .4s;
+    .swiper {
+      padding-top: 25px;
+
+      .swiper-slide .g-review {
+        -webkit-transition: all .4s;
+        transition: all .4s;
+      }
+
+    }
+  }
 }

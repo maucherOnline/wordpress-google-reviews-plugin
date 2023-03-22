@@ -1,0 +1,192 @@
+#g-review {
+  &.badge {
+    position: fixed;
+    bottom: 5vw;
+    right: 5vw;
+    z-index: 9999;
+
+    .g-badge {
+      display: block;
+      position: relative;
+      width: 210px;
+      height: 52px;
+      background-color: white;
+      border-color: black;
+      border-width: 1px;
+      border-style: solid;
+      border-bottom-left-radius: 26px;
+      border-top-left-radius: 26px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+
+      .g-logo {
+        position: absolute;
+        left: 15px;
+        top: 10px;
+        width: 32px;
+        height: 32px;
+      }
+
+      .g-label {
+        font-size: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: grey;
+        position: absolute;
+        top: 7px;
+        right: 19px;
+        display: block;
+      }
+
+      .g-stars {
+        position: absolute;
+        display: block;
+        bottom: 10px;
+        right: 19px;
+      }
+
+      .g-rating {
+        position: absolute;
+        right: 19px;
+        bottom: 7px;
+        color: #ffb73a;
+        font-size: 21px;
+        font-weight: 900;
+        line-height: 1;
+      }
+    }
+  }
+}
+
+.g-review-sidebar {
+  &.hide {
+    visibility: hidden;
+    right: -450px !important;
+  }
+
+  visibility: visible;
+  position: fixed;
+  margin: 0 !important;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  max-width: 450px !important;
+  transition: all .3s ease-in-out;
+  background-color: #f2f2f2;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  z-index: 100000;
+
+  &.right {
+    right: 0;
+  }
+
+  .grwp-header {
+    height: 100px;
+    background: white;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    font-weight: 600;
+    font-size: 18px;
+
+    img {
+      max-width: 110px;
+      margin-top: 5px;
+    }
+
+    .grwp-close {
+      &:after {
+        content: '✕';
+        display: block;
+        top: 32px;
+        right: 32px;
+        position: absolute;
+        cursor: pointer;
+      }
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 7px;
+    border-radius: 10px;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #b7b7b7 #e5e5e5;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #e5e5e5;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #b7b7b7;
+    border-radius: 10px;
+    border: 3px none #ffffff;
+  }
+
+  .grwp-sidebar-inner {
+    overflow-y: scroll;
+    height: calc(100% - 128px);
+
+    .g-review {
+      padding: 32px;
+      border-bottom: 1px solid #e6e6e6;
+      .gr-inner-header {
+        position: relative;
+        display: flex;
+        flex-flow: row wrap;
+
+        .gr-profile {
+          margin-right: 10px;
+          width: 50px;
+          height: 50px;
+        }
+
+        .gr-google {
+          position: absolute;
+          right: 0;
+          top: 0;
+        }
+
+        p {
+          margin: 0;
+          width: calc(100% - 60px);
+          a {
+            text-decoration: none;
+            font-size: 16px;
+            color: black;
+          }
+          .gr-stars {
+            display: flex;
+            justify-content: space-between;
+
+            .stars-wrapper {
+              min-width: 110px;
+              display: flex;
+              gap: 4px;
+
+              img {
+                max-width: 20px;
+              }
+            }
+            .time {
+              color: #bbbbbb;
+              font-size: 14px;
+              line-height: 36px;
+            }
+          }
+        }
+      }
+      .gr-inner-body {
+        p {
+          color: #686767;
+          font-size: 16px;
+          line-height: 1.5em;
+        }
+      }
+    }
+  }
+}

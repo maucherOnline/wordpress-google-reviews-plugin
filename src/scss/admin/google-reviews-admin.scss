@@ -208,7 +208,7 @@
     }
   }
 
-  .preview_section {
+  .preview_section:not(.is_badge) {
     background-color: white;
     padding: 2rem;
     box-shadow: inset 0 0 3px grey;
