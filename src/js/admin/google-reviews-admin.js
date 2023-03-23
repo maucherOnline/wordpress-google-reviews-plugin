@@ -290,6 +290,7 @@
                     } else {
                         $pullButtonPro
                             .removeAttr('disabled');
+                        $error.show();
                     }
                 }
             });
