@@ -106,7 +106,10 @@ Class GRWP_Free_API_Service_Advanced {
 			$admin_email
 		);
 
-		$get_reviews = wp_remote_get( $license_request_url );
+		$get_reviews = wp_remote_get(
+			$license_request_url,
+			['timeout' => 30]
+		);
 
 		$response = new WP_REST_Response();
 
@@ -205,7 +208,10 @@ Class GRWP_Free_API_Service_Advanced {
 			$is_premium
 		);
 
-		$get_results = wp_remote_get( $license_request_url );
+		$get_results = wp_remote_get(
+			$license_request_url,
+			['timeout' => 30]
+		);
 
 		$get_results = json_decode( wp_remote_retrieve_body( $get_results ) );
 

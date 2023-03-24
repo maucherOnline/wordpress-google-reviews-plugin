@@ -106,7 +106,8 @@ Class GRWP_Pro_API_Service {
         $get_reviews = wp_remote_get( $license_request_url, array(
             'headers' => array(
                 'Authorization' => wp_remote_retrieve_body( $new_hash )
-            )
+            ),
+	        'timeout' => 30
         ) );
 
         $response = new WP_REST_Response();
@@ -218,7 +219,8 @@ Class GRWP_Pro_API_Service {
         $get_results = wp_remote_get( $license_request_url, array(
             'headers' => array(
                 'Authorization' => wp_remote_retrieve_body( $new_hash )
-            )
+            ),
+	        'timeout' => 30
         ) );
 
         $get_results = json_decode( wp_remote_retrieve_body( $get_results ) );
