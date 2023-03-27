@@ -39,13 +39,18 @@ class GRWP_Google_Reviews_Activator {
             $google_reviews_options['serp_business_name'] = '';
             $google_reviews_options['serp_data_id'] = '';
             $google_reviews_options['style_2'] = 'Slider';
-            $google_reviews_options['layout_style'] = 'layout_style-1';
+            $google_reviews_options['layout_style'] = 'layout_style-7';
             $google_reviews_options['filter_below_5_stars'] = '1';
             $google_reviews_options['filter_words'] = '';
             $google_reviews_options['reviews_language_3'] = 'en';
 
             add_option('google_reviews_option_name', $google_reviews_options);
         }
+
+		// add place info field
+		if ( ! get_option('grwp_place_info') ) {
+			add_option('grwp_place_info','');
+		}
 
         // add pro version results field
         if ( ! get_option('gr_latest_results') ) {
