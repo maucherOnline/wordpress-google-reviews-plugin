@@ -17,6 +17,16 @@ class GRWP_Reviews_Widget_Badge
 
 		}
 
+		$all_options = get_option( 'google_reviews_option_name' );
+        $data_id = $all_options['serp_data_id'];
+        $place_info = json_decode(get_option('grwp_place_info')[$data_id], true);
+        $rating_rounded = intval(round($place_info['rating']));
+        $rating_formatted = number_format($place_info['rating'], 1);
+        $reviews = $place_info['reviews'];
+        $title = $place_info['title'];
+
+        $stars = $this->get_stars($rating_rounded);
+
 		// loop through reviews
 		$output = '<div id="g-review" class="badge">';
         ob_start();
@@ -32,12 +42,9 @@ class GRWP_Reviews_Widget_Badge
 			<span class="g-label">
 				<?php _e('Our Google Reviews', 'grwp'); ?>
 											</span>
-			<img src="<?php echo GR_PLUGIN_DIR_URL .'/dist/images/g-stars.svg'; ?>"
-			     alt=""
-			     class="g-stars"
-			/>
+            <?php echo $stars; ?>
 			<span class="g-rating">
-
+                <?php echo $rating_formatted; ?>
 			</span>
 		</a>
 
@@ -45,8 +52,10 @@ class GRWP_Reviews_Widget_Badge
 <?php
         $output .= ob_get_clean();
 		$output .= '</div>';
-        $output .= '<div class="g-review-sidebar right hide"><div class="grwp-header">'.__("Google Reviews", "grwp");
-        $output .= sprintf('<img src="%s/dist/images/g-stars.svg" alt="" class="g-logo" />', GR_PLUGIN_DIR_URL);
+        $output .= '<div class="g-review-sidebar right hide"><div class="grwp-header">';
+        $output .= sprintf('<span class="business-title">%s</span>', $title);
+        $output .=  $stars;
+        $output .= sprintf('<span class="rating">%s</span>', $rating_formatted);
         $output .= '<span class="grwp-close"></span></div>';
         $output .= '<div class="grwp-sidebar-inner">';
 
@@ -69,6 +78,25 @@ class GRWP_Reviews_Widget_Badge
         $output .= '</div></div>';
 
 		return wp_kses( $output, $this->allowed_html );
+
+	}
+
+	/**
+	 * Count and prepare stars
+	 * @param $rating
+	 * @return string
+	 */
+	private function get_stars( $rating ) {
+
+		$path = esc_attr( GR_PLUGIN_DIR_URL );
+		$star = sprintf('<img src="%sdist/images/svg-star.svg" alt="" />', $path);
+		$star_output = '<span class="stars-wrapper">';
+		for ( $i = 1; $i <= $rating; $i++ ) {
+			$star_output .= $star;
+		}
+		$star_output .= '</span>';
+
+		return $star_output;
 
 	}
 
