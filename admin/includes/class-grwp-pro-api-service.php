@@ -2,6 +2,7 @@
 
 Class GRWP_Pro_API_Service {
 
+
     public function __construct() {
 
         // Business search ajax handler
@@ -95,7 +96,7 @@ Class GRWP_Pro_API_Service {
         ) );
 
         $license_request_url = sprintf(
-            'https://api.reviewsembedder.com/get-reviews.php?install_id=%s&data_id=%s&language=%s&site=%s&mail=%s',
+			'https://api.reviewsembedder.com/get-reviews-data.php?install_id=%s&data_id=%s&language=%s&site=%s&mail=%s',
             $install_id,
             $data_id,
             $reviews_language,
@@ -126,7 +127,7 @@ Class GRWP_Pro_API_Service {
         // check for empty response
         else if ( ! $get_reviews ) {
 
-            $message = 'Response was empty.';
+			$message = 'Response was invalid.';
             wp_send_json_error( array(
                 'html' => $message
             ) );
@@ -135,10 +136,12 @@ Class GRWP_Pro_API_Service {
 
         }
 
-        // check if response body is there
-        else if ( ! isset($get_reviews['body']) ) {
+		$body = json_decode( wp_remote_retrieve_body( $get_reviews ) );
 
-            $message = 'No response body found.';
+		// check if response body has content
+		if ( $body === '' || $body === null ) {
+
+			$message = 'Empty response body.';
             wp_send_json_error( array(
                 'html' => $message
             ) );
@@ -150,35 +153,22 @@ Class GRWP_Pro_API_Service {
         // if response body available, proceed
         else {
 
-
-            $body = json_decode($get_reviews['body']);
-
-            // check, if body is null
-            if ( $body->results === null) {
-
-                $message = 'Response was empty.';
-                wp_send_json_error( array(
-                    'html' => $message
-                ) );
-
-                die();
-
-            }
-
-            // if response is fine, update the database
-            else {
-
                 $get_reviews = json_decode( wp_remote_retrieve_body( $get_reviews ) );
+			$reviews_arr = json_decode(json_encode($get_reviews), true);
 
+			// Update reviews
                 update_option( 'gr_latest_results', [
-                    $data_id => json_encode( $get_reviews->results )
+				$data_id => json_encode( $reviews_arr['reviews'] )
+			]);
+
+			// Update place info data
+			update_option( 'grwp_place_info', [
+				$data_id => json_encode( $reviews_arr['place_info'] )
                 ]);
 
                 $response->set_status(200);
 
             }
-
-        }
 
         return $response;
 

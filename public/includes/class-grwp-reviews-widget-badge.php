@@ -19,11 +19,18 @@ class GRWP_Reviews_Widget_Badge
 
 		$all_options = get_option( 'google_reviews_option_name' );
         $data_id = $all_options['serp_data_id'];
-        $place_info = json_decode(get_option('grwp_place_info')[$data_id], true);
-        $rating_rounded = intval(round($place_info['rating']));
-        $rating_formatted = number_format($place_info['rating'], 1);
-        $reviews = $place_info['reviews'];
-        $title = $place_info['title'];
+        $place_option = get_option('grwp_place_info');
+        $place_raw = get_option('grwp_place_info');
+        $place_info = isset($place_raw[$data_id]) ? $place_raw[$data_id] : null;
+
+        if ( ! $place_info ) return __( '', 'grwp' );
+
+        $place_info_arr = json_decode($place_info, true);
+
+        $rating_rounded = intval(round($place_info_arr['rating']));
+        $rating_formatted = number_format($place_info_arr['rating'], 1);
+        $reviews = $place_info_arr['reviews'];
+        $title = $place_info_arr['title'];
 
         $stars = $this->get_stars($rating_rounded);
 

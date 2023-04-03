@@ -85,18 +85,6 @@ Class GRWP_Free_API_Service_Advanced {
 		$admin_email = urlencode(get_option('admin_email'));
 		$install_id = grwp_fs()->get_site()->id;
 
-		/*
-		$secret_key = base64_encode( grwp_fs()->get_site()->secret_key );
-
-		$new_hash_request_url = 'https://api.reviewsembedder.com/generate-hash.php';
-
-		$new_hash = wp_remote_get( $new_hash_request_url, array(
-			'headers' => array(
-				'Authorization' => $secret_key
-			)
-		) );
-		*/
-
 		$license_request_url = sprintf(
 			'https://api.reviewsembedder.com/get-reviews-data.php?install_id=%s&data_id=%s&language=%s&site=%s&mail=%s',
 			$install_id,
