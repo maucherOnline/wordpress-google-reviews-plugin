@@ -9,8 +9,8 @@ Class GRWP_Free_API_Service_Advanced {
 		add_action('wp_ajax_nopriv_handle_serp_business_search', [$this, 'handle_serp_business_search']);
 
 		// Pull reviews ajax handler
-		add_action('wp_ajax_handle_get_reviews_pro_api', [$this, 'get_reviews_pro_api']);
-		add_action('wp_ajax_nopriv_handle_get_reviews_pro_api', [$this, 'get_reviews_pro_api']);
+		add_action('wp_ajax_handle_get_reviews_pro_api', [$this, 'get_reviews_free_api_advanced']);
+		add_action('wp_ajax_nopriv_handle_get_reviews_pro_api', [$this, 'get_reviews_free_api_advanced']);
 
 		// Save language ajax handler
 		add_action('wp_ajax_handle_language_saving', [$this, 'handle_language_saving']);
@@ -70,7 +70,7 @@ Class GRWP_Free_API_Service_Advanced {
 	 * Get reviews from Pro API
 	 * @return WP_REST_Response
 	 */
-	public static function get_reviews_pro_api() {
+	public static function get_reviews_free_api_advanced() {
 
 		$google_reviews_options = get_option( 'google_reviews_option_name' );
 
