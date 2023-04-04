@@ -50,7 +50,7 @@ if ( ! function_exists('grwp_fs') ) {
                     'has_addons' => false,
                     'has_paid_plans' => true,
                     'trial' => array(
-                        'days' => 4,
+                        'days' => 14,
                         'is_require_payment' => true,
                     ),
                     'has_affiliation' => 'all',
