@@ -33,8 +33,7 @@ Class GRWP_Pro_API_Service
 		$install_id = grwp_fs()->get_site()->id;
         $secret_key = base64_encode( grwp_fs()->get_site()->secret_key );
 
-        //$new_hash_request_url = 'https://api.reviewsembedder.com/generate-hash.php';
-        $new_hash_request_url = 'http://localhost/reviews-api/generate-hash.php';
+        $new_hash_request_url = 'https://api.reviewsembedder.com/generate-hash.php';
 
         $new_hash = wp_remote_get( $new_hash_request_url, array(
             'headers' => array(
@@ -42,9 +41,8 @@ Class GRWP_Pro_API_Service
             )
         ) );
 
-		// https://api.reviewsembedder.com
         $license_request_url = sprintf(
-			'http://localhost/reviews-api/get-reviews-data-pro.php?install_id=%s&data_id=%s&language=%s&site=%s&mail=%s',
+			'https://api.reviewsembedder.com/get-reviews-data-pro.php?install_id=%s&data_id=%s&language=%s&site=%s&mail=%s',
             $install_id,
             $data_id,
             $reviews_language,
