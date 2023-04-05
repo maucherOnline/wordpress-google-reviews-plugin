@@ -3,13 +3,12 @@
 /* ------------------------------------------------------------------------- */
 
 #g-review {
-
   &.layout_style-8 {
     .g-review {
       padding: 29px 30px 32px;
       border-radius: 16px;
       opacity: 1;
-      box-shadow: 0 5px 10px rgba(0,0,0,0) !important;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0) !important;
       background: black;
       overflow: hidden;
       text-align: center;
@@ -22,26 +21,32 @@
             margin: 0 auto 9px;
             filter: grayscale(.8);
           }
+
           &.gr-google {
 
           }
         }
+
         p {
           flex-basis: 100%;
+
           br {
             display: none;
           }
+
           a {
             display: block;
             margin-bottom: 4px;
             color: white;
           }
         }
+
         .gr-stars {
           img {
             margin-right: 7px !important;
             filter: hue-rotate(45deg);
           }
+
           .time {
             color: #9f9f9f;
           }
@@ -57,8 +62,10 @@
         }
       }
     }
+
     .swiper {
       padding-top: 25px;
+
       .swiper-slide .g-review {
         -webkit-transition: all .4s;
         transition: all .4s;

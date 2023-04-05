@@ -29,6 +29,11 @@ class GRWP_Google_Reviews_Output {
      */
     protected $reviews_have_error = false;
 
+	protected $rating_rounded = 0;
+	protected $rating_formatted = 5.0;
+	protected $total_reviews = 0;
+	protected $place_title = '';
+
     /**
      * Constructor method
      */
@@ -42,6 +47,7 @@ class GRWP_Google_Reviews_Output {
 		$this->options = get_option( 'google_reviews_option_name' );
         $this->showdummy = isset( $this->options['show_dummy_content'] );
         $this->reviews = $this->get_review_data();
+		$this->set_place_info();
 
         // check for errors and set flag
         if ( is_wp_error( $this->reviews )
@@ -52,6 +58,45 @@ class GRWP_Google_Reviews_Output {
         }
 
     }
+
+	/**
+	 * Get place info
+	 */
+	protected function set_place_info() {
+
+		$all_options = get_option( 'google_reviews_option_name' );
+		$data_id = $all_options['serp_data_id'];
+		$place_raw = get_option('grwp_place_info');
+		$place_info = isset($place_raw[$data_id]) ? $place_raw[$data_id] : null;
+
+		if ( $place_info ) {
+
+			$place_info_arr         = json_decode( $place_info, true );
+			$this->rating_rounded   = intval( round( $place_info_arr['rating'] ) );
+			$this->rating_formatted = number_format_i18n( $place_info_arr['rating'], 1 );
+			$this->total_reviews    = number_format_i18n($place_info_arr['reviews']);
+			$this->place_title      = $place_info_arr['title'];
+
+		}
+
+	}
+
+	/**
+	 * Get total star rating html
+	 */
+	protected function get_total_stars() {
+
+		$path = esc_attr( GR_PLUGIN_DIR_URL );
+		$star = sprintf('<img src="%sdist/images/svg-star.svg" alt="" />', $path);
+		$star_output = '<span class="grwp_stars-wrapper">';
+		for ( $i = 1; $i <= $this->rating_rounded; $i++ ) {
+			$star_output .= $star;
+		}
+		$star_output .= '</span>';
+
+		return $star_output;
+
+	}
 
     /**
      * Prepare time string for reviews

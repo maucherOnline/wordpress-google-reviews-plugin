@@ -3,13 +3,12 @@
 /* ------------------------------------------------------------------------- */
 
 #g-review {
-
   &.layout_style-6 {
     .g-review {
       padding: 29px 30px 32px;
       border-radius: 0;
       opacity: 1;
-      box-shadow: 0 5px 10px rgba(0,0,0,0) !important;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0) !important;
       background-color: #e3e3e3;
       overflow: hidden;
       text-align: left;
@@ -17,20 +16,25 @@
 
       .gr-inner-header {
         flex-flow: row nowrap;
+
         img {
           &.gr-profile {
             display: block;
             margin: 0 16px 9px 0;
           }
+
           &.gr-google {
 
           }
         }
+
         p {
           flex-basis: 100%;
+
           br {
             display: none;
           }
+
           a {
             display: block;
             padding-right: 26px;
@@ -38,8 +42,10 @@
             color: black;
           }
         }
+
         .gr-stars {
           display: flex;
+
           .stars-wrapper {
             display: flex;
 
@@ -57,20 +63,24 @@
       ::-webkit-scrollbar-track {
         background: white;
       }
+
       * {
         scrollbar-color: #b7b7b7 #ffffff;
       }
+
       .gr-inner-body {
         max-height: 76px;
         overflow: auto;
 
         p {
-          color: rgba(0,0,0,0.6);
+          color: rgba(0, 0, 0, 0.6);
         }
       }
     }
+
     .swiper {
       padding-top: 25px;
+
       .swiper-slide .g-review {
         -webkit-transition: all .4s;
         transition: all .4s;

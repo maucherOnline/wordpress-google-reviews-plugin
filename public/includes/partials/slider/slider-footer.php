@@ -15,6 +15,3 @@ if (! defined('ABSPATH'))
 </div>
 
 </div> <!--swiper-->
-
-
-

@@ -3,7 +3,6 @@
 /* ------------------------------------------------------------------------- */
 
 #g-review {
-
   &.layout_style-7 {
     .g-review {
       padding: 29px 30px 32px;
@@ -26,21 +25,26 @@
             top: -70px;
             left: calc(50% - 25px);
           }
+
           &.gr-google {
 
           }
         }
+
         p {
           flex-basis: 100%;
+
           br {
             display: none;
           }
+
           a {
             display: block;
             margin-bottom: 4px;
             color: black;
           }
         }
+
         .gr-stars {
           display: flex;
           flex-direction: column-reverse;
@@ -48,6 +52,7 @@
           img {
             margin-right: 3px !important;
           }
+
           .time {
 
           }
@@ -59,17 +64,20 @@
         overflow: auto;
 
         p {
-          color: rgba(0,0,0,0.6);
+          color: rgba(0, 0, 0, 0.6);
         }
       }
     }
+
     .swiper {
       padding-top: 25px;
+
       .swiper-slide .g-review {
         margin-top: 26px !important;
         -webkit-transition: all .4s;
         transition: all .4s;
       }
     }
+
   }
 }

@@ -3,11 +3,16 @@
 /* ------------------------------------------------------------------------- */
 
 #g-review:not(.badge) {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
-  gap: 30px;
-  margin: 30px auto;
-  padding: 0;
+
+  &.grwp_grid {
+    .grwp_body {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+      gap: 30px;
+      margin: 30px auto;
+      padding: 0;
+    }
+  }
 
   .g-review {
     padding: 24px;
@@ -56,6 +61,7 @@
         margin: 0 10px 0 0 !important;
         vertical-align: middle !important;
       }
+
       .time {
         vertical-align: middle;
 
@@ -69,6 +75,7 @@
       width: 7px;
       border-radius: 10px;
     }
+
     * {
       scrollbar-width: thin;
       scrollbar-color: #b7b7b7 #e5e5e5;
@@ -78,6 +85,7 @@
       background: #e5e5e5;
       border-radius: 10px;
     }
+
     ::-webkit-scrollbar-thumb {
       background-color: #b7b7b7;
       border-radius: 10px;

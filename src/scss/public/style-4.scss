@@ -9,7 +9,7 @@
       padding: 30px 30px 58px;
       border-radius: 0;
       opacity: 1;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.16);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16);
 
       &:before {
         position: absolute;
@@ -20,7 +20,7 @@
         height: 45px;
         display: block;
         z-index: 0;
-        background: rgba(0,0,0,0.05);
+        background: rgba(0, 0, 0, 0.05);
         content: '';
       }
 
@@ -69,7 +69,7 @@
         overflow: auto;
 
         p {
-          color: rgba(0,0,0,0.6);
+          color: rgba(0, 0, 0, 0.6);
         }
       }
     }

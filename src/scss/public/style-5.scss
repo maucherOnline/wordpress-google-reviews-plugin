@@ -3,13 +3,12 @@
 /* ------------------------------------------------------------------------- */
 
 #g-review {
-
   &.layout_style-5 {
     .g-review {
       padding: 29px 30px 32px;
       border-radius: 16px;
       opacity: 1;
-      box-shadow: 0 5px 10px rgba(0,0,0,0) !important;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0) !important;
       background: linear-gradient(45deg, #F6F2F2, #D9D9D9);
       overflow: hidden;
       text-align: center;
@@ -21,25 +20,31 @@
             margin: 0 auto 9px;
             filter: grayscale(.8);
           }
+
           &.gr-google {
 
           }
         }
+
         p {
           flex-basis: 100%;
+
           br {
             display: none;
           }
+
           a {
             display: block;
             margin-bottom: 4px;
             color: black;
           }
         }
+
         .gr-stars {
           img {
             margin-right: 7px !important;
           }
+
           .time {
 
           }
@@ -49,6 +54,7 @@
       ::-webkit-scrollbar-track {
         background: white;
       }
+
       * {
         scrollbar-color: #b7b7b7 #ffffff;
       }
@@ -58,12 +64,14 @@
         overflow: auto;
 
         p {
-          color: rgba(0,0,0,0.6);
+          color: rgba(0, 0, 0, 0.6);
         }
       }
     }
+
     .swiper {
       padding-top: 25px;
+
       .swiper-slide .g-review {
         -webkit-transition: all .4s;
         transition: all .4s;

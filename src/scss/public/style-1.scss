@@ -8,7 +8,7 @@
       padding: 30px;
       border-radius: 16px;
       opacity: 1;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.16);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16);
 
       .gr-inner-header {
         img {
@@ -22,39 +22,46 @@
 
           }
         }
+
         p {
           position: relative;
           flex-basis: calc(100% - 75px);
+
           a {
             padding-right: 32px;
           }
         }
+
         .gr-stars {
           display: flex;
           align-items: flex-end;
           flex-wrap: wrap;
+
           .stars-wrapper {
             img {
               margin-right: 5px !important;
             }
           }
+
           .time {
             display: inline-block;
           }
         }
       }
+
       .gr-inner-body {
         max-height: 76px;
         overflow: auto;
 
         p {
-          color: rgba(0,0,0,0.6);
+          color: rgba(0, 0, 0, 0.6);
         }
       }
     }
+
     .swiper-button-next,
     .swiper-button-prev {
-      box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
     }
   }
 }

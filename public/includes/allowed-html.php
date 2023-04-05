@@ -33,6 +33,9 @@ $allowed_html = [
     ],
     'strong' => [],
     'h4' => [],
+	'h3' => [
+		'class' => []
+	],
     'br' => [],
     'iframe' => [
         'src'       => [],

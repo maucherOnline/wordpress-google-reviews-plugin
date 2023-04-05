@@ -22,52 +22,33 @@ class GRWP_Reviews_Widget_Badge
             return '';
         }
 
-		$all_options = get_option( 'google_reviews_option_name' );
-        $data_id = $all_options['serp_data_id'];
-        $place_option = get_option('grwp_place_info');
-        $place_raw = get_option('grwp_place_info');
-        $place_info = isset($place_raw[$data_id]) ? $place_raw[$data_id] : null;
-
-        if ( ! $place_info ) return __( '', 'grwp' );
-
-        $place_info_arr = json_decode($place_info, true);
-
-        $rating_rounded = intval(round($place_info_arr['rating']));
-        $rating_formatted = number_format($place_info_arr['rating'], 1);
-        $reviews = $place_info_arr['reviews'];
-        $title = $place_info_arr['title'];
-
-        $stars = $this->get_stars($rating_rounded);
+        $stars = $this->get_total_stars();
 
 		// loop through reviews
 		$output = '<div id="g-review" class="badge">';
-        ob_start();
-        ?>
-
+        $output .= sprintf('
 		<a href="#badge_list"
 		   class="g-badge"
 		   target="_blank">
-			<img src="<?php echo GR_PLUGIN_DIR_URL .'/dist/images/google-logo-svg.svg'; ?>"
+			<img src="%sdist/images/google-logo-svg.svg"
 			     alt=""
 			     class="g-logo"
 			/>
-			<span class="g-label">
-				<?php _e('Our Google Reviews', 'grwp'); ?>
-											</span>
-            <?php echo $stars; ?>
-			<span class="g-rating">
-                <?php echo $rating_formatted; ?>
-			</span>
-		</a>
+			<span class="g-label">%s</span>
+            %s
+			<span class="g-rating">%s</span>
+		</a>',
+            GR_PLUGIN_DIR_URL,
+            __('Our Google Reviews', 'grwp'),
+	        $stars,
+            $this->rating_formatted
+        );
 
-
-<?php
-        $output .= ob_get_clean();
 		$output .= '</div>';
         $output .= '<div class="g-review-sidebar right hide"><div class="grwp-header">';
-        $output .= sprintf('<span class="business-title">%s</span>', $title);
+        $output .= sprintf('<span class="business-title">%s</span>', $this->place_title);
         $output .=  $stars;
-        $output .= sprintf('<span class="rating">%s</span>', $rating_formatted);
+        $output .= sprintf('<span class="rating">%s</span>', $this->rating_formatted);
         $output .= '<span class="grwp-close"></span></div>';
         $output .= '<div class="grwp-sidebar-inner">';
 
@@ -90,25 +71,6 @@ class GRWP_Reviews_Widget_Badge
         $output .= '</div></div>';
 
 		return wp_kses( $output, $this->allowed_html );
-
-	}
-
-	/**
-	 * Count and prepare stars
-	 * @param $rating
-	 * @return string
-	 */
-	private function get_stars( $rating ) {
-
-		$path = esc_attr( GR_PLUGIN_DIR_URL );
-		$star = sprintf('<img src="%sdist/images/svg-star.svg" alt="" />', $path);
-		$star_output = '<span class="stars-wrapper">';
-		for ( $i = 1; $i <= $rating; $i++ ) {
-			$star_output .= $star;
-		}
-		$star_output .= '</span>';
-
-		return $star_output;
 
 	}
 

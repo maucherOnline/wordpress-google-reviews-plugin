@@ -4,14 +4,13 @@
 
 #g-review {
   &.layout_style-2 {
-
     .g-review {
       position: relative;
       padding: 24px 30px 106px;
       border-radius: 16px;
       opacity: 1;
-      border: 1px solid rgba(0,0,0,0.2);
-      box-shadow: 0 5px 10px rgba(0,0,0,0) !important;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0) !important;
       overflow: hidden;
 
       &:before {
@@ -23,7 +22,7 @@
         height: 89px;
         display: block;
         z-index: 0;
-        background: rgba(0,0,0,0.05);
+        background: rgba(0, 0, 0, 0.05);
         content: '';
       }
 
@@ -79,7 +78,7 @@
         overflow: auto;
 
         p {
-          color: rgba(0,0,0,.6);
+          color: rgba(0, 0, 0, .6);
         }
       }
     }
