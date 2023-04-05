@@ -177,6 +177,10 @@ class GRWP_Google_Reviews_Output {
      */
     protected function step_over_review( $rating, $text ) {
 
+		if ( ! grwp_fs()->can_use_premium_code() ) {
+			return false;
+		}
+
         // step over rating if minimum stars are not met
         if ( isset($this->options['filter_below_5_stars'])
             && $this->options['filter_below_5_stars'] ) {

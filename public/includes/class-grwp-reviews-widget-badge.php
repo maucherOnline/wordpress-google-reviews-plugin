@@ -17,6 +17,11 @@ class GRWP_Reviews_Widget_Badge
 
 		}
 
+        // Check if a user is on a trial or has an activated license
+		if ( ! grwp_fs()->can_use_premium_code() ) {
+            return '';
+        }
+
 		$all_options = get_option( 'google_reviews_option_name' );
         $data_id = $all_options['serp_data_id'];
         $place_option = get_option('grwp_place_info');
