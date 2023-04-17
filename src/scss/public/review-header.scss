@@ -6,25 +6,39 @@
       flex-flow: row wrap;
       justify-content: center;
       text-align: center;
+      margin-bottom: 50px;
 
       .grwp_header-inner {
         width: 100%;
         max-width: 390px;
+        box-shadow: 0 0 5px 0 rgba(0,0,0,0.1);
+        padding: 32px 16px;
+
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        column-gap: 5px;
+        row-gap: 16px;
 
         .grwp_business-title {
           flex-basis: 100%;
+          margin: 0;
         }
 
         .grwp_stars-wrapper {
+          display: inline-flex;
+          gap: 5px;
+          align-items: center;
           img {
-            max-width: 35px;
+            max-width: clamp(22px, 5vw, 32px);
           }
         }
 
         .grwp_total-rating {
           font-size: 40px;
-          line-height: 40px;
+          line-height: 1em;
           font-weight: 600;
+          align-self: center;
         }
 
         .grwp_5_stars {
@@ -34,15 +48,48 @@
           text-align: left;
           padding-left: 7px;
           font-size: 14px;
-          margin-right: 12px;
           padding-right: 8px;
-          border-right: 1px solid grey;
+          align-self: center;
         }
 
         .grwp_overall {
           font-weight: 400;
+          margin: 0;
         }
       }
     }
+  }
+  &.layout_style-1 .grwp_header .grwp_header-inner,
+  &.layout_style-2 .grwp_header .grwp_header-inner,
+  &.layout_style-3 .grwp_header .grwp_header-inner,
+  &.layout_style-5 .grwp_header .grwp_header-inner,
+  &.layout_style-8 .grwp_header .grwp_header-inner {
+    border-radius: 16px;
+  }
+  &.layout_style-2 .grwp_header .grwp_header-inner,
+  &.layout_style-3 .grwp_header .grwp_header-inner {
+    box-shadow: none;
+    border: 1px solid rgba(0,0,0,.2);
+  }
+  &.layout_style-4 .grwp_header .grwp_header-inner {
+    box-shadow: 0 5px 10px rgba(0,0,0,.16);;
+  }
+  &.layout_style-5 .grwp_header .grwp_header-inner {
+    box-shadow: none;
+    background: linear-gradient(45deg,#f6f2f2,#d9d9d9);
+  }
+  &.layout_style-6 .grwp_header .grwp_header-inner {
+    box-shadow: none;
+    background-color: #e3e3e3;
+  }
+  &.layout_style-8 .grwp_header .grwp_header-inner {
+    box-shadow: none;
+    background-color: black;
+  }
+  &.layout_style-8 .grwp_header .grwp_header-inner * {
+    color: white;
+  }
+  &.layout_style-8 .grwp_header .grwp_header-inner .grwp_stars-wrapper img {
+    filter: hue-rotate(45deg);
   }
 }
