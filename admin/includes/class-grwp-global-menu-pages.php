@@ -72,12 +72,62 @@ Class GRWP_Global_Menu_Pages {
                 </div>
             </form>
 
-            <div class="preview_section">
-                <h2>
-                    <?php _e( 'Preview', 'grwp' ); ?>
-                </h2>
-                <?php echo wp_kses(do_shortcode('[google-reviews]'), $allowed_html); ?>
-            </div>
+            <?php
+            $settings = $this->google_reviews_options = get_option( 'google_reviews_option_name' );
+            $widget_type = $settings['style_2']; ?>
+            <h2>
+                <?php _e( 'Preview', 'grwp' ); ?>
+            </h2>
+            <?php
+            if ($widget_type === 'Slider' || $widget_type === 'Grid') : ?>
+
+            <?php
+                ob_start();
+                for ($x = 1; $x <= 8 ; $x++) :
+
+                ?>
+
+                <div class="preview_section">
+
+                    <?php
+                    if ($widget_type === 'Slider') { ?>
+                        <label>
+                            <?php _e('Use this shortcode to display the widget', 'grwp'); ?>
+                            <input type="text" disabled value="[google-reviews type='slider' style='<?php echo $x; ?>']">
+                        </label>
+                    <?php
+                        echo wp_kses( do_shortcode( '[google-reviews type="slider" style="' . $x . '"]' ), $allowed_html );
+                    } else { ?>
+                        <label>
+                            <?php _e('Use this shortcode to display the widget', 'grwp'); ?>
+                            <input type="text" disabled value="[google-reviews type='grid' max_reviews='10' style='<?php echo $x; ?>']">
+                        </label>
+                        <?php
+                        echo wp_kses( do_shortcode( '[google-reviews type="grid" max_reviews="10" style="' . $x . '"]' ), $allowed_html );
+                    }
+                    ?>
+                </div>
+
+            <?php
+                endfor;
+
+                else : ?>
+
+                <div class="preview_section">
+                    <label>
+		                <?php _e('Use this shortcode to display the widget', 'grwp'); ?>
+                        <input type="text" disabled value="[google-reviews type='badge']">
+                    </label>
+                    <?php
+                    echo wp_kses( do_shortcode( '[google-reviews type="badge"]' ), $allowed_html );
+                    ?>
+                </div>
+
+                <?php
+            endif;
+            echo ob_get_clean();
+            ?>
+
         </div>
     <?php }
 }

@@ -66,7 +66,7 @@ class GRWP_Reviews_Widget_Slider
 
         $output .= ob_get_clean();
 
-        $output .= '</div>';
+        $output .= '</div></div></div>';
 
         return wp_kses( $output, $this->allowed_html );
 

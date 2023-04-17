@@ -11,7 +11,7 @@
       .grwp_header-inner {
         width: 100%;
         max-width: 390px;
-        box-shadow: 0 0 5px 0 rgba(0,0,0,0.1);
+        //box-shadow: 0 0 5px 0 rgba(0,0,0,0.1);
         padding: 32px 16px;
 
         display: flex;
@@ -65,7 +65,7 @@
   &.layout_style-3 .grwp_header .grwp_header-inner,
   &.layout_style-5 .grwp_header .grwp_header-inner,
   &.layout_style-8 .grwp_header .grwp_header-inner {
-    border-radius: 16px;
+    //border-radius: 16px;
   }
   &.layout_style-2 .grwp_header .grwp_header-inner,
   &.layout_style-3 .grwp_header .grwp_header-inner {
@@ -73,22 +73,22 @@
     border: 1px solid rgba(0,0,0,.2);
   }
   &.layout_style-4 .grwp_header .grwp_header-inner {
-    box-shadow: 0 5px 10px rgba(0,0,0,.16);;
+    //box-shadow: 0 5px 10px rgba(0,0,0,.16);;
   }
   &.layout_style-5 .grwp_header .grwp_header-inner {
     box-shadow: none;
-    background: linear-gradient(45deg,#f6f2f2,#d9d9d9);
+    //background: linear-gradient(45deg,#f6f2f2,#d9d9d9);
   }
   &.layout_style-6 .grwp_header .grwp_header-inner {
     box-shadow: none;
-    background-color: #e3e3e3;
+    //background-color: #e3e3e3;
   }
   &.layout_style-8 .grwp_header .grwp_header-inner {
     box-shadow: none;
-    background-color: black;
+    //background-color: black;
   }
   &.layout_style-8 .grwp_header .grwp_header-inner * {
-    color: white;
+    //color: white;
   }
   &.layout_style-8 .grwp_header .grwp_header-inner .grwp_stars-wrapper img {
     filter: hue-rotate(45deg);
