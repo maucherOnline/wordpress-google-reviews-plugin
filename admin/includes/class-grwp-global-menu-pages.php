@@ -50,10 +50,11 @@ Class GRWP_Global_Menu_Pages {
                        class="nav-tab">
                         <?php _e('Display Settings', 'grwp'); ?>
                     </a>
+                    <!--
                     <a href="#embedding_instructions"
                        class="nav-tab">
-                        <?php _e('Embedding Instructions', 'grwp'); ?>
-                    </a>
+                        <?php //_e('Embedding Instructions', 'grwp'); ?>
+                    </a>-->
                     <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
                     <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=upgrade_tab&utm_campaign=upgrade"
                        class="nav-tab upgrade"

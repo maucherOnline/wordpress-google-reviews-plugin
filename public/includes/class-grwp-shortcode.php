@@ -115,6 +115,7 @@ class GRWP_Shortcode {
 
         // check if style type is overwritten by shortcode attributes
         $style_type = $this->options['layout_style'];
+
         if ( $review_style_override !== '' ) {
 
             $style_type = $review_style_override;

@@ -9,6 +9,7 @@ $(document).ready(function() {
     }
 
     // hide style options for badge layout on change
+    /*
     const $layout_select = $('#style_2');
     $layout_select.change(function () {
         const $layout_style_option = $('.form-table .layout_style');
@@ -20,5 +21,6 @@ $(document).ready(function() {
     })
 
     $layout_select.change();
+    */
 
 });

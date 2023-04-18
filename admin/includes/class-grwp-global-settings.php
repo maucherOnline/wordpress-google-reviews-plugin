@@ -147,7 +147,6 @@ Class GRWP_Global_Settings {
             'google_reviews_style_layout_setting_section' // section
         );
 
-        // $id, $title, $callback, $page, $section = 'default', $args = array()
         add_settings_field(
             'layout_style', // id
             __( 'Design type', 'grwp' ), // title
@@ -194,6 +193,7 @@ Class GRWP_Global_Settings {
             $this->settings_slug // page
         );
 
+        /*
         add_settings_field(
             'embedding_instructions', // id
             __( 'Shortcode', 'grwp' ), // title
@@ -201,6 +201,7 @@ Class GRWP_Global_Settings {
             $this->settings_slug, // page
             'google_reviews_embedding_instructions_section' // section
         );
+        */
 
     }
 
