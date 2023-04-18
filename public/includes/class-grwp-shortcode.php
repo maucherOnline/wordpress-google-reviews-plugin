@@ -101,13 +101,16 @@ class GRWP_Shortcode {
         $review_type_override = '';
         $review_style_override = '';
         $max_reviews = null;
+	    $show_place_info = false;
 
         if ( $atts ) {
 
             $review_type_override = $this->get_review_type_override( $atts );
             $review_style_override = $this->get_review_style_override( $atts );
-
+			$place_info = isset($atts['place_info']) ? $atts['place_info'] : null;
+	        $show_place_info = $place_info === 'true';
             $max_reviews = isset($atts['max_reviews']) ? $atts['max_reviews'] : null;
+
         }
 
         // check if style type is overwritten by shortcode attributes
@@ -128,7 +131,7 @@ class GRWP_Shortcode {
 
         if ( $widget_type === 'slider' ) {
             $slider = new GRWP_Reviews_Widget_Slider();
-            return $slider->render( $style_type, $max_reviews );
+            return $slider->render( $style_type, $max_reviews, $show_place_info );
         }
 
 		elseif ( $widget_type === 'badge' ) {
@@ -137,7 +140,7 @@ class GRWP_Shortcode {
 		}
 
         $grid = new GRWP_Reviews_Widget_Grid();
-        return $grid->render( $style_type, $max_reviews );
+        return $grid->render( $style_type, $max_reviews, $show_place_info );
 
     }
 

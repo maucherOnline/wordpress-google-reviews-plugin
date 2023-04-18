@@ -4,7 +4,7 @@ class GRWP_Reviews_Widget_Grid
     extends
     GRWP_Google_Reviews_Output {
 
-    public function render( $style_type, $max_reviews = null ) {
+    public function render( $style_type, $max_reviews = null, $show_place_info = false ) {
 
         // error handling
         if ( $this->reviews_have_error ) {
@@ -18,19 +18,24 @@ class GRWP_Reviews_Widget_Grid
 
 	    $output = sprintf('<div id="g-review" class="%s grwp_grid">', $style_type);
 
-	    $output .= '<div class="grwp_header"><div class="grwp_header-inner">';
-	    $output .= sprintf('<h3 class="grwp_business-title">%s</h3>', $this->place_title);
-	    $output .= sprintf(
-			'<span class="grwp_total-rating">%s</span><span class="grwp_5_stars">%s</span>',
-			$this->rating_formatted,
-		    __('Out of 5 stars', 'grwp')
-	    );
-	    $output .= $stars;
-		$output .= sprintf(
-			'<h3 class="grwp_overall">'.__('Overall rating out of %s Google reviews', 'grwp').'</h3>',
-			$this->total_reviews
-		);
-		$output .= '</div></div><div class="grwp_body">';
+		if ( $show_place_info ) {
+
+			$output .= '<div class="grwp_header"><div class="grwp_header-inner">';
+			$output .= sprintf( '<h3 class="grwp_business-title">%s</h3>', $this->place_title );
+			$output .= sprintf(
+				'<span class="grwp_total-rating">%s</span><span class="grwp_5_stars">%s</span>',
+				$this->rating_formatted,
+				__( 'Out of 5 stars', 'grwp' )
+			);
+			$output .= $stars;
+			$output .= sprintf(
+				'<h3 class="grwp_overall">' . __( 'Overall rating out of %s Google reviews', 'grwp' ) . '</h3>',
+				$this->total_reviews
+			);
+			$output .= '</div></div>';
+
+		}
+		$output .= '<div class="grwp_body">';
 
 		// loop through reviews
         $count = 0;

@@ -79,6 +79,8 @@ Class GRWP_Global_Menu_Pages {
                 <?php _e( 'Preview', 'grwp' ); ?>
             </h2>
             <?php
+            $docs = 'https://reviewsembedder.com/docs/how-to-overwrite-styles/?utm_source=wp_backend&utm_medium=preview&utm_campaign=docs';
+
             if ($widget_type === 'Slider' || $widget_type === 'Grid') : ?>
 
             <?php
@@ -92,18 +94,24 @@ Class GRWP_Global_Menu_Pages {
                     <?php
                     if ($widget_type === 'Slider') { ?>
                         <label>
-                            <?php _e('Use this shortcode to display the widget', 'grwp'); ?>
-                            <input type="text" disabled value="[google-reviews type='slider' style='<?php echo $x; ?>']">
+                            <?php echo sprintf(
+                                    __('Use this shortcode to display the widget (<a href="%s" target="_blank">Documentation</a>).', 'grwp'),
+                                    $docs
+                            ); ?>
+                            <input type="text" disabled value="[google-reviews type='slider' place_info='true' style='<?php echo $x; ?>']">
                         </label>
                     <?php
-                        echo wp_kses( do_shortcode( '[google-reviews type="slider" style="' . $x . '"]' ), $allowed_html );
+                        echo wp_kses( do_shortcode( '[google-reviews type="slider" place_info="true" style="' . $x . '"]' ), $allowed_html );
                     } else { ?>
                         <label>
-                            <?php _e('Use this shortcode to display the widget', 'grwp'); ?>
-                            <input type="text" disabled value="[google-reviews type='grid' max_reviews='10' style='<?php echo $x; ?>']">
+                            <?php echo sprintf(
+	                            __('Use this shortcode to display the widget (<a href="%s" target="_blank">Documentation</a>).', 'grwp'),
+	                            $docs
+                            ); ?>
+                            <input type="text" disabled value="[google-reviews type='grid' max_reviews='10' place_info='true' style='<?php echo $x; ?>']">
                         </label>
                         <?php
-                        echo wp_kses( do_shortcode( '[google-reviews type="grid" max_reviews="10" style="' . $x . '"]' ), $allowed_html );
+                        echo wp_kses( do_shortcode( '[google-reviews type="grid" max_reviews="10" place_info="true" style="' . $x . '"]' ), $allowed_html );
                     }
                     ?>
                 </div>
@@ -115,7 +123,10 @@ Class GRWP_Global_Menu_Pages {
 
                 <div class="preview_section">
                     <label>
-		                <?php _e('Use this shortcode to display the widget', 'grwp'); ?>
+		                <?php echo sprintf(
+			                __('Use this shortcode to display the widget (<a href="%s" target="_blank">Documentation</a>).', 'grwp'),
+			                $docs
+		                ); ?>
                         <input type="text" disabled value="[google-reviews type='badge']">
                     </label>
                     <?php

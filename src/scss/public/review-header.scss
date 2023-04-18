@@ -6,14 +6,11 @@
       flex-flow: row wrap;
       justify-content: center;
       text-align: center;
-      margin-bottom: 50px;
 
       .grwp_header-inner {
         width: 100%;
         max-width: 390px;
-        //box-shadow: 0 0 5px 0 rgba(0,0,0,0.1);
         padding: 32px 16px;
-
         display: flex;
         flex-flow: row wrap;
         justify-content: center;
@@ -21,6 +18,7 @@
         row-gap: 16px;
 
         .grwp_business-title {
+          font-size: 18px;
           flex-basis: 100%;
           margin: 0;
         }
@@ -53,6 +51,7 @@
         }
 
         .grwp_overall {
+          font-size: 18px;
           font-weight: 400;
           margin: 0;
           color: rgba(0,0,0,.6);
@@ -65,7 +64,7 @@
   &.layout_style-3 .grwp_header .grwp_header-inner,
   &.layout_style-5 .grwp_header .grwp_header-inner,
   &.layout_style-8 .grwp_header .grwp_header-inner {
-    //border-radius: 16px;
+    border-radius: 16px;
   }
   &.layout_style-2 .grwp_header .grwp_header-inner,
   &.layout_style-3 .grwp_header .grwp_header-inner {
