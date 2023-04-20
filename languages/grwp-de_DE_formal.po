@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: undefined\n"
-"POT-Creation-Date: 2023-02-27 20:05+0100\n"
+"POT-Creation-Date: 2023-04-20 16:47+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -28,28 +28,49 @@ msgstr ""
 msgid "How to"
 msgstr "So geht's"
 
-#: admin/includes/class-grwp-free-settings.php:15
-msgid "Place ID"
-msgstr "Place ID"
+#: admin/includes/class-grwp-free-settings.php:25
+#: admin/includes/class-grwp-pro-settings.php:18
+msgid "Search for your business:"
+msgstr "Suche nach dem Unternehmen:"
 
-#: admin/includes/class-grwp-free-settings.php:40
-msgid "How to use this plugin"
-msgstr "Wie es funktioniert"
+#: admin/includes/class-grwp-free-settings.php:87
+#: admin/includes/class-grwp-pro-settings.php:76
+msgid "Search for your business"
+msgstr "Suche nach dem Unternehmen"
 
-#: admin/includes/class-grwp-free-settings.php:41
-msgid "Explained in less than 1 minute..."
-msgstr "Erklärt in weniger als 1 Minute..."
+#: admin/includes/class-grwp-free-settings.php:91
+#: admin/includes/class-grwp-pro-settings.php:80
+msgid "Search business"
+msgstr "Unternehmen suchen"
 
-#: admin/includes/class-grwp-free-settings.php:73
-msgid "Paste the Place ID of your business here."
-msgstr "Place ID des Unternehmens hier einfügen."
-
-#: admin/includes/class-grwp-free-settings.php:76
+#: admin/includes/class-grwp-free-settings.php:94
+#: admin/includes/class-grwp-free-settings.php:174
 #: admin/includes/class-grwp-pro-settings.php:83
 msgid "Pull reviews"
 msgstr "Bewertungen laden"
 
-#: admin/includes/class-grwp-free-settings.php:92
+#: admin/includes/class-grwp-free-settings.php:103
+#: admin/includes/class-grwp-pro-settings.php:92
+msgid ""
+"Details like country, state, city and/or phone number may help achieving "
+"more accurate results."
+msgstr ""
+"Details wie Land, Stadt und/oder die Telefonnummer helfen dabei, präzisere "
+"Ergebnisse zu erhalten."
+
+#: admin/includes/class-grwp-free-settings.php:138
+msgid "How to use this plugin"
+msgstr "Wie es funktioniert"
+
+#: admin/includes/class-grwp-free-settings.php:139
+msgid "Explained in less than 1 minute..."
+msgstr "Erklärt in weniger als 1 Minute..."
+
+#: admin/includes/class-grwp-free-settings.php:171
+msgid "Paste the Place ID of your business here."
+msgstr "Place ID des Unternehmens hier einfügen."
+
+#: admin/includes/class-grwp-free-settings.php:190
 #, php-format
 msgid ""
 "Search for your business in the map below and copy/paste the Place ID into "
@@ -58,24 +79,10 @@ msgstr ""
 "Suche nach deinem Unternehmen in der Karte, kopiere die Place ID und füge "
 "sie oben ein (<a href=\"%s\" target=\"_blank\">kurzes Erklärvideo</a>)."
 
-#: admin/includes/class-grwp-free-settings.php:102
+#: admin/includes/class-grwp-free-settings.php:200
 msgid "Look up your Place ID and paste it in the field above."
 msgstr ""
 "Suche nach der Place ID des Unternehmens und füge sie im Feld oben ein."
-
-#: admin/includes/class-grwp-free-settings.php:108
-msgid ""
-"<strong>Attention</strong>: Google's free version only allows for pulling 5 "
-"reviews."
-msgstr ""
-"<p><strong>Achtung</strong>: Die kostenlose Version stellt nur 5 Bewertungen "
-"bereit."
-
-#: admin/includes/class-grwp-free-settings.php:116
-#, php-format
-msgid "<a href=\"%s\">Upgrade to the PRO version</a> to show ALL your reviews."
-msgstr ""
-"<a href=\"%s\">Upgrade zur PRO-Version</a> um ALLE Bewertungen anzuzeigen."
 
 #: admin/includes/class-grwp-global-menu-pages.php:12
 #: admin/includes/class-grwp-global-menu-pages.php:13
@@ -91,105 +98,130 @@ msgstr "Google Anbindung"
 msgid "Display Settings"
 msgstr "Darstellung"
 
-#: admin/includes/class-grwp-global-menu-pages.php:55
-msgid "Embedding Instructions"
-msgstr "Einbindung"
-
-#: admin/includes/class-grwp-global-menu-pages.php:60
+#: admin/includes/class-grwp-global-menu-pages.php:62
 msgid "Upgrade to"
 msgstr "Upgrade auf"
 
-#: admin/includes/class-grwp-global-menu-pages.php:60
+#: admin/includes/class-grwp-global-menu-pages.php:62
 msgid "PRO"
 msgstr "PRO-Version"
 
-#: admin/includes/class-grwp-global-menu-pages.php:76
+#: admin/includes/class-grwp-global-menu-pages.php:80
 msgid "Preview"
 msgstr "Vorschau"
 
-#: admin/includes/class-grwp-global-settings.php:39
+#: admin/includes/class-grwp-global-menu-pages.php:99
+#: admin/includes/class-grwp-global-menu-pages.php:109
+#: admin/includes/class-grwp-global-menu-pages.php:128
+#, php-format
+msgid ""
+"Use this shortcode to display the widget (<a href=\"%s\" "
+"target=\"_blank\">Documentation</a>)."
+msgstr ""
+"Verwende diesen Shortcode, um das Widget anzuzeigen <a href=\"%s\" "
+"target=\"_blank\">(Dokumentation</a>)."
+
+#: admin/includes/class-grwp-global-settings.php:49
 msgid "Show dummy content"
 msgstr "Blindtext verwenden"
 
-#: admin/includes/class-grwp-global-settings.php:47
+#: admin/includes/class-grwp-global-settings.php:57
 msgid "Reviews language"
 msgstr "Bewertungs-Sprache"
 
-#: admin/includes/class-grwp-global-settings.php:77
+#: admin/includes/class-grwp-global-settings.php:72
+msgid ""
+"<strong>Attention</strong>: the free version only allows for pulling 20 "
+"reviews."
+msgstr ""
+"<p><strong>Achtung</strong>: Die kostenlose Version stellt nur 5 Bewertungen "
+"bereit."
+
+#: admin/includes/class-grwp-global-settings.php:80
+#, php-format
+msgid "<a href=\"%s\">Upgrade to the PRO version</a> to show ALL your reviews."
+msgstr ""
+"<a href=\"%s\">Upgrade zur PRO-Version</a> um ALLE Bewertungen anzuzeigen."
+
+#: admin/includes/class-grwp-global-settings.php:144
 msgid "Layout type"
 msgstr "Layout Typ"
 
-#: admin/includes/class-grwp-global-settings.php:85
+#: admin/includes/class-grwp-global-settings.php:152
 msgid "Design type"
 msgstr "Design Typ"
 
-#: admin/includes/class-grwp-global-settings.php:93
+#: admin/includes/class-grwp-global-settings.php:161
 msgid "Minimum rating (stars)"
 msgstr "Mindest-Bewertung"
 
-#: admin/includes/class-grwp-global-settings.php:101
+#: admin/includes/class-grwp-global-settings.php:169
 msgid "Exclude reviews without text"
 msgstr "Bewertungen ohne Text ausschließen"
 
-#: admin/includes/class-grwp-global-settings.php:109
+#: admin/includes/class-grwp-global-settings.php:177
 msgid "Filter by words (comma separated)"
 msgstr "Bewertungen mit bestimmten Wörtern ausschließen"
 
-#: admin/includes/class-grwp-global-settings.php:130
-msgid "Shortcode"
-msgstr "Shortcode"
-
-#: admin/includes/class-grwp-global-settings.php:204
+#: admin/includes/class-grwp-global-settings.php:274
 msgid "Global settings for showing reviews"
 msgstr "Globale Einstellungen für die Darstellung"
 
-#: admin/includes/class-grwp-global-settings.php:210
+#: admin/includes/class-grwp-global-settings.php:280
 msgid "Display settings"
 msgstr "Darstellungs-Optionen"
 
-#: admin/includes/class-grwp-global-settings.php:232
-#: admin/includes/class-grwp-global-settings.php:284
+#: admin/includes/class-grwp-global-settings.php:302
+#: admin/includes/class-grwp-global-settings.php:368
 msgid "Yes"
 msgstr "Ja"
 
-#: admin/includes/class-grwp-global-settings.php:325
+#: admin/includes/class-grwp-global-settings.php:424
 msgid "Slider"
 msgstr "Slider"
 
-#: admin/includes/class-grwp-global-settings.php:329
+#: admin/includes/class-grwp-global-settings.php:428
 msgid "Grid"
 msgstr "Grid"
 
-#: admin/includes/class-grwp-global-settings.php:344
+#: admin/includes/class-grwp-global-settings.php:434
+msgid "Floating Badge (PRO)"
+msgstr "Floating Badge (PRO)"
+
+#: admin/includes/class-grwp-global-settings.php:441
+msgid "Floating Badge"
+msgstr "Floating Badge"
+
+#: admin/includes/class-grwp-global-settings.php:459
 msgid "1"
 msgstr "1"
 
-#: admin/includes/class-grwp-global-settings.php:345
+#: admin/includes/class-grwp-global-settings.php:460
 msgid "2"
 msgstr "2"
 
-#: admin/includes/class-grwp-global-settings.php:346
+#: admin/includes/class-grwp-global-settings.php:461
 msgid "3"
 msgstr "3"
 
-#: admin/includes/class-grwp-global-settings.php:368
+#: admin/includes/class-grwp-global-settings.php:483
 msgid "Design"
 msgstr "Design"
 
-#: admin/includes/class-grwp-global-settings.php:368
+#: admin/includes/class-grwp-global-settings.php:483
 msgid " #"
 msgstr " #"
 
-#: admin/includes/class-grwp-global-settings.php:468
+#: admin/includes/class-grwp-global-settings.php:583
 msgid "Embedding instructions"
 msgstr "Anleitung zur Einbindung"
 
-#: admin/includes/class-grwp-global-settings.php:478
+#: admin/includes/class-grwp-global-settings.php:593
 msgid "Use this shortcode to show your reviews on pages and posts:"
 msgstr ""
 "Verwende diesen Shortcode, um Bewertungen in Seiten und Beiträgen anzuzeigen:"
 
-#: admin/includes/class-grwp-global-settings.php:484
+#: admin/includes/class-grwp-global-settings.php:599
 #, php-format
 msgid ""
 "<a href=\"%s\" target=\"_blank\">See</a>, how to overwrite styles, widget "
@@ -198,70 +230,37 @@ msgstr ""
 "<a href=\"%s\" target=\"_blank\">So werden</a> Styles, Widget Typen und "
 "andere Einstellungen überschrieben."
 
-#: admin/includes/class-grwp-pro-settings.php:18
-msgid "Search for your business:"
-msgstr "Suche nach dem Unternehmen:"
-
-#: admin/includes/class-grwp-pro-settings.php:76
-msgid "Search for your business"
-msgstr "Suche nach dem Unternehmen"
-
-#: admin/includes/class-grwp-pro-settings.php:80
-msgid "Search business"
-msgstr "Unternehmen suchen"
-
-#: admin/includes/class-grwp-pro-settings.php:92
-msgid ""
-"Details like country, state, city and/or phone number may help achieving "
-"more accurate results."
-msgstr ""
-"Details wie Land, Stadt und/oder die Telefonnummer helfen dabei, präzisere "
-"Ergebnisse zu erhalten."
-
 #: admin/includes/free/how-to.php:8
 msgid "How to use the free version"
 msgstr "Wie es funktioniert"
 
-#: admin/includes/free/how-to.php:10
-msgid "Remove checkmark at \"Show Dummy Content\""
-msgstr "Entferne den Haken bei \"Blindtext verwenden\""
+#: admin/includes/free/how-to.php:10 admin/includes/pro/how-to-pro.php:10
+msgid "Enter your business name"
+msgstr "Gib den Unternehmensnamen ein"
 
-#: admin/includes/free/how-to.php:11
-msgid "Search for your business in our map search."
-msgstr "Suche nach dem Unternehmen in der Suchkarte."
+#: admin/includes/free/how-to.php:11 admin/includes/pro/how-to-pro.php:11
+msgid "Click 'Search business'"
+msgstr "Klicke auf 'Unternehmen suchen'"
 
-#: admin/includes/free/how-to.php:18
-#, php-format
-msgid ""
-"If this is not available, you can search for your business <a href=\"%s\" "
-"target=\"_blank\">here</a>"
-msgstr ""
-"Wenn die Suchkarte nicht verfügbar ist, suche <a href=\"%s\" "
-"target=\"_blank\">hier</a> nach deinem Unternehmen"
+#: admin/includes/free/how-to.php:12 admin/includes/pro/how-to-pro.php:12
+msgid "Choose your business from the list"
+msgstr "Wähle dein Unternehmen aus der Liste aus"
 
-#: admin/includes/free/how-to.php:26
-msgid "Copy the Place ID of your business"
-msgstr "Kopiere die Place ID des Unternehmens"
-
-#: admin/includes/free/how-to.php:27
-msgid "Paste the Place ID into the Place ID field"
-msgstr "Place ID des Unternehmens ins Place ID Feld einfügen"
-
-#: admin/includes/free/how-to.php:28 admin/includes/pro/how-to-pro.php:10
+#: admin/includes/free/how-to.php:13 admin/includes/pro/how-to-pro.php:13
 msgid "Choose your preferred language"
 msgstr "Wähle die bevorzugte Sprache"
 
-#: admin/includes/free/how-to.php:29 admin/includes/pro/how-to-pro.php:11
+#: admin/includes/free/how-to.php:14 admin/includes/pro/how-to-pro.php:14
 msgid "Click the 'Pull reviews' button"
 msgstr "Klicke den 'Bewertungen laden' Button"
 
-#: admin/includes/free/how-to.php:30 admin/includes/pro/how-to-pro.php:12
+#: admin/includes/free/how-to.php:15 admin/includes/pro/how-to-pro.php:15
 msgid "Wait until the process is finished. The page will refresh automatically"
 msgstr ""
 "Warte, bis der Prozess fertig ist. Die Seite wird sich automatisch "
 "aktualisiren"
 
-#: admin/includes/free/how-to.php:31 admin/includes/pro/how-to-pro.php:13
+#: admin/includes/free/how-to.php:16 admin/includes/pro/how-to-pro.php:16
 msgid ""
 "Now you should already see your reviews. If not, click the 'Pull reviews' "
 "button again"
@@ -269,28 +268,27 @@ msgstr ""
 "Jetzt solltest du bereits die Bewertungen sehen können. Wenn nicht, klicke "
 "den 'Bewertungen laden' Button noch einmal"
 
-#: admin/includes/free/how-to.php:32 admin/includes/pro/how-to-pro.php:14
+#: admin/includes/free/how-to.php:17 admin/includes/pro/how-to-pro.php:17
 msgid "Configure styling and layout options"
 msgstr "Konfiguriere die Styling- und Layout-Optionen"
 
-#: admin/includes/free/how-to.php:33 admin/includes/pro/how-to-pro.php:15
+#: admin/includes/free/how-to.php:18 admin/includes/pro/how-to-pro.php:18
 msgid "Hit 'save'"
 msgstr "Klicke 'Änderungen speichern'"
 
-#: admin/includes/free/how-to.php:34 admin/includes/pro/how-to-pro.php:16
+#: admin/includes/free/how-to.php:19 admin/includes/pro/how-to-pro.php:19
 msgid "You will see your changes applied right after saving"
 msgstr "Deine Änderungen werden direkt nach dem Speichern übernommen"
 
-#: admin/includes/free/how-to.php:35 admin/includes/pro/how-to-pro.php:17
+#: admin/includes/free/how-to.php:20 admin/includes/pro/how-to-pro.php:20
 msgid ""
 "Use the shortcode <code>[google-reviews]</code> to show your reviews on "
 "pages, posts, Elementor, Beaver Builder, Bakery Builder etc."
 msgstr ""
-"Verwenden den Shortcode <code>[google-reviews]</code> um deine Bewertungen "
-"in Seiten, Beiträgen, Elementor, Beaver Builder, Bakery Builder etc. "
-"anzuzeigen."
+"Verwende den Shortcode <code>[google-reviews]</code> um deine Bewertungen in "
+"Seiten, Beiträgen, Elementor, Beaver Builder, Bakery Builder etc. anzuzeigen."
 
-#: admin/includes/free/how-to.php:41
+#: admin/includes/free/how-to.php:26 admin/includes/pro/how-to-pro.php:26
 #, php-format
 msgid ""
 "Check the <a href=\"%s\" target=\"_blank\">documentation</a>, to learn how "
@@ -299,110 +297,100 @@ msgstr ""
 "Lies die <a href=\"%s\" target=\"_blank\">Dokumentation</a>, um zu lernen, "
 "wie du die Ausgabe des Shortcodes verändern kannst"
 
-#: admin/includes/free/how-to.php:51
+#: admin/includes/free/how-to.php:36
 #, php-format
 msgid ""
-"<strong>Note:</strong> the free Google API only allows for pulling 5 "
-"reviews. To get around this, please <a href=\"%s\">upgrade to the PRO "
-"version</a>, which will pull all your reviews"
+"<strong>Note:</strong> the free version only allows for pulling 20 reviews. "
+"To get around this, please <a href=\"%s\" target=\"_blank\">upgrade to the "
+"PRO version</a>, which will pull all your reviews"
 msgstr ""
 "<strong>Achtung:</strong> die kostenlose Version stellt nur 5 Bewertungen "
 "bereit. Um ALLE Bewertungen anzuzeigen, <a href=\"%s\">upgrade bitte zur PRO "
 "Version</a>"
 
-#: admin/includes/free/how-to.php:58 admin/includes/pro/how-to-pro.php:20
+#: admin/includes/free/how-to.php:43 admin/includes/pro/how-to-pro.php:34
 msgid "Video tutorial"
 msgstr "Video-Anleitung"
 
-#: admin/includes/pro/how-to-pro.php:5
+#: admin/includes/pro/how-to-pro.php:8
 msgid "How to use the premium version"
 msgstr "Wie es funktioniert"
 
-#: admin/includes/pro/how-to-pro.php:7
-msgid "Enter your business name"
-msgstr "Gib den Unternehmensnamen ein"
-
-#: admin/includes/pro/how-to-pro.php:8
-msgid "Click 'Search business'"
-msgstr "Klicke auf 'Unternehmen suchen'"
-
-#: admin/includes/pro/how-to-pro.php:9
-msgid "Choose your business from the list"
-msgstr "Wähle dein Unternehmen aus der Liste aus"
-
-#: public/includes/class-grwp-google-reviews-output.php:73
+#: public/includes/class-grwp-google-reviews-output.php:118
 msgid "year"
 msgstr "Jahr"
 
-#: public/includes/class-grwp-google-reviews-output.php:74
+#: public/includes/class-grwp-google-reviews-output.php:119
 msgid "years"
 msgstr "Jahren"
 
-#: public/includes/class-grwp-google-reviews-output.php:77
+#: public/includes/class-grwp-google-reviews-output.php:122
 msgid "month"
 msgstr "Monat"
 
-#: public/includes/class-grwp-google-reviews-output.php:78
+#: public/includes/class-grwp-google-reviews-output.php:123
 msgid "months"
 msgstr "Monaten"
 
-#: public/includes/class-grwp-google-reviews-output.php:81
+#: public/includes/class-grwp-google-reviews-output.php:126
 msgid "week"
 msgstr "Woche"
 
-#: public/includes/class-grwp-google-reviews-output.php:82
+#: public/includes/class-grwp-google-reviews-output.php:127
 msgid "weeks"
 msgstr "Wochen"
 
-#: public/includes/class-grwp-google-reviews-output.php:85
+#: public/includes/class-grwp-google-reviews-output.php:130
 msgid "day"
 msgstr "Tag"
 
-#: public/includes/class-grwp-google-reviews-output.php:86
+#: public/includes/class-grwp-google-reviews-output.php:131
 msgid "days"
 msgstr "Tagen"
 
-#: public/includes/class-grwp-google-reviews-output.php:89
+#: public/includes/class-grwp-google-reviews-output.php:134
 msgid "hour"
 msgstr "Stunde"
 
-#: public/includes/class-grwp-google-reviews-output.php:90
+#: public/includes/class-grwp-google-reviews-output.php:135
 msgid "hours"
 msgstr "Stunden"
 
-#: public/includes/class-grwp-google-reviews-output.php:93
+#: public/includes/class-grwp-google-reviews-output.php:138
 msgid "minute"
 msgstr "Minute"
 
-#: public/includes/class-grwp-google-reviews-output.php:94
+#: public/includes/class-grwp-google-reviews-output.php:139
 msgid "minutes"
 msgstr "Minuten"
 
-#: public/includes/class-grwp-google-reviews-output.php:97
+#: public/includes/class-grwp-google-reviews-output.php:142
 msgid "second"
 msgstr "Sekunde"
 
-#: public/includes/class-grwp-google-reviews-output.php:98
+#: public/includes/class-grwp-google-reviews-output.php:143
 msgid "seconds"
 msgstr "Sekunden"
 
-#: public/includes/class-grwp-google-reviews-output.php:110
+#: public/includes/class-grwp-google-reviews-output.php:157
+#: public/includes/class-grwp-google-reviews-output.php:162
 msgid " ago"
 msgstr "vor "
 
-#: public/includes/class-grwp-google-reviews-output.php:110
+#: public/includes/class-grwp-google-reviews-output.php:157
+#: public/includes/class-grwp-google-reviews-output.php:162
 msgid "just now"
 msgstr "gerade eben"
 
-#: public/includes/class-grwp-google-reviews-output.php:141
+#: public/includes/class-grwp-google-reviews-output.php:199
 msgid "Lorem Ipsum"
 msgstr "Lorem Ipsum"
 
-#: public/includes/class-grwp-google-reviews-output.php:146
+#: public/includes/class-grwp-google-reviews-output.php:204
 msgid "three months ago"
 msgstr "vor drei Monaten"
 
-#: public/includes/class-grwp-google-reviews-output.php:147
+#: public/includes/class-grwp-google-reviews-output.php:205
 msgid ""
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
 "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "
@@ -414,7 +402,52 @@ msgstr ""
 "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo "
 "consequat."
 
+#: public/includes/class-grwp-reviews-widget-badge.php:16
 #: public/includes/class-grwp-reviews-widget-grid.php:12
 #: public/includes/class-grwp-reviews-widget-slider.php:16
 msgid "No reviews available"
 msgstr "Keine Bewertungen verfügbar"
+
+#: public/includes/class-grwp-reviews-widget-badge.php:42
+msgid "Our Google Reviews"
+msgstr "Google Bewertungen"
+
+#: public/includes/class-grwp-reviews-widget-grid.php:28
+#: public/includes/class-grwp-reviews-widget-slider.php:34
+msgid "Out of 5 stars"
+msgstr "von 5 Sternen"
+
+#: public/includes/class-grwp-reviews-widget-grid.php:32
+#: public/includes/class-grwp-reviews-widget-slider.php:38
+#, php-format
+msgid "Overall rating out of %s Google reviews"
+msgstr "Gesamtbewertung aus %s Google-Bewertungen"
+
+#~ msgid "Place ID"
+#~ msgstr "Place ID"
+
+#~ msgid "Embedding Instructions"
+#~ msgstr "Einbindung"
+
+#~ msgid "Shortcode"
+#~ msgstr "Shortcode"
+
+#~ msgid "Remove checkmark at \"Show Dummy Content\""
+#~ msgstr "Entferne den Haken bei \"Blindtext verwenden\""
+
+#~ msgid "Search for your business in our map search."
+#~ msgstr "Suche nach dem Unternehmen in der Suchkarte."
+
+#, php-format
+#~ msgid ""
+#~ "If this is not available, you can search for your business <a href=\"%s\" "
+#~ "target=\"_blank\">here</a>"
+#~ msgstr ""
+#~ "Wenn die Suchkarte nicht verfügbar ist, suche <a href=\"%s\" "
+#~ "target=\"_blank\">hier</a> nach deinem Unternehmen"
+
+#~ msgid "Copy the Place ID of your business"
+#~ msgstr "Kopiere die Place ID des Unternehmens"
+
+#~ msgid "Paste the Place ID into the Place ID field"
+#~ msgstr "Place ID des Unternehmens ins Place ID Feld einfügen"
