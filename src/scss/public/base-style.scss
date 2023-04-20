@@ -36,7 +36,10 @@
 
         a {
           text-decoration: none;
-          font: normal normal bold 18px/22px Roboto, Arial, sans-serif;
+          font-family: inherit;
+          font-weight: 600;
+          font-size: 18px;
+          line-height: 22px;
           letter-spacing: 0;
           color: #5791FF;
         }
@@ -65,7 +68,11 @@
       .time {
         vertical-align: middle;
 
-        font: normal normal normal 14px/17px Roboto, Arial, sans-serif;
+        //font: normal normal normal 14px/17px inherit;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 17px;
+        font-family: inherit;
         letter-spacing: 0;
         color: #0000004D;
       }
@@ -100,7 +107,7 @@
         margin: 0 0 16px 0;
         text-align: left;
         font-size: 14px;
-        font-family: Roboto, Arial, sans-serif;;
+        font-family: inherit;
         line-height: 1.36;
         letter-spacing: 0;
         color: black;

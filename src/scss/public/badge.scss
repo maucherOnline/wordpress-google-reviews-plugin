@@ -5,6 +5,10 @@
     right: 5vw;
     z-index: 9999;
 
+    * {
+      font-family: inherit;
+    }
+
     .g-badge {
       display: block;
       position: relative;
@@ -67,6 +71,10 @@
   &.hide {
     visibility: hidden;
     right: -450px !important;
+  }
+
+  * {
+    font-family: inherit;
   }
 
   visibility: visible;

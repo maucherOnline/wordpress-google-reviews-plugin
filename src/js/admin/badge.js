@@ -5,7 +5,7 @@ $(document).ready(function() {
 
     // hide preview background for badge layout
     if (is_badge) {
-        $('.preview_section').addClass('is_badge');
+        //$('.preview_section').addClass('is_badge');
     }
 
     // hide style options for badge layout on change
