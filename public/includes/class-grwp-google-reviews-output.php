@@ -89,6 +89,7 @@ class GRWP_Google_Reviews_Output {
 		$path = esc_attr( GR_PLUGIN_DIR_URL );
 		$star = sprintf('<img src="%sdist/images/svg-star.svg" alt="" />', $path);
 		$star_output = '<span class="grwp_stars-wrapper">';
+		if ($this->rating_rounded === 0) $this->rating_rounded = 5;
 		for ( $i = 1; $i <= $this->rating_rounded; $i++ ) {
 			$star_output .= $star;
 		}

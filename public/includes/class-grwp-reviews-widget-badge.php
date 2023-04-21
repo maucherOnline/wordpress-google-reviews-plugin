@@ -23,6 +23,7 @@ class GRWP_Reviews_Widget_Badge
         }
 
         $stars = $this->get_total_stars();
+		$this->place_title = $this->place_title === '' ? 'Lorem Ipsum Business' : $this->place_title;
 
 		// loop through reviews
 		$output = '<div id="g-review" class="badge">';

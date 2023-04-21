@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: undefined\n"
-"POT-Creation-Date: 2023-04-20 16:47+0200\n"
+"POT-Creation-Date: 2023-04-21 09:27+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -134,8 +134,8 @@ msgid ""
 "<strong>Attention</strong>: the free version only allows for pulling 20 "
 "reviews."
 msgstr ""
-"<p><strong>Achtung</strong>: Die kostenlose Version stellt nur 5 Bewertungen "
-"bereit."
+"<p><strong>Achtung</strong>: Die kostenlose Version stellt nur 20 "
+"Bewertungen bereit."
 
 #: admin/includes/class-grwp-global-settings.php:80
 #, php-format
@@ -230,37 +230,37 @@ msgstr ""
 "<a href=\"%s\" target=\"_blank\">So werden</a> Styles, Widget Typen und "
 "andere Einstellungen überschrieben."
 
-#: admin/includes/free/how-to.php:8
+#: admin/includes/how-to.php:8
 msgid "How to use the free version"
 msgstr "Wie es funktioniert"
 
-#: admin/includes/free/how-to.php:10 admin/includes/pro/how-to-pro.php:10
+#: admin/includes/how-to.php:10
 msgid "Enter your business name"
 msgstr "Gib den Unternehmensnamen ein"
 
-#: admin/includes/free/how-to.php:11 admin/includes/pro/how-to-pro.php:11
+#: admin/includes/how-to.php:11
 msgid "Click 'Search business'"
 msgstr "Klicke auf 'Unternehmen suchen'"
 
-#: admin/includes/free/how-to.php:12 admin/includes/pro/how-to-pro.php:12
+#: admin/includes/how-to.php:12
 msgid "Choose your business from the list"
 msgstr "Wähle dein Unternehmen aus der Liste aus"
 
-#: admin/includes/free/how-to.php:13 admin/includes/pro/how-to-pro.php:13
+#: admin/includes/how-to.php:13
 msgid "Choose your preferred language"
 msgstr "Wähle die bevorzugte Sprache"
 
-#: admin/includes/free/how-to.php:14 admin/includes/pro/how-to-pro.php:14
+#: admin/includes/how-to.php:14
 msgid "Click the 'Pull reviews' button"
 msgstr "Klicke den 'Bewertungen laden' Button"
 
-#: admin/includes/free/how-to.php:15 admin/includes/pro/how-to-pro.php:15
+#: admin/includes/how-to.php:15
 msgid "Wait until the process is finished. The page will refresh automatically"
 msgstr ""
 "Warte, bis der Prozess fertig ist. Die Seite wird sich automatisch "
 "aktualisiren"
 
-#: admin/includes/free/how-to.php:16 admin/includes/pro/how-to-pro.php:16
+#: admin/includes/how-to.php:16
 msgid ""
 "Now you should already see your reviews. If not, click the 'Pull reviews' "
 "button again"
@@ -268,27 +268,19 @@ msgstr ""
 "Jetzt solltest du bereits die Bewertungen sehen können. Wenn nicht, klicke "
 "den 'Bewertungen laden' Button noch einmal"
 
-#: admin/includes/free/how-to.php:17 admin/includes/pro/how-to-pro.php:17
-msgid "Configure styling and layout options"
-msgstr "Konfiguriere die Styling- und Layout-Optionen"
-
-#: admin/includes/free/how-to.php:18 admin/includes/pro/how-to-pro.php:18
+#: admin/includes/how-to.php:17
 msgid "Hit 'save'"
 msgstr "Klicke 'Änderungen speichern'"
 
-#: admin/includes/free/how-to.php:19 admin/includes/pro/how-to-pro.php:19
-msgid "You will see your changes applied right after saving"
-msgstr "Deine Änderungen werden direkt nach dem Speichern übernommen"
-
-#: admin/includes/free/how-to.php:20 admin/includes/pro/how-to-pro.php:20
+#: admin/includes/how-to.php:18
 msgid ""
-"Use the shortcode <code>[google-reviews]</code> to show your reviews on "
-"pages, posts, Elementor, Beaver Builder, Bakery Builder etc."
+"Use one of the shortcodes in order to display your reviews on pages, posts, "
+"Elementor, Beaver Builder, Bakery Builder etc."
 msgstr ""
-"Verwende den Shortcode <code>[google-reviews]</code> um deine Bewertungen in "
-"Seiten, Beiträgen, Elementor, Beaver Builder, Bakery Builder etc. anzuzeigen."
+"Verwende einen der Shortcodes, um deine Bewertungen in Seiten, Beiträgen, "
+"Elementor, Beaver Builder, Bakery Builder etc. anzuzeigen."
 
-#: admin/includes/free/how-to.php:26 admin/includes/pro/how-to-pro.php:26
+#: admin/includes/how-to.php:24
 #, php-format
 msgid ""
 "Check the <a href=\"%s\" target=\"_blank\">documentation</a>, to learn how "
@@ -297,100 +289,96 @@ msgstr ""
 "Lies die <a href=\"%s\" target=\"_blank\">Dokumentation</a>, um zu lernen, "
 "wie du die Ausgabe des Shortcodes verändern kannst"
 
-#: admin/includes/free/how-to.php:36
+#: admin/includes/how-to.php:34
 #, php-format
 msgid ""
 "<strong>Note:</strong> the free version only allows for pulling 20 reviews. "
 "To get around this, please <a href=\"%s\" target=\"_blank\">upgrade to the "
 "PRO version</a>, which will pull all your reviews"
 msgstr ""
-"<strong>Achtung:</strong> die kostenlose Version stellt nur 5 Bewertungen "
+"<strong>Achtung:</strong> die kostenlose Version stellt nur 20 Bewertungen "
 "bereit. Um ALLE Bewertungen anzuzeigen, <a href=\"%s\">upgrade bitte zur PRO "
 "Version</a>"
 
-#: admin/includes/free/how-to.php:43 admin/includes/pro/how-to-pro.php:34
+#: admin/includes/how-to.php:41
 msgid "Video tutorial"
 msgstr "Video-Anleitung"
 
-#: admin/includes/pro/how-to-pro.php:8
-msgid "How to use the premium version"
-msgstr "Wie es funktioniert"
-
-#: public/includes/class-grwp-google-reviews-output.php:118
+#: public/includes/class-grwp-google-reviews-output.php:119
 msgid "year"
 msgstr "Jahr"
 
-#: public/includes/class-grwp-google-reviews-output.php:119
+#: public/includes/class-grwp-google-reviews-output.php:120
 msgid "years"
 msgstr "Jahren"
 
-#: public/includes/class-grwp-google-reviews-output.php:122
+#: public/includes/class-grwp-google-reviews-output.php:123
 msgid "month"
 msgstr "Monat"
 
-#: public/includes/class-grwp-google-reviews-output.php:123
+#: public/includes/class-grwp-google-reviews-output.php:124
 msgid "months"
 msgstr "Monaten"
 
-#: public/includes/class-grwp-google-reviews-output.php:126
+#: public/includes/class-grwp-google-reviews-output.php:127
 msgid "week"
 msgstr "Woche"
 
-#: public/includes/class-grwp-google-reviews-output.php:127
+#: public/includes/class-grwp-google-reviews-output.php:128
 msgid "weeks"
 msgstr "Wochen"
 
-#: public/includes/class-grwp-google-reviews-output.php:130
+#: public/includes/class-grwp-google-reviews-output.php:131
 msgid "day"
 msgstr "Tag"
 
-#: public/includes/class-grwp-google-reviews-output.php:131
+#: public/includes/class-grwp-google-reviews-output.php:132
 msgid "days"
 msgstr "Tagen"
 
-#: public/includes/class-grwp-google-reviews-output.php:134
+#: public/includes/class-grwp-google-reviews-output.php:135
 msgid "hour"
 msgstr "Stunde"
 
-#: public/includes/class-grwp-google-reviews-output.php:135
+#: public/includes/class-grwp-google-reviews-output.php:136
 msgid "hours"
 msgstr "Stunden"
 
-#: public/includes/class-grwp-google-reviews-output.php:138
+#: public/includes/class-grwp-google-reviews-output.php:139
 msgid "minute"
 msgstr "Minute"
 
-#: public/includes/class-grwp-google-reviews-output.php:139
+#: public/includes/class-grwp-google-reviews-output.php:140
 msgid "minutes"
 msgstr "Minuten"
 
-#: public/includes/class-grwp-google-reviews-output.php:142
+#: public/includes/class-grwp-google-reviews-output.php:143
 msgid "second"
 msgstr "Sekunde"
 
-#: public/includes/class-grwp-google-reviews-output.php:143
+#: public/includes/class-grwp-google-reviews-output.php:144
 msgid "seconds"
 msgstr "Sekunden"
 
-#: public/includes/class-grwp-google-reviews-output.php:157
-#: public/includes/class-grwp-google-reviews-output.php:162
+#: public/includes/class-grwp-google-reviews-output.php:158
+#: public/includes/class-grwp-google-reviews-output.php:163
 msgid " ago"
 msgstr "vor "
 
-#: public/includes/class-grwp-google-reviews-output.php:157
-#: public/includes/class-grwp-google-reviews-output.php:162
+#: public/includes/class-grwp-google-reviews-output.php:158
+#: public/includes/class-grwp-google-reviews-output.php:163
 msgid "just now"
 msgstr "gerade eben"
 
-#: public/includes/class-grwp-google-reviews-output.php:199
+#: public/includes/class-grwp-google-reviews-output.php:200
 msgid "Lorem Ipsum"
 msgstr "Lorem Ipsum"
 
-#: public/includes/class-grwp-google-reviews-output.php:204
+#: public/includes/class-grwp-google-reviews-output.php:205
 msgid "three months ago"
 msgstr "vor drei Monaten"
 
-#: public/includes/class-grwp-google-reviews-output.php:205
+#: public/includes/class-grwp-google-reviews-output.php:206
 msgid ""
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
 "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "
@@ -408,20 +396,29 @@ msgstr ""
 msgid "No reviews available"
 msgstr "Keine Bewertungen verfügbar"
 
-#: public/includes/class-grwp-reviews-widget-badge.php:42
+#: public/includes/class-grwp-reviews-widget-badge.php:43
 msgid "Our Google Reviews"
 msgstr "Google Bewertungen"
 
-#: public/includes/class-grwp-reviews-widget-grid.php:28
-#: public/includes/class-grwp-reviews-widget-slider.php:34
+#: public/includes/class-grwp-reviews-widget-grid.php:30
+#: public/includes/class-grwp-reviews-widget-slider.php:36
 msgid "Out of 5 stars"
 msgstr "von 5 Sternen"
 
-#: public/includes/class-grwp-reviews-widget-grid.php:32
-#: public/includes/class-grwp-reviews-widget-slider.php:38
+#: public/includes/class-grwp-reviews-widget-grid.php:34
+#: public/includes/class-grwp-reviews-widget-slider.php:40
 #, php-format
 msgid "Overall rating out of %s Google reviews"
 msgstr "Gesamtbewertung aus %s Google-Bewertungen"
+
+#~ msgid "Configure styling and layout options"
+#~ msgstr "Konfiguriere die Styling- und Layout-Optionen"
+
+#~ msgid "You will see your changes applied right after saving"
+#~ msgstr "Deine Änderungen werden direkt nach dem Speichern übernommen"
+
+#~ msgid "How to use the premium version"
+#~ msgstr "Wie es funktioniert"
 
 #~ msgid "Place ID"
 #~ msgstr "Place ID"

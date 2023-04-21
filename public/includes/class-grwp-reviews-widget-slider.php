@@ -24,6 +24,8 @@ class GRWP_Reviews_Widget_Slider
 
 		if ( $show_place_info ) {
 
+			$this->place_title = $this->place_title === '' ? 'Lorem Ipsum Business Title' : $this->place_title;
+
 			$output = sprintf( '<div id="g-review" class="%s grwp_grid">', $style_type );
 
 			$output .= '<div class="grwp_header"><div class="grwp_header-inner">';

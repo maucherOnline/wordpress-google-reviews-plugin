@@ -20,6 +20,8 @@ class GRWP_Reviews_Widget_Grid
 
 		if ( $show_place_info ) {
 
+			$this->place_title = $this->place_title === '' ? 'Lorem Ipsum Business' : $this->place_title;
+
 			$output .= '<div class="grwp_header"><div class="grwp_header-inner">';
 			$output .= sprintf( '<h3 class="grwp_business-title">%s</h3>', $this->place_title );
 			$output .= sprintf(

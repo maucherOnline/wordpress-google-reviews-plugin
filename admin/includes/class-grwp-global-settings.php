@@ -78,7 +78,7 @@ Class GRWP_Global_Settings {
 		    wp_kses(
 			    sprintf(
 				    __('<a href="%s">Upgrade to the PRO version</a> to show ALL your reviews.', 'grwp' ),
-				    grwp_fs()->get_upgrade_url()
+				    'https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=upgrade_tab&utm_campaign=upgrade_banner'
 			    ),
 			    $allowed_html
 		    );
