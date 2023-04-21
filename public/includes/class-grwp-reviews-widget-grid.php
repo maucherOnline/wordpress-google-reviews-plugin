@@ -22,7 +22,8 @@ class GRWP_Reviews_Widget_Grid
 
 			$this->place_title = $this->place_title === '' ? 'Lorem Ipsum Business' : $this->place_title;
 
-			$output .= '<div class="grwp_header"><div class="grwp_header-inner">';
+			$output .= '<div class="grwp_header">';
+			$output .= '<div class="grwp_header-inner">';
 			$output .= sprintf( '<h3 class="grwp_business-title">%s</h3>', $this->place_title );
 			$output .= sprintf(
 				'<span class="grwp_total-rating">%s</span><span class="grwp_5_stars">%s</span>',
@@ -37,6 +38,7 @@ class GRWP_Reviews_Widget_Grid
 			$output .= '</div></div>';
 
 		}
+
 		$output .= '<div class="grwp_body">';
 
 		// loop through reviews
