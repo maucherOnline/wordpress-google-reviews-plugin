@@ -22,11 +22,11 @@ class GRWP_Reviews_Widget_Slider
 
 		$output = '';
 
+	    $output = sprintf( '<div id="g-review" class="%s grwp_grid">', $style_type );
+
 		if ( $show_place_info ) {
 
 			$this->place_title = $this->place_title === '' ? 'Lorem Ipsum Business Title' : $this->place_title;
-
-			$output = sprintf( '<div id="g-review" class="%s grwp_grid">', $style_type );
 
 			$output .= '<div class="grwp_header">';
 			$output .= '<div class="grwp_header-inner">';
@@ -77,7 +77,7 @@ class GRWP_Reviews_Widget_Slider
 
         $output .= ob_get_clean();
 
-        $output .= '</div></div>';
+        $output .= '</div></div></div>';
 
         return wp_kses( $output, $this->allowed_html );
 
