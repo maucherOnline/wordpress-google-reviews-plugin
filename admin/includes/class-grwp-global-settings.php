@@ -64,6 +64,8 @@ Class GRWP_Global_Settings {
 
     public function show_upgrade_message_callback() {
 	    global $allowed_html;
+
+        $upgrade_url = 'https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=upgrade_tab&utm_campaign=upgrade_banner';
         ?>
 
         <span class="dashicons dashicons-no close-icon"></span>
@@ -77,8 +79,8 @@ Class GRWP_Global_Settings {
 		    echo
 		    wp_kses(
 			    sprintf(
-				    __('<a href="%s">Upgrade to the PRO version</a> to show ALL your reviews.', 'grwp' ),
-				    'https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=upgrade_tab&utm_campaign=upgrade_banner'
+				    __('<a href="%s" target="_blank">Upgrade to the PRO version</a> to show ALL your reviews, <strong>filter out bad reviews</strong> and <a href="%s" target="_blank">much more</a>.', 'grwp' ),
+				    $upgrade_url, $upgrade_url
 			    ),
 			    $allowed_html
 		    );
