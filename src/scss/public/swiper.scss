@@ -7,38 +7,40 @@
 
   &.layout_style-1 {
     .g-review {
-      min-height: 210px;
+      //min-height: 210px;
     }
   }
   &.layout_style-2 {
     .g-review {
-      min-height: 255px;
+      //min-height: 255px;
     }
   }
   &.layout_style-3 {
     .g-review {
-      min-height: 255px;
+      //min-height: 255px;
     }
   }
   &.layout_style-4 {
     .g-review {
-      min-height: 255px;
+      //min-height: 255px;
     }
   }
   &.layout_style-5 {
     .g-review {
-      min-height: 255px;
+      //min-height: 255px;
     }
   }
 
 
   .swiper {
-    padding: 0 0 100px 0;
+    padding: 0 0 150px 0;
     max-width: 100%;
 
     .swiper-wrapper {
       .swiper-slide {
+        height: auto;
         .g-review {
+          height: 100%;
           box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16);
           margin: 13px 10px;
           box-sizing: border-box;
@@ -55,7 +57,7 @@
         transition: all .4s;
 
         position: absolute;
-        margin-top: 120px;
+        margin-top: 155px;
         width: 40px;
         height: 40px;
         color: black;
