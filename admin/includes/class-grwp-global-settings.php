@@ -422,17 +422,17 @@ Class GRWP_Global_Settings {
     public function style_2_callback() {
         ?> <select name="google_reviews_option_name[style_2]" id="style_2">
             <?php $selected = (isset( $this->google_reviews_options['style_2'] ) && $this->google_reviews_options['style_2'] === 'Slider') ? 'selected' : '' ; ?>
-            <option <?php echo esc_attr($selected); ?>>
+            <option <?php echo esc_attr($selected); ?> value="Slider">
                 <?php _e( 'Slider', 'grwp' ); ?>
             </option>
             <?php $selected = (isset( $this->google_reviews_options['style_2'] ) && $this->google_reviews_options['style_2'] === 'Grid') ? 'selected' : '' ; ?>
-            <option <?php echo esc_attr($selected); ?>>
+            <option <?php echo esc_attr($selected); ?> value="Grid">
                 <?php _e( 'Grid', 'grwp' ); ?>
             </option>
 
             <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
 
-            <option disabled>
+            <option disabled value="Badge">
 			    <?php _e( 'Floating Badge (PRO)', 'grwp' ); ?>
             </option>
 
