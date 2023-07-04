@@ -2,8 +2,9 @@
 # This file is distributed under the same license as the grwp package.
 msgid ""
 msgstr ""
+"Project-Id-Version: grwp\n"
 "Project-Id-Version: undefined\n"
-"POT-Creation-Date: 2023-04-21 09:34+0200\n"
+"POT-Creation-Date: 2023-06-26 09:13+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,39 +18,39 @@ msgstr ""
 "_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;"
 "esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: admin/includes/class-grwp-free-menu-pages.php:14
-#: admin/includes/class-grwp-free-menu-pages.php:15
-#: admin/includes/class-grwp-pro-menu-pages.php:13
+#: admin/includes/class-grwp-free-menu-pages.php:14,
+#: admin/includes/class-grwp-free-menu-pages.php:15,
+#: admin/includes/class-grwp-pro-menu-pages.php:13,
 #: admin/includes/class-grwp-pro-menu-pages.php:14
 msgid "How to"
 msgstr "Comment"
 
-#: admin/includes/class-grwp-free-settings.php:25
+#: admin/includes/class-grwp-free-settings.php:25,
 #: admin/includes/class-grwp-pro-settings.php:18
 msgid "Search for your business:"
 msgstr "Recherchez votre entreprise :"
 
-#: admin/includes/class-grwp-free-settings.php:87
+#: admin/includes/class-grwp-free-settings.php:87,
 #: admin/includes/class-grwp-pro-settings.php:76
 msgid "Search for your business"
 msgstr "Recherchez votre entreprise"
 
-#: admin/includes/class-grwp-free-settings.php:91
+#: admin/includes/class-grwp-free-settings.php:91,
 #: admin/includes/class-grwp-pro-settings.php:80
 msgid "Search business"
 msgstr "Recherche d'entreprises"
 
-#: admin/includes/class-grwp-free-settings.php:94
-#: admin/includes/class-grwp-free-settings.php:174
+#: admin/includes/class-grwp-free-settings.php:94,
+#: admin/includes/class-grwp-free-settings.php:174,
 #: admin/includes/class-grwp-pro-settings.php:83
 msgid "Pull reviews"
 msgstr "Critiques de tirage"
 
-#: admin/includes/class-grwp-free-settings.php:103
+#: admin/includes/class-grwp-free-settings.php:103,
 #: admin/includes/class-grwp-pro-settings.php:92
 msgid ""
 "Details like country, state, city and/or phone number may help achieving "
@@ -71,7 +72,6 @@ msgid "Paste the Place ID of your business here."
 msgstr "Collez ici l'identifiant du lieu de votre entreprise."
 
 #: admin/includes/class-grwp-free-settings.php:190
-#, php-format
 msgid ""
 "Search for your business in the map below and copy/paste the Place ID into "
 "the field above (<a href=\"%s\" target=\"_blank\">short explainer video</a>)."
@@ -84,8 +84,8 @@ msgstr ""
 msgid "Look up your Place ID and paste it in the field above."
 msgstr "Recherchez votre ID de lieu et collez-le dans le champ ci-dessus."
 
-#: admin/includes/class-grwp-global-menu-pages.php:12
-#: admin/includes/class-grwp-global-menu-pages.php:13
+#: admin/includes/class-grwp-global-menu-pages.php:12,
+#: admin/includes/class-grwp-global-menu-pages.php:13,
 #: admin/includes/class-grwp-global-menu-pages.php:36
 msgid "Google Reviews"
 msgstr "Google avis"
@@ -110,10 +110,9 @@ msgstr "PRO"
 msgid "Preview"
 msgstr "Aperçu"
 
+#: admin/includes/class-grwp-global-menu-pages.php:128,
+#: admin/includes/class-grwp-global-menu-pages.php:109,
 #: admin/includes/class-grwp-global-menu-pages.php:99
-#: admin/includes/class-grwp-global-menu-pages.php:109
-#: admin/includes/class-grwp-global-menu-pages.php:128
-#, php-format
 msgid ""
 "Use this shortcode to display the widget (<a href=\"%s\" "
 "target=\"_blank\">Documentation</a>)."
@@ -129,7 +128,7 @@ msgstr "Afficher le contenu fctice"
 msgid "Reviews language"
 msgstr "Critique de la langue"
 
-#: admin/includes/class-grwp-global-settings.php:72
+#: admin/includes/class-grwp-global-settings.php:74
 msgid ""
 "<strong>Attention</strong>: the free version only allows for pulling 20 "
 "reviews."
@@ -137,92 +136,75 @@ msgstr ""
 "<strong>Attention</strong>: La version gratuite de Google ne permet de tirer "
 "que 20 avis."
 
-#: admin/includes/class-grwp-global-settings.php:80
-#, php-format
-msgid "<a href=\"%s\">Upgrade to the PRO version</a> to show ALL your reviews."
+#: admin/includes/class-grwp-global-settings.php:82
+msgid ""
+"<a href=\"%s\" target=\"_blank\">Upgrade to the PRO version</a> to show ALL "
+"your reviews, <strong>filter out bad reviews</strong> and <a href=\"%s\" "
+"target=\"_blank\">much more</a>."
 msgstr ""
-"<a href=\"%s\">Passez à la version PRO</a> pour afficher TOUS vos avis."
+"<a href=\"%s\" target=\"_blank\">Passez à la version PRO</a> pour afficher "
+"TOUS vos avis, <strong>filtrer les mauvais avis</strong> et <a href=\"%s\" "
+"target=\"_blank\">bien plus encore.</a>"
 
-#: admin/includes/class-grwp-global-settings.php:144
+#: admin/includes/class-grwp-global-settings.php:146
 msgid "Layout type"
 msgstr "Type de mise en page"
 
-#: admin/includes/class-grwp-global-settings.php:152
+#: admin/includes/class-grwp-global-settings.php:154
 msgid "Design type"
 msgstr "Type de design"
 
-#: admin/includes/class-grwp-global-settings.php:161
+#: admin/includes/class-grwp-global-settings.php:163
 msgid "Minimum rating (stars)"
 msgstr "Classement minimum (étoiles)"
 
-#: admin/includes/class-grwp-global-settings.php:169
+#: admin/includes/class-grwp-global-settings.php:171
 msgid "Exclude reviews without text"
 msgstr "Exclure les commentaires sans texte"
 
-#: admin/includes/class-grwp-global-settings.php:177
+#: admin/includes/class-grwp-global-settings.php:179
 msgid "Filter by words (comma separated)"
 msgstr "Filtrer par mots (séparés par des virgules)"
 
-#: admin/includes/class-grwp-global-settings.php:274
+#: admin/includes/class-grwp-global-settings.php:276
 msgid "Global settings for showing reviews"
 msgstr "Paramètres globaux pour l'affichage des avis"
 
-#: admin/includes/class-grwp-global-settings.php:280
+#: admin/includes/class-grwp-global-settings.php:282
 msgid "Display settings"
 msgstr "Afficher les paramètres"
 
-#: admin/includes/class-grwp-global-settings.php:302
-#: admin/includes/class-grwp-global-settings.php:368
+#: admin/includes/class-grwp-global-settings.php:304,
+#: admin/includes/class-grwp-global-settings.php:370
 msgid "Yes"
 msgstr "Oui"
 
-#: admin/includes/class-grwp-global-settings.php:424
+#: admin/includes/class-grwp-global-settings.php:426
 msgid "Slider"
 msgstr "Slider"
 
-#: admin/includes/class-grwp-global-settings.php:428
+#: admin/includes/class-grwp-global-settings.php:430
 msgid "Grid"
 msgstr "Grille"
 
-#: admin/includes/class-grwp-global-settings.php:434
-msgid "Floating Badge (PRO)"
-msgstr "Floating Badge (PRO)"
-
-#: admin/includes/class-grwp-global-settings.php:441
+#: admin/includes/class-grwp-global-settings.php:443
 msgid "Floating Badge"
 msgstr "Badge flottant"
 
-#: admin/includes/class-grwp-global-settings.php:459
-msgid "1"
-msgstr "1"
+#: admin/includes/class-grwp-global-settings.php:436
+msgid "Floating Badge (PRO)"
+msgstr "Floating Badge (PRO)"
 
-#: admin/includes/class-grwp-global-settings.php:460
-msgid "2"
-msgstr "2"
-
-#: admin/includes/class-grwp-global-settings.php:461
-msgid "3"
-msgstr "3"
-
-#: admin/includes/class-grwp-global-settings.php:483
-msgid "Design"
-msgstr "Design"
-
-#: admin/includes/class-grwp-global-settings.php:483
-msgid " #"
-msgstr " #"
-
-#: admin/includes/class-grwp-global-settings.php:583
+#: admin/includes/class-grwp-global-settings.php:585
 msgid "Embedding instructions"
 msgstr "Instructions d'incorporation"
 
-#: admin/includes/class-grwp-global-settings.php:593
+#: admin/includes/class-grwp-global-settings.php:595
 msgid "Use this shortcode to show your reviews on pages and posts:"
 msgstr ""
 "Utilisez ce code court pour afficher vos avis sur les pages et les articles :"
 
-#: admin/includes/class-grwp-global-settings.php:599
-#, php-format
+#: admin/includes/class-grwp-global-settings.php:601
 msgid ""
 "<a href=\"%s\" target=\"_blank\">See</a>, how to overwrite styles, widget "
 "types and other settings."
@@ -281,7 +263,6 @@ msgstr ""
 "Elementor, Beaver Builder, Bakery Builder, etc."
 
 #: admin/includes/how-to.php:24
-#, php-format
 msgid ""
 "Check the <a href=\"%s\" target=\"_blank\">documentation</a>, to learn how "
 "to modify the shortcode output"
@@ -290,7 +271,6 @@ msgstr ""
 "comment modifier la sortie du shortcode"
 
 #: admin/includes/how-to.php:34
-#, php-format
 msgid ""
 "<strong>Note:</strong> the free version only allows for pulling 20 reviews. "
 "To get around this, please <a href=\"%s\" target=\"_blank\">upgrade to the "
@@ -360,12 +340,12 @@ msgstr "seconde"
 msgid "seconds"
 msgstr "secondes"
 
-#: public/includes/class-grwp-google-reviews-output.php:158
+#: public/includes/class-grwp-google-reviews-output.php:158,
 #: public/includes/class-grwp-google-reviews-output.php:163
 msgid " ago"
 msgstr "depuis "
 
-#: public/includes/class-grwp-google-reviews-output.php:158
+#: public/includes/class-grwp-google-reviews-output.php:158,
 #: public/includes/class-grwp-google-reviews-output.php:163
 msgid "just now"
 msgstr "maintenant"
@@ -390,8 +370,8 @@ msgstr ""
 "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo "
 "consequat."
 
-#: public/includes/class-grwp-reviews-widget-badge.php:16
-#: public/includes/class-grwp-reviews-widget-grid.php:12
+#: public/includes/class-grwp-reviews-widget-badge.php:16,
+#: public/includes/class-grwp-reviews-widget-grid.php:12,
 #: public/includes/class-grwp-reviews-widget-slider.php:16
 msgid "No reviews available"
 msgstr "Aucune critique disponible"
@@ -400,51 +380,12 @@ msgstr "Aucune critique disponible"
 msgid "Our Google Reviews"
 msgstr "Google avis"
 
-#: public/includes/class-grwp-reviews-widget-grid.php:30
-#: public/includes/class-grwp-reviews-widget-slider.php:36
+#: public/includes/class-grwp-reviews-widget-grid.php:31,
+#: public/includes/class-grwp-reviews-widget-slider.php:37
 msgid "Out of 5 stars"
 msgstr "Sur 5 étoiles"
 
-#: public/includes/class-grwp-reviews-widget-grid.php:34
-#: public/includes/class-grwp-reviews-widget-slider.php:40
-#, php-format
+#: public/includes/class-grwp-reviews-widget-grid.php:35,
+#: public/includes/class-grwp-reviews-widget-slider.php:41
 msgid "Overall rating out of %s Google reviews"
 msgstr "Note globale sur %s avis Google"
-
-#~ msgid "Place ID"
-#~ msgstr "ID de lieu"
-
-#~ msgid "Embedding Instructions"
-#~ msgstr "Instructions d'incorporation"
-
-#~ msgid "Shortcode"
-#~ msgstr "Shortcode"
-
-#~ msgid "Remove checkmark at \"Show Dummy Content\""
-#~ msgstr "Enlevez la coche de \"Show Dummy Content\""
-
-#~ msgid "Search for your business in our map search."
-#~ msgstr "Recherchez votre entreprise dans notre recherche par carte."
-
-#~ msgid ""
-#~ "If this is not available, you can search for your business <a href=\"%s\" "
-#~ "target=\"_blank\">here</a>"
-#~ msgstr ""
-#~ "Si ce n'est pas disponible, vous pouvez rechercher votre entreprise <a "
-#~ "href=\"%s\" target=\"_blank\">ici</a>"
-
-#~ msgid "Copy the Place ID of your business"
-#~ msgstr "Copiez l'ID du lieu de votre entreprise"
-
-#~ msgid "Paste the Place ID into the Place ID field"
-#~ msgstr "Collez l'ID du lieu dans le champ ID du lieu"
-
-#~ msgid "Configure styling and layout options"
-#~ msgstr "Configurer les options de style et de mise en page"
-
-#~ msgid "You will see your changes applied right after saving"
-#~ msgstr ""
-#~ "Vous verrez vos modifications appliquées juste après avoir enregistré"
-
-#~ msgid "How to use the premium version"
-#~ msgstr "Comment utiliser la version premium"
