@@ -34,13 +34,18 @@
           }
 
           a {
-            display: block;
             margin-bottom: 4px;
             color: black;
           }
         }
 
         .gr-stars {
+          display: flex;
+          gap: 5px;
+          justify-content: center;
+          flex-wrap: wrap;
+          align-items: flex-end;
+
           img {
             margin-right: 7px !important;
           }

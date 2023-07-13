@@ -39,15 +39,18 @@
           }
 
           a {
-            display: block;
             margin-bottom: 4px;
             color: black;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
           }
         }
 
         .gr-stars {
           display: flex;
           flex-direction: column-reverse;
+
 
           img {
             margin-right: 3px !important;

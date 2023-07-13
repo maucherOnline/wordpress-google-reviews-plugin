@@ -41,6 +41,10 @@
           margin-top: 14px;
           flex-basis: calc(100% - 70px);
 
+          a {
+            max-width: 83%;
+          }
+
           .gr-stars {
             position: absolute;
             bottom: 12px;
@@ -50,15 +54,23 @@
             flex-direction: row;
             flex-wrap: nowrap;
             justify-content: space-between;
-            align-items: stretch;
-            align-content: stretch;
+            align-items: center;
+
+            .stars-wrapper {
+              display: flex;
+              flex-wrap: nowrap;
+              gap: 5px;
+            }
 
             img {
-              margin-right: 7px !important;
+              margin-right: 0 !important;
             }
 
             .time {
-              margin-top: 5px;
+              display: -webkit-box;
+              -webkit-line-clamp: 1;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
             }
           }
         }

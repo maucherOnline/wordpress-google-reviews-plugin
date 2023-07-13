@@ -31,7 +31,7 @@
 
         .gr-profile {
           position: absolute;
-          bottom: 20px;
+          bottom: 22px;
           left: 29px;
           margin: 0;
         }
@@ -43,9 +43,14 @@
 
         p {
           position: absolute;
-          bottom: 20px;
+          bottom: 27px;
           left: 100px;
           flex-basis: 100%;
+
+          a {
+            max-width: 190px;
+            font-size: clamp(12px, 4vw, 17px);
+          }
 
           .gr-stars {
             display: flex;
@@ -55,12 +60,24 @@
             align-items: stretch;
             align-content: stretch;
 
-            img {
-              margin-right: 6px !important;
+            .stars-wrapper {
+              display: flex;
+              column-gap: 6px;
+              img {
+                width: clamp(14px, 4vw, 18px) !important;
+                margin: 0 !important;
+              }
             }
+
 
             .time {
               padding-top: 6px;
+
+              display: -webkit-box;
+              -webkit-line-clamp: 1;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              display: none;
             }
 
           }

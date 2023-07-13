@@ -38,7 +38,6 @@
           }
 
           a {
-            display: block;
             padding-right: 26px;
             margin-bottom: 4px;
             color: black;
@@ -47,6 +46,7 @@
 
         .gr-stars {
           display: flex;
+          flex-wrap: wrap;
 
           .stars-wrapper {
             display: flex;
@@ -54,10 +54,9 @@
             img {
               margin-right: 3px !important;
             }
+          }
+          .time {
 
-            .time {
-
-            }
           }
         }
       }

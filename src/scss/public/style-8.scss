@@ -35,13 +35,17 @@
           }
 
           a {
-            display: block;
             margin-bottom: 4px;
             color: white;
           }
         }
 
         .gr-stars {
+          flex-wrap: wrap;
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+
           img {
             margin-right: 7px !important;
             filter: hue-rotate(45deg);
