@@ -17,12 +17,19 @@ class GRWP_Reviews_Widget_Slider
 
         }
 
+		$hide_date = '';
+		if ( isset($this->options['hide_date_string']) ) {
+			if ( $this->options['hide_date_string'] !== '' ) {
+				$hide_date = 'hide_date';
+			}
+		}
+
 	    $google_svg = GR_PLUGIN_DIR_URL . 'dist/images/google-logo-svg.svg';
 	    $stars = $this->get_total_stars();
 
 		$output = '';
 
-	    $output = sprintf( '<div id="g-review" class="%s grwp_grid">', $style_type );
+	    $output = sprintf( '<div id="g-review" class="%s grwp_grid %s">', $style_type, $hide_date );
 
 		if ( $show_place_info ) {
 

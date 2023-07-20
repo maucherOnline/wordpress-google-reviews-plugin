@@ -2,6 +2,12 @@
 /* General styles for reviews
 /* ------------------------------------------------------------------------- */
 
+
+#g-review.hide_date .time,
+.g-review-sidebar.hide_date .time {
+  visibility: hidden;
+}
+
 #g-review:not(.badge) {
 
   &.grwp_grid {

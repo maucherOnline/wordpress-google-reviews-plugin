@@ -17,6 +17,13 @@ class GRWP_Reviews_Widget_Badge
 
 		}
 
+		$hide_date = '';
+		if ( isset($this->options['hide_date_string']) ) {
+			if ( $this->options['hide_date_string'] !== '' ) {
+				$hide_date = 'hide_date';
+			}
+		}
+
         // Check if a user is on a trial or has an activated license
 		if ( ! grwp_fs()->can_use_premium_code() ) {
             return '';
@@ -46,7 +53,7 @@ class GRWP_Reviews_Widget_Badge
         );
 
 		$output .= '</div>';
-        $output .= '<div class="g-review-sidebar right hide"><div class="grwp-header">';
+        $output .= sprintf('<div class="g-review-sidebar right hide %s"><div class="grwp-header">', $hide_date);
         $output .= sprintf('<span class="business-title">%s</span>', $this->place_title);
         $output .=  $stars;
         $output .= sprintf('<span class="rating">%s</span>', $this->rating_formatted);

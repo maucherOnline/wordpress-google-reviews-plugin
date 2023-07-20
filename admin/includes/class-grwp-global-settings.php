@@ -174,6 +174,14 @@ Class GRWP_Global_Settings {
             'google_reviews_style_layout_setting_section' // section
         );
 
+	    add_settings_field(
+		    'hide_date_string', // id
+		    __('Hide review date', 'grwp'), // title
+		    array($this, 'hide_date_string_callback'), // callback
+		    $this->settings_slug, // page
+		    'google_reviews_style_layout_setting_section' // section
+	    );
+
         add_settings_field(
             'filter_words', // id
             __('Filter by words (comma separated)', 'grwp'), // title
@@ -260,6 +268,10 @@ Class GRWP_Global_Settings {
         if ( isset( $input['exclude_reviews_without_text'] ) ) {
             $sanitary_values['exclude_reviews_without_text'] = $input['exclude_reviews_without_text'];
         }
+
+	    if ( isset( $input['hide_date_string'] ) ) {
+		    $sanitary_values['hide_date_string'] = $input['hide_date_string'];
+	    }
 
         if ( isset( $input['filter_words'] ) ) {
             $sanitary_values['filter_words'] = $input['filter_words'];
@@ -382,6 +394,44 @@ Class GRWP_Global_Settings {
         echo wp_kses($html, $allowed_html);
 
     }
+
+	/**
+	 * Hide date string
+	 * @return void
+	 */
+	public function hide_date_string_callback() {
+		global $allowed_html;
+
+		ob_start(); ?>
+
+		<?php if ( ! grwp_fs()->is__premium_only() ) : ?>
+            <div class="tooltip">
+		<?php endif; ?>
+
+        <input type="checkbox"
+               name="google_reviews_option_name[hide_date_string]"
+               value="1"
+               id="hide_date_string"
+			<?php echo esc_attr( ! empty( $this->google_reviews_options['hide_date_string'] ) ? 'checked' : '' ); ?>
+			<?php echo grwp_fs()->is__premium_only() ? '' : 'disabled'; ?>
+        >
+
+        <span>
+            <?php _e( 'Yes', 'grwp' ); ?>
+        </span>
+
+		<?php if ( ! grwp_fs()->is__premium_only() ) : ?>
+            <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=textless_reviews&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
+            </div>
+		<?php endif; ?>
+
+		<?php
+
+		$html = ob_get_clean();
+
+		echo wp_kses($html, $allowed_html);
+
+	}
 
     /**
      * Filter specific words
