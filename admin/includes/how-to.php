@@ -38,5 +38,5 @@ sprintf(__('<strong>Note:</strong> the free version only allows for pulling 20 r
     </li>
 </ol>
 
-<h1><?php _e('Video tutorial', 'grwp'); ?></h1>
+<h1 style="display: block;"><?php _e('Video tutorial', 'grwp'); ?></h1>
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/RqNEEVWoT0s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

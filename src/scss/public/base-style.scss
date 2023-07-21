@@ -5,7 +5,7 @@
 
 #g-review.hide_date .time,
 .g-review-sidebar.hide_date .time {
-  visibility: hidden;
+  display: none !important;
 }
 
 #g-review:not(.badge) {

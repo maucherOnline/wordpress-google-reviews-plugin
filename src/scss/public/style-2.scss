@@ -46,6 +46,9 @@
           bottom: 27px;
           left: 100px;
           flex-basis: 100%;
+          display: flex;
+          flex-direction: column;
+          row-gap: 3px;
 
           a {
             max-width: 190px;

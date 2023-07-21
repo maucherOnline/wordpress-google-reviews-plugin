@@ -184,6 +184,7 @@
   .form-table input[type="number"],
   .form-table textarea {
     min-width: 200px;
+    max-width: 200px;
   }
 
   .form-table input[type="search"] {
