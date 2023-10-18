@@ -1,4 +1,4 @@
-=== Embedder for Google Reviews ===
+=== Google Reviews Plugin for WordPress ===
 Contributors: paretodigital, googlereviewsplugin
 Tags: google reviews, google reviews plugin, google reviews widget, google reviews block, google reviews slider
 Tested up to: 6.3
@@ -13,43 +13,50 @@ With a few easy clicks, display your Google Reviews for free, and improve your w
 Our Google Reviews plugin displays customer reviews with newly and easily implemented widgets.
 
 ⚡ PRO Version (Free Trial) for **advanced filtering** and additional layouts
-[https://reviewsembedder.com](https://reviewsembedder.com?utm_source=wp_dir&utm_medium=link&utm_campaign=01)
+
+➡ [See LIVE Demo](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=live_demo)
+
+✨ [Live Demo](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=live_demo) | 📚 [Documentation](https://reviewsembedder.com/docs/how-to-install/?utm_source=wp_dir&utm_medium=link&utm_campaign=docs) | 🌟 [PRO Features](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=features#pricing) | 🔥 [Get PRO](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=get_pro)
 
 [youtube https://www.youtube.com/watch?v=RqNEEVWoT0s]
 
-== Top Features of this Google Reviews Plugin ==
+== 🏆 Top Features of this Google Reviews Plugin ==
 The Google Reviews WordPress plugin has different styles and layouts and offers easy installation and integration.
 
-💪 **Pull your Google Reviews** from Google My Business / Google Business Profile
+**➡ Pull your Google Reviews** from Google My Business / Google Business Profile
 
-💪 **Update reviews automatically**
+**➡ Update reviews automatically**
 
-💪 **Display reviews** as Slider or Grid
+**➡ Display reviews** as Slider or Grid
 
-💪 **Choose** from 8 different designs
+**➡ Choose** from 8 different designs
 
-== Plus ==
-💪 **Free usage** - Our plugin is free to use with different free options to choose from
+== 💪 Plus ==
+**➕ Free usage** - Our plugin is free to use with different free options to choose from
 
-💪 **Display Google reviews in different layouts** - Make your website look more attractive to your customers by choosing different layouts for Google Reviews.
+**➕ Display Google reviews in different layouts** - Make your website look more attractive to your customers by choosing different layouts for Google Reviews.
 
-💪 **Use dummy content for testing if you don't have reviews yet** - If you don't have reviews yet, no worries, you can use dummy content for testing and still embed the google reviews plugin on your business website.
+**➕ Use dummy content for testing if you don't have reviews yet** - If you don't have reviews yet, no worries, you can use dummy content for testing and still embed the google reviews plugin on your business website.
 
-💪 **Use high-quality pre-designed styles** - Choose from a variety of high-quality pre-designed styles to catch the eyes of your customers.
+**➕ Use high-quality pre-designed styles** - Choose from a variety of high-quality pre-designed styles to catch the eyes of your customers.
 
-💪 **All designs are fully customizable via CSS** - We know how important is the use of CSS for your design, and that's why all of our designs are compatible and fully customizable via CSS.
+**➕ All designs are fully customizable via CSS** - We know how important is the use of CSS for your design, and that's why all of our designs are compatible and fully customizable via CSS.
 
-💪 **Show reviews as a slider or as a grid** - Depending on your preferences, you can choose to show reviews as a slider or as a grid.
+**➕ Show reviews as a slider or as a grid** - Depending on your preferences, you can choose to show reviews as a slider or as a grid.
 
-💪 **Shortcode integration** - Activate widget on your business website with straightforward shortcode integration.
+**➕ Shortcode integration** - Activate widget on your business website with straightforward shortcode integration.
 
-💪 **Use in any page builder** like, Divi, Classic Editor, Gutenberg, Page Origin, Beaver Builder, WPBakery etc. - Our plugin is available and compatible with a wide variety of page builders, and the process of integration is as simple as pasting a shortcode mentioned in the feature before.
+**➕ Use in any page builder** like, Divi, Classic Editor, Gutenberg, Page Origin, Beaver Builder, WPBakery etc. - Our plugin is available and compatible with a wide variety of page builders, and the process of integration is as simple as pasting a shortcode mentioned in the feature before.
 
-💪 **Save all reviews to WordPress for 100% uptime** - reviews are kept in the WordPress database for 100% uptime and easy navigation.
+**➕ Save all reviews to WordPress for 100% uptime** - reviews are kept in the WordPress database for 100% uptime and easy navigation.
 
-💪 **Boost your SEO** - Make your website rank higher in search results and allow more people and potential customers to discover your excellent products and services.
+**➕ Boost your SEO** - Make your website rank higher in search results and allow more people and potential customers to discover your excellent products and services.
 
-💪 **Ultra-fast loading times** - Not only is the embedding process of our widget easy, but its loading time is ultra-fast to ensure the best customer experience.
+**➕ Ultra-fast loading times** - Not only is the embedding process of our widget easy, but its loading time is ultra-fast to ensure the best customer experience.
+
+➡ [See LIVE Demo](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=live_demo)
+
+✨ [Live Demo](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=live_demo) | 📚 [Documentation](https://reviewsembedder.com/docs/how-to-install/?utm_source=wp_dir&utm_medium=link&utm_campaign=docs) | 🌟 [PRO Features](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=features#pricing) | 🔥 [Get PRO](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=get_pro)
 
 == PRO Features of the paid version (Free Trial) ==
 With [the pro version](https://reviewsembedder.com?utm_source=wp_dir&utm_medium=link&utm_campaign=02), you can pull all Google reviews of a business instead of only 20.
@@ -71,21 +78,21 @@ The plugin has a special word filter that enables you to search for powerful and
 5. Save
 6. Paste shortcode in pages, posts, or even Elementor, Beaver Builder, WP Bakery etc.
 
-== Innovative Design ==
+== 🌐 Innovative Design ==
 Design and create your own widgets, and choose the reviews to build your customer's trust and optimize the website.
 With our newly designed Google reviews plugin, you will enjoy displaying customer feedback and improving your customer experience. Embedding Google Reviews will boost conversions to your business website and build customer trust.
 The Google Reviews WordPress plugin comes with different designs and styles to catch the eye of your customers and develop an online reputation.
 
-== Why are WordPress Google Reviews Plugins so Important? ==
+== 🌟 Why are WordPress Google Reviews Plugins so Important? ==
 More than 90% of customers looking for positive feedback often make purchase decisions on the back of Google reviews. When there is somebody to vouch for your product/service quality, other people looking to purchase your goods and services will be more confident to buy something from you.
 Google Reviews will increase your sales and conversions and ensure customers keep coming back to you by creating a positive feedback loop.
 Our plugin will boost your SEO and rank your website higher in search results because of positive reviews.
 
-== Easy and Intuitive Implementation ==
+== 👥 Easy and Intuitive Implementation ==
 The implementation process is simple, and it only takes a couple of clicks to finish everything. You must copy your business website's link into our Google Reviews widget and follow the steps outlined in the video above.
 After that, you are all set and can finally focus on other aspects of your business.
 
-== What are the benefits of embedding Google reviews on your website? ==
+== 🖥️ What are the benefits of embedding Google reviews on your website? ==
 
 There are multiple advantages of using Google business reviews, and some of them are:
 
@@ -97,7 +104,7 @@ There are multiple advantages of using Google business reviews, and some of them
 - **Improved Website Traffic** - Positive reviews will make your customers return to repurchase your services and products. Also, regular customers will increase your website traffic and make it more stable. When those customers leave a positive review, new ones will have an easier time deciding if a particular product or service is right for them.
 - **Increased Conversions & ROI** - Most people look for positive reviews when deciding to purchase something on the internet. By constantly improving your business, you will increase the chance of customers leaving positive reviews and, in turn, improve your conversion rates and ROI.
 
-== Do embedded Google reviews help with SEO? ==
+== 🚀 Do embedded Google reviews help with SEO? ==
 Google reviews help with SEO(Search Engine Optimization).
 Many other factors are involved in search rankings, but customer reviews can be a solid signal to Google's search engine since they communicate trustworthiness and authority.
 Here are some reasons why Google reviews help with your search engine optimization:
@@ -115,7 +122,8 @@ Here are the most common questions associated with Google Review Plugins and rev
 If you have any problem whatsoever or didn't find the answer you were looking for, make sure to contact our support at WordPress.org support forums.
 
 == ⚡ PRO Version to pull ALL reviews ⚡ ==
-[https://reviewsembedder.com](https://reviewsembedder.com?utm_source=wp_dir&utm_medium=link&utm_campaign=03)
+
+✨ [Live Demo](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=live_demo) | 📚 [Documentation](https://reviewsembedder.com/docs/how-to-install/?utm_source=wp_dir&utm_medium=link&utm_campaign=docs) | 🌟 [PRO Features](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=features#pricing) | 🔥 [Get PRO](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=get_pro)
 
 == Frequently Asked Questions ==
 
