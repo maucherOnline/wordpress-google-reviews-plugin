@@ -125,6 +125,8 @@ If you have any problem whatsoever or didn't find the answer you were looking fo
 
 ✨ [Live Demo](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=live_demo) | 📚 [Documentation](https://reviewsembedder.com/docs/how-to-install/?utm_source=wp_dir&utm_medium=link&utm_campaign=docs) | 🌟 [PRO Features](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=features#pricing) | 🔥 [Get PRO](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=get_pro)
 
+Also check out our other plugin: YASR - [Star Rating Plugin for WordPress](https://wordpress.org/plugins/yet-another-stars-rating/)
+
 == Frequently Asked Questions ==
 
 = What is the Google reviews WordPress Plugin? =
