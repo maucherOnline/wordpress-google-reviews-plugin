@@ -130,3 +130,27 @@
     }
   }
 }
+
+
+/**
+ * Temporary fixes for missing place_info
+ */
+#g-review {
+  .grwp_header {
+    display: none !important;
+  }
+  .g-badge {
+    .g-rating {
+      display: none !important;
+    }
+  }
+}
+.g-review-sidebar {
+  .grwp-header {
+    .business-title,
+    .grwp_stars-wrapper,
+    .rating {
+      display: none !important;
+    }
+  }
+}

@@ -72,10 +72,11 @@ class GRWP_Google_Reviews_Output {
 		if ( $place_info ) {
 
 			$place_info_arr         = json_decode( $place_info, true );
-			$this->rating_rounded   = intval( round( $place_info_arr['rating'] ) );
-			$this->rating_formatted = number_format_i18n( $place_info_arr['rating'], 1 );
-			$this->total_reviews    = number_format_i18n($place_info_arr['reviews']);
-			$this->place_title      = $place_info_arr['title'];
+
+			$this->rating_rounded = isset($place_info_arr['rating']) ? intval(round($place_info_arr['rating'])) : 0;
+			$this->rating_formatted = isset($place_info_arr['rating']) ? number_format_i18n($place_info_arr['rating'], 1) : 'N/A';
+			$this->total_reviews = isset($place_info_arr['reviews']) ? number_format_i18n($place_info_arr['reviews']) : 'N/A';
+			$this->place_title = isset($place_info_arr['title']) ? $place_info_arr['title'] : 'Unknown Title';
 
 		}
 

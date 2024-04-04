@@ -1,5 +1,6 @@
 ## How to run this thing
 
+0. nvm use v14.17.0
 1. run `npm i` to install all dependencies
 2. run `gulp dev` to start the **dev** build and watch for changes
 3. run `gulp build --prod` to start the **production** build
