@@ -8,6 +8,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Stable tag: 1.5.16
 Tags: google reviews, google, reviews, rating, reviews plugin
 
+This Google Reviews Plugin pulls reviews from Google profiles and displays them on your website.
+
 == Description ==
 With a few easy clicks, display your Google Reviews for free, and improve your website user experience and conversions.
 Our Google Reviews WordPress plugin displays customer reviews with newly and easily implemented widgets.
