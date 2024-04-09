@@ -9,7 +9,7 @@
  * Plugin Name:       Embedder for Google Reviews
  * Plugin URI:        https://paretodigital.io
  * Description:       This Google Reviews Plugin pulls reviews from Google profiles and displays them on your website.
- * Version:           1.5.15
+ * Version:           1.5.16
  * Requires at least: 5.4
  * Requires PHP:      7.4
  * Tested up to:      6.3
@@ -91,7 +91,7 @@ else {
     // start freemius sdk
     startup_fs();
 
-    define( 'GRWP_GOOGLE_REVIEWS_VERSION', '1.5.15' );
+    define( 'GRWP_GOOGLE_REVIEWS_VERSION', '1.5.16' );
 
     // Base path to plugin for includes
     define( 'GR_BASE_PATH', plugin_dir_path( __FILE__ ) );
@@ -155,6 +155,27 @@ else {
 	// temporary from v1.5.5: add new place_info field for older active installations
 	if ( ! get_option('grwp_place_info') ) {
 		add_option('grwp_place_info','');
+	}
+
+	// temporary from v1.5.6: pull place_info from API to get newest place_info field
+	function pull_reviews_once() {
+		if ( grwp_fs()->is__premium_only() ) {
+			$reviews = new GRWP_Pro_API_Service();
+			$reviews->get_reviews_pro_api();
+		} else {
+			$reviews = new GRWP_Free_API_Service_Advanced();
+			$reviews->get_reviews_free_api_advanced();
+		}
+	}
+	add_action('pull_reviews_once', 'pull_reviews_once');
+
+	$flag_pulled_reviews_once = get_option('grwp_pulled_reviews_once');
+	if (GRWP_GOOGLE_REVIEWS_VERSION == '1.5.16' && ! $flag_pulled_reviews_once) {
+		// pull all reviews from API again, but only once
+		if ( ! wp_next_scheduled( 'pull_reviews_once' ) ) {
+			wp_schedule_single_event( time(), 'pull_reviews_once' );
+		}
+		update_option('grwp_pulled_reviews_once', 1);
 	}
 
 }
