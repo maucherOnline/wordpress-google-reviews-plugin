@@ -158,24 +158,24 @@ else {
 	}
 
 	// temporary from v1.5.6: pull place_info from API to get newest place_info field
-	function pull_reviews_once() {
-		if ( grwp_fs()->is__premium_only() ) {
+	if ( grwp_fs()->is__premium_only() ) {
+
+		function pull_reviews_once() {
 			$reviews = new GRWP_Pro_API_Service();
 			$reviews->get_reviews_pro_api();
-		} else {
-			$reviews = new GRWP_Free_API_Service_Advanced();
-			$reviews->get_reviews_free_api_advanced();
 		}
-	}
-	add_action('pull_reviews_once', 'pull_reviews_once');
 
-	$flag_pulled_reviews_once = get_option('grwp_pulled_reviews_once');
-	if (GRWP_GOOGLE_REVIEWS_VERSION == '1.5.16' && ! $flag_pulled_reviews_once) {
-		// pull all reviews from API again, but only once
-		if ( ! wp_next_scheduled( 'pull_reviews_once' ) ) {
-			wp_schedule_single_event( time(), 'pull_reviews_once' );
+		$flag_pulled_reviews_once = get_option( 'grwp_pulled_reviews_once' );
+		if ( GRWP_GOOGLE_REVIEWS_VERSION == '1.5.16' && ! $flag_pulled_reviews_once ) {
+
+			add_action( 'pull_reviews_once', 'pull_reviews_once' );
+			// pull all reviews from API again, but only once
+			if ( ! wp_next_scheduled( 'pull_reviews_once' ) ) {
+				wp_schedule_single_event( time(), 'pull_reviews_once' );
+			}
+			update_option( 'grwp_pulled_reviews_once', 1 );
 		}
-		update_option('grwp_pulled_reviews_once', 1);
+
 	}
 
 }
