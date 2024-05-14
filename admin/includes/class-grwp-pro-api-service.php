@@ -41,8 +41,17 @@ Class GRWP_Pro_API_Service
             )
         ) );
 
+		// assign endpoint, depending on plan
+		if (grwp_fs()->is_plan('pro_unlimited')) {
+			$api_endpoint = 'get-reviews-data-pro-unlimited.php';
+		} else {
+			$api_endpoint = 'get-reviews-data-pro.php';
+		}
+
+		// construct request URL
         $license_request_url = sprintf(
-			'https://api.reviewsembedder.com/get-reviews-data-pro.php?install_id=%s&data_id=%s&language=%s&site=%s&mail=%s',
+			'https://api.reviewsembedder.com/%s?install_id=%s&data_id=%s&language=%s&site=%s&mail=%s',
+	        $api_endpoint,
             $install_id,
             $data_id,
             $reviews_language,
