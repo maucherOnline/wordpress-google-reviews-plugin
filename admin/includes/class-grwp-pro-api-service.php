@@ -108,22 +108,31 @@ Class GRWP_Pro_API_Service
         // if response body available, proceed
         else {
 
-                $get_reviews = json_decode( wp_remote_retrieve_body( $get_reviews ) );
-			$reviews_arr = json_decode(json_encode($get_reviews), true);
+			$get_reviews = json_decode( wp_remote_retrieve_body( $get_reviews ) );
+			$reviews_arr = json_decode( json_encode($get_reviews), true );
 
-			// Update reviews
-                update_option( 'gr_latest_results', [
-				$data_id => json_encode( $reviews_arr['reviews'] )
-			]);
+			// make sure, the reviews are properly formatted and contain all necessary info
+			if ( parent::check_reviews($reviews_arr['reviews']) ) {
 
-			// Update place info data
-			update_option( 'grwp_place_info', [
-				$data_id => json_encode( $reviews_arr['place_info'] )
-                ]);
+				// Update reviews
+				update_option( 'gr_latest_results', [
+					$data_id => json_encode( $reviews_arr['reviews'] )
+				] );
 
-                $response->set_status(200);
+			}
 
-            }
+			// make sure, the place_info is properly formatted and contains all necessary info
+	        if ( parent::check_place_info($reviews_arr['place_info']) ) {
+
+		        // Update place info data
+		        update_option( 'grwp_place_info', [
+			        $data_id => json_encode( $reviews_arr['place_info'] )
+		        ] );
+
+	        }
+
+			$response->set_status(200);
+        }
 
         return $response;
 

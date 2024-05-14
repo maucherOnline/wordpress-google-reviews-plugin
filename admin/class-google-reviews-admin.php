@@ -45,7 +45,10 @@ class GRWP_Google_Reviews_Admin {
         // free version
         else {
 
+            // deprecated
             new GRWP_Free_API_Service();
+
+            // newest version
             new GRWP_Free_API_Service_Advanced();
 
         }

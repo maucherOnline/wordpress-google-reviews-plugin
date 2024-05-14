@@ -145,15 +145,25 @@ Class GRWP_Free_API_Service_Advanced {
 			$get_reviews = json_decode( wp_remote_retrieve_body( $get_reviews ) );
 			$reviews_arr = json_decode(json_encode($get_reviews), true);
 
-			// Update reviews
-			update_option( 'gr_latest_results', [
-				$data_id => json_encode( $reviews_arr['reviews'] )
-			]);
+			// make sure, the reviews are properly formatted and contain all necessary info
+			if ( self::check_reviews($reviews_arr['reviews']) ) {
 
-			// Update place info data
-			update_option( 'grwp_place_info', [
-				$data_id => json_encode( $reviews_arr['place_info'] )
-			]);
+				// Update reviews
+				update_option( 'gr_latest_results', [
+					$data_id => json_encode( $reviews_arr['reviews'] )
+				] );
+
+			}
+
+			// make sure, the place_info is properly formatted and contains all necessary info
+			if ( self::check_place_info($reviews_arr['place_info']) ) {
+
+				// Update place info data
+				update_option( 'grwp_place_info', [
+					$data_id => json_encode( $reviews_arr['place_info'] )
+				] );
+
+			}
 
 			$response->set_status(200);
 
@@ -161,6 +171,40 @@ Class GRWP_Free_API_Service_Advanced {
 
 		return $response;
 
+	}
+
+	public static function check_reviews($reviews) {
+
+		$all_values_correct = true;
+		foreach ($reviews as $review) {
+			if (
+				! isset($review['link']) || ! is_string($review['link']) ||
+				! isset($review['rating']) || ! is_int($review['rating']) ||
+				! isset($review['date']) || ! is_string($review['date']) ||
+				! isset($review['user']['name']) || ! is_string($review['user']['name']) ||
+				! isset($review['user']['link']) || ! is_string($review['user']['link']) ||
+				! isset($review['user']['thumbnail']) || ! is_string($review['user']['thumbnail'])
+			) {
+				$all_values_correct = false;
+				break;
+			}
+		}
+
+		return $all_values_correct;
+	}
+
+	public static function check_place_info($place_info) {
+
+		$all_values_correct = true;
+		if (
+			! isset($place_info['title']) || ! is_string($place_info['title']) ||
+			! isset($place_info['rating']) || ! is_float($place_info['rating']) ||
+			! isset($place_info['reviews']) || ! is_int($place_info['reviews'])
+		) {
+			$all_values_correct = false;
+		}
+
+		return $all_values_correct;
 	}
 
 	/**
