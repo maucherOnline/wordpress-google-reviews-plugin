@@ -34,6 +34,8 @@ class GRWP_Google_Reviews_Output {
 	protected $total_reviews = 0;
 	protected $place_title = '';
 
+	protected $options = [];
+
     /**
      * Constructor method
      */
