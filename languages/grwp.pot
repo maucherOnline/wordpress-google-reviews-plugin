@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-04-09 13:12+0000\n"
+"POT-Creation-Date: 2024-06-05 08:57+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -59,31 +59,31 @@ msgstr ""
 msgid "Look up your Place ID and paste it in the field above."
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:12, admin/includes/class-grwp-global-menu-pages.php:13, admin/includes/class-grwp-global-menu-pages.php:36
+#: admin/includes/class-grwp-global-menu-pages.php:14, admin/includes/class-grwp-global-menu-pages.php:15, admin/includes/class-grwp-global-menu-pages.php:35
 msgid "Google Reviews"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:47
+#: admin/includes/class-grwp-global-menu-pages.php:46
 msgid "Connect Google"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:51
+#: admin/includes/class-grwp-global-menu-pages.php:50
 msgid "Display Settings"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:62
+#: admin/includes/class-grwp-global-menu-pages.php:61
 msgid "Upgrade to"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:62
+#: admin/includes/class-grwp-global-menu-pages.php:61
 msgid "PRO"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:80
+#: admin/includes/class-grwp-global-menu-pages.php:79
 msgid "Preview"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:128, admin/includes/class-grwp-global-menu-pages.php:109, admin/includes/class-grwp-global-menu-pages.php:99
+#: admin/includes/class-grwp-global-menu-pages.php:127, admin/includes/class-grwp-global-menu-pages.php:108, admin/includes/class-grwp-global-menu-pages.php:98
 msgid "Use this shortcode to display the widget (<a href=\"%s\" target=\"_blank\">Documentation</a>)."
 msgstr ""
 
@@ -219,79 +219,79 @@ msgstr ""
 msgid "Video tutorial"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:120
+#: public/includes/class-grwp-google-reviews-output.php:122
 msgid "year"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:121
+#: public/includes/class-grwp-google-reviews-output.php:123
 msgid "years"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:124
+#: public/includes/class-grwp-google-reviews-output.php:126
 msgid "month"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:125
+#: public/includes/class-grwp-google-reviews-output.php:127
 msgid "months"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:128
+#: public/includes/class-grwp-google-reviews-output.php:130, public/includes/class-grwp-google-reviews-output.php:152
 msgid "week"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:129
+#: public/includes/class-grwp-google-reviews-output.php:131, public/includes/class-grwp-google-reviews-output.php:152
 msgid "weeks"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:132
+#: public/includes/class-grwp-google-reviews-output.php:134
 msgid "day"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:133
+#: public/includes/class-grwp-google-reviews-output.php:135
 msgid "days"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:136
+#: public/includes/class-grwp-google-reviews-output.php:138
 msgid "hour"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:137
+#: public/includes/class-grwp-google-reviews-output.php:139
 msgid "hours"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:140
+#: public/includes/class-grwp-google-reviews-output.php:142
 msgid "minute"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:141
+#: public/includes/class-grwp-google-reviews-output.php:143
 msgid "minutes"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:144
+#: public/includes/class-grwp-google-reviews-output.php:146
 msgid "second"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:145
+#: public/includes/class-grwp-google-reviews-output.php:147
 msgid "seconds"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:159, public/includes/class-grwp-google-reviews-output.php:164
+#: public/includes/class-grwp-google-reviews-output.php:166, public/includes/class-grwp-google-reviews-output.php:171
 msgid " ago"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:159, public/includes/class-grwp-google-reviews-output.php:164
+#: public/includes/class-grwp-google-reviews-output.php:166, public/includes/class-grwp-google-reviews-output.php:171
 msgid "just now"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:201
+#: public/includes/class-grwp-google-reviews-output.php:208
 msgid "Lorem Ipsum"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:206
+#: public/includes/class-grwp-google-reviews-output.php:213
 msgid "three months ago"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:207
+#: public/includes/class-grwp-google-reviews-output.php:214
 msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
 msgstr ""
 

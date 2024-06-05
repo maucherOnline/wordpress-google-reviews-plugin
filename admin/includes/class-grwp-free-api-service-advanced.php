@@ -198,7 +198,7 @@ Class GRWP_Free_API_Service_Advanced {
 		$all_values_correct = true;
 		if (
 			! isset($place_info['title']) || ! is_string($place_info['title']) ||
-			! isset($place_info['rating']) || ! is_float($place_info['rating']) ||
+			! isset($place_info['rating']) || (!is_float($place_info['rating']) && !is_int($place_info['rating'])) ||
 			! isset($place_info['reviews']) || ! is_int($place_info['reviews'])
 		) {
 			$all_values_correct = false;

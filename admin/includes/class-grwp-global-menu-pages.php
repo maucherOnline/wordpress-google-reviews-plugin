@@ -2,6 +2,8 @@
 
 Class GRWP_Global_Menu_Pages {
 
+    protected $google_reviews_options;
+
     public function __construct() {
         $this->add_menu_pages();
     }
@@ -25,9 +27,6 @@ Class GRWP_Global_Menu_Pages {
      */
     public function google_reviews_create_admin_page() {
         global $allowed_html;
-
-        $default_tab = null;
-        $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
 
         ?>
 

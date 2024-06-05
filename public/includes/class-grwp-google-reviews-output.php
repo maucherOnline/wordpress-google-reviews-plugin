@@ -110,52 +110,57 @@ class GRWP_Google_Reviews_Output {
      * @throws Exception
      */
     protected function time_elapsed_string( $datetime, $full = false ) {
-		$now = new DateTime;
-		$ago = new DateTime($datetime);
-		$diff = $now->diff($ago);
+        $now = new DateTime;
+        $ago = new DateTime($datetime);
+        $diff = $now->diff($ago);
 
-		$diff->w = floor($diff->d / 7);
-		$diff->d -= $diff->w * 7;
+        $weeks = floor($diff->d / 7);
+        $diff->d -= $weeks * 7;
 
-		$string = array(
-			'y' => array(
-				__( 'year', 'grwp' ),
-				__( 'years', 'grwp' )
-			),
-			'm' => array(
-				__( 'month', 'grwp' ),
-				__( 'months', 'grwp' )
-			),
-			'w' => array(
-				__( 'week', 'grwp' ),
-				__( 'weeks', 'grwp' )
-			),
-			'd' => array(
-				__( 'day', 'grwp' ),
-				__( 'days', 'grwp' )
-			),
-			'h' => array(
-				__( 'hour', 'grwp' ),
-				__( 'hours', 'grwp' )
-			),
-			'i' => array(
-				__( 'minute', 'grwp' ),
-				__( 'minutes', 'grwp' )
-			),
-			's' => array(
-				__( 'second', 'grwp' ),
-				__( 'seconds', 'grwp' )
-			)
-		);
-		foreach ($string as $k => &$v) {
-			if ($diff->$k) {
-				$v = $diff->$k . ' ' . ($diff->$k > 1 ? $v[1] : $v[0]);
-			} else {
-				unset($string[$k]);
-			}
-		}
+        $string = array(
+            'y' => array(
+                __( 'year', 'grwp' ),
+                __( 'years', 'grwp' )
+            ),
+            'm' => array(
+                __( 'month', 'grwp' ),
+                __( 'months', 'grwp' )
+            ),
+            'w' => array(
+                __( 'week', 'grwp' ),
+                __( 'weeks', 'grwp' )
+            ),
+            'd' => array(
+                __( 'day', 'grwp' ),
+                __( 'days', 'grwp' )
+            ),
+            'h' => array(
+                __( 'hour', 'grwp' ),
+                __( 'hours', 'grwp' )
+            ),
+            'i' => array(
+                __( 'minute', 'grwp' ),
+                __( 'minutes', 'grwp' )
+            ),
+            's' => array(
+                __( 'second', 'grwp' ),
+                __( 'seconds', 'grwp' )
+            )
+        );
 
-		if (!$full) $string = array_slice($string, 0, 1);
+        if ($weeks) {
+            $string['w'] = $weeks . ' ' . ($weeks > 1 ? __( 'weeks', 'grwp' ) : __( 'week', 'grwp' ));
+        }
+
+        foreach ($string as $k => &$v) {
+            if ($k != 'w' && $diff->$k) {
+                $v = $diff->$k . ' ' . ($diff->$k > 1 ? $v[1] : $v[0]);
+            } elseif ($k != 'w') {
+                unset($string[$k]);
+            }
+        }
+
+        if (!$full) $string = array_slice($string, 0, 1);
 
         // standard time string for English
         $time_string = $string ? implode(', ', $string) . __( ' ago', 'grwp' ) : __( 'just now', 'grwp' );
