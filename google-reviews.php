@@ -12,7 +12,6 @@
  * Version:           1.6.1
  * Requires at least: 5.4
  * Requires PHP:      7.4
- * Tested up to:      6.3
  * Author:            ReviewsEmbedder.com
  * Author URI:        https://reviewsembedder.com
  * License:           GPL-2.0+
