@@ -5,7 +5,7 @@ Tested up to: 6.6
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.6
+Stable tag: 1.6.1
 Tags: google reviews, google, reviews, rating, reviews plugin
 
 This Google Reviews Plugin pulls reviews from Google profiles and displays them on your website.
@@ -127,7 +127,9 @@ If you have any problem whatsoever or didn’t find the answer you were looking 
 
 ✨ [Live Demo](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=live_demo) | 📚 [Documentation](https://reviewsembedder.com/docs/how-to-install/?utm_source=wp_dir&utm_medium=link&utm_campaign=docs) | 🌟 [PRO Features](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=features#pricing) | 🔥 [Get PRO](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=get_pro)
 
-Also check out our other plugin: YASR - [Star Rating Plugin for WordPress](https://wordpress.org/plugins/yet-another-stars-rating/)
+Also check out our other plugins:
+- YASR - [Star Rating Plugin for WordPress](https://wordpress.org/plugins/yet-another-stars-rating/)
+- Send Users Email – [Email Subscribers, Email Marketing Newsletter](https://wordpress.org/plugins/send-users-email/)
 
 == Frequently Asked Questions ==
 
