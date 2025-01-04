@@ -131,6 +131,15 @@ Also check out our other plugins:
 - YASR - [Star Rating Plugin for WordPress](https://wordpress.org/plugins/yet-another-stars-rating/)
 - Send Users Email – [Email Subscribers, Email Marketing Newsletter](https://wordpress.org/plugins/send-users-email/)
 
+== Resources ==
+* [Follow development on GitHub](https://github.com/maucherOnline/wordpress-google-reviews-plugin)
+* Source files for Swiper JS library: [https://swiperjs.com](https://swiperjs.com)
+
+== Use of external services ==
+To provide your Google reviews, the plugin uses an external service provided by the developer of this plugin.
+The plugin does not send any data to the external service, except for the Google Place ID, the admin email and the freemius installation ID, which is necessary to retrieve the reviews.
+The admin email is used to inform the admin of any potential outages on our service (very rarely the case). The email is only used for this purpose and is not stored or used for any other purpose.
+
 == Frequently Asked Questions ==
 
 = What is the Google reviews WordPress Plugin? =
@@ -223,6 +232,8 @@ Statistically, 86% of customers hesitate to purchase from companies with negativ
 = 1.6.3 =
 * Upgraded Freemius SDK
 * Upgraded Swiper JS library
+* Added resources like GitHub repository to source files and Swiper JS library
+* Added disclaimer for the use of external services
 = 1.6.2 =
 * Upgraded Freemius SDK
 * WP 6.7 compatibility
