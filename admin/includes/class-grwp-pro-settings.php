@@ -15,7 +15,7 @@ Class GRWP_Pro_Settings {
 
         add_settings_field(
             'serp_business_name', // id
-            __( 'Search for your business:', 'grwp' ), // title
+            __( 'Search for your business:', 'embedder-for-google-reviews' ), // title
             array( $this, 'serp_business_name_callback' ), // callback
             'google-reviews-admin', // page
             'google_reviews_setting_section' // section
@@ -73,14 +73,14 @@ Class GRWP_Pro_Settings {
                        id="serp_business_name"
                        value="<?php echo esc_attr( isset( $this->google_reviews_options['serp_business_name'] ) ? $this->google_reviews_options['serp_business_name'] : '' ); ?>"
                        autocomplete="off"
-                       placeholder="<?php _e('Search for your business', 'grwp');?>"
+                       placeholder="<?php _e('Search for your business', 'embedder-for-google-reviews');?>"
                 />
                 <div class="button-row">
                     <a class="button search-business pro" <?php echo $search_disabled; ?>>
-                        <?php _e('Search business', 'grwp');?>
+                        <?php _e('Search business', 'embedder-for-google-reviews');?>
                     </a>
                     <a class="button pull-reviews pro" <?php echo $pull_button_disabled; ?>>
-                        <?php _e('Pull reviews', 'grwp');?>
+                        <?php _e('Pull reviews', 'embedder-for-google-reviews');?>
                     </a>
                 </div>
                 <fieldset class="serp-results"></fieldset><!-- /.serp-results -->
@@ -89,7 +89,7 @@ Class GRWP_Pro_Settings {
 
         <p id="errors"></p>
         <p>
-            <?php _e( 'Details like country, state, city and/or phone number may help achieving more accurate results.', 'grwp' ); ?>
+            <?php _e( 'Details like country, state, city and/or phone number may help achieving more accurate results.', 'embedder-for-google-reviews' ); ?>
         </p>
 
         <?php

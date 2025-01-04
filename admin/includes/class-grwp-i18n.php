@@ -35,7 +35,7 @@ class GRWP_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'grwp',
+			'embedder-for-google-reviews',
 			false,
             GR_PLUGIN_REL_PATH . '/languages'
 		);

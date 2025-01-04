@@ -234,6 +234,8 @@ Statistically, 86% of customers hesitate to purchase from companies with negativ
 * Upgraded Swiper JS library
 * Added resources like GitHub repository to source files and Swiper JS library
 * Added disclaimer for the use of external services
+* Changed text domain for translation strings to match plugin slug
+* Added security measures to prevent public access to certain plugin files
 = 1.6.2 =
 * Upgraded Freemius SDK
 * WP 6.7 compatibility

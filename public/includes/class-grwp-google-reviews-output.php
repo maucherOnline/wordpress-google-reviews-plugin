@@ -119,37 +119,37 @@ class GRWP_Google_Reviews_Output {
 
         $string = array(
             'y' => array(
-                __( 'year', 'grwp' ),
-                __( 'years', 'grwp' )
+                __( 'year', 'embedder-for-google-reviews' ),
+                __( 'years', 'embedder-for-google-reviews' )
             ),
             'm' => array(
-                __( 'month', 'grwp' ),
-                __( 'months', 'grwp' )
+                __( 'month', 'embedder-for-google-reviews' ),
+                __( 'months', 'embedder-for-google-reviews' )
             ),
             'w' => array(
-                __( 'week', 'grwp' ),
-                __( 'weeks', 'grwp' )
+                __( 'week', 'embedder-for-google-reviews' ),
+                __( 'weeks', 'embedder-for-google-reviews' )
             ),
             'd' => array(
-                __( 'day', 'grwp' ),
-                __( 'days', 'grwp' )
+                __( 'day', 'embedder-for-google-reviews' ),
+                __( 'days', 'embedder-for-google-reviews' )
             ),
             'h' => array(
-                __( 'hour', 'grwp' ),
-                __( 'hours', 'grwp' )
+                __( 'hour', 'embedder-for-google-reviews' ),
+                __( 'hours', 'embedder-for-google-reviews' )
             ),
             'i' => array(
-                __( 'minute', 'grwp' ),
-                __( 'minutes', 'grwp' )
+                __( 'minute', 'embedder-for-google-reviews' ),
+                __( 'minutes', 'embedder-for-google-reviews' )
             ),
             's' => array(
-                __( 'second', 'grwp' ),
-                __( 'seconds', 'grwp' )
+                __( 'second', 'embedder-for-google-reviews' ),
+                __( 'seconds', 'embedder-for-google-reviews' )
             )
         );
 
         if ($weeks) {
-            $string['w'] = $weeks . ' ' . ($weeks > 1 ? __( 'weeks', 'grwp' ) : __( 'week', 'grwp' ));
+            $string['w'] = $weeks . ' ' . ($weeks > 1 ? __( 'weeks', 'embedder-for-google-reviews' ) : __( 'week', 'embedder-for-google-reviews' ));
         }
 
         foreach ($string as $k => &$v) {
@@ -163,12 +163,12 @@ class GRWP_Google_Reviews_Output {
         if (!$full) $string = array_slice($string, 0, 1);
 
         // standard time string for English
-        $time_string = $string ? implode(', ', $string) . __( ' ago', 'grwp' ) : __( 'just now', 'grwp' );
+        $time_string = $string ? implode(', ', $string) . __( ' ago', 'embedder-for-google-reviews' ) : __( 'just now', 'embedder-for-google-reviews' );
 
         // reverse string arrangement for non English sites
         $language_code = get_locale();
         if ( substr($language_code, 0, 3) !== 'en_') {
-            $time_string = $string ? __( ' ago', 'grwp' ) . implode(', ', $string) : __( 'just now', 'grwp' );
+            $time_string = $string ? __( ' ago', 'embedder-for-google-reviews' ) . implode(', ', $string) : __( 'just now', 'embedder-for-google-reviews' );
         }
 
         // allow filtering for edge cases
@@ -205,13 +205,13 @@ class GRWP_Google_Reviews_Output {
     protected function get_dummy_content() {
 
         $reviews = array( array(
-            'author_name'               => __( 'Lorem Ipsum', 'grwp' ),
+            'author_name'               => __( 'Lorem Ipsum', 'embedder-for-google-reviews' ),
             'author_url'                => '#',
             'language'                  => 'en',
             'profile_photo_url'         => GR_PLUGIN_DIR_URL . 'dist/images/sample-photo.png',
             'rating'                    => 5,
-            'relative_time_description' => __( 'three months ago', 'grwp' ),
-            'text'                      => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'grwp' ),
+            'relative_time_description' => __( 'three months ago', 'embedder-for-google-reviews' ),
+            'text'                      => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'embedder-for-google-reviews' ),
             'time'                      => '1643630205'
         ) );
 

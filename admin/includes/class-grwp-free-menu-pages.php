@@ -11,8 +11,8 @@ Class GRWP_Free_Menu_Pages {
 
         add_submenu_page(
             'google-reviews',
-            __('How to', 'grwp'),
-            __('How to', 'grwp'),
+            __('How to', 'embedder-for-google-reviews'),
+            __('How to', 'embedder-for-google-reviews'),
             'manage_options',
             'how-to-free-version',
             array($this, 'google_reviews_create_sub_page_how_to')
