@@ -1,4 +1,4 @@
-=== Google Reviews WordPress Plugin (Widget to add and display reviews) ===
+=== Embedder for Google Reviews ===
 Contributors: paretodigital, googlereviewsplugin
 Tags: google reviews, google reviews plugin, google reviews widget, google reviews block, google reviews slider
 Tested up to: 6.7
@@ -220,6 +220,9 @@ Statistically, 86% of customers hesitate to purchase from companies with negativ
 6. Google Reviews Plugin backend #2
 
 == Changelog ==
+= 1.6.3 =
+* Upgraded Freemius SDK
+* Upgraded Swiper JS library
 = 1.6.2 =
 * Upgraded Freemius SDK
 * WP 6.7 compatibility
