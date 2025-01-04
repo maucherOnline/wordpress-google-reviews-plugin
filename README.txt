@@ -236,6 +236,8 @@ Statistically, 86% of customers hesitate to purchase from companies with negativ
 * Added disclaimer for the use of external services
 * Changed text domain for translation strings to match plugin slug
 * Added security measures to prevent public access to certain plugin files
+* Added translators comments
+
 = 1.6.2 =
 * Upgraded Freemius SDK
 * WP 6.7 compatibility

@@ -295,7 +295,7 @@ class GRWP_Google_Reviews_Output {
                 $profile_photo_url = $review['profile_photo_url'];
                 $rating = $review['rating'];
                 $text = $review['text'];
-                $time = $this->time_elapsed_string( date('Y-m-d h:i:s', $review['time']) );
+                $time = $this->time_elapsed_string( gmdate('Y-m-d h:i:s', $review['time']) );
 
             }
 
@@ -321,7 +321,7 @@ class GRWP_Google_Reviews_Output {
                     $profile_photo_url = $review['profile_photo_url'];
                     $rating = $review['rating'];
                     $text = $review['text'];
-                    $time = $this->time_elapsed_string(date('Y-m-d h:i:s', $review['time']));
+                    $time = $this->time_elapsed_string(gmdate('Y-m-d h:i:s', $review['time']));
                 }
 
             }

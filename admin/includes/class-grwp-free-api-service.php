@@ -55,7 +55,7 @@ Class GRWP_Free_API_Service {
 
         else if ( isset( $get_results->result ) && ! $is_cron ) {
 
-            update_option('gr_latest_results_free', json_encode($get_results->result));
+            update_option('gr_latest_results_free', wp_json_encode($get_results->result));
 
             wp_send_json_success( array(
                 'html' => $get_results->result
@@ -67,7 +67,7 @@ Class GRWP_Free_API_Service {
 
         // only run if $is_cron == true and no errors detected
         else {
-            update_option('gr_latest_results_free', json_encode($get_results->result));
+            update_option('gr_latest_results_free', wp_json_encode($get_results->result));
         }
 
         die();

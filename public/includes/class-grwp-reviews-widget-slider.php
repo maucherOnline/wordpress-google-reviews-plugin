@@ -12,7 +12,7 @@ class GRWP_Reviews_Widget_Slider
 
         // error handling
         if ( $this->reviews_have_error ) {
-
+            /* translators: no reviews available */
             return __( 'No reviews available', 'embedder-for-google-reviews' );
 
         }
@@ -41,10 +41,12 @@ class GRWP_Reviews_Widget_Slider
 			$output .= sprintf(
 				'<span class="grwp_total-rating">%s</span><span class="grwp_5_stars">%s</span>',
 				$this->rating_formatted,
+                /* translators: out of 5 stars */
 				__( 'Out of 5 stars', 'embedder-for-google-reviews' )
 			);
 			$output .= $stars;
 			$output .= sprintf(
+            /* translators: %s: total reviews */
 				'<h3 class="grwp_overall">' . __( 'Overall rating out of %s Google reviews', 'embedder-for-google-reviews' ) . '</h3>',
 				$this->total_reviews
 			);

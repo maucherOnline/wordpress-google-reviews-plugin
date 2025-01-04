@@ -46,7 +46,8 @@ Class GRWP_Global_Settings {
 
         add_settings_field(
             'show_dummy_content', // id
-            __( 'Show dummy content', 'embedder-for-google-reviews' ), // title
+            /* translators: Show dummy content */
+            __( 'Show dummy content', 'embedder-for-google-reviews' ),
             array( $this, 'show_dummy_content_callback' ), // callback
             $this->settings_slug, // page
             'google_reviews_setting_section' // section
@@ -54,7 +55,8 @@ Class GRWP_Global_Settings {
 
         add_settings_field(
             'reviews_language_3', // id
-            __( 'Reviews language', 'embedder-for-google-reviews' ), // title
+            /* translators: Reviews language */
+            __( 'Reviews language', 'embedder-for-google-reviews' ),
             array( $this, 'reviews_language_3_callback' ), // callback
             $this->settings_slug, // page
             'google_reviews_setting_section' // section
@@ -71,7 +73,15 @@ Class GRWP_Global_Settings {
         <span class="dashicons dashicons-no close-icon"></span>
         <p>
 		    <?php
-		    _e( '<strong>Attention</strong>: the free version only allows for pulling 20 reviews.', 'embedder-for-google-reviews')
+            printf(
+                wp_kses(
+                /* translators: %s is replaced with "Attention" in bold. */
+                    sprintf( __('%s: the free version only allows for pulling 20 reviews.', 'embedder-for-google-reviews'),
+                        '<strong>' . __('Attention', 'embedder-for-google-reviews') . '</strong>'
+                    ),
+                    array('strong' => array()) // Allowed HTML tags
+                )
+            );
 		    ?>
         </p>
         <p>
@@ -79,7 +89,8 @@ Class GRWP_Global_Settings {
 		    echo
 		    wp_kses(
 			    sprintf(
-				    __('<a href="%s" target="_blank">Upgrade to the PRO version</a> to show ALL your reviews, <strong>filter out bad reviews</strong> and <a href="%s" target="_blank">much more</a>.', 'embedder-for-google-reviews' ),
+                    /* translators: %s: Upgrade to the PRO version */
+				    __('<a href="%1$s" target="_blank">Upgrade to the PRO version</a> to show ALL your reviews, <strong>filter out bad reviews</strong> and <a href="%2$s" target="_blank">much more</a>.', 'embedder-for-google-reviews' ),
 				    $upgrade_url, $upgrade_url
 			    ),
 			    $allowed_html
@@ -143,7 +154,8 @@ Class GRWP_Global_Settings {
 
         add_settings_field(
             'style_2', // id
-            __( 'Layout type', 'embedder-for-google-reviews' ), // title
+            /* translators: Layout type */
+            __( 'Layout type', 'embedder-for-google-reviews' ),
             array( $this, 'style_2_callback' ), // callback
             $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section
@@ -151,7 +163,8 @@ Class GRWP_Global_Settings {
 
         add_settings_field(
             'layout_style', // id
-            __( 'Design type', 'embedder-for-google-reviews' ), // title
+            /* translators: Design type */
+            __( 'Design type', 'embedder-for-google-reviews' ),
             array( $this, 'layout_style_callback' ), // callback
             $this->settings_slug, // page
             'google_reviews_style_layout_setting_section', // section,
@@ -160,7 +173,8 @@ Class GRWP_Global_Settings {
 
         add_settings_field(
             'filter_below_5_stars', // id
-            __('Minimum rating (stars)', 'embedder-for-google-reviews'), // title
+            /* translators: Minimum rating (stars) */
+            __('Minimum rating (stars)', 'embedder-for-google-reviews'),
             array($this, 'filter_below_5_stars_callback'), // callback
             $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section
@@ -168,7 +182,8 @@ Class GRWP_Global_Settings {
 
         add_settings_field(
             'exclude_reviews_without_text', // id
-            __('Exclude reviews without text', 'embedder-for-google-reviews'), // title
+            /* translators: Exclude reviews without text */
+            __('Exclude reviews without text', 'embedder-for-google-reviews'),
             array($this, 'exclude_reviews_without_text_callback'), // callback
             $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section
@@ -176,7 +191,8 @@ Class GRWP_Global_Settings {
 
 	    add_settings_field(
 		    'hide_date_string', // id
-		    __('Hide review date', 'embedder-for-google-reviews'), // title
+            /* translators: Hide review date */
+		    __('Hide review date', 'embedder-for-google-reviews'),
 		    array($this, 'hide_date_string_callback'), // callback
 		    $this->settings_slug, // page
 		    'google_reviews_style_layout_setting_section' // section
@@ -184,7 +200,8 @@ Class GRWP_Global_Settings {
 
         add_settings_field(
             'filter_words', // id
-            __('Filter by words (comma separated)', 'embedder-for-google-reviews'), // title
+            /* translators: Filter by words (comma separated) */
+            __('Filter by words (comma separated)', 'embedder-for-google-reviews'),
             array($this, 'filter_words_callback'), // callback
             $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section
@@ -206,6 +223,8 @@ Class GRWP_Global_Settings {
         /*
         add_settings_field(
             'embedding_instructions', // id
+            /* translators: Shortcode */
+        /*
             __( 'Shortcode', 'embedder-for-google-reviews' ), // title
             array( $this, 'reviews_instructions_callback' ), // callback
             $this->settings_slug, // page
@@ -285,13 +304,13 @@ Class GRWP_Global_Settings {
     }
 
     public function google_reviews_section_info() { ?>
-        <h2 id="connect_settings"><?php _e( 'Global settings for showing reviews', 'embedder-for-google-reviews' ); ?></h2>
+        <h2 id="connect_settings"><?php esc_html_e( 'Global settings for showing reviews', 'embedder-for-google-reviews' ); ?></h2>
 
         <?php
     }
 
     public function google_reviews_display_section_info() { ?>
-        <h2 id="display_settings"><?php _e( 'Display settings', 'embedder-for-google-reviews' );?></h2>
+        <h2 id="display_settings"><?php esc_html_e( 'Display settings', 'embedder-for-google-reviews' );?></h2>
 
         <?php
     }
@@ -313,7 +332,7 @@ Class GRWP_Global_Settings {
         >
 
         <span>
-            <?php _e( 'Yes', 'embedder-for-google-reviews' ); ?>
+            <?php esc_html_e( 'Yes', 'embedder-for-google-reviews' ); ?>
         </span>
 
         <?php
@@ -379,7 +398,7 @@ Class GRWP_Global_Settings {
         >
 
         <span>
-            <?php _e( 'Yes', 'embedder-for-google-reviews' ); ?>
+            <?php esc_html_e( 'Yes', 'embedder-for-google-reviews' ); ?>
         </span>
 
 	    <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
@@ -417,7 +436,7 @@ Class GRWP_Global_Settings {
         >
 
         <span>
-            <?php _e( 'Yes', 'embedder-for-google-reviews' ); ?>
+            <?php esc_html_e( 'Yes', 'embedder-for-google-reviews' ); ?>
         </span>
 
 		<?php if ( ! grwp_fs()->is__premium_only() ) : ?>
@@ -473,24 +492,24 @@ Class GRWP_Global_Settings {
         ?> <select name="google_reviews_option_name[style_2]" id="style_2">
             <?php $selected = (isset( $this->google_reviews_options['style_2'] ) && $this->google_reviews_options['style_2'] === 'Slider') ? 'selected' : '' ; ?>
             <option <?php echo esc_attr($selected); ?> value="Slider">
-                <?php _e( 'Slider', 'embedder-for-google-reviews' ); ?>
+                <?php esc_html_e( 'Slider', 'embedder-for-google-reviews' ); ?>
             </option>
             <?php $selected = (isset( $this->google_reviews_options['style_2'] ) && $this->google_reviews_options['style_2'] === 'Grid') ? 'selected' : '' ; ?>
             <option <?php echo esc_attr($selected); ?> value="Grid">
-                <?php _e( 'Grid', 'embedder-for-google-reviews' ); ?>
+                <?php esc_html_e( 'Grid', 'embedder-for-google-reviews' ); ?>
             </option>
 
             <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
 
             <option disabled value="Badge">
-			    <?php _e( 'Floating Badge (PRO)', 'embedder-for-google-reviews' ); ?>
+			    <?php esc_html_e( 'Floating Badge (PRO)', 'embedder-for-google-reviews' ); ?>
             </option>
 
             <?php else : ?>
 
             <?php $selected = (isset( $this->google_reviews_options['style_2'] ) && $this->google_reviews_options['style_2'] === 'Badge') ? 'selected' : '' ; ?>
             <option <?php echo esc_attr($selected); ?> value="Badge">
-                <?php _e( 'Floating Badge', 'embedder-for-google-reviews' ); ?>
+                <?php esc_html_e( 'Floating Badge', 'embedder-for-google-reviews' ); ?>
             </option>
 
             <?php endif; ?>
@@ -508,9 +527,9 @@ Class GRWP_Global_Settings {
         ?>
 
         <select name="google_reviews_option_name[grid_columns]" id="grid_columns">
-            <option <?php selected($columns, '1'); ?> value="1"><?php esc_attr_e('1'); ?></option>
-            <option <?php selected($columns, '2'); ?> value="2"><?php esc_attr_e('2'); ?></option>
-            <option <?php selected($columns, '3'); ?> value="3"><?php esc_attr_e('3'); ?></option>
+            <option <?php selected($columns, '1'); ?> value="1"><?php esc_attr_e('1', 'embedder-for-google-reviews'); ?></option>
+            <option <?php selected($columns, '2'); ?> value="2"><?php esc_attr_e('2', 'embedder-for-google-reviews'); ?></option>
+            <option <?php selected($columns, '3'); ?> value="3"><?php esc_attr_e('3', 'embedder-for-google-reviews'); ?></option>
         </select>
 
         <?php
@@ -530,9 +549,15 @@ Class GRWP_Global_Settings {
             <?php for ( $i = 1; $i <= 8; $i++ ) : ?>
                 <option
                     <?php selected( $layout_style, 'layout_style-' . $i ); ?>
-                        value="<?php echo esc_attr( sprintf( 'layout_style-%s', $i ) ) ?>"
+                        value="<?php echo esc_attr( sprintf( 'layout_style-%s', $i ) ); ?>"
                 >
-                    <?php esc_attr_e( __( 'Design', 'embedder-for-google-reviews' ) . ' #' . $i ); ?>
+                    <?php
+                    printf(
+                        /* translators: Design */
+                        esc_html__( 'Design #%s', 'embedder-for-google-reviews' ),
+                        esc_html( $i )
+                    );
+                    ?>
                 </option>
             <?php endfor; ?>
         </select>
@@ -632,7 +657,7 @@ Class GRWP_Global_Settings {
     }
 
     public function reviews_instructions_section() { ?>
-        <h2 id="embedding_instructions"><?php _e( 'Embedding instructions', 'embedder-for-google-reviews' ); ?></h2>
+        <h2 id="embedding_instructions"><?php esc_html_e( 'Embedding instructions', 'embedder-for-google-reviews' ); ?></h2>
         <?php
     }
 
@@ -642,14 +667,16 @@ Class GRWP_Global_Settings {
     public function reviews_instructions_callback() { ?>
         <div id="instructions">
             <p>
-                <?php _e( 'Use this shortcode to show your reviews on pages and posts:', 'embedder-for-google-reviews' ); ?>
+                <?php esc_html_e( 'Use this shortcode to show your reviews on pages and posts:', 'embedder-for-google-reviews' ); ?>
             </p>
             <input class="shortcode-container" type="text" disabled="" value="[google-reviews]">
             <p>
                 <?php
                 echo sprintf(
-                        __('<a href="%s" target="_blank">See</a>, how to overwrite styles, widget types and other settings.','embedder-for-google-reviews'),
-                        "https://reviewsembedder.com/docs/how-to-overwrite-styles/?utm_source=wp_backend&utm_medium=instructions&utm_campaign=overwrite_styles_types");
+                /* translators: %s: URL */
+                    esc_html__('<a href="%s" target="_blank">See</a>, how to overwrite styles, widget types and other settings.', 'embedder-for-google-reviews'),
+                    esc_url("https://reviewsembedder.com/docs/how-to-overwrite-styles/?utm_source=wp_backend&utm_medium=instructions&utm_campaign=overwrite_styles_types")
+                );
                 ?>
             </p>
         </div>

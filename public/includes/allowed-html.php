@@ -67,5 +67,8 @@ $allowed_html = [
         'rows'      => [],
         'cols'      => [],
 	    'disabled'  => []
-    ]
+    ],
+    'fieldset' => [
+        'class' => [],
+    ],
 ];

@@ -12,7 +12,7 @@ class GRWP_Reviews_Widget_Badge
 
 		// error handling
 		if ( $this->reviews_have_error ) {
-
+            /* translators: %s: error message */
 			return __( 'No reviews available', 'embedder-for-google-reviews' );
 
 		}
@@ -47,6 +47,7 @@ class GRWP_Reviews_Widget_Badge
 			<span class="g-rating">%s</span>
 		</a>',
             GR_PLUGIN_DIR_URL,
+            /* translators: %s: business name */
             __('Our Google Reviews', 'embedder-for-google-reviews'),
 	        $stars,
             $this->rating_formatted

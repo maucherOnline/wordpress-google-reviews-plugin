@@ -10,8 +10,8 @@ Class GRWP_Pro_Menu_Pages {
 
         add_submenu_page(
             'google-reviews',
-            __('How to', 'embedder-for-google-reviews'),
-            __('How to', 'embedder-for-google-reviews'),
+            __('How to', 'embedder-for-google-reviews'), /* translators: page title */
+            __('How to', 'embedder-for-google-reviews'), /* translators: menu title */
             'manage_options',
             'how-to-premium-version',
             array($this, 'google_reviews_create_sub_page_how_to_premium')

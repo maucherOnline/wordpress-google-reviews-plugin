@@ -16,7 +16,7 @@
  * Author URI:        https://reviewsembedder.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       grwp
+ * Text Domain:       embedder-for-google-reviews
  * Domain Path:       /languages
  */
 
@@ -42,7 +42,7 @@ if ( ! function_exists('grwp_fs') ) {
                     'premium_slug' => 'embedder-for-google-reviews-pro',
                     'type' => 'plugin',
                     'public_key' => 'pk_6823179f29a329a909c59a7a25a0a',
-                    'is_premium' => true,
+                    'is_premium' => false,
                     'premium_suffix' => 'Premium',
                     // If your plugin is a serviceware, set this option to false.
                     'has_premium_version' => true,

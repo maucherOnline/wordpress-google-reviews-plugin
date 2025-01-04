@@ -106,7 +106,7 @@ class GRWP_Google_Reviews_Admin {
     public function echo_js_wp_url() {
         ?>
         <script>
-            window.wp_base_url = "<?php echo get_site_url();?>";
+            window.wp_base_url = <?php echo wp_json_encode(esc_url(get_site_url())); ?>;
         </script>
         <?php
     }

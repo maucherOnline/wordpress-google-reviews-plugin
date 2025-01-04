@@ -109,14 +109,14 @@ Class GRWP_Pro_API_Service
         else {
 
 			$get_reviews = json_decode( wp_remote_retrieve_body( $get_reviews ) );
-			$reviews_arr = json_decode( json_encode($get_reviews), true );
+			$reviews_arr = json_decode( wp_json_encode($get_reviews), true );
 
 			// make sure, the reviews are properly formatted and contain all necessary info
 			if ( parent::check_reviews($reviews_arr['reviews']) ) {
 
 				// Update reviews
 				update_option( 'gr_latest_results', [
-					$data_id => json_encode( $reviews_arr['reviews'] )
+					$data_id => wp_json_encode( $reviews_arr['reviews'] )
 				] );
 
 			}
@@ -126,7 +126,7 @@ Class GRWP_Pro_API_Service
 
 		        // Update place info data
 		        update_option( 'grwp_place_info', [
-			        $data_id => json_encode( $reviews_arr['place_info'] )
+			        $data_id => wp_json_encode( $reviews_arr['place_info'] )
 		        ] );
 
 	        }

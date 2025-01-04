@@ -39,6 +39,7 @@ Class GRWP_Pro_Settings {
      * Echo Business Search Field
      */
     public function serp_business_name_callback() {
+        global $allowed_html;
         ob_start();
 
         $search_disabled = '';
@@ -73,14 +74,14 @@ Class GRWP_Pro_Settings {
                        id="serp_business_name"
                        value="<?php echo esc_attr( isset( $this->google_reviews_options['serp_business_name'] ) ? $this->google_reviews_options['serp_business_name'] : '' ); ?>"
                        autocomplete="off"
-                       placeholder="<?php _e('Search for your business', 'embedder-for-google-reviews');?>"
+                       placeholder="<?php esc_html_e('Search for your business', 'embedder-for-google-reviews');?>"
                 />
                 <div class="button-row">
-                    <a class="button search-business pro" <?php echo $search_disabled; ?>>
-                        <?php _e('Search business', 'embedder-for-google-reviews');?>
+                    <a class="button search-business pro" <?php echo esc_attr($search_disabled); ?>>
+                        <?php esc_html_e('Search business', 'embedder-for-google-reviews');?>
                     </a>
-                    <a class="button pull-reviews pro" <?php echo $pull_button_disabled; ?>>
-                        <?php _e('Pull reviews', 'embedder-for-google-reviews');?>
+                    <a class="button pull-reviews pro" <?php echo esc_attr($pull_button_disabled); ?>>
+                        <?php esc_html_e('Pull reviews', 'embedder-for-google-reviews');?>
                     </a>
                 </div>
                 <fieldset class="serp-results"></fieldset><!-- /.serp-results -->
@@ -89,13 +90,13 @@ Class GRWP_Pro_Settings {
 
         <p id="errors"></p>
         <p>
-            <?php _e( 'Details like country, state, city and/or phone number may help achieving more accurate results.', 'embedder-for-google-reviews' ); ?>
+            <?php esc_html_e( 'Details like country, state, city and/or phone number may help achieving more accurate results.', 'embedder-for-google-reviews' ); ?>
         </p>
 
         <?php
         $html = ob_get_clean();
 
-        echo $html;
+        echo wp_kses($html, $allowed_html );
     }
 
     /**

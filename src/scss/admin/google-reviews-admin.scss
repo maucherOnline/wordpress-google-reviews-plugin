@@ -230,19 +230,19 @@
 
     label {
       font-weight: 600;
-
-      input[type="text"] {
-        font-weight: 400;
-        width: 100%;
-        max-width: 485px;
-        text-align: center;
-        display: block;
-        background: #efefef;
-        color: black;
-        cursor: text;
-        margin-bottom: 32px;
-        margin-top: 8px;
-      }
+    }
+    input[type="text"],
+    input[disabled] {
+      font-weight: 400;
+      width: 100%;
+      max-width: 485px;
+      text-align: center;
+      display: block;
+      background: #efefef;
+      color: black;
+      cursor: text;
+      margin-bottom: 32px;
+      margin-top: 8px;
     }
   }
 
