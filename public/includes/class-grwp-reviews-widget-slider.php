@@ -33,7 +33,7 @@ class GRWP_Reviews_Widget_Slider
 
 	    $google_svg = GR_PLUGIN_DIR_URL . 'dist/images/google-logo-svg.svg';
         $verified_svg = GR_PLUGIN_DIR_URL . 'dist/images/verified-badge.svg';
-        $url = 'https://reviewsembedder.com?utm_source=verified&utm_medium=header&utm_campaign='.get_site_url();
+        $url = 'https://reviewsembedder.com';
 	    $stars = $this->get_total_stars();
 
 		$output = '';

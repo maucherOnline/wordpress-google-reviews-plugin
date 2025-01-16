@@ -37,7 +37,7 @@ class GRWP_Reviews_Widget_Badge
         }
 
         $verified_svg = GR_PLUGIN_DIR_URL . 'dist/images/verified-badge.svg';
-        $url = 'https://reviewsembedder.com?utm_source=verified&utm_medium=header&utm_campaign='.get_site_url();
+        $url = 'https://reviewsembedder.com';
 
         $stars = $this->get_total_stars();
 		$this->place_title = $this->place_title === '' ? 'Lorem Ipsum Business' : $this->place_title;
