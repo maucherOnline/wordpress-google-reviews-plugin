@@ -54,6 +54,15 @@ Class GRWP_Global_Settings {
         );
 
         add_settings_field(
+            'show_verified', // id
+            /* translators: Show dummy content */
+            __( 'Show \'verified\' badge', 'embedder-for-google-reviews' ),
+            array( $this, 'show_verified_callback' ), // callback
+            $this->settings_slug, // page
+            'google_reviews_setting_section' // section
+        );
+
+        add_settings_field(
             'reviews_language_3', // id
             /* translators: Reviews language */
             __( 'Reviews language', 'embedder-for-google-reviews' ),
@@ -248,6 +257,10 @@ Class GRWP_Global_Settings {
             $sanitary_values['show_dummy_content'] = sanitize_text_field( $input['show_dummy_content'] );
         }
 
+        if ( isset( $input['show_verified'] ) ) {
+            $sanitary_values['show_verified'] = sanitize_text_field( $input['show_verified'] );
+        }
+
         if ( isset( $input['serp_business_name'] ) ) {
             $sanitary_values['serp_business_name'] = sanitize_text_field( $input['serp_business_name'] );
         }
@@ -329,6 +342,32 @@ Class GRWP_Global_Settings {
                value="1"
                id="show_dummy_content"
             <?php echo esc_attr( ! empty( $this->google_reviews_options['show_dummy_content'] ) ? 'checked' : '' ); ?>
+        >
+
+        <span>
+            <?php esc_html_e( 'Yes', 'embedder-for-google-reviews' ); ?>
+        </span>
+
+        <?php
+        $html = ob_get_clean();
+
+        echo wp_kses($html, $allowed_html);
+    }
+
+    /**
+     * Show dummy content
+     * @return void
+     */
+    public function show_verified_callback() {
+        global $allowed_html;
+        ob_start();
+        ?>
+
+        <input type="checkbox"
+               name="google_reviews_option_name[show_verified]"
+               value="1"
+               id="show_verified"
+            <?php echo esc_attr( ! empty( $this->google_reviews_options['show_verified'] ) ? 'checked' : '' ); ?>
         >
 
         <span>

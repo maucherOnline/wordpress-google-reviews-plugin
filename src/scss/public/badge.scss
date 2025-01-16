@@ -127,6 +127,44 @@
       font-weight: 800;
       line-height: 1;
     }
+    .grwp_verified {
+      width: 100%;
+
+      > a {
+
+        text-decoration: none;
+        position: relative;
+        font-weight: 400;
+        font-size: 14px;
+        letter-spacing: 0.02em;
+        color: rgba(0, 0, 0, .6);
+        margin: 0;
+        padding: 0;
+        outline: none;
+        border: none;
+        text-shadow: none;
+        font-size: 14px;
+        margin-top: 10px;
+        display: inline-block;
+        &:focus {
+          outline: none;
+          border: none;
+          box-shadow: none;
+        }
+
+        > img {
+          width: 25px;
+          height: auto;
+          max-width: 25px;
+          outline: none;
+          border: none;
+          box-shadow: none;
+          position: absolute;
+          top: -3px;
+          right: -32px;
+        }
+      }
+    }
 
     .grwp-close {
       &:after {

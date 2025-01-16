@@ -24,7 +24,16 @@ class GRWP_Reviews_Widget_Slider
 			}
 		}
 
+        $show_verified = false;
+        if ( isset($this->options['show_verified']) ) {
+            if ( $this->options['show_verified'] === '1' ) {
+                $show_verified = true;
+            }
+        }
+
 	    $google_svg = GR_PLUGIN_DIR_URL . 'dist/images/google-logo-svg.svg';
+        $verified_svg = GR_PLUGIN_DIR_URL . 'dist/images/verified-badge.svg';
+        $url = 'https://reviewsembedder.com?utm_source=verified&utm_medium=header&utm_campaign='.get_site_url();
 	    $stars = $this->get_total_stars();
 
 		$output = '';
@@ -50,6 +59,16 @@ class GRWP_Reviews_Widget_Slider
 				'<h3 class="grwp_overall">' . __( 'Overall rating out of %s Google reviews', 'embedder-for-google-reviews' ) . '</h3>',
 				$this->total_reviews
 			);
+            if ($show_verified) {
+                $output .= sprintf(
+                /* translators: 'Verified by' badge */
+                    '<div class="grwp_verified">
+                                <a href="%s" target="_blank">'.__('Verified by', 'embedder-for-google-reviews').' 
+                                    <img src="'.$verified_svg.'" alt="Google Reviews WordPress Plugin" />
+                                </a>
+                            </div>',
+                    $url);
+            }
 			$output .= '</div></div>';
 
 		}

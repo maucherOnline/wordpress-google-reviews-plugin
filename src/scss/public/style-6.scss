@@ -61,12 +61,14 @@
         }
       }
 
-      ::-webkit-scrollbar-track {
-        background: white;
+      @supports not selector(::-webkit-scrollbar) {
+        * {
+          scrollbar-color: #b7b7b7 white;
+        }
       }
 
-      * {
-        scrollbar-color: #b7b7b7 #ffffff;
+      ::-webkit-scrollbar-track {
+        background: white;
       }
 
       .gr-inner-body {

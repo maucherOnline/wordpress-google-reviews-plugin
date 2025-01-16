@@ -29,6 +29,16 @@ class GRWP_Reviews_Widget_Badge
             return '';
         }
 
+        $show_verified = false;
+        if ( isset($this->options['show_verified']) ) {
+            if ( $this->options['show_verified'] === '1' ) {
+                $show_verified = true;
+            }
+        }
+
+        $verified_svg = GR_PLUGIN_DIR_URL . 'dist/images/verified-badge.svg';
+        $url = 'https://reviewsembedder.com?utm_source=verified&utm_medium=header&utm_campaign='.get_site_url();
+
         $stars = $this->get_total_stars();
 		$this->place_title = $this->place_title === '' ? 'Lorem Ipsum Business' : $this->place_title;
 
@@ -58,6 +68,16 @@ class GRWP_Reviews_Widget_Badge
         $output .= sprintf('<span class="business-title">%s</span>', $this->place_title);
         $output .=  $stars;
         $output .= sprintf('<span class="rating">%s</span>', $this->rating_formatted);
+        if ($show_verified) {
+            $output .= sprintf(
+            /* translators: 'Verified by' badge */
+                '<div class="grwp_verified">
+                                <a href="%s" target="_blank">'.__('Verified by', 'embedder-for-google-reviews').' 
+                                    <img src="'.$verified_svg.'" alt="Google Reviews WordPress Plugin" />
+                                </a>
+                            </div>',
+                $url);
+        }
         $output .= '<span class="grwp-close"></span></div>';
         $output .= '<div class="grwp-sidebar-inner">';
 

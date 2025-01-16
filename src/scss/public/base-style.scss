@@ -93,14 +93,16 @@
       }
     }
 
+    @supports not selector(::-webkit-scrollbar) {
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: #b7b7b7 #e5e5e5;
+      }
+    }
+
     ::-webkit-scrollbar {
       width: 7px;
       border-radius: 10px;
-    }
-
-    * {
-      scrollbar-width: thin;
-      scrollbar-color: #b7b7b7 #e5e5e5;
     }
 
     ::-webkit-scrollbar-track {

@@ -229,6 +229,10 @@ Statistically, 86% of customers hesitate to purchase from companies with negativ
 6. Google Reviews Plugin backend #2
 
 == Changelog ==
+= 1.6.4 =
+* Chrome scrollbar CSS bugfix
+* Added 'verified' badge
+* Upgraded Freemius SDK
 = 1.6.3 =
 * Upgraded Freemius SDK
 * Upgraded Swiper JS library
@@ -237,7 +241,6 @@ Statistically, 86% of customers hesitate to purchase from companies with negativ
 * Changed text domain for translation strings to match plugin slug
 * Added security measures to prevent public access to certain plugin files
 * Added translators comments
-
 = 1.6.2 =
 * Upgraded Freemius SDK
 * WP 6.7 compatibility
