@@ -8,7 +8,7 @@ class GRWP_Reviews_Widget_Slider
      * Slider HTML
      * @return string
      */
-    public function render( $style_type, $max_reviews = null, $show_place_info = false ) {
+    public function render( $style_type, $max_reviews = null, $show_place_info = false, $txt = '' ) {
 
         // error handling
         if ( $this->reviews_have_error ) {
@@ -62,11 +62,7 @@ class GRWP_Reviews_Widget_Slider
             if ($show_verified) {
                 $output .= sprintf(
                 /* translators: 'Verified by' badge */
-                    '<div class="grwp_verified">
-                                <a href="%s" target="_blank">'.__('Verified by', 'embedder-for-google-reviews').' 
-                                    <img src="'.$verified_svg.'" alt="Google Reviews WordPress Plugin" />
-                                </a>
-                            </div>',
+                    '<div class="grwp_verified"><a href="%s" target="_blank">'.__('Verified by', 'embedder-for-google-reviews').' <img src="'.$verified_svg.'" alt="'.$txt.'" /></a></div>',
                     $url);
             }
 			$output .= '</div></div>';

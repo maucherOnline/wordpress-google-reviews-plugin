@@ -48,6 +48,10 @@ class GRWP_Google_Reviews_Activator {
             add_option('google_reviews_option_name', $google_reviews_options);
         }
 
+        if ( ! get_option( 'grwp_activation_version' ) ) {
+            add_option('grwp_activation_version', GRWP_GOOGLE_REVIEWS_VERSION);
+        }
+
 		// add place info field
 		if ( ! get_option('grwp_place_info') ) {
 			add_option('grwp_place_info','');

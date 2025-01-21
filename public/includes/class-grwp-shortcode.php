@@ -130,18 +130,30 @@ class GRWP_Shortcode {
 
         }
 
+        // set txt for badge
+        $txt = 'https://reviewsembedder.com';
+        $activation_version = get_option('grwp_activation_version');
+        if ( $activation_version ) {
+            if ( version_compare( $activation_version, '1.6.6', '<=') ) {
+                $txt = 'https://reviewsembedder.com';
+            }
+            else {
+                // for future versions, if needed
+            }
+        }
+
         if ( $widget_type === 'slider' ) {
             $slider = new GRWP_Reviews_Widget_Slider();
-            return $slider->render( $style_type, $max_reviews, $show_place_info );
+            return $slider->render( $style_type, $max_reviews, $show_place_info, $txt );
         }
 
 		elseif ( $widget_type === 'badge' ) {
 			$badge = new GRWP_Reviews_Widget_Badge();
-			return $badge->render( $max_reviews );
+			return $badge->render( $max_reviews, $txt );
 		}
 
         $grid = new GRWP_Reviews_Widget_Grid();
-        return $grid->render( $style_type, $max_reviews, $show_place_info );
+        return $grid->render( $style_type, $max_reviews, $show_place_info, $txt );
 
     }
 

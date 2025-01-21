@@ -230,6 +230,8 @@ Statistically, 86% of customers hesitate to purchase from companies with negativ
 
 == Changelog ==
 = 1.6.5 =
+* Bugfix regarding wp auto p
+= 1.6.5 =
 * Updated translation files
 = 1.6.4 =
 * Chrome scrollbar CSS bugfix

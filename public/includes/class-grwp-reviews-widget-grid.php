@@ -4,7 +4,7 @@ class GRWP_Reviews_Widget_Grid
     extends
     GRWP_Google_Reviews_Output {
 
-    public function render( $style_type, $max_reviews = null, $show_place_info = false ) {
+    public function render( $style_type, $max_reviews = null, $show_place_info = false, $txt = '' ) {
 
         // error handling
         if ( $this->reviews_have_error ) {
@@ -29,6 +29,7 @@ class GRWP_Reviews_Widget_Grid
         $google_svg = GR_PLUGIN_DIR_URL . 'dist/images/google-logo-svg.svg';
         $verified_svg = GR_PLUGIN_DIR_URL . 'dist/images/verified-badge.svg';
         $url = 'https://reviewsembedder.com';
+
 
 	    $stars = $this->get_total_stars();
 
@@ -57,11 +58,7 @@ class GRWP_Reviews_Widget_Grid
             if ($show_verified) {
                 $output .= sprintf(
                     /* translators: 'Verified by' badge */
-                    '<div class="grwp_verified">
-                                <a href="%s" target="_blank">'.__('Verified by', 'embedder-for-google-reviews').' 
-                                    <img src="'.$verified_svg.'" alt="Google Reviews WordPress Plugin" />
-                                </a>
-                            </div>',
+                    '<div class="grwp_verified"><a href="%s" target="_blank">'.__('Verified by', 'embedder-for-google-reviews').' <img src="'.$verified_svg.'" alt="'.$txt.'" /></a></div>',
                     $url);
             }
 			$output .= '</div></div>';
