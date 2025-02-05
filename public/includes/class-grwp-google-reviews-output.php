@@ -347,6 +347,25 @@ class GRWP_Google_Reviews_Output {
     }
 
     /**
+     * Avoid duplication of reviews by filtering for duplicate name entries
+     * @return void
+     */
+    protected function filter_unique_reviews($reviews) {
+        $unique_names = [];
+        $filtered_reviews = [];
+
+        foreach ($reviews as $review) {
+            $name = $review['user']['name'];
+            if (!isset($unique_names[$name])) {
+                $unique_names[$name] = true;
+                $filtered_reviews[] = $review;
+            }
+        }
+
+        return $filtered_reviews;
+    }
+
+    /**
      * Get raw review data from database
      * @return void|array
      */
@@ -382,6 +401,10 @@ class GRWP_Google_Reviews_Output {
 
             }
 
+        }
+
+        if ( ! empty($reviews_raw) ) {
+            $reviews_raw = $this->filter_unique_reviews($reviews_raw);
         }
 
         return $this->map_review_data( $reviews_raw, $use_new_api_results );
