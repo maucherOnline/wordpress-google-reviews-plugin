@@ -232,6 +232,7 @@ Statistically, 86% of customers hesitate to purchase from companies with negativ
 = 1.7 =
 * Added swiper options
 * Swiper performance improvements
+* Fixed reviews duplication bug
 = 1.6.7 =
 * Upgraded Freemius SDK
 = 1.6.5 =

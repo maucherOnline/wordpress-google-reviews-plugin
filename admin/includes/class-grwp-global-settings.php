@@ -311,17 +311,25 @@ Class GRWP_Global_Settings {
         global $allowed_html;
         ob_start();
         ?>
+        <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
+            <div class="tooltip">
+        <?php endif; ?>
 
         <input type="checkbox"
                name="google_reviews_option_name[hide_slider_arrows]"
                value="1"
                id="hide_slider_arrows"
             <?php echo esc_attr( ! empty( $this->google_reviews_options['hide_slider_arrows'] ) ? 'checked' : '' ); ?>
+            <?php echo ! grwp_fs()->is__premium_only() ? 'disabled' : ''; ?>
         >
 
         <span>
             <?php esc_html_e( 'Yes', 'embedder-for-google-reviews' ); ?>
         </span>
+        <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
+            <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=slide_duration&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
+            </div>
+        <?php endif; ?>
 
         <?php
         $html = ob_get_clean();
@@ -333,17 +341,26 @@ Class GRWP_Global_Settings {
         global $allowed_html;
         ob_start();
         ?>
+        <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
+            <div class="tooltip">
+        <?php endif; ?>
 
         <input type="checkbox"
                name="google_reviews_option_name[disable_loop_slider]"
                value="1"
                id="disable_loop_slider"
             <?php echo esc_attr( ! empty( $this->google_reviews_options['disable_loop_slider'] ) ? 'checked' : '' ); ?>
+            <?php echo ! grwp_fs()->is__premium_only() ? 'disabled' : ''; ?>
         >
 
         <span>
             <?php esc_html_e( 'Yes', 'embedder-for-google-reviews' ); ?>
         </span>
+
+        <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
+            <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=slide_duration&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
+            </div>
+        <?php endif; ?>
 
         <?php
         $html = ob_get_clean();
