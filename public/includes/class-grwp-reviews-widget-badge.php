@@ -8,7 +8,7 @@ class GRWP_Reviews_Widget_Badge
 	 * Slider HTML
 	 * @return string
 	 */
-	public function render( $max_reviews = null, $txt = '' ) {
+	public function render( $link_user_profiles, $max_reviews = null, $txt = '' ) {
 
 		// error handling
 		if ( $this->reviews_have_error ) {

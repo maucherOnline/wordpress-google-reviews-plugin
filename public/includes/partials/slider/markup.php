@@ -8,6 +8,7 @@
  * @var number $slide_duration
  * @var array  $allowed_html
  * @var array  $review
+ * @var bool   $link_user_profiles
  */
 ?>
 
@@ -29,10 +30,14 @@
                     class="gr-google"
             />
             <p>
+                <?php if ($link_user_profiles) : ?>
                 <a href="<?php echo esc_attr($review['author_url']); ?>"
                    target="_blank">
                     <?php echo esc_html($review['name']); ?>
                 </a>
+                <?php else: ?>
+                <span><?php echo esc_html($review['name']); ?></span>
+                <?php endif; ?>
                 <br>
                 <span class="gr-stars">
                     <?php echo wp_kses($star_output, $this->allowed_html); ?>

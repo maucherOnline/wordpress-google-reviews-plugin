@@ -8,7 +8,7 @@ class GRWP_Reviews_Widget_Slider
      * Slider HTML
      * @return string
      */
-    public function render( $style_type, $max_reviews = null, $show_place_info = false, $txt = '' ) {
+    public function render( $style_type, $link_user_profiles, $max_reviews = null, $show_place_info = false, $txt = '' ) {
 
         // error handling
         if ( $this->reviews_have_error ) {

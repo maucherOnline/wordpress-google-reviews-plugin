@@ -206,6 +206,14 @@ Class GRWP_Global_Settings {
 		    $this->settings_slug, // page
 		    'google_reviews_style_layout_setting_section' // section
 	    );
+        add_settings_field(
+            'link_users_profiles', // id
+            /* translators: Link to users Google prilfe */
+            __('Link to users Profile', 'embedder-for-google-reviews'),
+            array($this, 'link_users_profiles_callback'), // callback
+            $this->settings_slug, // page
+            'google_reviews_style_layout_setting_section' // section
+        );
 
         add_settings_field(
             'filter_words', // id
@@ -215,6 +223,8 @@ Class GRWP_Global_Settings {
             $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section
         );
+
+
     }
 
     /**
@@ -307,6 +317,10 @@ Class GRWP_Global_Settings {
 
         if ( isset( $input['filter_words'] ) ) {
             $sanitary_values['filter_words'] = $input['filter_words'];
+        }
+
+        if ( isset( $input['link_users_profiles'] ) ) {
+            $sanitary_values['link_users_profiles'] = $input['link_users_profiles'];
         }
 
         if ( isset( $input['reviews_language_3'] ) ) {
@@ -407,6 +421,43 @@ Class GRWP_Global_Settings {
             <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=minimum_rating&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
         </div>
 	    <?php endif; ?>
+
+        <?php
+        $html = ob_get_clean();
+
+        echo wp_kses($html, $allowed_html);
+
+    }
+
+    /**
+     * Link to User's Google Profiles
+     * @return void
+     */
+    public function link_users_profiles_callback() {
+        global $allowed_html;
+
+        ob_start();
+        ?>
+        <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
+            <div class="tooltip">
+        <?php endif; ?>
+
+        <input type="checkbox"
+               name="google_reviews_option_name[link_users_profiles]"
+               value="1"
+               id="link_users_profiles"
+            <?php echo esc_attr( ! empty( $this->google_reviews_options['link_users_profiles'] ) ? 'checked' : '' ); ?>
+            <?php echo ! grwp_fs()->is__premium_only() ? 'disabled' : ''; ?>
+        />
+
+        <span>
+            <?php esc_html_e( 'Yes', 'embedder-for-google-reviews' ); ?>
+        </span>
+
+        <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
+            <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=link_profile&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
+            </div>
+        <?php endif; ?>
 
         <?php
         $html = ob_get_clean();

@@ -44,6 +44,7 @@ class GRWP_Google_Reviews_Activator {
             $google_reviews_options['filter_below_5_stars'] = '1';
             $google_reviews_options['filter_words'] = '';
             $google_reviews_options['reviews_language_3'] = 'en';
+            $google_reviews_options['link_users_profiles'] = '1';
 
             add_option('google_reviews_option_name', $google_reviews_options);
         }

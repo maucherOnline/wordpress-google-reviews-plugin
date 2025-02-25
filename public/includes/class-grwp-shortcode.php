@@ -113,6 +113,13 @@ class GRWP_Shortcode {
 
         }
 
+        $link_user_profiles = false;
+        if ( isset($this->options['link_users_profiles']) ) {
+            if ( $this->options['link_users_profiles'] === '1' ) {
+                $link_user_profiles = true;
+            }
+        }
+
         // check if style type is overwritten by shortcode attributes
         $style_type = $this->options['layout_style'];
 
@@ -144,16 +151,16 @@ class GRWP_Shortcode {
 
         if ( $widget_type === 'slider' ) {
             $slider = new GRWP_Reviews_Widget_Slider();
-            return $slider->render( $style_type, $max_reviews, $show_place_info, $txt );
+            return $slider->render( $style_type, $link_user_profiles, $max_reviews, $show_place_info, $txt );
         }
 
 		elseif ( $widget_type === 'badge' ) {
 			$badge = new GRWP_Reviews_Widget_Badge();
-			return $badge->render( $max_reviews, $txt );
+			return $badge->render( $link_user_profiles, $max_reviews, $txt );
 		}
 
         $grid = new GRWP_Reviews_Widget_Grid();
-        return $grid->render( $style_type, $max_reviews, $show_place_info, $txt );
+        return $grid->render( $style_type, $link_user_profiles, $max_reviews, $show_place_info, $txt );
 
     }
 

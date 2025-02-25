@@ -4,7 +4,7 @@ class GRWP_Reviews_Widget_Grid
     extends
     GRWP_Google_Reviews_Output {
 
-    public function render( $style_type, $max_reviews = null, $show_place_info = false, $txt = '' ) {
+    public function render( $style_type, $link_user_profiles, $max_reviews = null, $show_place_info = false, $txt = '' ) {
 
         // error handling
         if ( $this->reviews_have_error ) {
@@ -78,7 +78,7 @@ class GRWP_Reviews_Widget_Grid
             $star_output = $this->get_star_output($review);
 
             ob_start();
-            require 'partials/badge/markup.php';
+            require 'partials/grid/markup.php';
             $output .= ob_get_clean();
 
             $count++;
