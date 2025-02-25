@@ -229,6 +229,9 @@ Statistically, 86% of customers hesitate to purchase from companies with negativ
 6. Google Reviews Plugin backend #2
 
 == Changelog ==
+= 1.7 =
+* Added swiper options
+* Swiper performance improvements
 = 1.6.7 =
 * Upgraded Freemius SDK
 = 1.6.5 =

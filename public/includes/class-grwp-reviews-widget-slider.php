@@ -31,6 +31,13 @@ class GRWP_Reviews_Widget_Slider
             }
         }
 
+        $hide_slider_arrows = false;
+        if ( isset($this->options['hide_slider_arrows']) ) {
+            if ( $this->options['hide_slider_arrows'] === '1' ) {
+                $hide_slider_arrows = true;
+            }
+        }
+
 	    $google_svg = GR_PLUGIN_DIR_URL . 'dist/images/google-logo-svg.svg';
         $verified_svg = GR_PLUGIN_DIR_URL . 'dist/images/verified-badge.svg';
         $url = 'https://reviewsembedder.com';
@@ -84,7 +91,7 @@ class GRWP_Reviews_Widget_Slider
 
             $star_output = $this->get_star_output($review);
 
-            $slide_duration = $this->options['slide_duration'] ?? '';
+            $slide_duration = isset($this->options['slide_duration']) ? intval($this->options['slide_duration']) * 1000 : '';
 
             ob_start();
             require 'partials/slider/markup.php';

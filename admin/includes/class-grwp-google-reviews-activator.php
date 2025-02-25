@@ -45,6 +45,10 @@ class GRWP_Google_Reviews_Activator {
             $google_reviews_options['filter_words'] = '';
             $google_reviews_options['reviews_language_3'] = 'en';
             $google_reviews_options['link_users_profiles'] = '1';
+            $google_reviews_options['slide_duration'] = '5';
+            $google_reviews_options['autoplay_slider'] = '0';
+            $google_reviews_options['hide_slider_arrows'] = '0';
+            $google_reviews_options['disable_loop_slider'] = '0';
 
             add_option('google_reviews_option_name', $google_reviews_options);
         }

@@ -80,7 +80,17 @@ class GRWP_Google_Reviews_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, GR_PLUGIN_DIR_URL . 'dist/js/public-bundle.js', array( 'jquery' ), $this->version, true );
+        wp_enqueue_script( $this->plugin_name, GR_PLUGIN_DIR_URL . 'dist/js/public-bundle.js', array( 'jquery' ), $this->version, true );
+
+        $options = get_option( 'google_reviews_option_name' );
+        $slider_delay = isset($options['slide_duration']) ? intval($options['slide_duration']) : 0;
+        $disable_slider_loop = isset($options['disable_loop_slider']) && $options['disable_loop_slider'] == '1' ? $options['disable_loop_slider'] : false;
+
+        $swiper_data = array(
+            'disableLoop'   => $disable_slider_loop,
+            'autoplayDelay' => $slider_delay,
+        );
+        wp_localize_script( $this->plugin_name, 'swiperSettings', $swiper_data );
 	}
 
 }

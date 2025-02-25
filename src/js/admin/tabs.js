@@ -6,7 +6,7 @@ $(document).ready(function() {
     const $connectTab = $('.nav-tab-wrapper.menu > a[href="#connect_settings"]');
     const $displaySettings = $('#display_settings, #display_settings + table.form-table');
     const $displayTab = $('.nav-tab-wrapper.menu > a[href="#display_settings"]');
-    const $embeddingInstructions = $('#embedding_instructions, #embedding_instructions + table.form-table');
+    const $embeddingInstructions = $('#slider_settings, #slider_settings + table.form-table');
     const $embeddingInstructionsTab = $('.nav-tab-wrapper.menu > a[href="#embedding_instructions"]');
     const $navTabs = $('.nav-tab-wrapper.menu > .nav-tab:not(.upgrade)');
 
@@ -56,8 +56,8 @@ $(document).ready(function() {
                     $displaySettings.hide();
                     $navTabs.removeClass('nav-tab-active');
                     $(this).addClass('nav-tab-active').blur();
-                    history.pushState({}, '', '#embedding_instructions');
-                    localStorage.gr_location = '#embedding_instructions';
+                    history.pushState({}, '', '#slider_settings');
+                    localStorage.gr_location = '#slider_settings';
                     currentTab = 2;
                 }
             });

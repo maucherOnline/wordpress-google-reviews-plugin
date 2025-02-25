@@ -12,7 +12,7 @@
  */
 ?>
 
-<div class="swiper-slide" data-swiper-autoplay="<?php echo esc_attr($slide_duration); ?>">
+<div class="swiper-slide">
     <div class="g-review">
         <div class="gr-inner-header">
             <img

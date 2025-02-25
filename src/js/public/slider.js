@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import Swiper, {Navigation} from 'swiper';
+import Swiper, {Autoplay, Navigation} from 'swiper';
 
 
 $(document).ready(function() {
@@ -7,14 +7,26 @@ $(document).ready(function() {
     const $grwp_swiper_container = $('.reviews_embedder_slider');
     if ( $grwp_swiper_container.length ) {
 
-
         $grwp_swiper_container.each(function (i, slider) {
 
+            let autoplay = false;
+            if (swiperSettings.autoplayDelay > 0) {
+                autoplay = {delay: parseInt(swiperSettings.autoplayDelay) * 1000}
+            }
+
+            let loop = true;
+            if (swiperSettings.disableLoop) {
+                loop = false;
+            }
+
             const grwp_swiper = new Swiper(slider, {
-                modules: [ Navigation ],
+                modules: [ Autoplay, Navigation ],
                 spaceBetween: 15,
-                autoplay: false,
-                loop: true,
+                autoplay: autoplay,
+                loop: loop,
+                cssMode: true,
+                grabCursor: true,
+                pauseOnMouseEnter: true,
                 breakpointsBase: 'container',
                 breakpoints: {
                     690: {
