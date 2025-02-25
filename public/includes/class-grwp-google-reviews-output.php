@@ -403,7 +403,7 @@ class GRWP_Google_Reviews_Output {
 
         }
 
-        if ( ! empty($reviews_raw) ) {
+        if ( ! empty($reviews_raw) && ! $this->showdummy) {
             $reviews_raw = $this->filter_unique_reviews($reviews_raw);
         }
 
