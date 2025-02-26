@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-02-25 15:34+0000\n"
+"POT-Creation-Date: 2025-02-26 08:30+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -182,61 +182,61 @@ msgstr ""
 msgid "Disable slider loop"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:323, admin/includes/class-grwp-global-settings.php:345, admin/includes/class-grwp-global-settings.php:477, admin/includes/class-grwp-global-settings.php:503, admin/includes/class-grwp-global-settings.php:569, admin/includes/class-grwp-global-settings.php:606, admin/includes/class-grwp-global-settings.php:644
+#: admin/includes/class-grwp-global-settings.php:327, admin/includes/class-grwp-global-settings.php:357, admin/includes/class-grwp-global-settings.php:494, admin/includes/class-grwp-global-settings.php:520, admin/includes/class-grwp-global-settings.php:586, admin/includes/class-grwp-global-settings.php:623, admin/includes/class-grwp-global-settings.php:661
 msgid "Yes"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:443
+#: admin/includes/class-grwp-global-settings.php:460
 msgid "Global settings for showing reviews"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:449
+#: admin/includes/class-grwp-global-settings.php:466
 msgid "Display settings"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:455
+#: admin/includes/class-grwp-global-settings.php:472
 msgid "Slider settings"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:700
+#: admin/includes/class-grwp-global-settings.php:717
 msgid "Slider"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:704
+#: admin/includes/class-grwp-global-settings.php:721
 msgid "Grid"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:717
+#: admin/includes/class-grwp-global-settings.php:734
 msgid "Floating Badge"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:710
+#: admin/includes/class-grwp-global-settings.php:727
 msgid "Floating Badge (PRO)"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:735
+#: admin/includes/class-grwp-global-settings.php:752
 msgid "1"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:736
+#: admin/includes/class-grwp-global-settings.php:753
 msgid "2"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:737
+#: admin/includes/class-grwp-global-settings.php:754
 msgid "3"
 msgstr ""
 
 #. translators: Design
-#: admin/includes/class-grwp-global-settings.php:762
+#: admin/includes/class-grwp-global-settings.php:779
 msgid "Design #%s"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:856
+#: admin/includes/class-grwp-global-settings.php:873
 msgid "Use this shortcode to show your reviews on pages and posts:"
 msgstr ""
 
 #. translators: %s: URL
-#: admin/includes/class-grwp-global-settings.php:863
+#: admin/includes/class-grwp-global-settings.php:880
 msgid "<a href=\"%s\" target=\"_blank\">See</a>, how to overwrite styles, widget types and other settings."
 msgstr ""
 

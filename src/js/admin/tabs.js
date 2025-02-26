@@ -7,7 +7,7 @@ $(document).ready(function() {
     const $displaySettings = $('#display_settings, #display_settings + table.form-table');
     const $displayTab = $('.nav-tab-wrapper.menu > a[href="#display_settings"]');
     const $embeddingInstructions = $('#slider_settings, #slider_settings + table.form-table');
-    const $embeddingInstructionsTab = $('.nav-tab-wrapper.menu > a[href="#embedding_instructions"]');
+    const $embeddingInstructionsTab = $('.nav-tab-wrapper.menu > a[href="#slider_settings"]');
     const $navTabs = $('.nav-tab-wrapper.menu > .nav-tab:not(.upgrade)');
 
     function handle_tabs() {
@@ -67,7 +67,7 @@ $(document).ready(function() {
 
         if (hash === '#display_settings' || localStorage.gr_location === '#display_settings') {
             $displayTab.click();
-        } else if (hash === '#embedding_instructions' || localStorage.gr_location === '#embedding_instructions') {
+        } else if (hash === '#slider_settings' || localStorage.gr_location === '#slider_settings') {
             $embeddingInstructionsTab.click();
         } else {
             $connectTab.click();

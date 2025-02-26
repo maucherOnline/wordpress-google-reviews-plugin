@@ -265,7 +265,7 @@ Class GRWP_Global_Settings {
         add_settings_field(
             'disable_loop_slider', // id
             /* translators: Layout type */
-            __( 'Disable slider loop', 'embedder-for-google-reviews' ),
+            __( 'Disable slider endless loop', 'embedder-for-google-reviews' ),
             array( $this, 'disable_loop_slider_callback' ), // callback
             $this->settings_slug, // page
             'google_reviews_slider_setting_section' // section
@@ -281,22 +281,29 @@ Class GRWP_Global_Settings {
 
         ob_start();
         ?>
-        <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
+
+        <?php if ( grwp_fs()->is__premium_only() ) : ?>
+            <input type="number"
+                   name="google_reviews_option_name[slide_duration]"
+                   id="slide_duration"
+                   min="0"
+                   step="1"
+                   value="<?php echo esc_attr( ! empty( $this->google_reviews_options['slide_duration'] ) ? $this->google_reviews_options['slide_duration'] : '0' ); ?>"
+                    <?php echo ! grwp_fs()->is__premium_only() ? 'readonly ' : ''; ?>
+            />
+        <?php else : ?>
             <div class="tooltip">
-        <?php endif; ?>
-
-        <input type="number"
-               name="google_reviews_option_name[slide_duration]"
-               id="slide_duration"
-               min="0"
-               max=""
-               step="1"
-               value="<?php echo esc_attr( ! empty( $this->google_reviews_options['slide_duration'] ) ? $this->google_reviews_options['slide_duration'] : '0' ); ?>"
-            <?php echo ! grwp_fs()->is__premium_only() ? 'disabled' : ''; ?>
-        />
-
-        <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
-            <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=slide_duration&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
+                <input type="hidden"
+                       name="google_reviews_option_name[slide_duration]"
+                       value="5"
+                />
+                <input type="number"
+                       name="google_reviews_option_name[slide_duration]"
+                       id="slide_duration"
+                       value="5"
+                       disabled
+                />
+                <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=slide_duration&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
             </div>
         <?php endif; ?>
 
@@ -311,25 +318,34 @@ Class GRWP_Global_Settings {
         global $allowed_html;
         ob_start();
         ?>
-        <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
-            <div class="tooltip">
-        <?php endif; ?>
 
-        <input type="checkbox"
-               name="google_reviews_option_name[hide_slider_arrows]"
-               value="1"
-               id="hide_slider_arrows"
-            <?php echo esc_attr( ! empty( $this->google_reviews_options['hide_slider_arrows'] ) ? 'checked' : '' ); ?>
-            <?php echo ! grwp_fs()->is__premium_only() ? 'disabled' : ''; ?>
-        >
+        <?php if ( grwp_fs()->is__premium_only() ) : ?>
+            <input type="checkbox"
+                   name="google_reviews_option_name[hide_slider_arrows]"
+                   id="hide_slider_arrows"
+                   value="1"
+                    <?php echo esc_attr( ! empty( $this->google_reviews_options['hide_slider_arrows'] ) ? 'checked' : '' ); ?>
+            />
+
+        <?php else : ?>
+            <div class="tooltip">
+                <input type="hidden"
+                       name="google_reviews_option_name[hide_slider_arrows]"
+                       id="hide_slider_arrows"
+                       value="0"
+                />
+
+                <input type="checkbox"
+                       name="google_reviews_option_name[hide_slider_arrows]"
+                       disabled
+                />
+                <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=slide_duration&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
+            </div>
+        <?php endif; ?>
 
         <span>
             <?php esc_html_e( 'Yes', 'embedder-for-google-reviews' ); ?>
         </span>
-        <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
-            <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=slide_duration&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
-            </div>
-        <?php endif; ?>
 
         <?php
         $html = ob_get_clean();
@@ -341,26 +357,34 @@ Class GRWP_Global_Settings {
         global $allowed_html;
         ob_start();
         ?>
-        <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
-            <div class="tooltip">
-        <?php endif; ?>
 
-        <input type="checkbox"
-               name="google_reviews_option_name[disable_loop_slider]"
-               value="1"
-               id="disable_loop_slider"
-            <?php echo esc_attr( ! empty( $this->google_reviews_options['disable_loop_slider'] ) ? 'checked' : '' ); ?>
-            <?php echo ! grwp_fs()->is__premium_only() ? 'disabled' : ''; ?>
-        >
+        <?php if ( grwp_fs()->is__premium_only() ) : ?>
+            <input type="checkbox"
+                   name="google_reviews_option_name[disable_loop_slider]"
+                   id="disable_loop_slider"
+                   value="1"
+                    <?php echo esc_attr( ! empty( $this->google_reviews_options['disable_loop_slider'] ) ? 'checked' : '' ); ?>
+            />
+
+        <?php else : ?>
+            <div class="tooltip">
+                <input type="hidden"
+                       name="google_reviews_option_name[disable_loop_slider]"
+                       id="disable_loop_slider"
+                       value="0"
+                />
+
+                <input type="checkbox"
+                       name="google_reviews_option_name[disable_loop_slider]"
+                       disabled
+                />
+                <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=slide_duration&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
+            </div>
+        <?php endif; ?>
 
         <span>
             <?php esc_html_e( 'Yes', 'embedder-for-google-reviews' ); ?>
         </span>
-
-        <?php if ( ! grwp_fs()->is__premium_only() ) : ?>
-            <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=slide_duration&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
-            </div>
-        <?php endif; ?>
 
         <?php
         $html = ob_get_clean();
@@ -574,13 +598,27 @@ Class GRWP_Global_Settings {
             <div class="tooltip">
         <?php endif; ?>
 
-        <input type="checkbox"
-               name="google_reviews_option_name[link_users_profiles]"
-               value="1"
-               id="link_users_profiles"
-            <?php echo esc_attr( ! empty( $this->google_reviews_options['link_users_profiles'] ) ? 'checked' : '' ); ?>
-            <?php echo ! grwp_fs()->is__premium_only() ? 'disabled' : ''; ?>
-        />
+        <?php if ( grwp_fs()->is__premium_only() ) : ?>
+            <input type="checkbox"
+                   name="google_reviews_option_name[link_users_profiles]"
+                   id="link_users_profiles"
+                <?php echo esc_attr( ! empty( $this->google_reviews_options['link_users_profiles'] ) ? 'checked' : '' ); ?>
+            />
+
+        <?php else : ?>
+            <input type="hidden"
+                   name="google_reviews_option_name[link_users_profiles]"
+                   id="link_users_profiles"
+                   value="1"
+            />
+
+            <input type="checkbox"
+                   name="google_reviews_option_name[link_users_profiles]"
+                   id="link_users_profiles"
+                   checked
+                   disabled
+            />
+        <?php endif; ?>
 
         <span>
             <?php esc_html_e( 'Yes', 'embedder-for-google-reviews' ); ?>

@@ -19,14 +19,17 @@ $(document).ready(function() {
                 loop = false;
             }
 
+            //console.log("swiperSettings", swiperSettings);
+            //console.log("autoplay", autoplay);
+            //console.log("loop", loop);
+
             const grwp_swiper = new Swiper(slider, {
                 modules: [ Autoplay, Navigation ],
                 spaceBetween: 15,
                 autoplay: autoplay,
                 loop: loop,
-                cssMode: true,
-                grabCursor: true,
-                pauseOnMouseEnter: true,
+                //grabCursor: true,
+                //pauseOnMouseEnter: true,
                 breakpointsBase: 'container',
                 breakpoints: {
                     690: {

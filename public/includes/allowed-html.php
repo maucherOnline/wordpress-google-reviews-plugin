@@ -59,6 +59,7 @@ $allowed_html = [
         'step'      => [],
 	    'disabled'  => [],
 	    'title'     => [],
+        'readonly'  => [],
     ],
     'textarea' => [
         'id'        => [],
