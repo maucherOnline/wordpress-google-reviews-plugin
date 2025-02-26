@@ -50,6 +50,11 @@
           flex-direction: column;
           row-gap: 3px;
 
+          > span:first-of-type {
+            max-width: 190px;
+            font-size: clamp(12px, 4vw, 17px);
+          }
+
           a {
             max-width: 190px;
             font-size: clamp(12px, 4vw, 17px);

@@ -27,6 +27,10 @@
           position: relative;
           flex-basis: calc(100% - 75px);
 
+          > span:first-of-type {
+            max-width: 190px;
+          }
+
           a {
             padding-right: 32px;
           }

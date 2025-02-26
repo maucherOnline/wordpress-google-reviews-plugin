@@ -41,6 +41,10 @@
           margin-top: 14px;
           flex-basis: calc(100% - 70px);
 
+          > span:first-of-type {
+            max-width: 83%;
+          }
+
           a {
             max-width: 83%;
           }

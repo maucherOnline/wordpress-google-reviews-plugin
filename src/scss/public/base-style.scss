@@ -37,11 +37,24 @@
       p {
         margin: 0;
         flex-basis: calc(100% - 60px);
-        font-size: 16px;
         line-height: 1.5;
 
         br {
           display: none;
+        }
+
+        > span:first-of-type {
+          text-decoration: none;
+          font-family: inherit;
+          font-weight: 600;
+          font-size: 18px;
+          line-height: 22px;
+          letter-spacing: 0;
+
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
 
         a {

@@ -38,6 +38,15 @@
             display: none;
           }
 
+          > span:first-of-type {
+            margin-bottom: 4px;
+            color: black;
+            max-width: 88%;
+            margin-left: auto;
+            margin-right: auto;
+            display: inline-block;
+          }
+
           a {
             margin-bottom: 4px;
             color: black;

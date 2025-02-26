@@ -209,7 +209,7 @@ Class GRWP_Global_Settings {
         add_settings_field(
             'link_users_profiles', // id
             /* translators: Link to users Google prilfe */
-            __('Link to users Profile', 'embedder-for-google-reviews'),
+            __('Link to users Profile <br> (uncheck for better SEO)', 'embedder-for-google-reviews'),
             array($this, 'link_users_profiles_callback'), // callback
             $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section

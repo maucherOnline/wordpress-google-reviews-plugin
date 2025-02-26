@@ -37,10 +37,15 @@
             display: none;
           }
 
+          > span:first-of-type {
+            max-width: 190px;
+          }
+
           a {
             padding-right: 26px;
             margin-bottom: 4px;
             color: black;
+            max-width: 190px;
           }
         }
 
