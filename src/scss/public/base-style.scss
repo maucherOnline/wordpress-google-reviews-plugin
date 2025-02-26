@@ -43,7 +43,7 @@
           display: none;
         }
 
-        > span:first-of-type {
+        > span:first-of-type:not(.gr-stars) {
           text-decoration: none;
           font-family: inherit;
           font-weight: 600;
