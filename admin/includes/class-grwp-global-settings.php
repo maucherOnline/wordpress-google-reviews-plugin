@@ -273,7 +273,7 @@ Class GRWP_Global_Settings {
     }
 
     /**
-     * Link to User's Google Profiles
+     * Slide duration
      * @return void
      */
     public function slide_duration_callback() {
@@ -602,6 +602,7 @@ Class GRWP_Global_Settings {
             <input type="checkbox"
                    name="google_reviews_option_name[link_users_profiles]"
                    id="link_users_profiles"
+                   value="1"
                 <?php echo esc_attr( ! empty( $this->google_reviews_options['link_users_profiles'] ) ? 'checked' : '' ); ?>
             />
 
