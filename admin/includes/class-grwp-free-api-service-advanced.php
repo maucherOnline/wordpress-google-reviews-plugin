@@ -83,7 +83,11 @@ Class GRWP_Free_API_Service_Advanced {
 
 		$site = urlencode(get_site_url());
 		$admin_email = urlencode(get_option('admin_email'));
-		$install_id = grwp_fs()->get_site()->id;
+        if (grwp_fs()->get_site()) {
+            $install_id = grwp_fs()->get_site()->id;
+        } else {
+            $install_id = '';
+        }
 
 		$license_request_url = sprintf(
 			'https://api.reviewsembedder.com/get-reviews-data.php?install_id=%s&data_id=%s&language=%s&site=%s&mail=%s',
@@ -215,7 +219,12 @@ Class GRWP_Free_API_Service_Advanced {
 		$search_value = isset( $_GET['search'] ) ? sanitize_text_field($_GET['search']) : '';
 		$language     = isset( $_GET['language'] ) ? sanitize_text_field($_GET['language']) : 'en';
 
-		$install_id = grwp_fs()->get_site()->id;
+        if (grwp_fs()->get_site()) {
+            $install_id = grwp_fs()->get_site()->id;
+        } else {
+            $install_id = '';
+        }
+
 		$site = urlencode(get_site_url());
 		$admin_email = urlencode(get_option('admin_email'));
 		$is_premium = grwp_fs()->is__premium_only() ? 'true' : 'false';
