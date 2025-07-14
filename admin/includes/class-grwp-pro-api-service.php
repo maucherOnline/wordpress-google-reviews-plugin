@@ -2,7 +2,7 @@
 
 Class GRWP_Pro_API_Service
 	extends
-	GRWP_Free_API_Service_Advanced {
+	GRWP_Free_API_Service {
 
 	public function __construct() {
 
@@ -33,7 +33,7 @@ Class GRWP_Pro_API_Service
 		$install_id = grwp_fs()->get_site()->id;
         $secret_key = base64_encode( grwp_fs()->get_site()->secret_key );
 
-        $new_hash_request_url = 'https://api.reviewsembedder.com/generate-hash.php';
+        $new_hash_request_url = 'https://easyreviewsapi.com/generate-hash.php';
 
         $new_hash = wp_remote_get( $new_hash_request_url, array(
             'headers' => array(
@@ -50,7 +50,7 @@ Class GRWP_Pro_API_Service
 
 		// construct request URL
         $license_request_url = sprintf(
-			'https://api.reviewsembedder.com/%s?install_id=%s&data_id=%s&language=%s&site=%s&mail=%s',
+			'https://easyreviewsapi.com/%s?install_id=%s&data_id=%s&language=%s&site=%s&mail=%s',
 	        $api_endpoint,
             $install_id,
             $data_id,

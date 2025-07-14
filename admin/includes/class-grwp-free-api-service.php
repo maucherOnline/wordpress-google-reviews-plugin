@@ -2,77 +2,288 @@
 
 Class GRWP_Free_API_Service {
 
-    public function __construct() {
+	public function __construct() {
 
-        // Pull reviews ajax handler
-        add_action('wp_ajax_get_reviews_free_api', [$this, 'get_reviews_free_api']);
-        add_action('wp_ajax_nopriv_get_reviews_free_api', [$this, 'get_reviews_free_api']);
+		// Business search ajax handler
+		add_action('wp_ajax_handle_serp_business_search', [$this, 'handle_serp_business_search']);
+		add_action('wp_ajax_nopriv_handle_serp_business_search', [$this, 'handle_serp_business_search']);
 
-    }
+		// Pull reviews ajax handler
+		add_action('wp_ajax_handle_get_reviews_pro_api', [$this, 'get_reviews_free_api_advanced']);
+		add_action('wp_ajax_nopriv_handle_get_reviews_pro_api', [$this, 'get_reviews_free_api_advanced']);
 
-    /**
-     * Get reviews from Free API
-     * @return void
-     */
-    public static function get_reviews_free_api( $is_cron = false ) {
+		// Save language ajax handler
+		add_action('wp_ajax_handle_language_saving', [$this, 'handle_language_saving']);
+		add_action('wp_ajax_nopriv_handle_language_saving', [$this, 'handle_language_saving']);
 
-        if ( ! $is_cron ) {
-            $place_id = isset($_GET['place_id']) ? sanitize_text_field($_GET['place_id']) : '';
-            $language = isset($_GET['language']) ? sanitize_text_field($_GET['language']) : 'en';
+		// Save location ajax handler
+		add_action('wp_ajax_handle_location_saving', [$this, 'handle_location_saving']);
+		add_action('wp_ajax_nopriv_handle_location_saving', [$this, 'handle_location_saving']);
+	}
+
+	/**
+	 * Handle location saving via ajax
+	 */
+	public static function handle_location_saving() {
+
+		$data_id = isset($_GET['data_id']) ? sanitize_text_field($_GET['data_id']) : '';
+		$location_name = isset($_GET['location_name']) ? sanitize_text_field($_GET['location_name']) : '';
+
+		$response = new WP_REST_Response();
+
+		if ( $data_id == '' || $location_name == '' ) {
+			$response->set_status(404);
+		} else {
+
+			$google_reviews_options = get_option( 'google_reviews_option_name' );
+			$google_reviews_options['serp_data_id'] = $data_id;
+			$google_reviews_options['serp_business_name'] = $location_name;
+			update_option('google_reviews_option_name', $google_reviews_options);
+
+			$response->set_status(200);
+		}
+
+		return $response;
+
+	}
+
+	/**
+	 * Handle language saving via ajax
+	 * @return WP_REST_Response
+	 */
+	public static function handle_language_saving( $arg ) {
+
+		$language = isset($_GET['search']) ? sanitize_text_field($_GET['search']) : 'en';
+
+		$google_reviews_options = get_option( 'google_reviews_option_name' );
+		$google_reviews_options["reviews_language_3"] = $language;
+
+		update_option('google_reviews_option_name', $google_reviews_options);
+
+		$response = new WP_REST_Response();
+		$response->set_status(200);
+
+		return $response;
+	}
+
+	/**
+	 * Get reviews from Pro API
+	 * @return WP_REST_Response
+	 */
+	public static function get_reviews_free_api_advanced() {
+
+		$google_reviews_options = get_option( 'google_reviews_option_name' );
+
+		$data_id          = $google_reviews_options['serp_data_id'];
+		$reviews_language = $google_reviews_options['reviews_language_3'];
+
+		if ( empty( $data_id ) ) {
+			return;
+		}
+
+		$site = urlencode(get_site_url());
+		$admin_email = urlencode(get_option('admin_email'));
+        if (grwp_fs()->get_site()) {
+            $install_id = grwp_fs()->get_site()->id;
+        } else {
+            $install_id = '';
         }
-        else {
-            $google_reviews_options = get_option( 'google_reviews_option_name' );
-            $place_id = $google_reviews_options['gmb_id_1'];
-            $language = $google_reviews_options['reviews_language_3'] ?? 'en';
+
+		$license_request_url = sprintf(
+			'https://easyreviewsapi.com/get-reviews-data.php?install_id=%s&data_id=%s&language=%s&site=%s&mail=%s',
+			$install_id,
+			$data_id,
+			$reviews_language,
+			$site,
+			$admin_email
+		);
+
+		$get_reviews = wp_remote_get(
+			$license_request_url,
+			['timeout' => 30]
+		);
+
+
+		$response = new WP_REST_Response();
+
+		// check for errors in response
+		if ( is_wp_error( $get_reviews ) ) {
+
+			wp_send_json_error( array(
+				'html' => $get_reviews->get_error_message()
+			) );
+
+			die();
+
+		}
+
+		// check for empty response
+		else if ( ! $get_reviews ) {
+
+			$message = 'Response was invalid.';
+			wp_send_json_error( array(
+				'html' => $message
+			) );
+
+			die();
+
+		}
+
+		$body = json_decode( wp_remote_retrieve_body( $get_reviews ) );
+
+		// check if response body has content
+		if ( $body === '' || $body === null ) {
+
+			$message = 'Empty response body.';
+			wp_send_json_error( array(
+				'html' => $message
+			) );
+
+			die();
+
+		}
+
+		// if response body available, proceed
+		else {
+
+			$get_reviews = json_decode( wp_remote_retrieve_body( $get_reviews ) );
+			$reviews_arr = json_decode(wp_json_encode($get_reviews), true);
+
+			// make sure, the reviews are properly formatted and contain all necessary info
+			if ( self::check_reviews($reviews_arr['reviews']) ) {
+
+				// Update reviews
+				update_option( 'gr_latest_results', [
+					$data_id => wp_json_encode( $reviews_arr['reviews'] )
+				] );
+
+			}
+
+			// make sure, the place_info is properly formatted and contains all necessary info
+			if ( self::check_place_info($reviews_arr['place_info']) ) {
+
+				// Update place info data
+				update_option( 'grwp_place_info', [
+					$data_id => wp_json_encode( $reviews_arr['place_info'] )
+				] );
+
+			}
+
+			$response->set_status(200);
+
+		}
+
+		return $response;
+
+	}
+
+	public static function check_reviews($reviews) {
+
+		$all_values_correct = true;
+		foreach ($reviews as $review) {
+			if (
+				! isset($review['link']) || ! is_string($review['link']) ||
+				! isset($review['rating']) || ! is_int($review['rating']) ||
+				! isset($review['date']) || ! is_string($review['date']) ||
+				! isset($review['user']['name']) || ! is_string($review['user']['name']) ||
+				! isset($review['user']['link']) || ! is_string($review['user']['link']) ||
+				! isset($review['user']['thumbnail']) || ! is_string($review['user']['thumbnail'])
+			) {
+				$all_values_correct = false;
+				break;
+			}
+		}
+
+		return $all_values_correct;
+	}
+
+	public static function check_place_info($place_info) {
+
+		$all_values_correct = true;
+		if (
+			! isset($place_info['title']) || ! is_string($place_info['title']) ||
+			! isset($place_info['rating']) || (!is_float($place_info['rating']) && !is_int($place_info['rating'])) ||
+			! isset($place_info['reviews']) || ! is_int($place_info['reviews'])
+		) {
+			$all_values_correct = false;
+		}
+
+		return $all_values_correct;
+	}
+
+	/**
+	 * Handle Google business search
+	 * @return void
+	 */
+	public static function handle_serp_business_search() {
+		$search_value = isset( $_GET['search'] ) ? sanitize_text_field($_GET['search']) : '';
+		$language     = isset( $_GET['language'] ) ? sanitize_text_field($_GET['language']) : 'en';
+
+        if (grwp_fs()->get_site()) {
+            $install_id = grwp_fs()->get_site()->id;
+        } else {
+            $install_id = '';
         }
 
-        $site = urlencode(get_site_url());
-        $admin_email = urlencode(get_option('admin_email'));
+		$site = urlencode(get_site_url());
+		$admin_email = urlencode(get_option('admin_email'));
+		$is_premium = grwp_fs()->is__premium_only() ? 'true' : 'false';
 
-        $url = sprintf(
-            'https://api.reviewsembedder.com/free-api.php?gmb=%s&language=%s&site=%s&mail=%s',
-            $place_id,
-            $language,
-            $site,
-            $admin_email
-        );
+		$license_request_url = sprintf(
+			'https://easyreviewsapi.com/get-results.php?install_id=%s&search_value=%s&language=%s&site=%s&mail=%s&is_premium=%s',
+			$install_id,
+			$search_value,
+			$language,
+			$site,
+			$admin_email,
+			$is_premium
+		);
 
-        $result = wp_remote_get($url);
+		$get_results = wp_remote_get(
+			$license_request_url,
+			['timeout' => 30]
+		);
 
-        $get_results = json_decode( wp_remote_retrieve_body( $result ) );
+		$get_results = json_decode( wp_remote_retrieve_body( $get_results ) );
 
-        if ( isset( $get_results->status) && $get_results->status == 'INVALID_REQUEST' ) {
+		if ( isset( $get_results->error_message ) ) {
+			wp_send_json_error( array(
+				'html' => $get_results->error_message
+			) );
 
-            if ( ! $is_cron ) {
+			die();
+		} else if ( isset( $get_results->html ) ) {
+			wp_send_json_success( array(
+				'html' => $get_results->html
+			) );
 
-                wp_send_json_error(new WP_Error($get_results->status), 404);
+			die();
+		}
 
-            }
+		die();
+	}
 
-            die();
+	/**
+	 * Parse json results of Pro API and check for errors
+	 * @return mixed|WP_Error
+	 */
+	public static function parse_pro_review_json() {
 
-        }
+		$business  = get_option('google_reviews_option_name');
+		$data_id = isset($business['serp_data_id']) && $business['serp_data_id'] ? $business['serp_data_id'] : null;
 
-        else if ( isset( $get_results->result ) && ! $is_cron ) {
+		$raw = get_option('gr_latest_results');
 
-            update_option('gr_latest_results_free', wp_json_encode($get_results->result));
+		if ( isset($raw[$data_id]) && $raw[$data_id] ) {
+			$reviewArr = json_decode($raw[$data_id], true);
+			$reviews   = $reviewArr;
+		} else {
+			$reviews = [];
+		}
 
-            wp_send_json_success( array(
-                'html' => $get_results->result
-            ) );
+		return $reviews;
 
-            die();
-
-        }
-
-        // only run if $is_cron == true and no errors detected
-        else {
-            update_option('gr_latest_results_free', wp_json_encode($get_results->result));
-        }
-
-        die();
-
-    }
+	}
 
     /**
      * Parse json results of Free API and check for errors
@@ -87,5 +298,4 @@ Class GRWP_Free_API_Service {
         return $result;
 
     }
-
 }
