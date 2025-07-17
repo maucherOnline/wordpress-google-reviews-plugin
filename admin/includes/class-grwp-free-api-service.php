@@ -246,9 +246,9 @@ Class GRWP_Free_API_Service {
 
 		$get_results = json_decode( wp_remote_retrieve_body( $get_results ) );
 
-		if ( isset( $get_results->error_message ) ) {
+		if ( isset( $get_results->error ) ) {
 			wp_send_json_error( array(
-				'html' => $get_results->error_message
+				'html' => $get_results->reason
 			) );
 
 			die();
@@ -259,6 +259,10 @@ Class GRWP_Free_API_Service {
 
 			die();
 		}
+
+        wp_send_json_error( array(
+            'html' => 'Not found. Please refer to this guide: https://reviewsembedder.com/docs/business-not-found/'
+        ) );
 
 		die();
 	}

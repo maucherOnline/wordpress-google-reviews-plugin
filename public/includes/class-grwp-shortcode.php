@@ -144,6 +144,9 @@ class GRWP_Shortcode {
             if ( version_compare( $activation_version, '1.6.6', '<=') ) {
                 $txt = 'https://reviewsembedder.com';
             }
+            else if ( version_compare( $activation_version, '1.7.2', '<=') ) {
+                $txt = 'Google Reviews WordPress Plugin';
+            }
             else {
                 // for future versions, if needed
             }
