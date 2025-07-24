@@ -224,7 +224,7 @@ Statistically, 86% of customers hesitate to purchase from companies with negativ
 1. Sample design of WP Google Review Slider #1
 2. Sample design of WP Google Review Slider #2
 3. Sample design of WP Google Review Slider #3
-4. SSample design of Google Reviews Widget #4
+4. Sample design of Google Reviews Widget #4
 5. Google Reviews Plugin backend view #1
 6. Google Reviews Plugin backend #2
 

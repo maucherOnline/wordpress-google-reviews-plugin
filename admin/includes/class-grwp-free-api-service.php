@@ -21,27 +21,47 @@ Class GRWP_Free_API_Service {
 		add_action('wp_ajax_nopriv_handle_location_saving', [$this, 'handle_location_saving']);
 	}
 
+    /**
+     * Validate all requests to prevent external threats
+     * @return true|WP_Error
+     */
+    public static function validate_request() {
+        if ( wp_doing_cron() ) {
+            return true; // Allow if running via WP-Cron
+        }
+
+        if (! current_user_can( 'manage_options' ) ) {
+            return new WP_Error( 'forbidden', 'You are not allowed to do this.', [ 'status' => 403 ] );
+        }
+
+        return true;
+    }
+
 	/**
 	 * Handle location saving via ajax
 	 */
 	public static function handle_location_saving() {
 
-		$data_id = isset($_GET['data_id']) ? sanitize_text_field($_GET['data_id']) : '';
-		$location_name = isset($_GET['location_name']) ? sanitize_text_field($_GET['location_name']) : '';
+        $validate = self::validate_request();
+        if (is_wp_error($validate)) {
+            wp_send_json_error( [ 'message' => $validate->get_error_message() ], $validate->get_error_data()['status'] ?? 403 );
+        }
 
-		$response = new WP_REST_Response();
+        $response = new WP_REST_Response();
+        $data_id = isset($_GET['data_id']) ? sanitize_text_field($_GET['data_id']) : '';
+        $location_name = isset($_GET['location_name']) ? sanitize_text_field($_GET['location_name']) : '';
 
-		if ( $data_id == '' || $location_name == '' ) {
-			$response->set_status(404);
-		} else {
+        if ($data_id == '' || $location_name == '') {
+            $response->set_status(404);
+        } else {
 
-			$google_reviews_options = get_option( 'google_reviews_option_name' );
-			$google_reviews_options['serp_data_id'] = $data_id;
-			$google_reviews_options['serp_business_name'] = $location_name;
-			update_option('google_reviews_option_name', $google_reviews_options);
+            $google_reviews_options = get_option('google_reviews_option_name');
+            $google_reviews_options['serp_data_id'] = $data_id;
+            $google_reviews_options['serp_business_name'] = $location_name;
+            update_option('google_reviews_option_name', $google_reviews_options);
 
-			$response->set_status(200);
-		}
+            $response->set_status(200);
+        }
 
 		return $response;
 
@@ -52,6 +72,11 @@ Class GRWP_Free_API_Service {
 	 * @return WP_REST_Response
 	 */
 	public static function handle_language_saving( $arg ) {
+
+        $validate = self::validate_request();
+        if (is_wp_error($validate)) {
+            wp_send_json_error( [ 'message' => $validate->get_error_message() ], $validate->get_error_data()['status'] ?? 403 );
+        }
 
 		$language = isset($_GET['search']) ? sanitize_text_field($_GET['search']) : 'en';
 
@@ -71,6 +96,11 @@ Class GRWP_Free_API_Service {
 	 * @return WP_REST_Response
 	 */
 	public static function get_reviews_free_api_advanced() {
+
+        $validate = self::validate_request();
+        if (is_wp_error($validate)) {
+            wp_send_json_error( [ 'message' => $validate->get_error_message() ], $validate->get_error_data()['status'] ?? 403 );
+        }
 
 		$google_reviews_options = get_option( 'google_reviews_option_name' );
 
@@ -216,6 +246,12 @@ Class GRWP_Free_API_Service {
 	 * @return void
 	 */
 	public static function handle_serp_business_search() {
+
+        $validate = self::validate_request();
+        if (is_wp_error($validate)) {
+            wp_send_json_error( [ 'message' => $validate->get_error_message() ], $validate->get_error_data()['status'] ?? 403 );
+        }
+
 		$search_value = isset( $_GET['search'] ) ? sanitize_text_field($_GET['search']) : '';
 		$language     = isset( $_GET['language'] ) ? sanitize_text_field($_GET['language']) : 'en';
 

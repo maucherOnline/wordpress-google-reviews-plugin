@@ -19,6 +19,11 @@ Class GRWP_Pro_API_Service
      */
     public static function get_reviews_pro_api() {
 
+        $validate = parent::validate_request();
+        if (is_wp_error($validate)) {
+            wp_send_json_error( [ 'message' => $validate->get_error_message() ], $validate->get_error_data()['status'] ?? 403 );
+        }
+
         $google_reviews_options = get_option( 'google_reviews_option_name' );
 
         $data_id          = $google_reviews_options['serp_data_id'];
