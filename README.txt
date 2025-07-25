@@ -220,6 +220,10 @@ It depends on if the reviews are positive or negative.
 Negative reviews can seriously impact your business by decreasing your conversion rate, customer experience, and sales.
 Statistically, 86% of customers hesitate to purchase from companies with negative reviews.
 
+= How can I report security bugs? =
+
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team helps validate, triage and handle any security vulnerabilities. [Report a security vulnerability.]( https://patchstack.com/database/vdp/9e5fbc2e-facd-423f-b519-e537c29c5cd5 )
+
 == Screenshots ==
 1. Sample design of WP Google Review Slider #1
 2. Sample design of WP Google Review Slider #2
@@ -231,6 +235,7 @@ Statistically, 86% of customers hesitate to purchase from companies with negativ
 == Changelog ==
 = 1.7.2 =
 * Changed error handling for empty search results
+* Added patchstack security disclaimer
 = 1.7.1 =
 * Checked WP 6.8 compatibility
 * Fixed freemius/tastewp issue
