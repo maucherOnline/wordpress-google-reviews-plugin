@@ -82,13 +82,13 @@ if ( function_exists( 'grwp_fs' ) ) {
 }
 else {
 
+    // start freemius sdk
+    startup_fs();
+
     /**
      * No code must be present outside of this block.
      * Else, pro plugin activation will throw an error while free version is activated
      */
-
-    // start freemius sdk
-    startup_fs();
 
     define( 'GRWP_GOOGLE_REVIEWS_VERSION', '1.7.4' );
 
@@ -101,6 +101,10 @@ else {
 
     // Register class autoloader
     spl_autoload_register( function ( $class ) {
+
+        if ( strpos( $class, 'GRWP_' ) !== 0 ) {
+            return;
+        }
 
         $className = strtolower(str_replace('_', '-', $class));
         $adminfile = GR_BASE_PATH_ADMIN.'includes/class-'.$className.'.php';
