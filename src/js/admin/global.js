@@ -38,7 +38,8 @@ $(document).ready(function() {
             data: {
                 action: 'handle_serp_business_search',
                 search: $search.val(),
-                language: js_global.language
+                language: js_global.language,
+                _ajax_nonce: js_global.nonce
             },
             beforeSend: function () {
                 $buttonRow
@@ -96,7 +97,8 @@ $(document).ready(function() {
             data: {
                 action: 'handle_location_saving',
                 data_id: data_id,
-                location_name: location_name
+                location_name: location_name,
+                _ajax_nonce: js_global.nonce
             },
             beforeSend: function () {
                 disableButtonsWhileSaving();
@@ -146,6 +148,7 @@ $(document).ready(function() {
             data: {
                 action: 'handle_language_saving',
                 search: language,
+                _ajax_nonce: js_global.nonce
             },
             beforeSend: function () {
                 disableButtonsWhileSaving();
@@ -171,7 +174,8 @@ $(document).ready(function() {
         $.ajax({
             url: js_global.wp_ajax_url,
             data: {
-                action: 'handle_get_reviews_pro_api'
+                action: 'handle_get_reviews_pro_api',
+                _ajax_nonce: js_global.nonce
             },
             beforeSend: function () {
                 $buttonRow

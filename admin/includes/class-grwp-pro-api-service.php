@@ -10,7 +10,6 @@ Class GRWP_Pro_API_Service
 
 		// Pull reviews ajax handler
 		add_action('wp_ajax_handle_get_reviews_pro_api', [$this, 'get_reviews_pro_api']);
-		add_action('wp_ajax_nopriv_handle_get_reviews_pro_api', [$this, 'get_reviews_pro_api']);
 	}
 
 	/**

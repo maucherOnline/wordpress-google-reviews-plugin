@@ -6,19 +6,15 @@ Class GRWP_Free_API_Service {
 
 		// Business search ajax handler
 		add_action('wp_ajax_handle_serp_business_search', [$this, 'handle_serp_business_search']);
-		add_action('wp_ajax_nopriv_handle_serp_business_search', [$this, 'handle_serp_business_search']);
 
 		// Pull reviews ajax handler
-		add_action('wp_ajax_handle_get_reviews_pro_api', [$this, 'get_reviews_free_api_advanced']);
-		add_action('wp_ajax_nopriv_handle_get_reviews_pro_api', [$this, 'get_reviews_free_api_advanced']);
+		add_action('wp_ajax_handle_get_reviews_pro_api', [$this, 'get_reviews_free_api']);
 
 		// Save language ajax handler
 		add_action('wp_ajax_handle_language_saving', [$this, 'handle_language_saving']);
-		add_action('wp_ajax_nopriv_handle_language_saving', [$this, 'handle_language_saving']);
 
 		// Save location ajax handler
 		add_action('wp_ajax_handle_location_saving', [$this, 'handle_location_saving']);
-		add_action('wp_ajax_nopriv_handle_location_saving', [$this, 'handle_location_saving']);
 	}
 
     /**
@@ -28,6 +24,11 @@ Class GRWP_Free_API_Service {
     public static function validate_request() {
         if ( wp_doing_cron() ) {
             return true; // Allow if running via WP-Cron
+        }
+
+        if (! isset($_REQUEST['_ajax_nonce']) ||
+            ! wp_verify_nonce($_REQUEST['_ajax_nonce'], 'grwp_nonce_action')) {
+            return new WP_Error( 'forbidden', 'Security check failed.', [ 'status' => 403 ] );
         }
 
         if (! current_user_can( 'manage_options' ) ) {
@@ -95,7 +96,7 @@ Class GRWP_Free_API_Service {
 	 * Get reviews from Pro API
 	 * @return WP_REST_Response
 	 */
-	public static function get_reviews_free_api_advanced() {
+	public static function get_reviews_free_api() {
 
         $validate = self::validate_request();
         if (is_wp_error($validate)) {

@@ -83,8 +83,9 @@ class GRWP_Google_Reviews_Admin {
         if ( isset($this->google_reviews_options['reviews_language_3']) ) {
 
             wp_localize_script('admin-' . $this->plugin_name, 'js_global', array(
-                'wp_ajax_url' => admin_url('admin-ajax.php'),
-                'language' => $this->google_reviews_options['reviews_language_3']
+                'wp_ajax_url'   => admin_url('admin-ajax.php'),
+                'language'      => $this->google_reviews_options['reviews_language_3'],
+                'nonce'         => wp_create_nonce('grwp_nonce_action')
             ));
 
         }
@@ -92,23 +93,13 @@ class GRWP_Google_Reviews_Admin {
         else {
 
             wp_localize_script('admin-' . $this->plugin_name, 'js_global', array(
-                'wp_ajax_url' => admin_url('admin-ajax.php'),
-                'language' => 'en'
+                'wp_ajax_url'   => admin_url('admin-ajax.php'),
+                'language'      => 'en',
+                'nonce'         => wp_create_nonce('grwp_nonce_action')
             ));
 
         }
 
-        // Set wp base url for script calls in local environments
-        add_action('admin_footer', [$this, 'echo_js_wp_url'] );
-
-    }
-
-    public function echo_js_wp_url() {
-        ?>
-        <script>
-            window.wp_base_url = <?php echo wp_json_encode(esc_url(get_site_url())); ?>;
-        </script>
-        <?php
     }
 
     /**
