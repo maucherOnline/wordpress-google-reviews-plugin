@@ -235,6 +235,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 == Changelog ==
 = 1.7.5 =
 * Fixed issue with reviews not being pulled
+* Upgraded Freemius SDK
 = 1.7.4 =
 * Added validation
 = 1.7.3 =
