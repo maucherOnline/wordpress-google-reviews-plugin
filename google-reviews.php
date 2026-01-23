@@ -2,7 +2,7 @@
 
 /**
  * @author            PARETO Digital
- * @copyright         2022 PARETO Digital GmbH & Co. KG
+ * @copyright         2026 PARETO Digital GmbH & Co. KG
  * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
@@ -20,66 +20,63 @@
  * Domain Path:       /languages
  */
 
-
-// Important check to prevent conflicts between free and pro versions upon activation
-if ( ! function_exists( 'grwp_fs' ) ) {
-    // Create a helper function for easy SDK access.
-    function grwp_fs() {
-        global $grwp_fs;
-
-        if ( ! isset( $grwp_fs ) ) {
-            // Include Freemius SDK.
-            require_once dirname( __FILE__ ) . '/vendor/freemius/start.php';
-
-            $grwp_fs = fs_dynamic_init( array(
-                'id'                  => '10211',
-                'slug'                => 'embedder-for-google-reviews',
-                'premium_slug'        => 'embedder-for-google-reviews-pro',
-                'type'                => 'plugin',
-                'public_key'          => 'pk_6823179f29a329a909c59a7a25a0a',
-                'is_premium'          => true,
-                // If your plugin is a serviceware, set this option to false.
-                'has_premium_version' => true,
-                'has_addons'          => false,
-                'has_paid_plans'      => true,
-                // Automatically removed in the free version. If you're not using the
-                // auto-generated free version, delete this line before uploading to wp.org.
-                'wp_org_gatekeeper'   => 'OA7#BoRiBNqdf52FvzEf!!074aRLPs8fspif$7K1#4u4Csys1fQlCecVcUTOs2mcpeVHi#C2j9d09fOTvbC0HloPT7fFee5WdS3G',
-                'trial'               => array(
-                    'days'               => 14,
-                    'is_require_payment' => true,
-                ),
-                'has_affiliation'     => 'all',
-                'menu'                => array(
-                    'slug'           => 'google-reviews',
-                    'contact'        => false,
-                    'support'        => false,
-                    'affiliation'    => false,
-                ),
-            ) );
-        }
-
-        return $grwp_fs;
-    }
-
-    // Init Freemius.
-    grwp_fs();
-    // Signal that SDK was initiated.
-    do_action( 'grwp_fs_loaded' );
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
 }
 
 if ( function_exists( 'grwp_fs' ) ) {
     grwp_fs()->set_basename( true, __FILE__ );
-}
-else {
+} else {
+    // Important check to prevent conflicts between free and pro versions upon activation
+    if ( ! function_exists( 'grwp_fs' ) ) {
+        // Create a helper function for easy SDK access.
+        function grwp_fs() {
+            global $grwp_fs;
+
+            if ( ! isset( $grwp_fs ) ) {
+                // Include Freemius SDK.
+                require_once dirname( __FILE__ ) . '/freemius/start.php';
+
+                $grwp_fs = fs_dynamic_init( array(
+                    'id'                  => '10211',
+                    'slug'                => 'embedder-for-google-reviews',
+                    'premium_slug'        => 'embedder-for-google-reviews-pro',
+                    'type'                => 'plugin',
+                    'public_key'          => 'pk_6823179f29a329a909c59a7a25a0a',
+                    'is_premium'          => true,
+                    // If your plugin is a serviceware, set this option to false.
+                    'has_premium_version' => true,
+                    'has_addons'          => false,
+                    'has_paid_plans'      => true,
+                    // Automatically removed in the free version. If you're not using the
+                    // auto-generated free version, delete this line before uploading to wp.org.
+                    'wp_org_gatekeeper'   => 'OA7#BoRiBNqdf52FvzEf!!074aRLPs8fspif$7K1#4u4Csys1fQlCecVcUTOs2mcpeVHi#C2j9d09fOTvbC0HloPT7fFee5WdS3G',
+                    'trial'               => array(
+                        'days'               => 14,
+                        'is_require_payment' => true,
+                    ),
+                    'has_affiliation'     => 'all',
+                    'menu'                => array(
+                        'slug'           => 'google-reviews',
+                        'contact'        => false,
+                        'support'        => false,
+                    ),
+                ) );
+            }
+
+            return $grwp_fs;
+        }
+
+        // Init Freemius.
+        grwp_fs();
+        // Signal that SDK was initiated.
+        do_action( 'grwp_fs_loaded' );
+    }
 
     /**
      * No code must be present outside of this block.
      * Else, pro plugin activation will throw an error while free version is activated
      */
-
-    // start freemius sdk
-    startup_fs();
 
     define( 'GRWP_GOOGLE_REVIEWS_VERSION', '1.7.6' );
 
@@ -165,7 +162,5 @@ else {
 			}
 			update_option( 'grwp_pulled_reviews_once', 1 );
 		}
-
 	}
-
 }
