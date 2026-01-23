@@ -55,7 +55,7 @@ if ( ! function_exists('grwp_fs') ) {
                     'has_affiliation' => 'all',
                     'menu' => array(
                         'slug' => 'google-reviews',
-                        'first-path' => 'admin.php?page=google-reviews',
+                        //'first-path' => 'admin.php?page=google-reviews',
                         'contact' => false,
                         'support' => false,
                     ),
