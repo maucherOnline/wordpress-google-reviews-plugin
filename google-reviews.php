@@ -22,58 +22,50 @@
 
 
 // Important check to prevent conflicts between free and pro versions upon activation
-if ( ! function_exists('grwp_fs') ) {
+if ( ! function_exists( 'grwp_fs' ) ) {
+    // Create a helper function for easy SDK access.
+    function grwp_fs() {
+        global $grwp_fs;
 
-    function startup_fs()
-    {
-        // Create a helper function for easy SDK access.
+        if ( ! isset( $grwp_fs ) ) {
+            // Include Freemius SDK.
+            require_once dirname( __FILE__ ) . '/vendor/freemius/start.php';
 
-        function grwp_fs()
-        {
-            global $grwp_fs;
-
-            if (!isset($grwp_fs)) {
-                // Include Freemius SDK.
-                require_once dirname(__FILE__) . '/freemius/start.php';
-
-                $grwp_fs = fs_dynamic_init(array(
-                    'id' => '10211',
-                    'slug' => 'embedder-for-google-reviews',
-                    'premium_slug' => 'embedder-for-google-reviews-pro',
-                    'type' => 'plugin',
-                    'public_key' => 'pk_6823179f29a329a909c59a7a25a0a',
-                    'is_premium' => true,
-                    'premium_suffix' => 'Premium',
-                    // If your plugin is a serviceware, set this option to false.
-                    'has_premium_version' => true,
-                    'has_addons' => false,
-                    'has_paid_plans' => true,
-                    'trial' => array(
-                        'days' => 14,
-                        'is_require_payment' => true,
-                    ),
-                    'has_affiliation' => 'all',
-                    'menu' => array(
-                        'slug' => 'google-reviews',
-                        'contact' => false,
-                        'support' => false,
-                    ),
-                    // Set the SDK to work in a sandbox mode (for development & testing).
-                    // IMPORTANT: MAKE SURE TO REMOVE SECRET KEY BEFORE DEPLOYMENT.
-                    'secret_key' => 'sk_kHyh8$^{Y;t{NIraPW)d6eNQ]S[9O',
-                ));
-            }
-
-
-            return $grwp_fs;
+            $grwp_fs = fs_dynamic_init( array(
+                'id'                  => '10211',
+                'slug'                => 'embedder-for-google-reviews',
+                'premium_slug'        => 'embedder-for-google-reviews-pro',
+                'type'                => 'plugin',
+                'public_key'          => 'pk_6823179f29a329a909c59a7a25a0a',
+                'is_premium'          => true,
+                // If your plugin is a serviceware, set this option to false.
+                'has_premium_version' => true,
+                'has_addons'          => false,
+                'has_paid_plans'      => true,
+                // Automatically removed in the free version. If you're not using the
+                // auto-generated free version, delete this line before uploading to wp.org.
+                'wp_org_gatekeeper'   => 'OA7#BoRiBNqdf52FvzEf!!074aRLPs8fspif$7K1#4u4Csys1fQlCecVcUTOs2mcpeVHi#C2j9d09fOTvbC0HloPT7fFee5WdS3G',
+                'trial'               => array(
+                    'days'               => 14,
+                    'is_require_payment' => true,
+                ),
+                'has_affiliation'     => 'all',
+                'menu'                => array(
+                    'slug'           => 'google-reviews',
+                    'contact'        => false,
+                    'support'        => false,
+                    'affiliation'    => false,
+                ),
+            ) );
         }
 
-        // Init Freemius.
-        grwp_fs();
-        // Signal that SDK was initiated.
-        do_action('grwp_fs_loaded');
+        return $grwp_fs;
     }
 
+    // Init Freemius.
+    grwp_fs();
+    // Signal that SDK was initiated.
+    do_action( 'grwp_fs_loaded' );
 }
 
 if ( function_exists( 'grwp_fs' ) ) {
