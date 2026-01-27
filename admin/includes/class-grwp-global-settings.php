@@ -206,6 +206,7 @@ Class GRWP_Global_Settings {
 		    $this->settings_slug, // page
 		    'google_reviews_style_layout_setting_section' // section
 	    );
+        
         add_settings_field(
             'link_users_profiles', // id
             /* translators: Link to users Google prilfe */

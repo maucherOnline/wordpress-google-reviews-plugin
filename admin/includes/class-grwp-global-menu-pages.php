@@ -83,10 +83,10 @@ Class GRWP_Global_Menu_Pages {
             <?php
             $docs = 'https://reviewsembedder.com/docs/how-to-overwrite-styles/?utm_source=wp_backend&utm_medium=preview&utm_campaign=docs';
 
-            if ($widget_type === 'Slider' || $widget_type === 'Grid') : ?>
+            ob_start();
 
-            <?php
-                ob_start();
+            if ($widget_type === 'Slider' || $widget_type === 'Grid') :
+
                 for ($x = 1; $x <= 8 ; $x++) :
 
                 ?>
@@ -137,31 +137,50 @@ Class GRWP_Global_Menu_Pages {
             <?php
                 endfor;
 
-                else : ?>
+            else :
 
-                <div class="preview_section">
-                    <label>
+                if ( grwp_fs()->can_use_premium_code() ) : ?>
+                    <div class="preview_section">
+                        <label>
+                            <?php
+                            printf(
+                            /* translators: Documentation link */
+                                esc_html__('Use this shortcode to display the widget (%s).', 'embedder-for-google-reviews'),
+                                sprintf(
+                                    '<a href="%s" target="_blank">%s</a>',
+                                    esc_url($docs),
+                                    esc_html__('Documentation', 'embedder-for-google-reviews')
+                                )
+                            );
+                            ?>
+
+                            <input type="text" disabled value="[google-reviews type='badge']">
+                        </label>
                         <?php
-                        printf(
-                        /* translators: Documentation link */
-                            esc_html__('Use this shortcode to display the widget (%s).', 'embedder-for-google-reviews'),
-                            sprintf(
-                                '<a href="%s" target="_blank">%s</a>',
-                                esc_url($docs),
-                                esc_html__('Documentation', 'embedder-for-google-reviews')
-                            )
-                        );
+                        echo wp_kses( do_shortcode( '[google-reviews type="badge"]' ), $allowed_html );
                         ?>
+                    </div>
+                <?php else : ?>
+                    <div class="preview_section">
+                        <label>
+                            <?php
+                            printf(
+                            /* translators: Documentation link */
+                                esc_html__('Floating Badge preview requires PRO. %s', 'embedder-for-google-reviews'),
+                                sprintf(
+                                    '<a href="%s" target="_blank">%s</a>',
+                                    esc_url('https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=preview_badge&utm_campaign=upgrade'),
+                                    esc_html__('Upgrade now', 'embedder-for-google-reviews')
+                                )
+                                . ' ' . esc_html__('or activate your existing license.', 'embedder-for-google-reviews')
+                            );
+                            ?>
+                        </label>
+                    </div>
+                <?php endif;
 
-                        <input type="text" disabled value="[google-reviews type='badge']">
-                    </label>
-                    <?php
-                    echo wp_kses( do_shortcode( '[google-reviews type="badge"]' ), $allowed_html );
-                    ?>
-                </div>
-
-                <?php
             endif;
+
             echo wp_kses(ob_get_clean(), $allowed_html);
             ?>
 
