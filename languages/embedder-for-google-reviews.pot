@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-02-17 09:08+0000\n"
+"POT-Creation-Date: 2026-05-07 09:41+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -66,53 +66,69 @@ msgstr ""
 
 #. translators: page title
 #. translators: menu title
-#: admin/includes/class-grwp-global-menu-pages.php:15, admin/includes/class-grwp-global-menu-pages.php:17, admin/includes/class-grwp-global-menu-pages.php:37
+#: admin/includes/class-grwp-global-menu-pages.php:15, admin/includes/class-grwp-global-menu-pages.php:17, admin/includes/class-grwp-global-menu-pages.php:56
 msgid "Google Reviews"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:48
+#: admin/includes/class-grwp-global-menu-pages.php:72
+msgid "Not connected yet"
+msgstr ""
+
+#: admin/includes/class-grwp-global-menu-pages.php:68
+msgid "Business set – pull reviews first"
+msgstr ""
+
+#: admin/includes/class-grwp-global-menu-pages.php:64
+msgid "Connected & reviews loaded"
+msgstr ""
+
+#: admin/includes/class-grwp-global-menu-pages.php:77
+msgid "Upgrade to PRO"
+msgstr ""
+
+#: admin/includes/class-grwp-global-menu-pages.php:96
 msgid "Connect Google"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:52
+#: admin/includes/class-grwp-global-menu-pages.php:100
 msgid "Display Settings"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:56
+#: admin/includes/class-grwp-global-menu-pages.php:104
 msgid "Slider Settings"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:63
-msgid "Upgrade to"
+#: admin/includes/class-grwp-global-menu-pages.php:133
+msgid "Changes apply to all widgets on your site."
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:63
-msgid "PRO"
+#: admin/includes/class-grwp-global-menu-pages.php:144
+msgid "Widget preview"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:81
-msgid "Preview"
-msgstr ""
-
-#. translators: Documentation link
-#: admin/includes/class-grwp-global-menu-pages.php:169
+#. translators: %s upgrade link
+#: admin/includes/class-grwp-global-menu-pages.php:213
 msgid "Floating Badge preview requires PRO. %s"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:173
+#: admin/includes/class-grwp-global-menu-pages.php:214
 msgid "Upgrade now"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:175
-msgid "or activate your existing license."
+#: admin/includes/class-grwp-global-menu-pages.php:201
+msgid "Floating Badge shortcode:"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:148, admin/includes/class-grwp-global-menu-pages.php:118, admin/includes/class-grwp-global-menu-pages.php:101
-msgid "Use this shortcode to display the widget (%s)."
+#: admin/includes/class-grwp-global-menu-pages.php:204, admin/includes/class-grwp-global-menu-pages.php:188, admin/includes/class-grwp-global-menu-pages.php:170
+msgid "Copy"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:152, admin/includes/class-grwp-global-menu-pages.php:119, admin/includes/class-grwp-global-menu-pages.php:102
-msgid "Documentation"
+#: admin/includes/class-grwp-global-menu-pages.php:179, admin/includes/class-grwp-global-menu-pages.php:161
+msgid "Style #%1$s – shortcode (%2$s)"
+msgstr ""
+
+#: admin/includes/class-grwp-global-menu-pages.php:181, admin/includes/class-grwp-global-menu-pages.php:163
+msgid "Docs"
 msgstr ""
 
 #. translators: Show dummy content
@@ -130,125 +146,129 @@ msgstr ""
 msgid "Reviews language"
 msgstr ""
 
-#. translators: %s is replaced with "Attention" in bold.
-#: admin/includes/class-grwp-global-settings.php:88
-msgid "%s: the free version only allows for pulling 20 reviews."
-msgstr ""
-
-#: admin/includes/class-grwp-global-settings.php:89
-msgid "Attention"
-msgstr ""
-
-#. translators: %s: Upgrade to the PRO version
-#: admin/includes/class-grwp-global-settings.php:102
-msgid "<a href=\"%1$s\" target=\"_blank\">Upgrade to the PRO version</a> to show ALL your reviews, <strong>filter out bad reviews</strong> and <a href=\"%2$s\" target=\"_blank\">much more</a>."
-msgstr ""
-
-#. translators: Layout type
-#: admin/includes/class-grwp-global-settings.php:167
+#: admin/includes/class-grwp-global-settings.php:76
 msgid "Layout type"
 msgstr ""
 
-#. translators: Design type
-#: admin/includes/class-grwp-global-settings.php:176
+#: admin/includes/class-grwp-global-settings.php:90
+msgid "Hinweis"
+msgstr ""
+
+#: admin/includes/class-grwp-global-settings.php:91
+msgid "Die Gratis-Version zeigt nur 20 Bewertungen an."
+msgstr ""
+
+#: admin/includes/class-grwp-global-settings.php:93
+msgid "Upgrade zur PRO Version"
+msgstr ""
+
+#: admin/includes/class-grwp-global-settings.php:95
+msgid "– um ALLE Bewertungen zu zeigen und schlechte Bewertungen zu filtern."
+msgstr ""
+
+#: admin/includes/class-grwp-global-settings.php:97
+msgid "Schließen"
+msgstr ""
+
+#: admin/includes/class-grwp-global-settings.php:137
 msgid "Design type"
 msgstr ""
 
 #. translators: Minimum rating (stars)
-#: admin/includes/class-grwp-global-settings.php:186
+#: admin/includes/class-grwp-global-settings.php:147
 msgid "Minimum rating (stars)"
 msgstr ""
 
 #. translators: Exclude reviews without text
-#: admin/includes/class-grwp-global-settings.php:195
+#: admin/includes/class-grwp-global-settings.php:156
 msgid "Exclude reviews without text"
 msgstr ""
 
 #. translators: Hide review date
-#: admin/includes/class-grwp-global-settings.php:204
+#: admin/includes/class-grwp-global-settings.php:165
 msgid "Hide review date"
 msgstr ""
 
 #. translators: Link to users Google prilfe
-#: admin/includes/class-grwp-global-settings.php:213
+#: admin/includes/class-grwp-global-settings.php:174
 msgid "Link to users Profile <br> (uncheck for better SEO)"
 msgstr ""
 
 #. translators: Filter by words (comma separated)
-#: admin/includes/class-grwp-global-settings.php:222
+#: admin/includes/class-grwp-global-settings.php:183
 msgid "Filter by words (comma separated)"
 msgstr ""
 
 #. translators: Layout type
-#: admin/includes/class-grwp-global-settings.php:251
+#: admin/includes/class-grwp-global-settings.php:212
 msgid "Slide Duration (seconds). <br> Use '0' to disable autoplay"
 msgstr ""
 
 #. translators: Layout type
-#: admin/includes/class-grwp-global-settings.php:260
+#: admin/includes/class-grwp-global-settings.php:221
 msgid "Hide slider arrows"
 msgstr ""
 
 #. translators: Layout type
-#: admin/includes/class-grwp-global-settings.php:269
+#: admin/includes/class-grwp-global-settings.php:230
 msgid "Disable slider endless loop"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:348, admin/includes/class-grwp-global-settings.php:387, admin/includes/class-grwp-global-settings.php:519, admin/includes/class-grwp-global-settings.php:545, admin/includes/class-grwp-global-settings.php:626, admin/includes/class-grwp-global-settings.php:663, admin/includes/class-grwp-global-settings.php:701
+#: admin/includes/class-grwp-global-settings.php:309, admin/includes/class-grwp-global-settings.php:348, admin/includes/class-grwp-global-settings.php:480, admin/includes/class-grwp-global-settings.php:506, admin/includes/class-grwp-global-settings.php:587, admin/includes/class-grwp-global-settings.php:624, admin/includes/class-grwp-global-settings.php:662
 msgid "Yes"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:485
+#: admin/includes/class-grwp-global-settings.php:446
 msgid "Global settings for showing reviews"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:491
+#: admin/includes/class-grwp-global-settings.php:452
 msgid "Display settings"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:497
+#: admin/includes/class-grwp-global-settings.php:458
 msgid "Slider settings"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:757
+#: admin/includes/class-grwp-global-settings.php:718
 msgid "Slider"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:761
+#: admin/includes/class-grwp-global-settings.php:722
 msgid "Grid"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:774
+#: admin/includes/class-grwp-global-settings.php:735
 msgid "Floating Badge"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:767
+#: admin/includes/class-grwp-global-settings.php:728
 msgid "Floating Badge (PRO)"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:792
+#: admin/includes/class-grwp-global-settings.php:753
 msgid "1"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:793
+#: admin/includes/class-grwp-global-settings.php:754
 msgid "2"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:794
+#: admin/includes/class-grwp-global-settings.php:755
 msgid "3"
 msgstr ""
 
 #. translators: Design
-#: admin/includes/class-grwp-global-settings.php:819
+#: admin/includes/class-grwp-global-settings.php:780
 msgid "Design #%s"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:913
+#: admin/includes/class-grwp-global-settings.php:874
 msgid "Use this shortcode to show your reviews on pages and posts:"
 msgstr ""
 
 #. translators: %s: URL
-#: admin/includes/class-grwp-global-settings.php:920
+#: admin/includes/class-grwp-global-settings.php:881
 msgid "<a href=\"%s\" target=\"_blank\">See</a>, how to overwrite styles, widget types and other settings."
 msgstr ""
 

@@ -71,71 +71,41 @@ Class GRWP_Global_Settings {
             'google_reviews_setting_section' // section
         );
 
+        add_settings_field(
+            'style_2_in_connect',
+            __( 'Layout type', 'embedder-for-google-reviews' ),
+            array( $this, 'style_2_callback' ),
+            $this->settings_slug,
+            'google_reviews_setting_section'
+        );
+
     }
 
     public function show_upgrade_message_callback() {
-	    global $allowed_html;
-
         $upgrade_url = 'https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=upgrade_tab&utm_campaign=upgrade_banner';
         ?>
-
-        <span class="dashicons dashicons-no close-icon"></span>
-        <p>
-		    <?php
-            printf(
-                wp_kses(
-                /* translators: %s is replaced with "Attention" in bold. */
-                    sprintf( __('%s: the free version only allows for pulling 20 reviews.', 'embedder-for-google-reviews'),
-                        '<strong>' . __('Attention', 'embedder-for-google-reviews') . '</strong>'
-                    ),
-                    array('strong' => array()) // Allowed HTML tags
-                )
-            );
-		    ?>
-        </p>
-        <p>
-		    <?php
-		    echo
-		    wp_kses(
-			    sprintf(
-                    /* translators: %s: Upgrade to the PRO version */
-				    __('<a href="%1$s" target="_blank">Upgrade to the PRO version</a> to show ALL your reviews, <strong>filter out bad reviews</strong> and <a href="%2$s" target="_blank">much more</a>.', 'embedder-for-google-reviews' ),
-				    $upgrade_url, $upgrade_url
-			    ),
-			    $allowed_html
-		    );
-		    ?>
-        </p>
-        <style>
-            .form-table:first-of-type > tbody > tr:first-of-type {
-                height: 5rem;
-            }
-            .form-table:first-of-type > tbody > tr:first-of-type td {
-                width: 100%;
-                max-width: 900px;
-                text-align: center;
-                background-color: white;
-                border: 1px solid black;
-                padding: 1rem !important;
-                display: block;
-                margin: 0;
-                position: absolute;
-                left: 0;
-            }
-            .form-table:first-of-type > tbody > tr:first-of-type td p {
-                margin-top: 0;
-                margin-bottom: 5px;
-            }
-        </style>
+        <div id="grwp-upgrade-banner" style="background:#fffbeb;border:1px solid #fde68a;border-left:4px solid #f59e0b;border-radius:6px;padding:12px 16px;display:flex;align-items:flex-start;gap:12px;max-width:620px;margin:8px 0 4px;">
+            <span style="font-size:1.1rem;line-height:1.5;">⚡</span>
+            <div style="flex:1;font-size:.85rem;color:#78350f;line-height:1.6;">
+                <strong><?php esc_html_e( 'Hinweis', 'embedder-for-google-reviews' ); ?>:</strong>
+                <?php esc_html_e( 'Die Gratis-Version zeigt nur 20 Bewertungen an.', 'embedder-for-google-reviews' ); ?>
+                <a href="<?php echo esc_url( $upgrade_url ); ?>" target="_blank" style="color:#92400e;font-weight:600;">
+                    <?php esc_html_e( 'Upgrade zur PRO Version', 'embedder-for-google-reviews' ); ?>
+                </a>
+                <?php esc_html_e( '– um ALLE Bewertungen zu zeigen und schlechte Bewertungen zu filtern.', 'embedder-for-google-reviews' ); ?>
+            </div>
+            <button type="button" id="grwp-upgrade-banner-close" style="background:none;border:none;cursor:pointer;color:#92400e;font-size:1rem;line-height:1;padding:2px 0 0;flex-shrink:0;" aria-label="<?php esc_attr_e( 'Schließen', 'embedder-for-google-reviews' ); ?>">✕</button>
+        </div>
         <script>
-            $messageRow = jQuery('.form-table > tbody > tr:first-of-type ');
-            if (localStorage.hideUpgradeMessage) {
-                $messageRow.hide();
+        (function($){
+            if ( localStorage.getItem('grwp_hide_upgrade_banner') ) {
+                $('#grwp-upgrade-banner').hide();
             }
-            jQuery('.close-icon').click(function() {
-                $messageRow.hide('slow');
-                localStorage.hideUpgradeMessage = true;
-            })
+            $('#grwp-upgrade-banner-close').on('click', function(){
+                $('#grwp-upgrade-banner').slideUp(200);
+                localStorage.setItem('grwp_hide_upgrade_banner', '1');
+            });
+        }(jQuery));
         </script>
 
         <?php
@@ -161,22 +131,13 @@ Class GRWP_Global_Settings {
             $this->settings_slug // page
         );
 
-        add_settings_field(
-            'style_2', // id
-            /* translators: Layout type */
-            __( 'Layout type', 'embedder-for-google-reviews' ),
-            array( $this, 'style_2_callback' ), // callback
-            $this->settings_slug, // page
-            'google_reviews_style_layout_setting_section' // section
-        );
 
         add_settings_field(
             'layout_style', // id
-            /* translators: Design type */
-            __( 'Design type', 'embedder-for-google-reviews' ),
-            array( $this, 'layout_style_callback' ), // callback
-            $this->settings_slug, // page
-            'google_reviews_style_layout_setting_section', // section,
+            __( 'Design type', 'embedder-for-google-reviews' ) . ' <span style="background:#fef3c7;color:#92400e;border:1px solid #fde68a;border-radius:3px;font-size:.7rem;font-weight:700;padding:1px 5px;vertical-align:middle;">Deprecated</span>',
+            array( $this, 'layout_style_callback' ),
+            $this->settings_slug,
+            'google_reviews_style_layout_setting_section',
             ['class' => 'layout_style']
         );
 
