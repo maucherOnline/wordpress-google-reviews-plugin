@@ -233,6 +233,9 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 6. Google Reviews Plugin backend #2
 
 == Changelog ==
+= 1.7.7 =
+* Bugfix: only load admin styles on plugin pages
+* Upgraded Freemius SDK
 = 1.7.6 =
 * Upgraded Freemius SDK
 * Bugfix: license activation
