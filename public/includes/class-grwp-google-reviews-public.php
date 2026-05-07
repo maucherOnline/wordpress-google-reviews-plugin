@@ -46,6 +46,10 @@ class GRWP_Google_Reviews_Public {
 	 */
 	public function enqueue_styles() {
 
+		if ( is_admin() && ! $this->is_plugin_admin_page() ) {
+			return;
+		}
+
 		/**
 		 * This function is provided for demonstration purposes only.
 		 *
@@ -67,6 +71,10 @@ class GRWP_Google_Reviews_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
+
+		if ( is_admin() && ! $this->is_plugin_admin_page() ) {
+			return;
+		}
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -91,6 +99,21 @@ class GRWP_Google_Reviews_Public {
             'autoplayDelay' => $slider_delay,
         );
         wp_localize_script( $this->plugin_name, 'swiperSettings', $swiper_data );
+	}
+
+	/**
+	 * Check whether the current admin request belongs to this plugin.
+	 *
+	 * @return bool
+	 */
+	private function is_plugin_admin_page() {
+		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
+
+		return (
+			'google-reviews' === $page ||
+			'how-to-free-version' === $page ||
+			'how-to-premium-version' === $page
+		);
 	}
 
 }
