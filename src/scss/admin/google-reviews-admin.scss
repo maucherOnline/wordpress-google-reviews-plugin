@@ -17,9 +17,15 @@
       gap: 1rem;
       position: relative;
 
-      input[type="search"] {
-        display: inline-block;
-        max-width: 400px;
+      .serp-input-wrapper {
+        position: relative;
+        display: inline-flex;
+        flex-direction: column;
+
+        input[type="search"] {
+          display: inline-block;
+          max-width: 400px;
+        }
       }
 
       .button.pull-reviews.free {
@@ -64,7 +70,7 @@
             animation: lds-dual-ring 1.2s linear infinite;
             position: absolute;
             right: -39px;
-            top: -5px;
+            top: 2px;
             cursor: auto;
           }
         }
@@ -93,11 +99,13 @@
 
   .serp-results {
     position: absolute;
-    top: 25px;
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    width: 100%;
     flex-direction: column;
-    margin: 5px 0 0 2px;
+    margin: 2px 0 0 0;
     max-height: 400px;
-    max-width: 348px;
     overflow: auto;
     background-color: #f4f4f4;
     -webkit-box-shadow: 0px 2px 15px -3px rgba(156, 156, 156, 0.65);
@@ -123,6 +131,8 @@
     float: right;
     order: 2;
     margin-left: 20px;
+    width: 1rem !important;
+    height: 1rem !important;
   }
 
   input.has-error:focus,
@@ -477,7 +487,7 @@
 
     input[type="search"] {
       flex: 1;
-      min-width: 160px;
+      min-width: 250px;
       max-width: 100% !important;
       width: auto !important;
       height: 30px !important;
@@ -493,7 +503,8 @@
     margin-top: 0 !important;
     align-items: center;
   }
-  .grwp-form-table .serp-results { flex-basis: 100%; }
+  .grwp-form-table .serp-input-wrapper { flex: 1; max-width: 400px; }
+  .grwp-form-table .serp-results { width: 100%; }
 
   #grwp-save-row {
     border-top: 1px solid #e2e8f0;
@@ -585,22 +596,27 @@
   }
 
   .grwp-copy-btn {
-    background: #2563eb;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 12px;
-    font-size: .8rem;
+    background: transparent;
+    color: #666;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 8px;
+    font-size: .75rem;
     cursor: pointer;
     white-space: nowrap;
-    transition: background .15s;
+    transition: color .15s, border-color .15s;
     vertical-align: middle;
     display: inline-flex;
     align-items: center;
+    gap: 4px;
 
-    &:hover { background: #1d4ed8; }
+    &:hover {
+      color: #333;
+      border-color: #999;
+      background: transparent;
+    }
   }
 
   .grwp-pro-badge {

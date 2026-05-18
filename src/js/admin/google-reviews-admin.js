@@ -28,30 +28,12 @@
 
         // ── Copy shortcode buttons ─────────────────────────
         $('.grwp-copy-btn').on('click', function () {
-            var btn = $(this);
-            var val = btn.data('clipboard');
-
-            function onSuccess() {
-                btn.text('✅ Copied!');
-                setTimeout(function () {
-                    btn.html('📋 Copy');
-                }, 2000);
-            }
-
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(val).then(onSuccess);
-            } else {
-                var $tmp = $('<textarea>').val(val).css({ position: 'fixed', top: 0, left: 0, opacity: 0 });
-                $('body').append($tmp);
-                $tmp[0].focus();
-                $tmp[0].select();
-                try {
-                    document.execCommand('copy');
-                    onSuccess();
-                } catch (e) {}
-                $tmp.remove();
+            var input = $(this).prevAll('input[type="text"]').first()[0];
+            if (input) {
+                navigator.clipboard.writeText(input.value);
             }
         });
 
     });
 })(jQuery);
+

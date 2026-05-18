@@ -167,7 +167,7 @@ Class GRWP_Global_Menu_Pages {
                                     <div class="preview_section-shortcode">
                                         <input type="text" readonly value="[google-reviews type='slider' place_info='true' style='<?php echo esc_attr( $x ); ?>']">
                                         <button class="grwp-copy-btn" type="button" data-clipboard="[google-reviews type='slider' place_info='true' style='<?php echo esc_attr( $x ); ?>']">
-                                            📋 <?php esc_html_e( 'Copy', 'embedder-for-google-reviews' ); ?>
+                                            📋 <span class="copy-btn"><?php esc_html_e( 'Copy', 'embedder-for-google-reviews' ); ?></span>
                                         </button>
                                     </div>
                                     <?php echo wp_kses( do_shortcode( '[google-reviews type="slider" place_info="true" style="' . esc_attr( $x ) . '"]' ), $allowed_html ); ?>
@@ -185,7 +185,7 @@ Class GRWP_Global_Menu_Pages {
                                     <div class="preview_section-shortcode">
                                         <input type="text" readonly value="[google-reviews type='grid' max_reviews='10' place_info='true' style='<?php echo esc_attr( $x ); ?>']">
                                         <button class="grwp-copy-btn" type="button" data-clipboard="[google-reviews type='grid' max_reviews='10' place_info='true' style='<?php echo esc_attr( $x ); ?>']">
-                                            📋 <?php esc_html_e( 'Copy', 'embedder-for-google-reviews' ); ?>
+                                            📋 <span class="copy-btn"><?php esc_html_e( 'Copy', 'embedder-for-google-reviews' ); ?></span>
                                         </button>
                                     </div>
                                     <?php echo wp_kses( do_shortcode( '[google-reviews type="grid" max_reviews="10" place_info="true" style="' . esc_attr( $x ) . '"]' ), $allowed_html ); ?>
@@ -201,7 +201,7 @@ Class GRWP_Global_Menu_Pages {
                                 <label><?php esc_html_e( 'Floating Badge shortcode:', 'embedder-for-google-reviews' ); ?></label>
                                 <input type="text" readonly value="[google-reviews type='badge']">
                                 <button class="grwp-copy-btn" type="button" data-clipboard="[google-reviews type='badge']">
-                                    📋 <?php esc_html_e( 'Copy', 'embedder-for-google-reviews' ); ?>
+                                    📋 <span class="copy-btn"><?php esc_html_e( 'Copy', 'embedder-for-google-reviews' ); ?></span>
                                 </button>
                                 <?php echo wp_kses( do_shortcode( '[google-reviews type="badge"]' ), $allowed_html ); ?>
                             </div>

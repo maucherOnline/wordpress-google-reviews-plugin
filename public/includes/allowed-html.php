@@ -72,4 +72,8 @@ $allowed_html = [
     'fieldset' => [
         'class' => [],
     ],
+    'button' => [
+        'class' => [],
+        'type'  => [],
+    ],
 ];

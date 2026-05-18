@@ -134,7 +134,7 @@ Class GRWP_Global_Settings {
 
         add_settings_field(
             'layout_style', // id
-            __( 'Design type', 'embedder-for-google-reviews' ) . ' <span style="background:#fef3c7;color:#92400e;border:1px solid #fde68a;border-radius:3px;font-size:.7rem;font-weight:700;padding:1px 5px;vertical-align:middle;">Deprecated</span>',
+            __( 'Design type', 'embedder-for-google-reviews' ),
             array( $this, 'layout_style_callback' ),
             $this->settings_slug,
             'google_reviews_style_layout_setting_section',

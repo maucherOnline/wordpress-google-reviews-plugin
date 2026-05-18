@@ -81,6 +81,7 @@ Class GRWP_Free_Settings {
 
         <div class="serp-container">
             <div class="serp-search">
+                <div class="serp-input-wrapper">
                 <input type="search"
                        class="regular-text js-serp-business-search"
                        name="google_reviews_option_name[serp_business_name]"
@@ -89,6 +90,8 @@ Class GRWP_Free_Settings {
                        autocomplete="off"
                        placeholder="<?php esc_html_e('Search for your business', 'embedder-for-google-reviews');?>"
                 />
+                <fieldset class="serp-results"></fieldset><!-- /.serp-results -->
+                </div><!-- /.serp-input-wrapper -->
                 <div class="button-row">
                     <a class="button search-business pro" <?php echo esc_attr($search_disabled); ?>>
 						<?php esc_html_e('Search business', 'embedder-for-google-reviews');?>
@@ -97,7 +100,6 @@ Class GRWP_Free_Settings {
 						<?php esc_html_e('Pull reviews', 'embedder-for-google-reviews');?>
                     </a>
                 </div>
-                <fieldset class="serp-results"></fieldset><!-- /.serp-results -->
             </div><!-- /.serp-search -->
         </div><!-- /.serp-container -->
 
