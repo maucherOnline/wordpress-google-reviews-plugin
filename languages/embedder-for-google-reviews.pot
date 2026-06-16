@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-18 08:24+0000\n"
+"POT-Creation-Date: 2026-06-16 12:37+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -26,108 +26,104 @@ msgstr ""
 msgid "Search for your business:"
 msgstr ""
 
-#: admin/includes/class-grwp-free-settings.php:90, admin/includes/class-grwp-pro-settings.php:77
+#: admin/includes/class-grwp-free-settings.php:91, admin/includes/class-grwp-pro-settings.php:78
 msgid "Search for your business"
 msgstr ""
 
-#: admin/includes/class-grwp-free-settings.php:94, admin/includes/class-grwp-pro-settings.php:81
+#: admin/includes/class-grwp-free-settings.php:97, admin/includes/class-grwp-pro-settings.php:84
 msgid "Search business"
 msgstr ""
 
-#: admin/includes/class-grwp-free-settings.php:97, admin/includes/class-grwp-free-settings.php:178, admin/includes/class-grwp-pro-settings.php:84
+#: admin/includes/class-grwp-free-settings.php:100, admin/includes/class-grwp-free-settings.php:180, admin/includes/class-grwp-pro-settings.php:87
 msgid "Pull reviews"
 msgstr ""
 
-#: admin/includes/class-grwp-free-settings.php:106, admin/includes/class-grwp-pro-settings.php:93
+#: admin/includes/class-grwp-free-settings.php:108, admin/includes/class-grwp-pro-settings.php:95
 msgid "Details like country, state, city and/or phone number may help achieving more accurate results."
 msgstr ""
 
-#: admin/includes/class-grwp-free-settings.php:141
+#: admin/includes/class-grwp-free-settings.php:143
 msgid "How to use this plugin"
 msgstr ""
 
-#: admin/includes/class-grwp-free-settings.php:142
+#: admin/includes/class-grwp-free-settings.php:144
 msgid "Explained in less than 1 minute..."
 msgstr ""
 
 #. translators: placeholder text
-#: admin/includes/class-grwp-free-settings.php:175
+#: admin/includes/class-grwp-free-settings.php:177
 msgid "Paste the Place ID of your business here."
 msgstr ""
 
 #. translators: %s: video link
-#: admin/includes/class-grwp-free-settings.php:195
+#: admin/includes/class-grwp-free-settings.php:197
 msgid "Search for your business in the map below and copy/paste the Place ID into the field above (<a href=\"%s\" target=\"_blank\">short explainer video</a>)."
 msgstr ""
 
-#: admin/includes/class-grwp-free-settings.php:205
+#: admin/includes/class-grwp-free-settings.php:207
 msgid "Look up your Place ID and paste it in the field above."
 msgstr ""
 
 #. translators: page title
 #. translators: menu title
-#: admin/includes/class-grwp-global-menu-pages.php:15, admin/includes/class-grwp-global-menu-pages.php:17, admin/includes/class-grwp-global-menu-pages.php:56
+#: admin/includes/class-grwp-global-menu-pages.php:15, admin/includes/class-grwp-global-menu-pages.php:17, admin/includes/class-grwp-global-menu-pages.php:55
 msgid "Google Reviews"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:72
-msgid "Not connected yet"
-msgstr ""
-
-#: admin/includes/class-grwp-global-menu-pages.php:68
+#: admin/includes/class-grwp-global-menu-pages.php:67
 msgid "Business set – pull reviews first"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:64
+#: admin/includes/class-grwp-global-menu-pages.php:63
 msgid "Connected & reviews loaded"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:77
-msgid "Upgrade to PRO"
+#: admin/includes/class-grwp-global-menu-pages.php:76
+msgid " Upgrade to PRO"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:96
+#: admin/includes/class-grwp-global-menu-pages.php:95
 msgid "Connect Google"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:100
+#: admin/includes/class-grwp-global-menu-pages.php:99
 msgid "Display Settings"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:104
+#: admin/includes/class-grwp-global-menu-pages.php:103
 msgid "Slider Settings"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:133
+#: admin/includes/class-grwp-global-menu-pages.php:132
 msgid "Changes apply to all widgets on your site."
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:144
+#: admin/includes/class-grwp-global-menu-pages.php:143
 msgid "Widget preview"
 msgstr ""
 
 #. translators: %s upgrade link
-#: admin/includes/class-grwp-global-menu-pages.php:213
+#: admin/includes/class-grwp-global-menu-pages.php:212
 msgid "Floating Badge preview requires PRO. %s"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:214
+#: admin/includes/class-grwp-global-menu-pages.php:213
 msgid "Upgrade now"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:201
+#: admin/includes/class-grwp-global-menu-pages.php:200
 msgid "Floating Badge shortcode:"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:204, admin/includes/class-grwp-global-menu-pages.php:188, admin/includes/class-grwp-global-menu-pages.php:170
+#: admin/includes/class-grwp-global-menu-pages.php:203, admin/includes/class-grwp-global-menu-pages.php:187, admin/includes/class-grwp-global-menu-pages.php:169
 msgid "Copy"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:179, admin/includes/class-grwp-global-menu-pages.php:161
+#: admin/includes/class-grwp-global-menu-pages.php:178, admin/includes/class-grwp-global-menu-pages.php:160
 msgid "Style #%1$s – shortcode (%2$s)"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:181, admin/includes/class-grwp-global-menu-pages.php:163
+#: admin/includes/class-grwp-global-menu-pages.php:180, admin/includes/class-grwp-global-menu-pages.php:162
 msgid "Docs"
 msgstr ""
 

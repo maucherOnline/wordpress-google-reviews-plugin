@@ -87,12 +87,21 @@ Class GRWP_Global_Settings {
         <div id="grwp-upgrade-banner" style="background:#fffbeb;border:1px solid #fde68a;border-left:4px solid #f59e0b;border-radius:6px;padding:12px 16px;display:flex;align-items:flex-start;gap:12px;margin:8px 0 4px;">
             <span style="font-size:1.1rem;line-height:1.5;">⚡</span>
             <div style="flex:1;font-size:.85rem;color:#78350f;line-height:1.6;">
-                <strong><?php esc_html_e( 'Hinweis', 'embedder-for-google-reviews' ); ?>:</strong>
-                <?php esc_html_e( 'Die Gratis-Version zeigt nur 20 Bewertungen an.', 'embedder-for-google-reviews' ); ?>
+                <?php
+                printf(
+                    wp_kses(
+                    /* translators: %s is replaced with "Attention" in bold. */
+                        sprintf( __('%s: the free version only allows for pulling 20 reviews.', 'embedder-for-google-reviews'),
+                            '<strong>' . __('Attention', 'embedder-for-google-reviews') . '</strong>'
+                        ),
+                        array('strong' => array()) // Allowed HTML tags
+                    )
+                );
+                ?>
                 <a href="<?php echo esc_url( $upgrade_url ); ?>" target="_blank" style="color:#92400e;font-weight:600;">
-                    <?php esc_html_e( 'Upgrade zur PRO Version', 'embedder-for-google-reviews' ); ?>
+                    <?php esc_html_e( 'Upgrade to PRO ', 'embedder-for-google-reviews' ); ?>
                 </a>
-                <?php esc_html_e( '– um ALLE Bewertungen zu zeigen und schlechte Bewertungen zu filtern.', 'embedder-for-google-reviews' ); ?>
+                <?php esc_html_e( '– to display ALL reviews and hide bad ones.', 'embedder-for-google-reviews' ); ?>
             </div>
             <button type="button" id="grwp-upgrade-banner-close" style="background:none;border:none;cursor:pointer;color:#92400e;font-size:1rem;line-height:1;padding:2px 0 0;flex-shrink:0;" aria-label="<?php esc_attr_e( 'Schließen', 'embedder-for-google-reviews' ); ?>">✕</button>
         </div>
