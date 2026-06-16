@@ -84,7 +84,7 @@ Class GRWP_Global_Settings {
     public function show_upgrade_message_callback() {
         $upgrade_url = 'https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=upgrade_tab&utm_campaign=upgrade_banner';
         ?>
-        <div id="grwp-upgrade-banner" style="background:#fffbeb;border:1px solid #fde68a;border-left:4px solid #f59e0b;border-radius:6px;padding:12px 16px;display:flex;align-items:flex-start;gap:12px;max-width:620px;margin:8px 0 4px;">
+        <div id="grwp-upgrade-banner" style="background:#fffbeb;border:1px solid #fde68a;border-left:4px solid #f59e0b;border-radius:6px;padding:12px 16px;display:flex;align-items:flex-start;gap:12px;margin:8px 0 4px;">
             <span style="font-size:1.1rem;line-height:1.5;">⚡</span>
             <div style="flex:1;font-size:.85rem;color:#78350f;line-height:1.6;">
                 <strong><?php esc_html_e( 'Hinweis', 'embedder-for-google-reviews' ); ?>:</strong>
@@ -99,11 +99,11 @@ Class GRWP_Global_Settings {
         <script>
         (function($){
             if ( localStorage.getItem('grwp_hide_upgrade_banner') ) {
-                $('#grwp-upgrade-banner').hide();
+                //$('#grwp-upgrade-banner').hide();
             }
             $('#grwp-upgrade-banner-close').on('click', function(){
                 $('#grwp-upgrade-banner').slideUp(200);
-                localStorage.setItem('grwp_hide_upgrade_banner', '1');
+                //localStorage.setItem('grwp_hide_upgrade_banner', '1');
             });
         }(jQuery));
         </script>

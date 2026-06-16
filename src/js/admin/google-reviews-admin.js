@@ -28,10 +28,17 @@
 
         // ── Copy shortcode buttons ─────────────────────────
         $('.grwp-copy-btn').on('click', function () {
-            var input = $(this).prevAll('input[type="text"]').first()[0];
-            if (input) {
-                navigator.clipboard.writeText(input.value);
-            }
+            var $btn  = $(this);
+            var input = $btn.prevAll('input[type="text"]').first()[0];
+            if (!input) return;
+
+            navigator.clipboard.writeText(input.value).then(function () {
+                var original = $btn.html();
+                $btn.html('<span class="dashicons dashicons-yes"></span> Copied').addClass('grwp-copied');
+                setTimeout(function () {
+                    $btn.html(original).removeClass('grwp-copied');
+                }, 1800);
+            });
         });
 
     });

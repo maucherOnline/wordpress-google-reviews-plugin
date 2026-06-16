@@ -236,6 +236,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 = 1.7.7 =
 * Bugfix: only load admin styles on plugin pages
 * Upgraded Freemius SDK
+* Dashboard redesign
 = 1.7.6 =
 * Upgraded Freemius SDK
 * Bugfix: license activation

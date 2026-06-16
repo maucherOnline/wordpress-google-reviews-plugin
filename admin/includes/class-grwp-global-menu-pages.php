@@ -52,7 +52,6 @@ Class GRWP_Global_Menu_Pages {
             <!-- ── Header ── -->
             <div id="grwp-header">
                 <h1>
-                    <span class="dashicons dashicons-star-filled"></span>
                     <?php esc_html_e( 'Google Reviews', 'embedder-for-google-reviews' ); ?>
                     <?php if ( $is_premium ) : ?>
                         <span style="background:#dcfce7;color:#166534;border:1px solid #bbf7d0;border-radius:4px;font-size:.7rem;font-weight:700;padding:2px 8px;">PRO</span>
@@ -61,7 +60,7 @@ Class GRWP_Global_Menu_Pages {
                 <div class="grwp-header-right">
                     <?php if ( $is_connected && $reviews_loaded ) : ?>
                         <span class="grwp-status-badge">
-                            ✅ <?php esc_html_e( 'Connected & reviews loaded', 'embedder-for-google-reviews' ); ?>
+                            <?php esc_html_e( 'Connected & reviews loaded', 'embedder-for-google-reviews' ); ?>
                         </span>
                     <?php elseif ( $is_connected ) : ?>
                         <span class="grwp-status-badge disconnected">
@@ -69,12 +68,12 @@ Class GRWP_Global_Menu_Pages {
                         </span>
                     <?php else : ?>
                         <span class="grwp-status-badge disconnected">
-                            ⚠️ <?php esc_html_e( 'Not connected yet', 'embedder-for-google-reviews' ); ?>
+
                         </span>
                     <?php endif; ?>
                     <?php if ( ! $is_premium ) : ?>
                         <a href="<?php echo esc_url( $upgrade_url ); ?>" target="_blank" class="grwp-upgrade-btn">
-                            ⚡ <?php esc_html_e( 'Upgrade to PRO', 'embedder-for-google-reviews' ); ?>
+                            🗲 <?php esc_html_e( ' Upgrade to PRO', 'embedder-for-google-reviews' ); ?>
                         </a>
                     <?php endif; ?>
                 </div>
