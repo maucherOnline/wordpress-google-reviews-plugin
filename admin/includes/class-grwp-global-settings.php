@@ -103,7 +103,7 @@ Class GRWP_Global_Settings {
                 </a>
                 <?php esc_html_e( '– to display ALL reviews and hide bad ones.', 'embedder-for-google-reviews' ); ?>
             </div>
-            <button type="button" id="grwp-upgrade-banner-close" style="background:none;border:none;cursor:pointer;color:#92400e;font-size:1rem;line-height:1;padding:2px 0 0;flex-shrink:0;" aria-label="<?php esc_attr_e( 'Schließen', 'embedder-for-google-reviews' ); ?>">✕</button>
+            <button type="button" id="grwp-upgrade-banner-close" style="background:none;border:none;cursor:pointer;color:#92400e;font-size:1rem;line-height:1;padding:2px 0 0;flex-shrink:0;" aria-label="<?php esc_attr_e( 'Close', 'embedder-for-google-reviews' ); ?>">✕</button>
         </div>
         <script>
         (function($){
