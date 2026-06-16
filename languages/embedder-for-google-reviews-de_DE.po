@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Plugins - Embedder for Google Reviews - Stable (latest "
 "release)\n"
 "POT-Creation-Date: 2026-06-16 13:10+0000\n"
-"PO-Revision-Date: 2026-06-16 15:14+0200\n"
+"PO-Revision-Date: 2026-06-16 15:47+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -88,7 +88,7 @@ msgstr ""
 #: admin/includes/class-grwp-global-menu-pages.php:17,
 #: admin/includes/class-grwp-global-menu-pages.php:55
 msgid "Google Reviews"
-msgstr "Google Bewertungen"
+msgstr "Bewertungen"
 
 #: admin/includes/class-grwp-global-menu-pages.php:67
 msgid "Business set – pull reviews first"
@@ -288,7 +288,7 @@ msgstr "3"
 #. translators: Design
 #: admin/includes/class-grwp-global-settings.php:789
 msgid "Design #%s"
-msgstr "Design"
+msgstr "Design #%s"
 
 #: admin/includes/class-grwp-global-settings.php:883
 msgid "Use this shortcode to show your reviews on pages and posts:"
@@ -372,7 +372,7 @@ msgid ""
 "To get around this, please <a href=\"%s\" target=\"_blank\">upgrade to the "
 "PRO version</a>, which will pull all your reviews"
 msgstr ""
-"<strong>Achtung:</strong> die kostenlose Version stellt nur 5 Bewertungen "
+"<strong>Achtung:</strong> die kostenlose Version stellt nur 20 Bewertungen "
 "bereit. Um ALLE Bewertungen anzuzeigen, <a href=\"%s\">upgrade bitte zur PRO "
 "Version</a>"
 

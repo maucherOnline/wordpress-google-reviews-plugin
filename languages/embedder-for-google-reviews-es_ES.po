@@ -92,21 +92,17 @@ msgstr "Busca tu ID de plaza y pégalo en el campo de arriba."
 #: admin/includes/class-grwp-global-menu-pages.php:17,
 #: admin/includes/class-grwp-global-menu-pages.php:55
 msgid "Google Reviews"
-msgstr "Reseñas de Google"
+msgstr "Reseñas"
 
 #: admin/includes/class-grwp-global-menu-pages.php:67
-#, fuzzy
 msgid "Business set – pull reviews first"
 msgstr "Conjunto de negocios: primero revisa las reseñas"
 
 #: admin/includes/class-grwp-global-menu-pages.php:63
-#, fuzzy
 msgid "Connected & reviews loaded"
 msgstr "Conectados y reseñas cargadas"
 
 #: admin/includes/class-grwp-global-menu-pages.php:76
-#, fuzzy
-#| msgid "Upgrade to"
 msgid " Upgrade to PRO"
 msgstr " Actualización a PRO"
 
@@ -123,7 +119,6 @@ msgid "Slider Settings"
 msgstr "Configuración del Slider"
 
 #: admin/includes/class-grwp-global-menu-pages.php:132
-#, fuzzy
 msgid "Changes apply to all widgets on your site."
 msgstr "Los cambios se aplican a todos los widgets de tu sitio."
 
@@ -193,7 +188,6 @@ msgid "Upgrade to PRO "
 msgstr "Actualiza a Pro "
 
 #: admin/includes/class-grwp-global-settings.php:104
-#, fuzzy
 msgid "– to display ALL reviews and hide bad ones."
 msgstr "– para mostrar TODAS las reseñas y ocultar las malas."
 
@@ -217,13 +211,11 @@ msgstr "Excluir las opiniones sin texto"
 
 #. translators: Hide review date
 #: admin/includes/class-grwp-global-settings.php:174
-#, fuzzy
 msgid "Hide review date"
 msgstr "Ocultar fecha de revisión"
 
 #. translators: Link to users Google prilfe
 #: admin/includes/class-grwp-global-settings.php:183
-#, fuzzy
 msgid "Link to users Profile <br> (uncheck for better SEO)"
 msgstr "Enlace al perfil de los usuarios <br> (desmarcar para mejorar el SEO)"
 
@@ -234,7 +226,6 @@ msgstr "Filtrar por palabras (separadas por comas)"
 
 #. translators: Layout type
 #: admin/includes/class-grwp-global-settings.php:221
-#, fuzzy
 msgid "Slide Duration (seconds). <br> Use '0' to disable autoplay"
 msgstr ""
 "Duración del deslizamiento (segundos). <br> Usa el '0' para desactivar la "
@@ -492,7 +483,7 @@ msgstr "No hay opiniones disponibles"
 #. translators: %s: business name
 #: public/includes/class-grwp-reviews-widget-badge.php:61
 msgid "Our Google Reviews"
-msgstr "Reseñas de Google"
+msgstr "Nuestras reseñas en Google"
 
 #. translators: 'Verified by' badge
 #: public/includes/class-grwp-reviews-widget-badge.php:74,
