@@ -137,9 +137,14 @@ Class GRWP_Global_Menu_Pages {
 
                     <!-- Panel: Display Settings -->
                     <div id="grwp-panel-display" class="grwp-tab-panel" role="tabpanel">
-                        <table class="form-table grwp-form-table" role="presentation"><tbody>
-                            <?php do_settings_fields( 'google-reviews-admin', 'google_reviews_style_layout_setting_section' ); ?>
-                        </tbody></table>
+                        <div class="grwp-two-col">
+                            <table class="form-table grwp-form-table" role="presentation"><tbody>
+                                <?php do_settings_fields( 'google-reviews-admin', 'google_reviews_style_layout_setting_section_inputs' ); ?>
+                            </tbody></table>
+                            <table class="form-table grwp-form-table" role="presentation"><tbody>
+                                <?php do_settings_fields( 'google-reviews-admin', 'google_reviews_style_layout_setting_section' ); ?>
+                            </tbody></table>
+                        </div>
                     </div>
 
                     <!-- Panel: Slider Settings -->

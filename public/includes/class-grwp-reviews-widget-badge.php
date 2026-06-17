@@ -93,6 +93,8 @@ class GRWP_Reviews_Widget_Badge
 			$count++;
 		}
 
+        $output .= $this->get_button_output();
+
         $output .= '</div></div>';
 
 		return wp_kses( $output, $this->allowed_html );

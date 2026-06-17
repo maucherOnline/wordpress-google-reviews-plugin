@@ -358,6 +358,30 @@
     border-top: 1px solid #f1f5f9;
   }
 
+  // Display Settings tab has grown long – split it into two side-by-side
+  // tables, each grouping fields of a similar kind (plain Yes/No toggles vs.
+  // text/number/url inputs) so the rows within a column stay close in height.
+  // A single auto-flowing column (CSS `column-count`) was tried first, but
+  // mixing short checkbox rows with tall textarea/two-line-label rows in the
+  // same flow still produced uneven, misaligned-looking rows.
+  .grwp-two-col {
+    display: block;
+
+    .grwp-form-table { width: 100%; }
+    .grwp-form-table + .grwp-form-table { margin-top: 0; }
+  }
+
+  @media (min-width: 900px) {
+    .grwp-two-col {
+      display: flex;
+      align-items: flex-start;
+      gap: 40px;
+
+      .grwp-form-table { flex: 1; min-width: 0; }
+      .grwp-form-table + .grwp-form-table { margin-top: 0; }
+    }
+  }
+
 
   .grwp-form-table th {
     display: block !important;

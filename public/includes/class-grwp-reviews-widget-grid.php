@@ -102,7 +102,11 @@ class GRWP_Reviews_Widget_Grid
 
         }
 
-        $output .= '</div></div>';
+        $output .= '</div>';
+
+        $output .= $this->get_button_output();
+
+        $output .= '</div>';
 
         return wp_kses( $output, $this->allowed_html );
 

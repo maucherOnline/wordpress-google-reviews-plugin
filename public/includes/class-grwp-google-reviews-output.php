@@ -102,6 +102,28 @@ class GRWP_Google_Reviews_Output {
 
 	}
 
+	/**
+	 * Get button output, linking to the configured button URL, if any
+	 * @return string
+	 */
+	protected function get_button_output() {
+
+		if ( empty( $this->options['button_url'] ) ) {
+			return '';
+		}
+
+		$button_text = ! empty( $this->options['button_text'] )
+			? $this->options['button_text']
+			: __( 'See all Reviews', 'embedder-for-google-reviews' );
+
+		return sprintf(
+			'<div class="grwp_button-wrapper"><a class="grwp_button" href="%s" target="_blank" rel="noopener noreferrer">%s</a></div>',
+			esc_url( $this->options['button_url'] ),
+			esc_html( $button_text )
+		);
+
+	}
+
     /**
      * Prepare time string for reviews
      * @param $datetime

@@ -116,7 +116,11 @@ class GRWP_Reviews_Widget_Slider
 
         $output .= ob_get_clean();
 
-        $output .= '</div></div></div>';
+        $output .= '</div></div>';
+
+        $output .= $this->get_button_output();
+
+        $output .= '</div>';
 
         return wp_kses( $output, $this->allowed_html );
 

@@ -1,4 +1,39 @@
 /* ------------------------------------------------------------------------- */
+/* Widget button – links to the configured button URL
+/* ------------------------------------------------------------------------- */
+.grwp_button-wrapper {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  grid-column: 1 / -1; // stay full-width even if a parent grid (e.g. .grwp_grid .grwp_body) puts it in
+}
+
+.grwp_button {
+  display: inline-block;
+  padding: 7px 28px;
+  background: transparent;
+  border: 1px solid #d0d0d0;
+  border-radius: 20px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  color: #888888;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+  line-height: 1.4;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+
+  &:hover,
+  &:focus {
+    border-color: #aaaaaa;
+    color: #555555;
+    background: transparent;
+  }
+}
+
+/* ------------------------------------------------------------------------- */
 /* Grid "Load more" – gradient fade + overlaid button
 /* ------------------------------------------------------------------------- */
 

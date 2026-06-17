@@ -134,7 +134,16 @@ Class GRWP_Global_Settings {
             $this->settings_slug // page
         );
 
-
+        // second section, rendered as a side-by-side column on the Display
+        // Settings tab – groups text/number/url inputs separately from the
+        // plain Yes/No toggles in the section above, so each column's rows
+        // stay close in height (see google-reviews-admin.scss .grwp-two-col)
+        add_settings_section(
+            'google_reviews_style_layout_setting_section_inputs', // id
+            '', // title
+            '__return_false', // callback
+            $this->settings_slug // page
+        );
 
         add_settings_field(
             'filter_below_5_stars', // id
@@ -142,7 +151,7 @@ Class GRWP_Global_Settings {
             __('Minimum rating (stars)', 'embedder-for-google-reviews'),
             array($this, 'filter_below_5_stars_callback'), // callback
             $this->settings_slug, // page
-            'google_reviews_style_layout_setting_section' // section
+            'google_reviews_style_layout_setting_section_inputs' // section
         );
 
         add_settings_field(
@@ -178,7 +187,7 @@ Class GRWP_Global_Settings {
             __('Filter by words (comma separated)', 'embedder-for-google-reviews'),
             array($this, 'filter_words_callback'), // callback
             $this->settings_slug, // page
-            'google_reviews_style_layout_setting_section' // section
+            'google_reviews_style_layout_setting_section_inputs' // section
         );
 
         add_settings_field(
@@ -206,6 +215,42 @@ Class GRWP_Global_Settings {
             array( $this, 'hide_profile_picture_callback' ), // callback
             $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section
+        );
+
+        add_settings_field(
+            'hide_rating_text', // id
+            /* translators: Hide rating text */
+            __( 'Hide rating text', 'embedder-for-google-reviews' ),
+            array( $this, 'hide_rating_text_callback' ), // callback
+            $this->settings_slug, // page
+            'google_reviews_style_layout_setting_section' // section
+        );
+
+        add_settings_field(
+            'use_safe_fallback_font', // id
+            /* translators: Use safe fallback font */
+            __( 'Use safe fallback font', 'embedder-for-google-reviews' ),
+            array( $this, 'use_safe_fallback_font_callback' ), // callback
+            $this->settings_slug, // page
+            'google_reviews_style_layout_setting_section' // section
+        );
+
+        add_settings_field(
+            'button_url', // id
+            /* translators: Button URL */
+            __( 'Button URL', 'embedder-for-google-reviews' ),
+            array( $this, 'button_url_callback' ), // callback
+            $this->settings_slug, // page
+            'google_reviews_style_layout_setting_section_inputs' // section
+        );
+
+        add_settings_field(
+            'button_text', // id
+            /* translators: Button text */
+            __( 'Button text', 'embedder-for-google-reviews' ),
+            array( $this, 'button_text_callback' ), // callback
+            $this->settings_slug, // page
+            'google_reviews_style_layout_setting_section_inputs' // section
         );
 
         add_settings_field(
@@ -499,6 +544,22 @@ Class GRWP_Global_Settings {
             $sanitary_values['hide_profile_picture'] = sanitize_text_field( $input['hide_profile_picture'] );
         }
 
+        if ( isset( $input['hide_rating_text'] ) ) {
+            $sanitary_values['hide_rating_text'] = sanitize_text_field( $input['hide_rating_text'] );
+        }
+
+        if ( isset( $input['use_safe_fallback_font'] ) ) {
+            $sanitary_values['use_safe_fallback_font'] = sanitize_text_field( $input['use_safe_fallback_font'] );
+        }
+
+        if ( isset( $input['button_url'] ) ) {
+            $sanitary_values['button_url'] = esc_url_raw( $input['button_url'] );
+        }
+
+        if ( isset( $input['button_text'] ) ) {
+            $sanitary_values['button_text'] = sanitize_text_field( $input['button_text'] );
+        }
+
         if ( isset( $input['disable_box_shadow'] ) ) {
             $sanitary_values['disable_box_shadow'] = sanitize_text_field( $input['disable_box_shadow'] );
         }
@@ -592,6 +653,94 @@ Class GRWP_Global_Settings {
         <span>
             <?php esc_html_e( 'Yes', 'embedder-for-google-reviews' ); ?>
         </span>
+
+        <?php
+        $html = ob_get_clean();
+        echo wp_kses( $html, $allowed_html );
+    }
+
+    /**
+     * Hide rating text
+     * @return void
+     */
+    public function hide_rating_text_callback() {
+        global $allowed_html;
+        ob_start(); ?>
+
+        <input type="checkbox"
+               name="google_reviews_option_name[hide_rating_text]"
+               value="1"
+               id="hide_rating_text"
+            <?php echo esc_attr( ! empty( $this->google_reviews_options['hide_rating_text'] ) ? 'checked' : '' ); ?>
+        >
+
+        <span>
+            <?php esc_html_e( 'Yes', 'embedder-for-google-reviews' ); ?>
+        </span>
+
+        <?php
+        $html = ob_get_clean();
+        echo wp_kses( $html, $allowed_html );
+    }
+
+    /**
+     * Use safe fallback font
+     * @return void
+     */
+    public function use_safe_fallback_font_callback() {
+        global $allowed_html;
+        ob_start(); ?>
+
+        <input type="checkbox"
+               name="google_reviews_option_name[use_safe_fallback_font]"
+               value="1"
+               id="use_safe_fallback_font"
+            <?php echo esc_attr( ! empty( $this->google_reviews_options['use_safe_fallback_font'] ) ? 'checked' : '' ); ?>
+        >
+
+        <span>
+            <?php esc_html_e( 'Yes', 'embedder-for-google-reviews' ); ?>
+        </span>
+
+        <?php
+        $html = ob_get_clean();
+        echo wp_kses( $html, $allowed_html );
+    }
+
+    /**
+     * Button URL, shown as a button below each widget when not empty
+     * @return void
+     */
+    public function button_url_callback() {
+        global $allowed_html;
+        ob_start(); ?>
+
+        <input type="url"
+               name="google_reviews_option_name[button_url]"
+               id="button_url"
+               placeholder="https://"
+               value="<?php echo esc_url( ! empty( $this->google_reviews_options['button_url'] ) ? $this->google_reviews_options['button_url'] : '' ); ?>"
+        >
+
+        <?php
+        $html = ob_get_clean();
+        echo wp_kses( $html, $allowed_html );
+    }
+
+    /**
+     * Button text, shown on the button rendered below each widget
+     * @return void
+     */
+    public function button_text_callback() {
+        global $allowed_html;
+        ob_start(); ?>
+
+        <input type="text"
+               name="google_reviews_option_name[button_text]"
+               id="button_text"
+               placeholder="<?php esc_attr_e( 'See all Reviews', 'embedder-for-google-reviews' ); ?>"
+               value="<?php echo esc_attr( ! empty( $this->google_reviews_options['button_text'] ) ? $this->google_reviews_options['button_text'] : '' ); ?>"
+        >
 
         <?php
         $html = ob_get_clean();

@@ -24,7 +24,8 @@ $allowed_html = [
     'a' => [
         'href'      => [],
         'target'    => [],
-	    'class'     => []
+	    'class'     => [],
+	    'rel'       => [],
     ],
     'p' => [
         'id'    => [],
@@ -63,6 +64,7 @@ $allowed_html = [
 	    'disabled'  => [],
 	    'title'     => [],
         'readonly'  => [],
+        'placeholder' => [],
     ],
     'textarea' => [
         'id'        => [],
