@@ -30,6 +30,7 @@ Class GRWP_Global_Menu_Pages {
     public function google_reviews_create_admin_page() {
         global $allowed_html;
 
+
         $settings             = $this->google_reviews_options = get_option( 'google_reviews_option_name' );
         $widget_type          = isset( $settings['style_2'] ) ? $settings['style_2'] : 'Slider';
         $is_connected         = ! empty( $settings['serp_business_name'] ) || ! empty( $settings['gmb_id_1'] );
@@ -37,6 +38,21 @@ Class GRWP_Global_Menu_Pages {
         $is_premium           = grwp_fs()->is__premium_only();
         $docs                 = 'https://reviewsembedder.com/docs/how-to-overwrite-styles/?utm_source=wp_backend&utm_medium=preview&utm_campaign=docs';
         $upgrade_url          = 'https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=upgrade_tab&utm_campaign=upgrade';
+
+        // Preview-only type switcher — does NOT modify the saved option.
+        $allowed_preview = array( 'Slider', 'Grid', 'Badge' );
+        $preview_type    = isset( $_GET['preview_type'] )
+            ? sanitize_text_field( wp_unslash( $_GET['preview_type'] ) )
+            : $widget_type;
+        if ( ! in_array( $preview_type, $allowed_preview, true ) ) {
+            $preview_type = $widget_type;
+        }
+
+        // Simple URLs — no nonce needed since nothing is saved.
+        $base_url     = admin_url( 'admin.php?page=google-reviews' );
+        $url_slider   = $base_url . '&preview_type=Slider';
+        $url_grid     = $base_url . '&preview_type=Grid';
+        $url_badge    = $base_url . '&preview_type=Badge';
         ?>
 
         <!-- WP/Freemius braucht .wrap als Ziel fuer admin_notices und JS-Notices -->
@@ -102,6 +118,14 @@ Class GRWP_Global_Menu_Pages {
                             <span class="dashicons dashicons-slides"></span>
                             <?php esc_html_e( 'Slider Settings', 'embedder-for-google-reviews' ); ?>
                         </button>
+                        <button type="button" class="grwp-tab-btn" data-tab="grid" role="tab">
+                            <span class="dashicons dashicons-grid-view"></span>
+                            <?php esc_html_e( 'Grid Settings', 'embedder-for-google-reviews' ); ?>
+                        </button>
+                        <button type="button" class="grwp-tab-btn" data-tab="legacy" role="tab">
+                            <span class="dashicons dashicons-backup"></span>
+                            <?php esc_html_e( 'Legacy Options', 'embedder-for-google-reviews' ); ?>
+                        </button>
                     </div>
 
                     <!-- Panel: Connect Google -->
@@ -125,6 +149,20 @@ Class GRWP_Global_Menu_Pages {
                         </tbody></table>
                     </div>
 
+                    <!-- Panel: Grid Settings -->
+                    <div id="grwp-panel-grid" class="grwp-tab-panel" role="tabpanel">
+                        <table class="form-table grwp-form-table" role="presentation"><tbody>
+                            <?php do_settings_fields( 'google-reviews-admin', 'google_reviews_grid_setting_section' ); ?>
+                        </tbody></table>
+                    </div>
+
+                    <!-- Panel: Legacy Options -->
+                    <div id="grwp-panel-legacy" class="grwp-tab-panel" role="tabpanel">
+                        <table class="form-table grwp-form-table" role="presentation"><tbody>
+                            <?php do_settings_fields( 'google-reviews-admin', 'google_reviews_legacy_setting_section' ); ?>
+                        </tbody></table>
+                    </div>
+
                     <!-- Save row -->
                     <div id="grwp-save-row">
                         <?php submit_button( null, 'primary', 'submit', false ); ?>
@@ -136,6 +174,31 @@ Class GRWP_Global_Menu_Pages {
                 </div><!-- /#grwp-main-card -->
             </form>
 
+            <!-- ── Layout type switcher ── -->
+            <div id="grwp-layout-switcher-section">
+                <div class="grwp-layout-toggle">
+                    <a href="<?php echo esc_url( $url_slider ); ?>"
+                       class="grwp-layout-btn<?php echo $preview_type === 'Slider' ? ' active' : ''; ?>">
+                        <?php esc_html_e( 'Slider', 'embedder-for-google-reviews' ); ?>
+                    </a>
+                    <a href="<?php echo esc_url( $url_grid ); ?>"
+                       class="grwp-layout-btn<?php echo $preview_type === 'Grid' ? ' active' : ''; ?>">
+                        <?php esc_html_e( 'Grid', 'embedder-for-google-reviews' ); ?>
+                    </a>
+                    <?php if ( $is_premium ) : ?>
+                    <a href="<?php echo esc_url( $url_badge ); ?>"
+                       class="grwp-layout-btn<?php echo $preview_type === 'Badge' ? ' active' : ''; ?>">
+                        <?php esc_html_e( 'Badge', 'embedder-for-google-reviews' ); ?>
+                    </a>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <!-- ── Preview notice ── -->
+            <p id="grwp-preview-notice">
+                <?php esc_html_e( 'This preview displays up to 10 reviews per design. More reviews will be visible on the website.', 'embedder-for-google-reviews' ); ?>
+            </p>
+
             <!-- ── Preview (collapsible) ── -->
             <div id="grwp-preview-toggle">
                 <button type="button" id="grwp-preview-toggle-btn">
@@ -145,14 +208,16 @@ Class GRWP_Global_Menu_Pages {
                 </button>
                 <div id="grwp-preview-body">
                     <?php
-                    ob_start();
+                    // Respect the "Hide company header" global setting in preview shortcodes.
+                    $place_info = empty( $settings['hide_company_header'] ) ? 'true' : 'false';
 
-                    if ( $widget_type === 'Slider' || $widget_type === 'Grid' ) :
+                    if ( $preview_type === 'Slider' || $preview_type === 'Grid' ) :
 
-                        for ( $x = 1; $x <= 8; $x++ ) : ?>
+                        for ( $x = 10; $x >= 1; $x-- ) :
+                            ?>
 
                             <div class="preview_section">
-                                <?php if ( $widget_type === 'Slider' ) : ?>
+                                <?php if ( $preview_type === 'Slider' ) : ?>
                                     <div class="preview_section-header">
                                         <label>
                                             <?php printf(
@@ -164,12 +229,16 @@ Class GRWP_Global_Menu_Pages {
                                         </label>
                                     </div>
                                     <div class="preview_section-shortcode">
-                                        <input type="text" readonly value="[google-reviews type='slider' place_info='true' style='<?php echo esc_attr( $x ); ?>']">
-                                        <button class="grwp-copy-btn" type="button" data-clipboard="[google-reviews type='slider' place_info='true' style='<?php echo esc_attr( $x ); ?>']">
+                                        <input type="text" readonly value="[google-reviews type='slider' place_info='<?php echo esc_attr( $place_info ); ?>' style='<?php echo esc_attr( $x ); ?>']">
+                                        <button class="grwp-copy-btn" type="button" data-clipboard="[google-reviews type='slider' place_info='<?php echo esc_attr( $place_info ); ?>' style='<?php echo esc_attr( $x ); ?>']">
                                             📋 <span class="copy-btn"><?php esc_html_e( 'Copy', 'embedder-for-google-reviews' ); ?></span>
                                         </button>
                                     </div>
-                                    <?php echo wp_kses( do_shortcode( '[google-reviews type="slider" place_info="true" style="' . esc_attr( $x ) . '"]' ), $allowed_html ); ?>
+                                    <?php
+                                    // Output is already wp_kses'd inside the render method.
+                                    // max_reviews=20 keeps the preview light and prevents timeout.
+                                    echo do_shortcode( '[google-reviews type="slider" max_reviews="10" place_info="' . esc_attr( $place_info ) . '" style="' . esc_attr( $x ) . '"]' );
+                                    ?>
                                 <?php else : ?>
                                     <div class="preview_section-header">
                                         <label>
@@ -182,27 +251,37 @@ Class GRWP_Global_Menu_Pages {
                                         </label>
                                     </div>
                                     <div class="preview_section-shortcode">
-                                        <input type="text" readonly value="[google-reviews type='grid' max_reviews='10' place_info='true' style='<?php echo esc_attr( $x ); ?>']">
-                                        <button class="grwp-copy-btn" type="button" data-clipboard="[google-reviews type='grid' max_reviews='10' place_info='true' style='<?php echo esc_attr( $x ); ?>']">
+                                        <input type="text" readonly value="[google-reviews type='grid' max_reviews='10' place_info='<?php echo esc_attr( $place_info ); ?>' style='<?php echo esc_attr( $x ); ?>']">
+                                        <button class="grwp-copy-btn" type="button" data-clipboard="[google-reviews type='grid' max_reviews='10' place_info='<?php echo esc_attr( $place_info ); ?>' style='<?php echo esc_attr( $x ); ?>']">
                                             📋 <span class="copy-btn"><?php esc_html_e( 'Copy', 'embedder-for-google-reviews' ); ?></span>
                                         </button>
                                     </div>
-                                    <?php echo wp_kses( do_shortcode( '[google-reviews type="grid" max_reviews="10" place_info="true" style="' . esc_attr( $x ) . '"]' ), $allowed_html ); ?>
+                                    <?php
+                                    echo do_shortcode( '[google-reviews type="grid" max_reviews="10" place_info="' . esc_attr( $place_info ) . '" style="' . esc_attr( $x ) . '"]' );
+                                    ?>
                                 <?php endif; ?>
                             </div>
 
                         <?php endfor;
 
-                    else :
-
-                        if ( grwp_fs()->can_use_premium_code() ) : ?>
+                    else :                        if ( grwp_fs()->can_use_premium_code() ) : ?>
                             <div class="preview_section">
-                                <label><?php esc_html_e( 'Floating Badge shortcode:', 'embedder-for-google-reviews' ); ?></label>
-                                <input type="text" readonly value="[google-reviews type='badge']">
-                                <button class="grwp-copy-btn" type="button" data-clipboard="[google-reviews type='badge']">
-                                    📋 <span class="copy-btn"><?php esc_html_e( 'Copy', 'embedder-for-google-reviews' ); ?></span>
-                                </button>
-                                <?php echo wp_kses( do_shortcode( '[google-reviews type="badge"]' ), $allowed_html ); ?>
+                                <div class="preview_section-header">
+                                    <label>
+                                        <?php printf(
+                                            /* translators: %1$s docs link */
+                                            esc_html__( 'Floating Badge – shortcode (%1$s)', 'embedder-for-google-reviews' ),
+                                            '<a href="' . esc_url( $docs ) . '" target="_blank">' . esc_html__( 'Docs', 'embedder-for-google-reviews' ) . '</a>'
+                                        ); ?>
+                                    </label>
+                                </div>
+                                <div class="preview_section-shortcode">
+                                    <input type="text" readonly value="[google-reviews type='badge']">
+                                    <button class="grwp-copy-btn" type="button" data-clipboard="[google-reviews type='badge']">
+                                        📋 <span class="copy-btn"><?php esc_html_e( 'Copy', 'embedder-for-google-reviews' ); ?></span>
+                                    </button>
+                                </div>
+                                <?php echo do_shortcode( '[google-reviews type="badge"]' ); ?>
                             </div>
                         <?php else : ?>
                             <div class="preview_section">
@@ -217,8 +296,6 @@ Class GRWP_Global_Menu_Pages {
                         <?php endif;
 
                     endif;
-
-                    echo wp_kses( ob_get_clean(), $allowed_html );
                     ?>
                 </div><!-- /#grwp-preview-body -->
             </div><!-- /#grwp-preview-toggle -->

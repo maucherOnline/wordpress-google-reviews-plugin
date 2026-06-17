@@ -1,0 +1,182 @@
+/* ------------------------------------------------------------------------- */
+/* G Review Card Slider / Grid - Style 9 */
+/* ------------------------------------------------------------------------- */
+
+#g-review {
+  &.layout_style-9 {
+
+    // ── Gray pill on .grwp_body — works for BOTH slider and grid ──────────
+    // Slider: .grwp_body has one child (inner #g-review > .swiper) → full width
+    // Grid:   .grwp_body has multiple .g-review children → auto-fit columns
+    &.grwp_grid > .grwp_body {
+      border-radius: 16px;
+      padding: 16px;
+      margin: 0;
+      gap: 16px; // gap between grid cards; harmless for slider (single child)
+    }
+
+    // ── Inner slider container: just a positioning context, no extra bg ────
+    &:not(.grwp_grid) {
+      position: relative;
+    }
+
+    // ── Card ──────────────────────────────────────────────────────────────
+    .g-review {
+      background: #F4F4F4;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+      padding: 20px;
+      box-sizing: border-box;
+      min-height: unset;
+      text-align: left;
+      overflow: visible;
+
+      // ── Card header ────────────────────────────────────────────────────
+      .gr-inner-header {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        position: relative;
+        gap: 12px;
+
+        img.gr-profile {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          flex-shrink: 0;
+          margin: 0;
+          object-fit: cover;
+          display: block;
+          align-self: flex-start;
+        }
+
+        img.gr-google {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 24px;
+          height: 24px;
+        }
+
+        p {
+          flex: 1;
+          min-width: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          margin: 0;
+          padding-right: 32px; // room for the G logo
+
+          br {
+            display: none;
+          }
+
+          // Reviewer name (plain span)
+          > span:first-of-type {
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 1.3;
+            color: #1a1a1a;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+            display: block;
+            -webkit-line-clamp: unset;
+          }
+
+          // Reviewer name (linked)
+          a {
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 1.3;
+            color: #1a1a1a;
+            text-decoration: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+            display: block;
+            -webkit-line-clamp: unset;
+          }
+
+          // Stars row — also contains the date (.time).
+          // flex-direction:column + order makes date appear ABOVE the stars.
+          .gr-stars {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+            margin-top: 3px;
+
+            .time {
+              order: -1; // render date before star icons
+              font-size: 13px;
+              color: #888888;
+              line-height: 1.3;
+              vertical-align: baseline;
+              margin: 0;
+            }
+
+            .stars-wrapper {
+              order: 1;
+              display: flex;
+              flex-wrap: nowrap;
+              gap: 1px;
+
+              img {
+                width: 18px !important;
+                height: 18px !important;
+                margin: 0 !important;
+                vertical-align: middle !important;
+              }
+            }
+          }
+        }
+      }
+
+      // ── Card body ──────────────────────────────────────────────────────
+      .gr-inner-body {
+        margin-top: 16px;
+        padding-right: 0;
+        max-height: 76px;
+        overflow: auto;
+
+        p {
+          color: #333333;
+          font-size: 14px;
+          line-height: 1.4;
+          margin: 0;
+        }
+      }
+    }
+
+    // ── Swiper overrides ─────────────────────────────────────────────────
+    // Remove the large bottom-padding used to park nav buttons below slides.
+    .swiper {
+      padding: 0 0 70px 0;
+
+      .swiper-slide .g-review {
+        margin: 4px 6px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+      }
+    }
+
+    // ── Nav buttons: vertically centered beside the slides ───────────────
+    // Higher specificity than the swiper.scss overrides (1 extra class),
+    // so these rules win regardless of source-file declaration order.
+    .slider-prev-next-wrapper {
+      .grwp-swiper-button-prev,
+      .grwp-swiper-button-next {
+        margin-top: 0;          // reset the 155 px offset from swiper.scss
+        top: 37%;
+        transform: translateY(-50%);
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        width: 36px;
+        height: 36px;
+      }
+    }
+  }
+}

@@ -26,6 +26,7 @@
             $arrow.text($body.hasClass('closed') ? '▼' : '▲');
         });
 
+
         // ── Copy shortcode buttons ─────────────────────────
         $('.grwp-copy-btn').on('click', function () {
             var $btn  = $(this);

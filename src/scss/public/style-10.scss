@@ -1,0 +1,171 @@
+/* ------------------------------------------------------------------------- */
+/* G Review Card Slider - Style 10                                           */
+/* Stars top · Review text middle · Avatar + name + date bottom             */
+/* ------------------------------------------------------------------------- */
+
+#g-review {
+  &.layout_style-10 {
+
+    // ── Card ──────────────────────────────────────────────────────────────
+    .g-review {
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 2px 14px rgba(0, 0, 0, 0.08);
+      padding: 24px;
+      box-sizing: border-box;
+      text-align: left;
+
+      // ── TOP: stars + Google logo ──────────────────────────────────────
+      .gr-inner-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+        position: static; // reset base relative
+
+        .gr-stars {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+
+          // Blue verified-check badge after stars
+          &::after {
+            content: '\2713'; // ✓
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            background: #1a73e8;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 1;
+            flex-shrink: 0;
+          }
+
+          .stars-wrapper {
+            display: inline-flex;
+            flex-wrap: nowrap;
+            gap: 1px;
+
+            img {
+              width: 18px !important;
+              height: 18px !important;
+              margin: 0 !important;
+              vertical-align: middle !important;
+            }
+          }
+        }
+
+        img.gr-google {
+          width: 24px;
+          height: 24px;
+          position: static; // override base absolute
+          flex-shrink: 0;
+        }
+
+        // Hide original profile / p block (not present in this markup, safety)
+        img.gr-profile,
+        p {
+          display: none;
+        }
+      }
+
+      // ── MIDDLE: review text ───────────────────────────────────────────
+      .gr-inner-body {
+        flex: 1;
+        margin-top: 0;
+        padding-right: 0;
+        max-height: 76px;
+        overflow: auto;
+
+        p {
+          font-size: 14px;
+          line-height: 1.4;
+          color: #222222;
+          margin: 0;
+        }
+      }
+
+      // ── BOTTOM: avatar + name + date ──────────────────────────────────
+      .gr-inner-footer {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding-top: 16px;
+        border-top: 1px solid #eeeeee;
+        margin-top: 16px;
+
+        img.gr-profile {
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          object-fit: cover;
+          flex-shrink: 0;
+          margin: 0;
+          display: block;
+        }
+
+        .gr-author-info {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          min-width: 0;
+
+          .gr-author-name {
+            font-weight: 600;
+            font-size: 15px;
+            color: #1a1a1a;
+            text-decoration: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            &:hover {
+              color: #444444;
+            }
+          }
+
+          .gr-author-date {
+            font-size: 13px;
+            color: #888888;
+          }
+        }
+      }
+    }
+
+    // ── Swiper overrides ─────────────────────────────────────────────────
+    .swiper {
+      padding: 8px 0 90px;
+
+      .swiper-slide {
+        height: auto;
+
+        .g-review {
+          margin: 4px 8px;
+          height: 100%;
+        }
+      }
+    }
+
+    // Nav buttons: centered vertically, minimal chrome
+    .slider-prev-next-wrapper {
+      .grwp-swiper-button-prev,
+      .grwp-swiper-button-next {
+        margin-top: 0 !important;
+        top: 90%;
+        transform: translateY(-50%);
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        width: 36px;
+        height: 36px;
+      }
+    }
+  }
+}
+

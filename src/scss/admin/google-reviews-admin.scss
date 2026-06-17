@@ -5,6 +5,8 @@
 
 .toplevel_page_google-reviews {
 
+  // "Design type" row was previously hidden but is now shown in the Legacy Options tab.
+
   @import "tooltip";
   .serp-container {
     display: flex;
@@ -206,11 +208,6 @@
     font-weight: 600;
   }
 
-  // field must be hidden and must not be removed for downwards
-  // compatibility and users who installed before v1.5.6
-  .form-table .layout_style {
-    display: none;
-  }
 
   .wrap form {
     .tab-content {
@@ -361,6 +358,7 @@
     border-top: 1px solid #f1f5f9;
   }
 
+
   .grwp-form-table th {
     display: block !important;
     width: 200px !important;
@@ -467,7 +465,7 @@
   }
 
   // SERP search row
-  .grwp-form-table .serp-container { max-width: 520px; }
+  .grwp-form-table .serp-container { max-width: 630px; }
   .grwp-form-table .serp-search {
     display: flex !important;
     flex-direction: row !important;
@@ -513,6 +511,7 @@
     box-shadow: 0 1px 3px rgba(0,0,0,.06);
     overflow: hidden;
   }
+
   #grwp-preview-toggle-btn {
     width: 100%;
     background: none;
@@ -528,6 +527,56 @@
     color: #334155;
 
     &:hover { background: #f8fafc; }
+  }
+
+  // ── Layout type switcher – centred section between settings and preview ──
+  #grwp-layout-switcher-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 0 6px;
+  }
+
+  #grwp-preview-notice {
+    text-align: center;
+    font-size: .82rem;
+    font-weight: 500;
+    color: #1e40af;
+    border-radius: 6px;
+    margin: 0 0 16px;
+    padding: 9px 16px;
+  }
+
+  .grwp-layout-toggle {
+    display: inline-flex;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    overflow: hidden;
+
+    .grwp-layout-btn {
+      display: inline-block;
+      background: none;
+      border: none;
+      border-right: 1px solid #e2e8f0;
+      padding: 7px 22px;
+      font-size: .85rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: #64748b;
+      text-decoration: none;
+      transition: background .15s, color .15s;
+      white-space: nowrap;
+      line-height: 1.5;
+
+      &:last-child { border-right: none; }
+      &:hover { background: #f1f5f9; color: #334155; }
+
+      &.active {
+        background: #2563eb;
+        color: #ffffff;
+        font-weight: 600;
+      }
+    }
   }
   #grwp-preview-body { display: block; padding: 0 24px 24px; }
   #grwp-preview-body.closed { display: none; }

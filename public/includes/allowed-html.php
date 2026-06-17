@@ -19,6 +19,7 @@ $allowed_html = [
         'class'                 => [],
         'id'                    => [],
         'data-swiper-autoplay'  => [],
+        'data-grwp-show-more'   => [],
     ],
     'a' => [
         'href'      => [],
@@ -27,6 +28,8 @@ $allowed_html = [
     ],
     'p' => [
         'id'    => [],
+        'class' => [],
+        'style' => [],
     ],
     'span' => [
         'class' => [],

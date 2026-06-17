@@ -62,7 +62,15 @@ class GRWP_Google_Reviews_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, GR_PLUGIN_DIR_URL . 'dist/css/google-reviews-public.css', array(), $this->version, 'all' );
+        wp_enqueue_style( $this->plugin_name, GR_PLUGIN_DIR_URL . 'dist/css/google-reviews-public.css', array(), $this->version, 'all' );
+
+        $options = get_option( 'google_reviews_option_name' );
+        if ( ! empty( $options['hide_profile_picture'] ) ) {
+            wp_add_inline_style( $this->plugin_name, '.gr-profile { display: none !important; }' );
+        }
+        if ( ! empty( $options['disable_box_shadow'] ) ) {
+            wp_add_inline_style( $this->plugin_name, '#g-review[class*="layout_style"] .g-review { box-shadow: none !important; }' );
+        }
 	}
 
 	/**
@@ -97,6 +105,7 @@ class GRWP_Google_Reviews_Public {
         $swiper_data = array(
             'disableLoop'   => $disable_slider_loop,
             'autoplayDelay' => $slider_delay,
+            'showMoreText'  => __( 'Show more', 'embedder-for-google-reviews' ),
         );
         wp_localize_script( $this->plugin_name, 'swiperSettings', $swiper_data );
 	}

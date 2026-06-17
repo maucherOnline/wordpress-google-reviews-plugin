@@ -30,10 +30,24 @@ class GRWP_Reviews_Widget_Grid
         $verified_svg = GR_PLUGIN_DIR_URL . 'dist/images/verified-badge.svg';
         $url = 'https://reviewsembedder.com';
 
+        // Global setting: hide company header overrides shortcode place_info attribute
+        if ( ! empty( $this->options['hide_company_header'] ) ) {
+            $show_place_info = false;
+        }
+
+
+        // Show-more button: add data attribute so JS knows how many cards to show initially
+        $show_more_attr = '';
+        if ( ! empty( $this->options['show_more_grid'] ) ) {
+            $initial = isset( $this->options['show_more_grid_initial'] ) && intval( $this->options['show_more_grid_initial'] ) > 0
+                ? intval( $this->options['show_more_grid_initial'] )
+                : 6;
+            $show_more_attr = ' data-grwp-show-more="' . esc_attr( $initial ) . '"';
+        }
 
 	    $stars = $this->get_total_stars();
 
-	    $output = sprintf('<div id="g-review" class="%s grwp_grid %s">', $style_type, $hide_date);
+	    $output = sprintf( '<div id="g-review" class="%s grwp_grid %s"%s>', $style_type, $hide_date, $show_more_attr );
 
 		if ( $show_place_info ) {
 
@@ -78,7 +92,10 @@ class GRWP_Reviews_Widget_Grid
             $star_output = $this->get_star_output($review);
 
             ob_start();
-            require 'partials/grid/markup.php';
+            $markup_file = ( $style_type === 'layout_style-10' )
+                ? 'partials/grid/markup-style10.php'
+                : 'partials/grid/markup.php';
+            require $markup_file;
             $output .= ob_get_clean();
 
             $count++;

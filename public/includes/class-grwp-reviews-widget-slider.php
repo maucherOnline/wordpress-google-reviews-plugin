@@ -38,6 +38,11 @@ class GRWP_Reviews_Widget_Slider
             }
         }
 
+        // Global setting: hide company header overrides shortcode place_info attribute
+        if ( ! empty( $this->options['hide_company_header'] ) ) {
+            $show_place_info = false;
+        }
+
 	    $google_svg = GR_PLUGIN_DIR_URL . 'dist/images/google-logo-svg.svg';
         $verified_svg = GR_PLUGIN_DIR_URL . 'dist/images/verified-badge.svg';
         $url = 'https://reviewsembedder.com';
@@ -94,7 +99,10 @@ class GRWP_Reviews_Widget_Slider
             $slide_duration = isset($this->options['slide_duration']) ? intval($this->options['slide_duration']) * 1000 : '';
 
             ob_start();
-            require 'partials/slider/markup.php';
+            $markup_file = ( $style_type === 'layout_style-10' )
+                ? 'partials/slider/markup-style10.php'
+                : 'partials/slider/markup.php';
+            require $markup_file;
             $slider_output .= ob_get_clean();
 
             $count++;
