@@ -37,6 +37,4 @@ $(document).ready(function() {
 
     }
 
-    trigger_modal();
-
 });
