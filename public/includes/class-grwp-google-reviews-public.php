@@ -62,7 +62,7 @@ class GRWP_Google_Reviews_Public {
 		 * class.
 		 */
 
-        wp_enqueue_style( $this->plugin_name, GR_PLUGIN_DIR_URL . 'dist/css/google-reviews-public.css', array(), $this->version, 'all' );
+        wp_enqueue_style( $this->plugin_name, GR_PLUGIN_DIR_URL . 'dist/css/google-reviews-public.css', array(), $this->asset_version( 'dist/css/google-reviews-public.css' ), 'all' );
 
         $options = get_option( 'google_reviews_option_name' );
         if ( ! empty( $options['hide_profile_picture'] ) ) {
@@ -102,18 +102,36 @@ class GRWP_Google_Reviews_Public {
 		 * class.
 		 */
 
-        wp_enqueue_script( $this->plugin_name, GR_PLUGIN_DIR_URL . 'dist/js/public-bundle.js', array( 'jquery' ), $this->version, true );
+        wp_enqueue_script( $this->plugin_name, GR_PLUGIN_DIR_URL . 'dist/js/public-bundle.js', array( 'jquery' ), $this->asset_version( 'dist/js/public-bundle.js' ), true );
 
         $options = get_option( 'google_reviews_option_name' );
         $slider_delay = isset($options['slide_duration']) ? intval($options['slide_duration']) : 0;
         $disable_slider_loop = isset($options['disable_loop_slider']) && $options['disable_loop_slider'] == '1' ? $options['disable_loop_slider'] : false;
+        $show_more_text = isset($options['show_more_grid_text']) && $options['show_more_grid_text'] !== ''
+            ? $options['show_more_grid_text']
+            : __( 'Show more', 'embedder-for-google-reviews' );
 
         $swiper_data = array(
             'disableLoop'   => $disable_slider_loop,
             'autoplayDelay' => $slider_delay,
-            'showMoreText'  => __( 'Show more', 'embedder-for-google-reviews' ),
+            'showMoreText'  => $show_more_text,
         );
         wp_localize_script( $this->plugin_name, 'swiperSettings', $swiper_data );
+	}
+
+	/**
+	 * Cache-busting version for a built asset.
+	 *
+	 * Uses the file's modification time so a rebuilt bundle/stylesheet always
+	 * gets a fresh URL (browsers won't serve a stale cached copy). Falls back
+	 * to the plugin version if the file can't be found.
+	 *
+	 * @param string $relative_path Path under the plugin root, e.g. 'dist/js/public-bundle.js'.
+	 * @return string|int
+	 */
+	private function asset_version( $relative_path ) {
+		$file = GR_BASE_PATH . $relative_path;
+		return file_exists( $file ) ? filemtime( $file ) : $this->version;
 	}
 
 	/**

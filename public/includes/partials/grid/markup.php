@@ -8,10 +8,11 @@ if (! defined('ABSPATH'))
  * @var array  $allowed_html
  * @var array  $review
  * @var bool   $link_user_profiles
+ * @var string $card_hidden_class
  */
 ?>
 
-<div class="g-review">
+<div class="g-review<?php echo esc_attr( $card_hidden_class ?? '' ); ?>">
 	<div class="gr-inner-header">
 		<img
 			class="gr-profile"

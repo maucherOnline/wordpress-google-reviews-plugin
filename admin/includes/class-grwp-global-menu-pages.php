@@ -199,11 +199,6 @@ Class GRWP_Global_Menu_Pages {
                 </div>
             </div>
 
-            <!-- ── Preview notice ── -->
-            <p id="grwp-preview-notice">
-                <?php esc_html_e( 'This preview displays up to 10 reviews per design. More reviews will be visible on the website.', 'embedder-for-google-reviews' ); ?>
-            </p>
-
             <!-- ── Preview (collapsible) ── -->
             <div id="grwp-preview-toggle">
                 <button type="button" id="grwp-preview-toggle-btn">
@@ -239,10 +234,13 @@ Class GRWP_Global_Menu_Pages {
                                             📋 <span class="copy-btn"><?php esc_html_e( 'Copy', 'embedder-for-google-reviews' ); ?></span>
                                         </button>
                                     </div>
+                                    <p class="grwp-preview-notice">
+                                        <?php esc_html_e( 'This preview displays up to 20 reviews. More reviews will be visible on the website.', 'embedder-for-google-reviews' ); ?>
+                                    </p>
                                     <?php
                                     // Output is already wp_kses'd inside the render method.
                                     // max_reviews=20 keeps the preview light and prevents timeout.
-                                    echo do_shortcode( '[google-reviews type="slider" max_reviews="10" place_info="' . esc_attr( $place_info ) . '" style="' . esc_attr( $x ) . '"]' );
+                                    echo do_shortcode( '[google-reviews type="slider" max_reviews="20" place_info="' . esc_attr( $place_info ) . '" style="' . esc_attr( $x ) . '"]' );
                                     ?>
                                 <?php else : ?>
                                     <div class="preview_section-header">
@@ -256,13 +254,17 @@ Class GRWP_Global_Menu_Pages {
                                         </label>
                                     </div>
                                     <div class="preview_section-shortcode">
-                                        <input type="text" readonly value="[google-reviews type='grid' max_reviews='10' place_info='<?php echo esc_attr( $place_info ); ?>' style='<?php echo esc_attr( $x ); ?>']">
-                                        <button class="grwp-copy-btn" type="button" data-clipboard="[google-reviews type='grid' max_reviews='10' place_info='<?php echo esc_attr( $place_info ); ?>' style='<?php echo esc_attr( $x ); ?>']">
+                                        <input type="text" readonly value="[google-reviews type='grid' place_info='<?php echo esc_attr( $place_info ); ?>' style='<?php echo esc_attr( $x ); ?>']">
+                                        <button class="grwp-copy-btn" type="button" data-clipboard="[google-reviews type='grid' place_info='<?php echo esc_attr( $place_info ); ?>' style='<?php echo esc_attr( $x ); ?>']">
                                             📋 <span class="copy-btn"><?php esc_html_e( 'Copy', 'embedder-for-google-reviews' ); ?></span>
                                         </button>
                                     </div>
+                                    <p class="grwp-preview-notice">
+                                        <?php esc_html_e( 'This preview displays up to 20 reviews. More reviews will be visible on the website.', 'embedder-for-google-reviews' ); ?>
+                                    </p>
                                     <?php
-                                    echo do_shortcode( '[google-reviews type="grid" max_reviews="10" place_info="' . esc_attr( $place_info ) . '" style="' . esc_attr( $x ) . '"]' );
+                                    // max_reviews=20 keeps the preview light and prevents timeout.
+                                    echo do_shortcode( '[google-reviews type="grid" max_reviews="20" place_info="' . esc_attr( $place_info ) . '" style="' . esc_attr( $x ) . '"]' );
                                     ?>
                                 <?php endif; ?>
                             </div>

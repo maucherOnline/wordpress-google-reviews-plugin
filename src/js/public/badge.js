@@ -12,3 +12,4 @@ $revButton.click(function (e) {
 $close.click(function () {
     $sidebar.addClass('hide');
 });
+

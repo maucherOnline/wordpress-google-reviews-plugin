@@ -15,11 +15,11 @@ $allowed_html = [
         'referrerpolicy'    => [],
     ],
     'style'                     => [],
-    'div'                       => [
-        'class'                 => [],
-        'id'                    => [],
-        'data-swiper-autoplay'  => [],
-        'data-grwp-show-more'   => [],
+    'div'                        => [
+        'class'                  => [],
+        'id'                     => [],
+        'data-swiper-autoplay'   => [],
+        'data-grwp-show-more-rows' => [],
     ],
     'a' => [
         'href'      => [],

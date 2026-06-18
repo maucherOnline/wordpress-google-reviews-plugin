@@ -9,13 +9,14 @@ if (! defined('ABSPATH'))
  * @var array  $review
  * @var string $google_svg
  * @var bool   $link_user_profiles
+ * @var string $card_hidden_class
  * @var object $this  GRWP_Reviews_Widget_Grid
  */
 
 $path = esc_attr( GR_PLUGIN_DIR_URL );
 ?>
 
-<div class="g-review">
+<div class="g-review<?php echo esc_attr( $card_hidden_class ?? '' ); ?>">
 
     <!-- ── TOP: stars + Google logo ── -->
     <div class="gr-inner-header">

@@ -287,9 +287,18 @@ Class GRWP_Global_Settings {
 
         add_settings_field(
             'show_more_grid_initial', // id
-            /* translators: Initially visible cards (grid load-more) */
-            __('Initially visible cards', 'embedder-for-google-reviews'),
+            /* translators: Initially visible review rows (grid load-more) */
+            __('Initially visible review rows', 'embedder-for-google-reviews'),
             array($this, 'show_more_grid_initial_callback'), // callback
+            $this->settings_slug, // page
+            'google_reviews_grid_setting_section' // section
+        );
+
+        add_settings_field(
+            'show_more_grid_text', // id
+            /* translators: "Load more" button text (grid load-more) */
+            __('"Load more" button text', 'embedder-for-google-reviews'),
+            array($this, 'show_more_grid_text_callback'), // callback
             $this->settings_slug, // page
             'google_reviews_grid_setting_section' // section
         );
@@ -570,6 +579,10 @@ Class GRWP_Global_Settings {
 
         if ( isset( $input['show_more_grid_initial'] ) ) {
             $sanitary_values['show_more_grid_initial'] = absint( $input['show_more_grid_initial'] );
+        }
+
+        if ( isset( $input['show_more_grid_text'] ) ) {
+            $sanitary_values['show_more_grid_text'] = sanitize_text_field( $input['show_more_grid_text'] );
         }
 
         if ( isset( $input['link_users_profiles'] ) ) {
@@ -1045,7 +1058,7 @@ Class GRWP_Global_Settings {
     }
 
     /**
-     * Number of cards visible before "Load more" is clicked
+     * Number of review rows visible before "Load more" is clicked
      * @return void
      */
     public function show_more_grid_initial_callback() {
@@ -1053,8 +1066,8 @@ Class GRWP_Global_Settings {
 
         $value = isset( $this->google_reviews_options['show_more_grid_initial'] )
             ? intval( $this->google_reviews_options['show_more_grid_initial'] )
-            : 6;
-        if ( $value < 1 ) $value = 6;
+            : 2;
+        if ( $value < 1 ) $value = 2;
 
         ob_start(); ?>
 
@@ -1063,6 +1076,33 @@ Class GRWP_Global_Settings {
                id="show_more_grid_initial"
                min="1"
                step="1"
+               value="<?php echo esc_attr( $value ); ?>"
+        >
+        <p class="description" style="margin-top:6px;">
+            <?php esc_html_e( 'Number of fully-filled review rows shown before "Load more" is clicked. The number of cards per row adapts to the screen width. Only applies when "Show \'Load more\' button" is enabled above.', 'embedder-for-google-reviews' ); ?>
+        </p>
+
+        <?php
+        $html = ob_get_clean();
+        echo wp_kses( $html, $allowed_html );
+    }
+
+    /**
+     * Text shown on the grid "Load more" button
+     * @return void
+     */
+    public function show_more_grid_text_callback() {
+        global $allowed_html;
+
+        $value = isset( $this->google_reviews_options['show_more_grid_text'] ) && $this->google_reviews_options['show_more_grid_text'] !== ''
+            ? $this->google_reviews_options['show_more_grid_text']
+            : __( 'Show more', 'embedder-for-google-reviews' );
+
+        ob_start(); ?>
+
+        <input type="text"
+               name="google_reviews_option_name[show_more_grid_text]"
+               id="show_more_grid_text"
                value="<?php echo esc_attr( $value ); ?>"
         >
         <p class="description" style="margin-top:6px;">

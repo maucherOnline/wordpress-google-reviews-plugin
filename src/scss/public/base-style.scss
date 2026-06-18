@@ -34,7 +34,7 @@
 }
 
 /* ------------------------------------------------------------------------- */
-/* Grid "Load more" – gradient fade + overlaid button
+/* Grid "Load more" – button placed below all reviews
 /* ------------------------------------------------------------------------- */
 
 // Cards hidden beyond the initial threshold
@@ -42,9 +42,16 @@
   display: none !important;
 }
 
-// Base button appearance (shared between truncated and expanded states)
+// While reviews are still hidden behind "Show more", keep the "See all reviews"
+// button hidden. JS removes .grwp-truncated once every review is revealed.
+.grwp-truncated .grwp_button-wrapper {
+  display: none;
+}
+
+// Button appearance — sits cleanly below the grid, after all reviews
 .grwp-show-more-btn {
-  display: inline-block;
+  display: block;
+  margin: 24px auto 0;
   padding: 7px 28px;
   background: transparent;
   border: 1px solid #d0d0d0;
@@ -63,57 +70,6 @@
     border-color: #aaaaaa;
     color: #555555;
     background: transparent;
-  }
-}
-
-// Truncated state:
-// – .grwp_body gets a gradient ::after that fades out the last row
-// – .grwp-show-more-btn is absolute-positioned on top of that gradient
-[data-grwp-show-more].grwp-truncated {
-
-  .grwp_body {
-    position: relative;
-
-    // Gradient overlay — fades the last row into the page background.
-    // Override --grwp-fade-color in your theme CSS if the background is not white.
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 130px;
-      background: linear-gradient(
-        to bottom,
-        transparent,
-        var(--grwp-fade-color, #ffffff)
-      );
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    // Button sits inside .grwp_body, on top of the gradient
-    .grwp-show-more-btn {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      // Solid background + shadow so the button stands out against the gradient
-      background: var(--grwp-fade-color, #ffffff);
-      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.10);
-    }
-  }
-}
-
-// Simple mode (single visible row): no gradient – button sits cleanly below the grid
-[data-grwp-show-more].grwp-truncated-simple {
-
-  .grwp-show-more-btn {
-    position: static;
-    display: block;
-    margin: 24px auto 0;
-    transform: none;
   }
 }
 
