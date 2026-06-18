@@ -4,10 +4,10 @@
  * The widget is configured with a number of initially visible review ROWS.
  * Cards-per-row is responsive, so the visible card count is derived from
  * rows x columns and the last visible row is always completely filled.
- * Each click reveals roughly BATCH_TARGET more reviews (rounded up to whole
- * rows). Everything is recomputed on resize so the rows stay filled.
+ * Each click reveals the configured number of additional rows. Everything
+ * is recomputed on resize so the rows stay filled.
  */
-const BATCH_TARGET = 10; // aim to reveal about this many reviews per click
+const DEFAULT_LOAD_MORE_ROWS = 2; // fallback when no per-click row count is configured
 
 export function initShowMore() {
     const showMoreText =
@@ -18,6 +18,11 @@ export function initShowMore() {
     document.querySelectorAll('[data-grwp-show-more-rows]').forEach(function (wrapper) {
         const initialRows = parseInt(wrapper.getAttribute('data-grwp-show-more-rows'), 10);
         if ( isNaN(initialRows) || initialRows < 1 ) return;
+
+        const loadMoreRowsAttr = parseInt(wrapper.getAttribute('data-grwp-load-more-rows'), 10);
+        const loadMoreRows = ( !isNaN(loadMoreRowsAttr) && loadMoreRowsAttr > 0 )
+            ? loadMoreRowsAttr
+            : DEFAULT_LOAD_MORE_ROWS;
 
         const body = wrapper.querySelector('.grwp_body');
         if ( !body ) return;
@@ -78,9 +83,9 @@ export function initShowMore() {
 
         apply();
 
-        // "Load more": add whole rows totalling ~BATCH_TARGET cards
+        // "Load more": reveal the configured number of additional rows
         btn.addEventListener('click', function () {
-            visibleRows += Math.max(1, Math.ceil(BATCH_TARGET / columns));
+            visibleRows += loadMoreRows;
             apply();
         });
 

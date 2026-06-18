@@ -20,6 +20,7 @@ $allowed_html = [
         'id'                     => [],
         'data-swiper-autoplay'   => [],
         'data-grwp-show-more-rows' => [],
+        'data-grwp-load-more-rows' => [],
     ],
     'a' => [
         'href'      => [],

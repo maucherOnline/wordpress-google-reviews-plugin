@@ -295,6 +295,15 @@ Class GRWP_Global_Settings {
         );
 
         add_settings_field(
+            'show_more_grid_load_more_rows', // id
+            /* translators: Number of rows revealed per "Load more" click (grid load-more) */
+            __('Load more rows', 'embedder-for-google-reviews'),
+            array($this, 'show_more_grid_load_more_rows_callback'), // callback
+            $this->settings_slug, // page
+            'google_reviews_grid_setting_section' // section
+        );
+
+        add_settings_field(
             'show_more_grid_text', // id
             /* translators: "Load more" button text (grid load-more) */
             __('"Load more" button text', 'embedder-for-google-reviews'),
@@ -579,6 +588,10 @@ Class GRWP_Global_Settings {
 
         if ( isset( $input['show_more_grid_initial'] ) ) {
             $sanitary_values['show_more_grid_initial'] = absint( $input['show_more_grid_initial'] );
+        }
+
+        if ( isset( $input['show_more_grid_load_more_rows'] ) ) {
+            $sanitary_values['show_more_grid_load_more_rows'] = absint( $input['show_more_grid_load_more_rows'] );
         }
 
         if ( isset( $input['show_more_grid_text'] ) ) {
@@ -1080,6 +1093,36 @@ Class GRWP_Global_Settings {
         >
         <p class="description" style="margin-top:6px;">
             <?php esc_html_e( 'Number of fully-filled review rows shown before "Load more" is clicked. The number of cards per row adapts to the screen width. Only applies when "Show \'Load more\' button" is enabled above.', 'embedder-for-google-reviews' ); ?>
+        </p>
+
+        <?php
+        $html = ob_get_clean();
+        echo wp_kses( $html, $allowed_html );
+    }
+
+    /**
+     * Number of additional review rows revealed each time "Load more" is clicked
+     * @return void
+     */
+    public function show_more_grid_load_more_rows_callback() {
+        global $allowed_html;
+
+        $value = isset( $this->google_reviews_options['show_more_grid_load_more_rows'] )
+            ? intval( $this->google_reviews_options['show_more_grid_load_more_rows'] )
+            : 2;
+        if ( $value < 1 ) $value = 2;
+
+        ob_start(); ?>
+
+        <input type="number"
+               name="google_reviews_option_name[show_more_grid_load_more_rows]"
+               id="show_more_grid_load_more_rows"
+               min="1"
+               step="1"
+               value="<?php echo esc_attr( $value ); ?>"
+        >
+        <p class="description" style="margin-top:6px;">
+            <?php esc_html_e( 'Number of additional fully-filled review rows revealed each time "Load more" is clicked. Only applies when "Show \'Load more\' button" is enabled above.', 'embedder-for-google-reviews' ); ?>
         </p>
 
         <?php

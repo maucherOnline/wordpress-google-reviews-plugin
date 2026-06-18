@@ -45,7 +45,11 @@ class GRWP_Reviews_Widget_Grid
             $show_more_rows = isset( $this->options['show_more_grid_initial'] ) && intval( $this->options['show_more_grid_initial'] ) > 0
                 ? intval( $this->options['show_more_grid_initial'] )
                 : 2;
-            $show_more_attr = ' data-grwp-show-more-rows="' . esc_attr( $show_more_rows ) . '"';
+            $load_more_rows = isset( $this->options['show_more_grid_load_more_rows'] ) && intval( $this->options['show_more_grid_load_more_rows'] ) > 0
+                ? intval( $this->options['show_more_grid_load_more_rows'] )
+                : 2;
+            $show_more_attr = ' data-grwp-show-more-rows="' . esc_attr( $show_more_rows ) . '"'
+                . ' data-grwp-load-more-rows="' . esc_attr( $load_more_rows ) . '"';
         }
 
         // Number of cards that will actually be rendered (respecting max_reviews)
