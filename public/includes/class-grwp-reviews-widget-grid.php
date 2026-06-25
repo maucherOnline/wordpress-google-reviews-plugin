@@ -27,8 +27,6 @@ class GRWP_Reviews_Widget_Grid
         }
 
         $google_svg = GR_PLUGIN_DIR_URL . 'dist/images/google-logo-svg.svg';
-        $verified_svg = GR_PLUGIN_DIR_URL . 'dist/images/verified-badge.svg';
-        $url = 'https://reviewsembedder.com';
 
         // Global setting: hide company header overrides shortcode place_info attribute
         if ( ! empty( $this->options['hide_company_header'] ) ) {
@@ -65,39 +63,9 @@ class GRWP_Reviews_Widget_Grid
             ? ' grwp-truncated'
             : '';
 
-	    $stars = $this->get_total_stars();
-
 	    $output = sprintf( '<div id="g-review" class="%s grwp_grid %s%s"%s>', $style_type, $hide_date, $truncated_class, $show_more_attr );
 
-		if ( $show_place_info ) {
-
-			$this->place_title = $this->place_title === '' ? 'Lorem Ipsum Business' : $this->place_title;
-
-			$output .= '<div class="grwp_header">';
-			$output .= '<div class="grwp_header-inner">';
-
-            $output .= sprintf( '<h3 class="grwp_business-title">%s</h3>', $this->place_title );
-			$output .= sprintf(
-				'<span class="grwp_total-rating">%s</span><span class="grwp_5_stars">%s</span>',
-				$this->rating_formatted,
-                /* translators: Out of 5 stars */
-				__( 'Out of 5 stars', 'embedder-for-google-reviews' )
-			);
-			$output .= $stars;
-			$output .= sprintf(
-            /* translators: Overall rating out of %s Google reviews */
-				'<h3 class="grwp_overall">' . __( 'Overall rating out of %s Google reviews', 'embedder-for-google-reviews' ) . '</h3>',
-				$this->total_reviews
-			);
-            if ($show_verified) {
-                $output .= sprintf(
-                    /* translators: 'Verified by' badge */
-                    '<div class="grwp_verified"><a href="%s" target="_blank">'.__('Verified by', 'embedder-for-google-reviews').' <img src="'.$verified_svg.'" alt="'.$txt.'" /></a></div>',
-                    $url);
-            }
-			$output .= '</div></div>';
-
-		}
+		$output .= $this->render_company_header( $show_place_info, $show_verified, $txt, 'Lorem Ipsum Business' );
 
 		$output .= '<div class="grwp_body">';
 
@@ -131,7 +99,11 @@ class GRWP_Reviews_Widget_Grid
 
         $output .= '</div>';
 
-        $output .= $this->get_button_output();
+        // The compact header carries its own "See all reviews" button, so skip
+        // the standalone one below the widget to avoid a duplicate.
+        if ( ! $this->compact_header_active( $show_place_info ) ) {
+            $output .= $this->get_button_output();
+        }
 
         $output .= '</div>';
 

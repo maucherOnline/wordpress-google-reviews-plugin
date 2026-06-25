@@ -12,6 +12,7 @@ Class GRWP_Global_Settings {
 
         $this->add_api_settings();
         $this->add_display_settings();
+        $this->add_header_settings();
         $this->add_slider_settings();
         $this->add_grid_settings();
         $this->add_legacy_settings();
@@ -190,14 +191,18 @@ Class GRWP_Global_Settings {
             'google_reviews_style_layout_setting_section_inputs' // section
         );
 
-        add_settings_field(
-            'hide_company_header', // id
-            /* translators: Hide company header section */
-            __('Hide company header section', 'embedder-for-google-reviews'),
-            array($this, 'hide_company_header_callback'), // callback
-            $this->settings_slug, // page
-            'google_reviews_style_layout_setting_section' // section
-        );
+        // In PRO the Header Settings tab ("None" header type) supersedes this,
+        // so only show the legacy checkbox on the free version.
+        if ( ! grwp_fs()->is__premium_only() ) {
+            add_settings_field(
+                'hide_company_header', // id
+                /* translators: Hide company header section */
+                __('Hide company header section', 'embedder-for-google-reviews'),
+                array($this, 'hide_company_header_callback'), // callback
+                $this->settings_slug, // page
+                'google_reviews_style_layout_setting_section' // section
+            );
+        }
 
         add_settings_field(
             'show_dummy_content', // id
@@ -315,6 +320,87 @@ Class GRWP_Global_Settings {
 
     public function google_reviews_display_grid_info() { ?>
         <h2 id="grid_settings"><?php esc_html_e( 'Grid settings', 'embedder-for-google-reviews' ); ?></h2>
+        <?php
+    }
+
+    /**
+     * Header settings
+     *
+     * Lets users pick which header is shown above the slider/grid widgets,
+     * optionally replacing the standard "Overall rating out of X reviews".
+     * @return void
+     */
+    private function add_header_settings() {
+
+        add_settings_section(
+            'google_reviews_header_setting_section', // id
+            '', // title
+            array( $this, 'google_reviews_display_header_info' ), // callback
+            $this->settings_slug // page
+        );
+
+        add_settings_field(
+            'header_type', // id
+            /* translators: Header type */
+            __( 'Header type', 'embedder-for-google-reviews' ),
+            array( $this, 'header_type_callback' ), // callback
+            $this->settings_slug, // page
+            'google_reviews_header_setting_section' // section
+        );
+
+    }
+
+    public function google_reviews_display_header_info() { ?>
+        <h2 id="header_settings"><?php esc_html_e( 'Header settings', 'embedder-for-google-reviews' ); ?></h2>
+        <p style="color:#64748b;font-size:.85rem;margin:0 0 8px;">
+            <?php esc_html_e( 'Choose which header is displayed above your slider and grid widgets. The selected header replaces the standard one.', 'embedder-for-google-reviews' ); ?>
+        </p>
+        <?php
+    }
+
+    /**
+     * Echo header type field (PRO feature).
+     * @return void
+     */
+    public function header_type_callback() {
+
+        $current = isset( $this->google_reviews_options['header_type'] ) ? $this->google_reviews_options['header_type'] : 'standard';
+        $is_pro  = grwp_fs()->is__premium_only();
+        ?>
+
+        <?php if ( ! $is_pro ) : ?>
+        <div class="tooltip">
+        <?php endif; ?>
+
+            <select name="google_reviews_option_name[header_type]"
+                    id="header_type"
+                    <?php echo $is_pro ? '' : 'disabled'; ?>
+            >
+                <option value="standard" <?php selected( $current, 'standard' ); ?>>
+                    <?php esc_html_e( 'Standard (Overall rating out of X reviews)', 'embedder-for-google-reviews' ); ?>
+                </option>
+                <option value="compact" <?php selected( $current, 'compact' ); ?>>
+                    <?php esc_html_e( 'Compact bar (logo, rating & "See all reviews")', 'embedder-for-google-reviews' ); ?>
+                </option>
+                <option value="compact_plain" <?php selected( $current, 'compact_plain' ); ?>>
+                    <?php esc_html_e( 'Compact – plain (no background, border or shadow)', 'embedder-for-google-reviews' ); ?>
+                </option>
+                <option value="none" <?php selected( $current, 'none' ); ?>>
+                    <?php esc_html_e( 'None (hide header)', 'embedder-for-google-reviews' ); ?>
+                </option>
+            </select>
+
+        <?php if ( ! $is_pro ) : ?>
+            <?php // Keep the saved value intact while the disabled select is not submitted. ?>
+            <input type="hidden" name="google_reviews_option_name[header_type]" value="<?php echo esc_attr( $current ); ?>" />
+            <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=header_type&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
+        </div>
+        <?php endif; ?>
+
+        <p class="description" style="margin-top:6px;">
+            <?php esc_html_e( 'The "Compact bar" header shows a "See all reviews" button (using the Button URL from Display Settings) and replaces the standalone button below the widget.', 'embedder-for-google-reviews' ); ?>
+        </p>
+
         <?php
     }
 
@@ -556,6 +642,13 @@ Class GRWP_Global_Settings {
 
         if ( isset( $input['hide_company_header'] ) ) {
             $sanitary_values['hide_company_header'] = sanitize_text_field( $input['hide_company_header'] );
+        }
+
+        if ( isset( $input['header_type'] ) ) {
+            $header_type = sanitize_text_field( $input['header_type'] );
+            $sanitary_values['header_type'] = in_array( $header_type, array( 'standard', 'compact', 'compact_plain', 'none' ), true )
+                ? $header_type
+                : 'standard';
         }
 
         if ( isset( $input['hide_profile_picture'] ) ) {

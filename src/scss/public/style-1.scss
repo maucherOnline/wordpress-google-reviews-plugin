@@ -8,7 +8,7 @@
       padding: 30px;
       border-radius: 16px;
       opacity: 1;
-      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16);
+      box-shadow: 0 0px 15px rgba(0, 0, 0, .1);
 
       .gr-inner-header {
         img {
@@ -61,6 +61,11 @@
           color: rgba(0, 0, 0, 0.6);
         }
       }
+    }
+
+    // Override the generic swiper card shadow so slider cards match the grid.
+    .swiper .swiper-wrapper .swiper-slide .g-review {
+      box-shadow: 0 0px 15px rgba(0, 0, 0, .1);
     }
 
     .swiper-button-next,

@@ -10,9 +10,9 @@
     // Grid:   .grwp_body has multiple .g-review children → auto-fit columns
     &.grwp_grid > .grwp_body {
       border-radius: 16px;
-      padding: 16px;
+      padding: 16px 0;
       margin: 0;
-      gap: 16px; // gap between grid cards; harmless for slider (single child)
+      gap: 30px; // gap between grid cards; harmless for slider (single child)
     }
 
     // ── Inner slider container: just a positioning context, no extra bg ────

@@ -1,0 +1,370 @@
+// Compact company header (Design 1): a single horizontal bar showing the
+// Google logo, a rating label, stars, the numeric rating, the review count
+// and an optional "See all reviews" button. Selected via the Header Settings
+// tab.
+//
+// The STRUCTURE (layout, spacing, typography) is identical for every design.
+// Only the SKIN (background, border, shadow, radius and — for dark cards —
+// text colour) changes per layout_style so the bar matches that design's
+// review cards. The base block and the per-style blocks share the same
+// specificity, so the per-style rules below win purely on source order.
+// "Verified by" badge — shared by the standard and compact headers. Shows the
+// blue check (as in design 10); the label plus the plugin icon appears as a
+// tooltip on hover/focus, and the whole badge links to reviewsembedder.com.
+// Colours are self-contained, so it works on every design without overrides.
+#g-review:not(.badge) {
+  .grwp_verified-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    // Blue check badge (matches design 10)
+    .grwp_verified-badge-check {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #1a73e8;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+      flex-shrink: 0;
+
+      &::before {
+        content: '\2713'; // ✓
+      }
+    }
+
+    .grwp_verified-badge-tip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+      background: #1f1f1f;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1;
+      padding: 6px 8px;
+      border-radius: 6px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .15s ease;
+      z-index: 5;
+
+      // Plugin icon inside the tooltip
+      .grwp_verified-badge-tip-icon {
+        width: 16px;
+        height: 16px;
+        max-width: 16px;
+        margin: 0;
+        display: block;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 4px solid transparent;
+        border-top-color: #1f1f1f;
+      }
+    }
+
+    &:hover .grwp_verified-badge-tip,
+    &:focus-within .grwp_verified-badge-tip {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+#g-review:not(.badge) {
+
+  // ── Structure (shared by all designs) ──────────────────────────────────
+  &[class^='layout_style-'] .grwp_header.grwp_header--compact {
+    display: block;
+    text-align: left;
+    margin: 0 0 16px;
+
+    // Slider cards sit inset from the container edge (per-slide margins), so the
+    // slider header is given matching side margins to line up with the cards.
+    &.grwp_header--slider {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .grwp_compact {
+      font-family: inherit;
+      box-sizing: border-box;
+      width: 100%;
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px 16px;
+      padding: 16px 22px;
+      // Default skin (overridden per design below)
+      background: #ffffff;
+      border: 0;
+      border-radius: 16px;
+      box-shadow: 0 7px 20px #00000029;
+    }
+
+    .grwp_compact-info {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 16px;
+      line-height: 1.2;
+      color: #1f1f1f;
+    }
+
+    .grwp_compact-logo {
+      width: 22px;
+      height: 22px;
+      max-width: 22px;
+      flex-shrink: 0;
+      margin: 0;
+    }
+
+    .grwp_compact-label {
+      font-weight: 700;
+    }
+
+    .grwp_compact-stars {
+      display: inline-flex;
+      align-items: center;
+
+      .grwp_stars-wrapper {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+
+        img {
+          width: 18px;
+          height: 18px;
+          max-width: 18px;
+          margin: 0;
+        }
+      }
+    }
+
+    .grwp_compact-rating {
+      font-weight: 700;
+    }
+
+    .grwp_compact-count {
+      padding-left: 12px;
+      margin-left: 4px;
+      border-left: 1px solid rgba(0, 0, 0, .2);
+      color: rgba(0, 0, 0, .7);
+    }
+
+    .grwp_compact-write {
+      flex-shrink: 0;
+      display: inline-block;
+      padding: 9px 18px;
+      border: 1px solid rgba(0, 0, 0, .25);
+      border-radius: 8px;
+      background: #fff;
+      color: #1f1f1f;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.2;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background .15s ease, border-color .15s ease;
+
+      &:hover,
+      &:focus {
+        background: #f0f0f0;
+        border-color: rgba(0, 0, 0, .4);
+        color: #1f1f1f;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .grwp_compact {
+        justify-content: center;
+      }
+
+      .grwp_compact-info {
+        justify-content: center;
+      }
+
+      // The count divider only makes sense on a single line; once items wrap it
+      // becomes a stray vertical bar at the start of a row, so drop it and let
+      // the natural gap handle spacing.
+      .grwp_compact-count {
+        border-left: 0;
+        padding-left: 0;
+        margin-left: 0;
+      }
+    }
+  }
+
+  // ── Slider with compact header: drop the top offsets ───────────────────
+  // The compact header already provides the top spacing, so remove the slider
+  // body's top margin and the swiper track's top padding to avoid a gap.
+  &.grwp-has-compact-header {
+    &.grwp_grid > .grwp_body {
+      margin-top: 0;
+    }
+
+    .swiper.reviews_embedder_slider {
+      padding-top: 0;
+    }
+  }
+
+  // ── Plain variant: no background, border or shadow ─────────────────────
+  // Wins over the per-design skins on specificity (extra class). Also resets
+  // the dark (style-8) text treatment so "plain" looks the same on any design.
+  &[class^='layout_style-'] .grwp_header.grwp_header--compact .grwp_compact.grwp_compact--plain {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    justify-content: center;
+
+    .grwp_compact-info {
+      color: #1f1f1f;
+      justify-content: center;
+    }
+
+    .grwp_compact-stars .grwp_stars-wrapper img {
+      filter: none;
+    }
+
+    .grwp_compact-count {
+      border-left-color: rgba(0, 0, 0, .2);
+      color: rgba(0, 0, 0, .7);
+    }
+
+    .grwp_compact-write {
+      background: #fff;
+      border-color: rgba(0, 0, 0, .25);
+      color: #1f1f1f;
+    }
+  }
+
+  // ── Per-design skins ───────────────────────────────────────────────────
+  // Each block mirrors the background / border / shadow / radius of that
+  // design's review card (see style-N.scss).
+
+  &.layout_style-1 .grwp_header.grwp_header--compact .grwp_compact {
+    background: #ffffff;
+    border: 0;
+    border-radius: 16px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, .1);
+  }
+
+  &.layout_style-2 .grwp_header.grwp_header--compact .grwp_compact {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 16px;
+    box-shadow: none;
+  }
+
+  &.layout_style-3 .grwp_header.grwp_header--compact .grwp_compact {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 16px;
+    box-shadow: none;
+  }
+
+  &.layout_style-4 .grwp_header.grwp_header--compact .grwp_compact {
+    background: #ffffff;
+    border: 0;
+    border-radius: 0;
+    box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 10%);
+  }
+
+  &.layout_style-5 .grwp_header.grwp_header--compact .grwp_compact {
+    background: linear-gradient(45deg, #f6f2f2, #d9d9d9);
+    border: 0;
+    border-radius: 16px;
+    box-shadow: none;
+  }
+
+  &.layout_style-6 .grwp_header.grwp_header--compact .grwp_compact {
+    background: #e3e3e3;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  &.layout_style-7 .grwp_header.grwp_header--compact .grwp_compact {
+    background: #ffffff;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+  }
+
+  // Dark card — invert text, divider, stars and button.
+  &.layout_style-8 .grwp_header.grwp_header--compact {
+    .grwp_compact {
+      background: #000000;
+      border: 0;
+      border-radius: 16px;
+      box-shadow: none;
+    }
+
+    .grwp_compact-info {
+      color: #ffffff;
+    }
+
+    .grwp_compact-stars .grwp_stars-wrapper img {
+      filter: hue-rotate(45deg);
+    }
+
+    .grwp_compact-count {
+      border-left-color: rgba(255, 255, 255, .3);
+      color: rgba(255, 255, 255, .75);
+    }
+
+    .grwp_compact-write {
+      background: transparent;
+      border-color: rgba(255, 255, 255, .4);
+      color: #ffffff;
+
+      &:hover,
+      &:focus {
+        background: rgba(255, 255, 255, .1);
+        border-color: rgba(255, 255, 255, .7);
+        color: #ffffff;
+      }
+    }
+  }
+
+  &.layout_style-9 .grwp_header.grwp_header--compact .grwp_compact {
+    background: #f4f4f4;
+    border: 0;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .07);
+  }
+
+  &.layout_style-10 .grwp_header.grwp_header--compact .grwp_compact {
+    background: #ffffff;
+    border: 0;
+    border-radius: 16px;
+    box-shadow: 0 2px 14px rgba(0, 0, 0, .08);
+  }
+}

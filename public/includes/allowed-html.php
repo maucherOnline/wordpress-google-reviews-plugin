@@ -27,6 +27,7 @@ $allowed_html = [
         'target'    => [],
 	    'class'     => [],
 	    'rel'       => [],
+	    'aria-label' => [],
     ],
     'p' => [
         'id'    => [],

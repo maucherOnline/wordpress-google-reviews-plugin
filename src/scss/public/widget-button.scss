@@ -1,0 +1,82 @@
+// Per-design theming for the buttons that sit at the end of each widget:
+//   .grwp_button        – the "See all reviews" button
+//   .grwp-show-more-btn – the grid "Load more" button
+//
+// The base look (neutral outlined pill) lives in base-style.scss. Here we only
+// adapt the corner radius — and, for the dark design, the fill — so each button
+// echoes that design's review cards. Both buttons render inside
+// #g-review.layout_style-N, so these selectors reach them.
+#g-review {
+
+  &.layout_style-1 {
+    .grwp_button,
+    .grwp-show-more-btn {
+      border-radius: 16px;
+    }
+  }
+
+  // Cards 2 & 3 use a thin border and no shadow — echo that border.
+  &.layout_style-2,
+  &.layout_style-3 {
+    .grwp_button,
+    .grwp-show-more-btn {
+      border-radius: 16px;
+      border-color: rgba(0, 0, 0, .2);
+    }
+  }
+
+  // Square-cornered cards.
+  &.layout_style-4,
+  &.layout_style-6 {
+    .grwp_button,
+    .grwp-show-more-btn {
+      border-radius: 0;
+    }
+  }
+
+  &.layout_style-5 {
+    .grwp_button,
+    .grwp-show-more-btn {
+      border-radius: 16px;
+    }
+  }
+
+  &.layout_style-7 {
+    .grwp_button,
+    .grwp-show-more-btn {
+      border-radius: 5px;
+    }
+  }
+
+  // Dark cards → filled dark button so it stays on-theme and legible.
+  &.layout_style-8 {
+    .grwp_button,
+    .grwp-show-more-btn {
+      border-radius: 16px;
+      background: #000000;
+      border-color: #000000;
+      color: #ffffff;
+
+      &:hover,
+      &:focus {
+        background: #222222;
+        border-color: #222222;
+        color: #ffffff;
+      }
+    }
+  }
+
+  &.layout_style-9 {
+    .grwp_button,
+    .grwp-show-more-btn {
+      border-radius: 12px;
+    }
+  }
+
+  &.layout_style-10 {
+    .grwp_button,
+    .grwp-show-more-btn {
+      border-radius: 16px;
+    }
+  }
+}

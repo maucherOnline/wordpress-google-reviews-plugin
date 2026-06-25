@@ -114,6 +114,10 @@ Class GRWP_Global_Menu_Pages {
                             <span class="dashicons dashicons-admin-appearance"></span>
                             <?php esc_html_e( 'Display Settings', 'embedder-for-google-reviews' ); ?>
                         </button>
+                        <button type="button" class="grwp-tab-btn" data-tab="header" role="tab">
+                            <span class="dashicons dashicons-cover-image"></span>
+                            <?php esc_html_e( 'Header Settings', 'embedder-for-google-reviews' ); ?>
+                        </button>
                         <button type="button" class="grwp-tab-btn" data-tab="slider" role="tab">
                             <span class="dashicons dashicons-slides"></span>
                             <?php esc_html_e( 'Slider Settings', 'embedder-for-google-reviews' ); ?>
@@ -145,6 +149,13 @@ Class GRWP_Global_Menu_Pages {
                                 <?php do_settings_fields( 'google-reviews-admin', 'google_reviews_style_layout_setting_section' ); ?>
                             </tbody></table>
                         </div>
+                    </div>
+
+                    <!-- Panel: Header Settings -->
+                    <div id="grwp-panel-header" class="grwp-tab-panel" role="tabpanel">
+                        <table class="form-table grwp-form-table" role="presentation"><tbody>
+                            <?php do_settings_fields( 'google-reviews-admin', 'google_reviews_header_setting_section' ); ?>
+                        </tbody></table>
                     </div>
 
                     <!-- Panel: Slider Settings -->

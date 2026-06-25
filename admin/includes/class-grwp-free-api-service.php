@@ -7,8 +7,10 @@ Class GRWP_Free_API_Service {
 		// Business search ajax handler
 		add_action('wp_ajax_handle_serp_business_search', [$this, 'handle_serp_business_search']);
 
-		// Pull reviews ajax handler
-		add_action('wp_ajax_handle_get_reviews_pro_api', [$this, 'get_reviews_free_api']);
+		// Pull reviews ajax handler (free only; the Pro subclass registers its own handler)
+		if ( ! grwp_fs()->is__premium_only() ) {
+			add_action('wp_ajax_handle_get_reviews_pro_api', [$this, 'get_reviews_free_api']);
+		}
 
 		// Save language ajax handler
 		add_action('wp_ajax_handle_language_saving', [$this, 'handle_language_saving']);

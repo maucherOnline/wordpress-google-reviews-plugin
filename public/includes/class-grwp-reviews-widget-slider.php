@@ -44,42 +44,16 @@ class GRWP_Reviews_Widget_Slider
         }
 
 	    $google_svg = GR_PLUGIN_DIR_URL . 'dist/images/google-logo-svg.svg';
-        $verified_svg = GR_PLUGIN_DIR_URL . 'dist/images/verified-badge.svg';
-        $url = 'https://reviewsembedder.com';
-	    $stars = $this->get_total_stars();
 
 		$output = '';
 
-	    $output = sprintf( '<div id="g-review" class="%s grwp_grid %s">', $style_type, $hide_date );
+		// When the compact header is shown it carries the top spacing, so the
+		// slider body/track top offsets are removed (see header-compact.scss).
+		$compact_header_class = $this->compact_header_active( $show_place_info ) ? ' grwp-has-compact-header' : '';
 
-		if ( $show_place_info ) {
+	    $output = sprintf( '<div id="g-review" class="%s grwp_grid %s%s">', $style_type, $hide_date, $compact_header_class );
 
-			$this->place_title = $this->place_title === '' ? 'Lorem Ipsum Business Title' : $this->place_title;
-
-			$output .= '<div class="grwp_header">';
-			$output .= '<div class="grwp_header-inner">';
-			$output .= sprintf( '<h3 class="grwp_business-title">%s</h3>', $this->place_title );
-			$output .= sprintf(
-				'<span class="grwp_total-rating">%s</span><span class="grwp_5_stars">%s</span>',
-				$this->rating_formatted,
-                /* translators: out of 5 stars */
-				__( 'Out of 5 stars', 'embedder-for-google-reviews' )
-			);
-			$output .= $stars;
-			$output .= sprintf(
-            /* translators: %s: total reviews */
-				'<h3 class="grwp_overall">' . __( 'Overall rating out of %s Google reviews', 'embedder-for-google-reviews' ) . '</h3>',
-				$this->total_reviews
-			);
-            if ($show_verified) {
-                $output .= sprintf(
-                /* translators: 'Verified by' badge */
-                    '<div class="grwp_verified"><a href="%s" target="_blank">'.__('Verified by', 'embedder-for-google-reviews').' <img src="'.$verified_svg.'" alt="'.$txt.'" /></a></div>',
-                    $url);
-            }
-			$output .= '</div></div>';
-
-		}
+		$output .= $this->render_company_header( $show_place_info, $show_verified, $txt, 'Lorem Ipsum Business Title', true );
 
 	    $output .= '<div class="grwp_body">';
 
@@ -118,7 +92,11 @@ class GRWP_Reviews_Widget_Slider
 
         $output .= '</div></div>';
 
-        $output .= $this->get_button_output();
+        // The compact header carries its own "See all reviews" button, so skip
+        // the standalone one below the widget to avoid a duplicate.
+        if ( ! $this->compact_header_active( $show_place_info ) ) {
+            $output .= $this->get_button_output();
+        }
 
         $output .= '</div>';
 

@@ -69,7 +69,7 @@ class GRWP_Google_Reviews_Public {
             wp_add_inline_style( $this->plugin_name, '.gr-profile { display: none !important; }' );
         }
         if ( ! empty( $options['disable_box_shadow'] ) ) {
-            wp_add_inline_style( $this->plugin_name, '#g-review[class*="layout_style"] .g-review { box-shadow: none !important; }' );
+            wp_add_inline_style( $this->plugin_name, '#g-review[class*="layout_style"] .g-review, #g-review[class*="layout_style"] .grwp_header--compact .grwp_compact { box-shadow: none !important; }' );
         }
         if ( ! empty( $options['hide_rating_text'] ) ) {
             wp_add_inline_style( $this->plugin_name, '.gr-inner-body { display: none !important; }' );
