@@ -53,6 +53,8 @@ Class GRWP_Free_API_Service {
         $response = new WP_REST_Response();
         $data_id = isset($_GET['data_id']) ? sanitize_text_field($_GET['data_id']) : '';
         $location_name = isset($_GET['location_name']) ? sanitize_text_field($_GET['location_name']) : '';
+        $place_id = isset($_GET['place_id']) ? sanitize_text_field($_GET['place_id']) : '';
+        $cid = isset($_GET['cid']) ? sanitize_text_field($_GET['cid']) : '';
 
         if ($data_id == '' || $location_name == '') {
             $response->set_status(404);
@@ -61,6 +63,8 @@ Class GRWP_Free_API_Service {
             $google_reviews_options = get_option('google_reviews_option_name');
             $google_reviews_options['serp_data_id'] = $data_id;
             $google_reviews_options['serp_business_name'] = $location_name;
+            $google_reviews_options['serp_place_id'] = $place_id;
+            $google_reviews_options['serp_cid'] = $cid;
             update_option('google_reviews_option_name', $google_reviews_options);
 
             $response->set_status(200);

@@ -297,10 +297,11 @@ class GRWP_Google_Reviews_Output {
 
 		$output .= '</div>';
 
-		if ( ! empty( $this->options['button_url'] ) ) {
+		$button_url = $this->get_button_url();
+		if ( $button_url !== '' ) {
 			$output .= sprintf(
 				'<a class="grwp_compact-write" href="%s" target="_blank" rel="noopener noreferrer">%s</a>',
-				esc_url( $this->options['button_url'] ),
+				esc_url( $button_url ),
 				esc_html( $this->get_button_text() )
 			);
 		}
@@ -312,28 +313,85 @@ class GRWP_Google_Reviews_Output {
 	}
 
 	/**
-	 * Text for the "See all reviews" button (configurable via Display Settings).
-	 * @return string
+	 * Resolve the effective button link target (Display Settings → "Button").
+	 * Installs saved before this setting existed are migrated on read: a
+	 * configured custom URL maps to 'custom', otherwise no button is shown.
+	 *
+	 * @return string One of 'reviews_google', 'write_review', 'custom', 'none'.
 	 */
-	protected function get_button_text() {
-		return ! empty( $this->options['button_text'] )
-			? $this->options['button_text']
-			: __( 'See all Reviews', 'embedder-for-google-reviews' );
+	protected function get_button_type() {
+		if ( ! empty( $this->options['button_type'] ) ) {
+			return $this->options['button_type'];
+		}
+
+		return ! empty( $this->options['button_url'] ) ? 'custom' : 'none';
 	}
 
 	/**
-	 * Get button output, linking to the configured button URL, if any
+	 * Resolve the button URL for the selected link target. The Google modes
+	 * build the URL from the saved place_id and return '' when it is missing
+	 * (hide-if-empty), so a broken link is never rendered.
+	 *
+	 * @return string
+	 */
+	protected function get_button_url() {
+
+		$place_id = ! empty( $this->options['serp_place_id'] ) ? $this->options['serp_place_id'] : '';
+
+		switch ( $this->get_button_type() ) {
+
+			case 'reviews_google':
+				return $place_id !== ''
+					? 'https://search.google.com/local/reviews?placeid=' . rawurlencode( $place_id )
+					: '';
+
+			case 'write_review':
+				return $place_id !== ''
+					? 'https://search.google.com/local/writereview?placeid=' . rawurlencode( $place_id )
+					: '';
+
+			case 'custom':
+				return ! empty( $this->options['button_url'] ) ? $this->options['button_url'] : '';
+
+			case 'none':
+			default:
+				return '';
+		}
+	}
+
+	/**
+	 * Text for the button. A custom text always wins; otherwise the default
+	 * depends on the selected link target.
+	 * @return string
+	 */
+	protected function get_button_text() {
+
+		if ( ! empty( $this->options['button_text'] ) ) {
+			return $this->options['button_text'];
+		}
+
+		if ( $this->get_button_type() === 'write_review' ) {
+			return __( 'Write a review', 'embedder-for-google-reviews' );
+		}
+
+		return __( 'See all Reviews', 'embedder-for-google-reviews' );
+	}
+
+	/**
+	 * Get button output, linking to the resolved button URL, if any
 	 * @return string
 	 */
 	protected function get_button_output() {
 
-		if ( empty( $this->options['button_url'] ) ) {
+		$button_url = $this->get_button_url();
+
+		if ( $button_url === '' ) {
 			return '';
 		}
 
 		return sprintf(
 			'<div class="grwp_button-wrapper"><a class="grwp_button" href="%s" target="_blank" rel="noopener noreferrer">%s</a></div>',
-			esc_url( $this->options['button_url'] ),
+			esc_url( $button_url ),
 			esc_html( $this->get_button_text() )
 		);
 

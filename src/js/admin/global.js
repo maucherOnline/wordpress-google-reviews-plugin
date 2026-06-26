@@ -17,6 +17,23 @@ $(document).ready(function() {
         $searchButton.removeAttr('disabled');
     });
 
+    // Button setting: show the custom URL/text rows only for the "Custom" mode,
+    // and the "re-select your business" hint only for the Google link modes.
+    // Delegated on document so it works regardless of bind timing / tab state.
+    const syncButtonRows = function () {
+        const mode = $('#button_type').val();
+        if (typeof mode === 'undefined') {
+            return;
+        }
+        // Toggle the `hidden` class (display:none !important) rather than inline
+        // styles: the form-table rows carry `display:flex !important`, which
+        // would otherwise override jQuery's non-important inline display.
+        $('#button_url, #button_text').closest('tr').toggleClass('hidden', mode !== 'custom');
+        $('.js-button-place-hint').toggle(mode === 'reviews_google' || mode === 'write_review');
+    };
+    $(document).on('change', '#button_type', syncButtonRows);
+    syncButtonRows();
+
     // prevent 'enter' from submitting form
     $search.on('keypress', function (e) {
         if (e.keyCode == '10' || e.keyCode == '13') {
@@ -84,6 +101,10 @@ $(document).ready(function() {
         const $this = $(this);
         const data_id = $this.val();
         const location_name = $this.parent().text();
+        // Read place-id / cid via attr(): the cid is a 20-digit number that
+        // exceeds JS' safe integer range, so .data() would corrupt it.
+        const place_id = $this.attr('data-place-id') || '';
+        const cid = $this.attr('data-cid') || '';
 
         $this.closest('.serp-results').slideUp();
 
@@ -98,6 +119,8 @@ $(document).ready(function() {
                 action: 'handle_location_saving',
                 data_id: data_id,
                 location_name: location_name,
+                place_id: place_id,
+                cid: cid,
                 _ajax_nonce: js_global.nonce
             },
             beforeSend: function () {

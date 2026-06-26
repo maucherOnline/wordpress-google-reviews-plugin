@@ -241,21 +241,32 @@ Class GRWP_Global_Settings {
         );
 
         add_settings_field(
-            'button_url', // id
-            /* translators: Button URL */
-            __( 'Button URL', 'embedder-for-google-reviews' ),
-            array( $this, 'button_url_callback' ), // callback
+            'button_type', // id
+            /* translators: Button link target */
+            __( 'Button', 'embedder-for-google-reviews' ),
+            array( $this, 'button_type_callback' ), // callback
             $this->settings_slug, // page
             'google_reviews_style_layout_setting_section_inputs' // section
         );
 
         add_settings_field(
+            'button_url', // id
+            /* translators: Button URL */
+            __( 'Custom button URL', 'embedder-for-google-reviews' ),
+            array( $this, 'button_url_callback' ), // callback
+            $this->settings_slug, // page
+            'google_reviews_style_layout_setting_section_inputs', // section
+            array( 'class' => 'grwp-button-custom-row' ) // toggled by the Button dropdown
+        );
+
+        add_settings_field(
             'button_text', // id
             /* translators: Button text */
-            __( 'Button text', 'embedder-for-google-reviews' ),
+            __( 'Custom button text', 'embedder-for-google-reviews' ),
             array( $this, 'button_text_callback' ), // callback
             $this->settings_slug, // page
-            'google_reviews_style_layout_setting_section_inputs' // section
+            'google_reviews_style_layout_setting_section_inputs', // section
+            array( 'class' => 'grwp-button-custom-row' ) // toggled by the Button dropdown
         );
 
         add_settings_field(
@@ -398,7 +409,7 @@ Class GRWP_Global_Settings {
         <?php endif; ?>
 
         <p class="description" style="margin-top:6px;">
-            <?php esc_html_e( 'The "Compact bar" header shows a "See all reviews" button (using the Button URL from Display Settings) and replaces the standalone button below the widget.', 'embedder-for-google-reviews' ); ?>
+            <?php esc_html_e( 'The "Compact bar" header shows a "See all reviews" button (using the Button setting from Display Settings) and replaces the standalone button below the widget.', 'embedder-for-google-reviews' ); ?>
         </p>
 
         <?php
@@ -596,6 +607,21 @@ Class GRWP_Global_Settings {
             $sanitary_values['serp_data_id'] = sanitize_text_field( $input['serp_data_id'] );
         }
 
+        // place_id and cid are saved via AJAX on business selection and have no
+        // form fields, so carry the stored values forward to avoid wiping them.
+        $existing_options = get_option( 'google_reviews_option_name' );
+        if ( isset( $input['serp_place_id'] ) ) {
+            $sanitary_values['serp_place_id'] = sanitize_text_field( $input['serp_place_id'] );
+        } elseif ( isset( $existing_options['serp_place_id'] ) ) {
+            $sanitary_values['serp_place_id'] = $existing_options['serp_place_id'];
+        }
+
+        if ( isset( $input['serp_cid'] ) ) {
+            $sanitary_values['serp_cid'] = sanitize_text_field( $input['serp_cid'] );
+        } elseif ( isset( $existing_options['serp_cid'] ) ) {
+            $sanitary_values['serp_cid'] = $existing_options['serp_cid'];
+        }
+
         if ( isset( $input['api_key_0'] ) ) {
             $sanitary_values['api_key_0'] = sanitize_text_field( $input['api_key_0'] );
         }
@@ -661,6 +687,12 @@ Class GRWP_Global_Settings {
 
         if ( isset( $input['use_safe_fallback_font'] ) ) {
             $sanitary_values['use_safe_fallback_font'] = sanitize_text_field( $input['use_safe_fallback_font'] );
+        }
+
+        if ( isset( $input['button_type'] ) ) {
+            $allowed_button_types = array( 'reviews_google', 'write_review', 'custom', 'none' );
+            $button_type = sanitize_text_field( $input['button_type'] );
+            $sanitary_values['button_type'] = in_array( $button_type, $allowed_button_types, true ) ? $button_type : 'none';
         }
 
         if ( isset( $input['button_url'] ) ) {
@@ -827,7 +859,51 @@ Class GRWP_Global_Settings {
     }
 
     /**
-     * Button URL, shown as a button below each widget when not empty
+     * Button link target. Drives whether the custom URL/text rows are shown
+     * (via JS) and how the front-end button URL is built.
+     * @return void
+     */
+    public function button_type_callback() {
+
+        $opt = $this->google_reviews_options;
+
+        // Migrate installs saved before this setting existed: a configured
+        // custom URL maps to 'custom', otherwise no button.
+        $current = ! empty( $opt['button_type'] )
+            ? $opt['button_type']
+            : ( ! empty( $opt['button_url'] ) ? 'custom' : 'none' );
+
+        $has_place_id = ! empty( $opt['serp_place_id'] );
+        $needs_place  = in_array( $current, array( 'reviews_google', 'write_review' ), true );
+        ?>
+
+        <select name="google_reviews_option_name[button_type]" id="button_type" class="js-button-type">
+            <option value="reviews_google" <?php selected( $current, 'reviews_google' ); ?>>
+                <?php esc_html_e( 'Link to reviews on Google', 'embedder-for-google-reviews' ); ?>
+            </option>
+            <option value="write_review" <?php selected( $current, 'write_review' ); ?>>
+                <?php esc_html_e( 'Link to "Write a review"', 'embedder-for-google-reviews' ); ?>
+            </option>
+            <option value="custom" <?php selected( $current, 'custom' ); ?>>
+                <?php esc_html_e( 'Custom URL & text', 'embedder-for-google-reviews' ); ?>
+            </option>
+            <option value="none" <?php selected( $current, 'none' ); ?>>
+                <?php esc_html_e( 'No button', 'embedder-for-google-reviews' ); ?>
+            </option>
+        </select>
+
+        <?php if ( ! $has_place_id ) : ?>
+            <p class="description js-button-place-hint"
+               style="margin-top:6px;<?php echo $needs_place ? '' : 'display:none;'; ?>">
+                <?php esc_html_e( 'Re-select your business above to enable this link.', 'embedder-for-google-reviews' ); ?>
+            </p>
+        <?php endif; ?>
+
+        <?php
+    }
+
+    /**
+     * Button URL, used only when the Button option is set to "Custom URL & text"
      * @return void
      */
     public function button_url_callback() {
