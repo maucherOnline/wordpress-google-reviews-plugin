@@ -5,7 +5,7 @@ Tested up to: 7.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.7.6
+Stable tag: 2.0.1
 Tags: google reviews, google, reviews, rating, reviews plugin
 
 This Google Reviews Plugin pulls reviews from Google profiles and displays them on your website.
@@ -233,6 +233,9 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 6. Google Reviews Plugin backend #2
 
 == Changelog ==
+= 2.0.1 =
+* Added new design variations
+* Added 'Write a review' button
 = 2.0 =
 * Added new designs and layouts
 * Added new options tabs
