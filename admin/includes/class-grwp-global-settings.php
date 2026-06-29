@@ -375,18 +375,10 @@ Class GRWP_Global_Settings {
      */
     public function header_type_callback() {
 
-        $current = isset( $this->google_reviews_options['header_type'] ) ? $this->google_reviews_options['header_type'] : 'standard';
-        $is_pro  = grwp_fs()->is__premium_only();
+        $current = isset( $this->google_reviews_options['header_type'] ) ? $this->google_reviews_options['header_type'] : grwp_default_header_type();
         ?>
 
-        <?php if ( ! $is_pro ) : ?>
-        <div class="tooltip">
-        <?php endif; ?>
-
-            <select name="google_reviews_option_name[header_type]"
-                    id="header_type"
-                    <?php echo $is_pro ? '' : 'disabled'; ?>
-            >
+            <select name="google_reviews_option_name[header_type]" id="header_type">
                 <option value="standard" <?php selected( $current, 'standard' ); ?>>
                     <?php esc_html_e( 'Standard (Overall rating out of X reviews)', 'embedder-for-google-reviews' ); ?>
                 </option>
@@ -400,13 +392,6 @@ Class GRWP_Global_Settings {
                     <?php esc_html_e( 'None (hide header)', 'embedder-for-google-reviews' ); ?>
                 </option>
             </select>
-
-        <?php if ( ! $is_pro ) : ?>
-            <?php // Keep the saved value intact while the disabled select is not submitted. ?>
-            <input type="hidden" name="google_reviews_option_name[header_type]" value="<?php echo esc_attr( $current ); ?>" />
-            <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=header_type&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
-        </div>
-        <?php endif; ?>
 
         <p class="description" style="margin-top:6px;">
             <?php esc_html_e( 'The "Compact bar" header shows a "See all reviews" button (using the Button setting from Display Settings) and replaces the standalone button below the widget.', 'embedder-for-google-reviews' ); ?>
@@ -868,10 +853,10 @@ Class GRWP_Global_Settings {
         $opt = $this->google_reviews_options;
 
         // Migrate installs saved before this setting existed: a configured
-        // custom URL maps to 'custom', otherwise no button.
+        // custom URL maps to 'custom', otherwise default to "Write a review".
         $current = ! empty( $opt['button_type'] )
             ? $opt['button_type']
-            : ( ! empty( $opt['button_url'] ) ? 'custom' : 'none' );
+            : ( ! empty( $opt['button_url'] ) ? 'custom' : 'write_review' );
 
         $has_place_id = ! empty( $opt['serp_place_id'] );
         $needs_place  = in_array( $current, array( 'reviews_google', 'write_review' ), true );
@@ -879,7 +864,7 @@ Class GRWP_Global_Settings {
 
         <select name="google_reviews_option_name[button_type]" id="button_type" class="js-button-type">
             <option value="reviews_google" <?php selected( $current, 'reviews_google' ); ?>>
-                <?php esc_html_e( 'Link to reviews on Google', 'embedder-for-google-reviews' ); ?>
+                <?php esc_html_e( 'Link to Google Profile', 'embedder-for-google-reviews' ); ?>
             </option>
             <option value="write_review" <?php selected( $current, 'write_review' ); ?>>
                 <?php esc_html_e( 'Link to "Write a review"', 'embedder-for-google-reviews' ); ?>

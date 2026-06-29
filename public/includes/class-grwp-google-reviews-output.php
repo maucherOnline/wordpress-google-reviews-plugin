@@ -143,14 +143,9 @@ class GRWP_Google_Reviews_Output {
 	 */
 	protected function render_company_header( $show_place_info, $show_verified, $txt = '', $default_title = 'Lorem Ipsum Business', $is_slider = false ) {
 
-		if ( ! $show_place_info ) {
-			return '';
-		}
+		$header_type = $this->effective_header_type( $show_place_info );
 
-		$header_type = $this->resolve_header_type();
-
-		// 'none' hides the header entirely.
-		if ( $header_type === 'none' ) {
+		if ( $header_type === '' ) {
 			return '';
 		}
 
@@ -165,24 +160,41 @@ class GRWP_Google_Reviews_Output {
 	}
 
 	/**
-	 * Resolve the effective header type, applying the PRO gate.
+	 * The header type that will actually render for a widget, accounting for the
+	 * place_info gate and the "none → default" override when a shortcode
+	 * explicitly requests the header. Returns '' when no header is shown.
 	 *
-	 * Editability is gated in the admin by is__premium_only() (the premium
-	 * build), matching the slider / display settings; the front-end simply
-	 * renders the saved value. Falls back to the standard header on the free
-	 * build as a safety net.
-	 *
-	 * @return string One of 'standard', 'compact', 'none'.
+	 * @param bool $show_place_info
+	 * @return string '', 'standard', 'compact' or 'compact_plain'.
 	 */
-	protected function resolve_header_type() {
+	protected function effective_header_type( $show_place_info ) {
 
-		$header_type = isset( $this->options['header_type'] ) ? $this->options['header_type'] : 'standard';
+		if ( ! $show_place_info ) {
+			return '';
+		}
 
-		if ( $header_type !== 'standard' && ! grwp_fs()->is__premium_only() ) {
-			$header_type = 'standard';
+		$header_type = $this->resolve_header_type();
+
+		// 'none' disables the header by default, but an explicit place_info="true"
+		// shortcode attribute still invokes it — fall back to the default style.
+		if ( $header_type === 'none' ) {
+			$header_type = grwp_default_header_type();
 		}
 
 		return $header_type;
+
+	}
+
+	/**
+	 * Resolve the effective header type. Available to free and premium users
+	 * alike; the front-end simply renders the saved value, falling back to the
+	 * version-aware default when none is set.
+	 *
+	 * @return string One of 'standard', 'compact', 'compact_plain', 'none'.
+	 */
+	protected function resolve_header_type() {
+
+		return isset( $this->options['header_type'] ) ? $this->options['header_type'] : grwp_default_header_type();
 
 	}
 
@@ -195,7 +207,7 @@ class GRWP_Google_Reviews_Output {
 	 * @return bool
 	 */
 	protected function compact_header_active( $show_place_info ) {
-		return $show_place_info && in_array( $this->resolve_header_type(), array( 'compact', 'compact_plain' ), true );
+		return in_array( $this->effective_header_type( $show_place_info ), array( 'compact', 'compact_plain' ), true );
 	}
 
 	/**
@@ -324,7 +336,7 @@ class GRWP_Google_Reviews_Output {
 			return $this->options['button_type'];
 		}
 
-		return ! empty( $this->options['button_url'] ) ? 'custom' : 'none';
+		return ! empty( $this->options['button_url'] ) ? 'custom' : 'write_review';
 	}
 
 	/**
@@ -370,11 +382,16 @@ class GRWP_Google_Reviews_Output {
 			return $this->options['button_text'];
 		}
 
-		if ( $this->get_button_type() === 'write_review' ) {
-			return __( 'Write a review', 'embedder-for-google-reviews' );
-		}
+		switch ( $this->get_button_type() ) {
+			case 'write_review':
+				return __( 'Write a review', 'embedder-for-google-reviews' );
 
-		return __( 'See all Reviews', 'embedder-for-google-reviews' );
+			case 'reviews_google':
+				return __( 'View on Google', 'embedder-for-google-reviews' );
+
+			default:
+				return __( 'See all Reviews', 'embedder-for-google-reviews' );
+		}
 	}
 
 	/**

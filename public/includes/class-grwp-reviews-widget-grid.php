@@ -28,12 +28,6 @@ class GRWP_Reviews_Widget_Grid
 
         $google_svg = GR_PLUGIN_DIR_URL . 'dist/images/google-logo-svg.svg';
 
-        // Global setting: hide company header overrides shortcode place_info attribute
-        if ( ! empty( $this->options['hide_company_header'] ) ) {
-            $show_place_info = false;
-        }
-
-
         // Show-more button: number of review ROWS visible before "Load more".
         // The cards-per-row count is responsive, so JS derives the visible card
         // count from rows x columns and keeps it in sync on resize.

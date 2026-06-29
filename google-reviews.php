@@ -87,6 +87,26 @@ if ( function_exists( 'grwp_fs' ) ) {
     define( 'GR_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
     define( 'GR_PLUGIN_REL_PATH', dirname( plugin_basename( __FILE__ ) ) );
 
+    /**
+     * Default header type for installs that have not explicitly chosen one.
+     *
+     * New installs (first activated on v2.0 or later) default to the
+     * "Compact – plain" header. Installs that predate v2.0 keep the legacy
+     * "Standard" header, since they never consented to the new look. The
+     * first-activation version is stored once and preserved across updates.
+     *
+     * @return string 'compact_plain' or 'standard'.
+     */
+    function grwp_default_header_type() {
+        $activation_version = get_option( 'grwp_activation_version' );
+
+        if ( $activation_version && version_compare( $activation_version, '2.0', '>=' ) ) {
+            return 'compact_plain';
+        }
+
+        return 'standard';
+    }
+
     // Register class autoloader
     spl_autoload_register( function ( $class ) {
 

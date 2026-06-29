@@ -12,8 +12,8 @@
 // blue check (as in design 10); the label plus the plugin icon appears as a
 // tooltip on hover/focus, and the whole badge links to reviewsembedder.com.
 // Colours are self-contained, so it works on every design without overrides.
-#g-review:not(.badge) {
-  .grwp_verified-badge {
+// Not scoped to #g-review so it also applies inside the floating-badge sidebar.
+.grwp_verified-badge {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -93,7 +93,6 @@
       opacity: 1;
       visibility: visible;
     }
-  }
 }
 
 #g-review:not(.badge) {

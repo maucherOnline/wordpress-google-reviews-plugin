@@ -38,11 +38,6 @@ class GRWP_Reviews_Widget_Slider
             }
         }
 
-        // Global setting: hide company header overrides shortcode place_info attribute
-        if ( ! empty( $this->options['hide_company_header'] ) ) {
-            $show_place_info = false;
-        }
-
 	    $google_svg = GR_PLUGIN_DIR_URL . 'dist/images/google-logo-svg.svg';
 
 		$output = '';
