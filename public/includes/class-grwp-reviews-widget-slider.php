@@ -38,7 +38,23 @@ class GRWP_Reviews_Widget_Slider
             }
         }
 
+        // Marquee mode scrolls continuously and ignores the navigation arrows
+        // (the Swiper Navigation module isn't loaded for it), so hide them.
+        if ( isset($this->options['marquee_slider']) && $this->options['marquee_slider'] === '1' ) {
+            $hide_slider_arrows = true;
+        }
+
 	    $google_svg = GR_PLUGIN_DIR_URL . 'dist/images/google-logo-svg.svg';
+
+	    // Prev/next arrow placement mode (CSS in swiper.scss). The custom px
+	    // offset itself is injected as a CSS variable in enqueue_styles().
+	    $arrows_position = isset( $this->options['slider_arrows_position'] )
+		    ? $this->options['slider_arrows_position']
+		    : 'below';
+	    if ( ! in_array( $arrows_position, array( 'below', 'middle', 'custom' ), true ) ) {
+		    $arrows_position = 'below';
+	    }
+	    $arrows_class = 'grwp-arrows-' . $arrows_position;
 
 		$output = '';
 
@@ -68,9 +84,12 @@ class GRWP_Reviews_Widget_Slider
             $slide_duration = isset($this->options['slide_duration']) ? intval($this->options['slide_duration']) * 1000 : '';
 
             ob_start();
-            $markup_file = ( $style_type === 'layout_style-10' )
-                ? 'partials/slider/markup-style10.php'
-                : 'partials/slider/markup.php';
+            $markup_file = 'partials/slider/markup.php';
+            if ( $style_type === 'layout_style-10' ) {
+                $markup_file = 'partials/slider/markup-style10.php';
+            } elseif ( $style_type === 'layout_style-11' ) {
+                $markup_file = 'partials/slider/markup-style11.php';
+            }
             require $markup_file;
             $slider_output .= ob_get_clean();
 

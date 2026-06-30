@@ -4,7 +4,9 @@
 
 #g-review {
   .swiper {
-    padding: 0 0 150px 0;
+    // Bottom strip that holds the prev/next arrows in the default "Below" mode.
+    // The "Middle" and "Custom" placement modes remove it (see arrow modes below).
+    padding: 0 0 70px 0;
     max-width: 100%;
 
     .swiper-wrapper {
@@ -29,7 +31,9 @@
         transition: all .4s;
 
         position: absolute;
-        margin-top: 155px;
+        // Vertical placement is set by the arrow-position mode classes below
+        // (was a fragile `margin-top: 155px` combined with the global `top: 50%`).
+        margin-top: 0;
         width: 40px;
         height: 40px;
         color: black;
@@ -45,6 +49,47 @@
         &:hover {
           opacity: 0.7;
         }
+      }
+    }
+
+    /* ── Arrow-position modes (class set on .swiper by the slider widget) ──
+       Horizontal placement (left/right: 10px) stays as-is; only the vertical
+       position changes. Each rule fully resets top/bottom/margin-top so no
+       value leaks in from the global Swiper navigation defaults. */
+
+    // BELOW (default): anchored to the reserved bottom strip, regardless of
+    // the slider's height.
+    &.grwp-arrows-below {
+      .grwp-swiper-button-next,
+      .grwp-swiper-button-prev {
+        top: auto;
+        bottom: 15px;
+        margin-top: 0;
+      }
+    }
+
+    // MIDDLE: vertically centred over the slides; no bottom strip needed.
+    &.grwp-arrows-middle {
+      padding-bottom: 0;
+
+      .grwp-swiper-button-next,
+      .grwp-swiper-button-prev {
+        top: 50%;
+        bottom: auto;
+        margin-top: -20px; // half the 40px button height
+      }
+    }
+
+    // CUSTOM: a fixed distance from the top of the slider, in px. The value is
+    // injected as the --grwp-arrow-offset custom property (see enqueue_styles).
+    &.grwp-arrows-custom {
+      padding-bottom: 0;
+
+      .grwp-swiper-button-next,
+      .grwp-swiper-button-prev {
+        top: var(--grwp-arrow-offset, 0px);
+        bottom: auto;
+        margin-top: 0;
       }
     }
   }

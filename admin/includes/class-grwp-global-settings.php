@@ -438,10 +438,55 @@ Class GRWP_Global_Settings {
         );
 
         add_settings_field(
+            'slider_arrows_position', // id
+            /* translators: Prev/next arrow placement */
+            __( 'Arrow position', 'embedder-for-google-reviews' ),
+            array( $this, 'slider_arrows_position_callback' ), // callback
+            $this->settings_slug, // page
+            'google_reviews_slider_setting_section' // section
+        );
+
+        add_settings_field(
+            'slider_arrows_custom_offset', // id
+            /* translators: Custom arrow offset in pixels */
+            __( 'Custom arrow offset (px)', 'embedder-for-google-reviews' ),
+            array( $this, 'slider_arrows_custom_offset_callback' ), // callback
+            $this->settings_slug, // page
+            'google_reviews_slider_setting_section' // section
+        );
+
+        add_settings_field(
             'disable_loop_slider', // id
             /* translators: Layout type */
             __( 'Disable slider endless loop', 'embedder-for-google-reviews' ),
             array( $this, 'disable_loop_slider_callback' ), // callback
+            $this->settings_slug, // page
+            'google_reviews_slider_setting_section' // section
+        );
+
+        add_settings_field(
+            'pause_on_hover', // id
+            /* translators: Pause slider autoplay on mouseover */
+            __( 'Pause on mouseover', 'embedder-for-google-reviews' ),
+            array( $this, 'pause_on_hover_callback' ), // callback
+            $this->settings_slug, // page
+            'google_reviews_slider_setting_section' // section
+        );
+
+        add_settings_field(
+            'marquee_slider', // id
+            /* translators: Marquee slider */
+            __( 'Marquee slider <br> (continuous scrolling)', 'embedder-for-google-reviews' ),
+            array( $this, 'marquee_slider_callback' ), // callback
+            $this->settings_slug, // page
+            'google_reviews_slider_setting_section' // section
+        );
+
+        add_settings_field(
+            'marquee_speed', // id
+            /* translators: Marquee scrolling speed */
+            __( 'Marquee speed <br> (1 = slow, 10 = fast)', 'embedder-for-google-reviews' ),
+            array( $this, 'marquee_speed_callback' ), // callback
             $this->settings_slug, // page
             'google_reviews_slider_setting_section' // section
         );
@@ -528,6 +573,92 @@ Class GRWP_Global_Settings {
         echo wp_kses($html, $allowed_html);
     }
 
+    /**
+     * Prev/next arrow placement: Below (default), Middle, or a custom px offset.
+     * @return void
+     */
+    public function slider_arrows_position_callback() {
+
+        $current = isset( $this->google_reviews_options['slider_arrows_position'] )
+            ? $this->google_reviews_options['slider_arrows_position']
+            : 'below';
+        if ( ! in_array( $current, array( 'below', 'middle', 'custom' ), true ) ) {
+            $current = 'below';
+        }
+
+        if ( grwp_fs()->is__premium_only() ) : ?>
+            <select name="google_reviews_option_name[slider_arrows_position]" id="slider_arrows_position">
+                <option value="below" <?php selected( $current, 'below' ); ?>>
+                    <?php esc_html_e( 'Below (default)', 'embedder-for-google-reviews' ); ?>
+                </option>
+                <option value="middle" <?php selected( $current, 'middle' ); ?>>
+                    <?php esc_html_e( 'Middle (over the slides)', 'embedder-for-google-reviews' ); ?>
+                </option>
+                <option value="custom" <?php selected( $current, 'custom' ); ?>>
+                    <?php esc_html_e( 'Custom pixel value', 'embedder-for-google-reviews' ); ?>
+                </option>
+            </select>
+        <?php else : ?>
+            <div class="tooltip">
+                <input type="hidden" name="google_reviews_option_name[slider_arrows_position]" value="below" />
+                <select disabled>
+                    <option><?php esc_html_e( 'Below (default)', 'embedder-for-google-reviews' ); ?></option>
+                </select>
+                <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=arrow_position&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
+            </div>
+        <?php endif; ?>
+
+        <p class="description" style="margin-top:6px;">
+            <?php esc_html_e( 'Where the prev/next arrows sit on the slider.', 'embedder-for-google-reviews' ); ?>
+        </p>
+
+        <?php
+    }
+
+    /**
+     * Custom vertical offset (px from the top of the slider) for the arrows,
+     * used only when Arrow position is set to "Custom pixel value".
+     * @return void
+     */
+    public function slider_arrows_custom_offset_callback() {
+        global $allowed_html;
+
+        $value = isset( $this->google_reviews_options['slider_arrows_custom_offset'] )
+            ? intval( $this->google_reviews_options['slider_arrows_custom_offset'] )
+            : 0;
+
+        ob_start();
+        ?>
+
+        <?php if ( grwp_fs()->is__premium_only() ) : ?>
+            <input type="number"
+                   name="google_reviews_option_name[slider_arrows_custom_offset]"
+                   id="slider_arrows_custom_offset"
+                   min="0"
+                   step="1"
+                   value="<?php echo esc_attr( $value ); ?>"
+            />
+        <?php else : ?>
+            <div class="tooltip">
+                <input type="hidden"
+                       name="google_reviews_option_name[slider_arrows_custom_offset]"
+                       value="0"
+                />
+                <input type="number" value="0" disabled />
+                <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=arrow_position&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
+            </div>
+        <?php endif; ?>
+
+        <p class="description" style="margin-top:6px;">
+            <?php esc_html_e( 'Distance of the arrows from the top of the slider, in pixels. Only applies when Arrow position is set to "Custom pixel value".', 'embedder-for-google-reviews' ); ?>
+        </p>
+
+        <?php
+        $html = ob_get_clean();
+
+        echo wp_kses( $html, $allowed_html );
+    }
+
     public function disable_loop_slider_callback() {
         global $allowed_html;
         ob_start();
@@ -560,6 +691,139 @@ Class GRWP_Global_Settings {
         <span>
             <?php esc_html_e( 'Yes', 'embedder-for-google-reviews' ); ?>
         </span>
+
+        <?php
+        $html = ob_get_clean();
+
+        echo wp_kses($html, $allowed_html);
+    }
+
+    public function pause_on_hover_callback() {
+        global $allowed_html;
+        ob_start();
+        ?>
+
+        <?php if ( grwp_fs()->is__premium_only() ) : ?>
+            <input type="checkbox"
+                   name="google_reviews_option_name[pause_on_hover]"
+                   id="pause_on_hover"
+                   value="1"
+                    <?php echo esc_attr( ! empty( $this->google_reviews_options['pause_on_hover'] ) ? 'checked' : '' ); ?>
+            />
+
+        <?php else : ?>
+            <div class="tooltip">
+                <input type="hidden"
+                       name="google_reviews_option_name[pause_on_hover]"
+                       id="pause_on_hover"
+                       value="0"
+                />
+
+                <input type="checkbox"
+                       name="google_reviews_option_name[pause_on_hover]"
+                       disabled
+                />
+                <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=pause_on_hover&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
+            </div>
+        <?php endif; ?>
+
+        <span>
+            <?php esc_html_e( 'Yes', 'embedder-for-google-reviews' ); ?>
+        </span>
+
+        <p class="description" style="margin-top:6px;">
+            <?php esc_html_e( 'Pauses autoplay while the visitor hovers over the slider. Does not apply to the marquee slider.', 'embedder-for-google-reviews' ); ?>
+        </p>
+
+        <?php
+        $html = ob_get_clean();
+
+        echo wp_kses($html, $allowed_html);
+    }
+
+    public function marquee_slider_callback() {
+        global $allowed_html;
+        ob_start();
+        ?>
+
+        <?php if ( grwp_fs()->is__premium_only() ) : ?>
+            <input type="checkbox"
+                   name="google_reviews_option_name[marquee_slider]"
+                   id="marquee_slider"
+                   value="1"
+                    <?php echo esc_attr( ! empty( $this->google_reviews_options['marquee_slider'] ) ? 'checked' : '' ); ?>
+            />
+
+        <?php else : ?>
+            <div class="tooltip">
+                <input type="hidden"
+                       name="google_reviews_option_name[marquee_slider]"
+                       id="marquee_slider"
+                       value="0"
+                />
+
+                <input type="checkbox"
+                       name="google_reviews_option_name[marquee_slider]"
+                       disabled
+                />
+                <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=marquee_slider&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
+            </div>
+        <?php endif; ?>
+
+        <span>
+            <?php esc_html_e( 'Yes', 'embedder-for-google-reviews' ); ?>
+        </span>
+
+        <p class="description" style="margin-top:6px;">
+            <?php esc_html_e( 'Slides scroll continuously at a constant speed instead of advancing one at a time. Overrides the slide duration and endless loop options.', 'embedder-for-google-reviews' ); ?>
+        </p>
+
+        <?php
+        $html = ob_get_clean();
+
+        echo wp_kses($html, $allowed_html);
+    }
+
+    public function marquee_speed_callback() {
+        global $allowed_html;
+
+        $value = isset( $this->google_reviews_options['marquee_speed'] )
+            ? intval( $this->google_reviews_options['marquee_speed'] )
+            : 5;
+        if ( $value < 1 )  $value = 1;
+        if ( $value > 10 ) $value = 10;
+
+        ob_start();
+        ?>
+
+        <?php if ( grwp_fs()->is__premium_only() ) : ?>
+            <input type="number"
+                   name="google_reviews_option_name[marquee_speed]"
+                   id="marquee_speed"
+                   min="1"
+                   max="10"
+                   step="1"
+                   value="<?php echo esc_attr( $value ); ?>"
+            />
+        <?php else : ?>
+            <div class="tooltip">
+                <input type="hidden"
+                       name="google_reviews_option_name[marquee_speed]"
+                       value="5"
+                />
+                <input type="number"
+                       name="google_reviews_option_name[marquee_speed]"
+                       id="marquee_speed"
+                       value="5"
+                       disabled
+                />
+                <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=marquee_speed&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
+            </div>
+        <?php endif; ?>
+
+        <p class="description" style="margin-top:6px;">
+            <?php esc_html_e( 'Only applies when "Marquee slider" is enabled above.', 'embedder-for-google-reviews' ); ?>
+        </p>
 
         <?php
         $html = ob_get_clean();
@@ -718,6 +982,30 @@ Class GRWP_Global_Settings {
 
         if ( isset( $input['disable_loop_slider'] ) ) {
             $sanitary_values['disable_loop_slider'] = $input['disable_loop_slider'];
+        }
+
+        if ( isset( $input['pause_on_hover'] ) ) {
+            $sanitary_values['pause_on_hover'] = $input['pause_on_hover'];
+        }
+
+        if ( isset( $input['slider_arrows_position'] ) ) {
+            $position = sanitize_text_field( $input['slider_arrows_position'] );
+            $sanitary_values['slider_arrows_position'] = in_array( $position, array( 'below', 'middle', 'custom' ), true )
+                ? $position
+                : 'below';
+        }
+
+        if ( isset( $input['slider_arrows_custom_offset'] ) ) {
+            $sanitary_values['slider_arrows_custom_offset'] = absint( $input['slider_arrows_custom_offset'] );
+        }
+
+        if ( isset( $input['marquee_slider'] ) ) {
+            $sanitary_values['marquee_slider'] = $input['marquee_slider'];
+        }
+
+        if ( isset( $input['marquee_speed'] ) ) {
+            $speed = absint( $input['marquee_speed'] );
+            $sanitary_values['marquee_speed'] = min( 10, max( 1, $speed ) );
         }
 
         if ( isset( $input['reviews_language_3'] ) ) {
@@ -1401,7 +1689,7 @@ Class GRWP_Global_Settings {
         }
         ?>
         <select name="google_reviews_option_name[layout_style]" id="layout_style">
-            <?php for ( $i = 1; $i <= 10; $i++ ) : ?>
+            <?php for ( $i = 1; $i <= 11; $i++ ) : ?>
                 <option
                     <?php selected( $layout_style, 'layout_style-' . $i ); ?>
                     value="<?php echo esc_attr( sprintf( 'layout_style-%s', $i ) ); ?>"

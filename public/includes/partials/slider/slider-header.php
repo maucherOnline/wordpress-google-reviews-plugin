@@ -5,6 +5,6 @@ if (! defined('ABSPATH'))
 ?>
 
 <!-- Slider main container -->
-<div class="swiper reviews_embedder_slider">
+<div class="swiper reviews_embedder_slider <?php echo esc_attr( $arrows_class ?? 'grwp-arrows-below' ); ?>">
 	<!-- Additional required wrapper -->
 	<div class="swiper-wrapper">

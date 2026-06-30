@@ -224,7 +224,18 @@ Class GRWP_Global_Menu_Pages {
 
                     if ( $preview_type === 'Slider' || $preview_type === 'Grid' ) :
 
-                        for ( $x = 10; $x >= 1; $x-- ) :
+                        // Order the styles appear in the preview (top to bottom).
+                        // Edit this array to re-order; any installed style not
+                        // listed here is appended afterwards in numeric order.
+                        $preview_style_order = array( 10, 9, 7, 11, 6, 5, 8, 4, 3, 2, 1 );
+
+                        $all_styles  = range( 1, 11 );
+                        $preview_styles = array_merge(
+                            array_intersect( $preview_style_order, $all_styles ),
+                            array_diff( $all_styles, $preview_style_order )
+                        );
+
+                        foreach ( $preview_styles as $x ) :
                             ?>
 
                             <div class="preview_section">
@@ -280,7 +291,7 @@ Class GRWP_Global_Menu_Pages {
                                 <?php endif; ?>
                             </div>
 
-                        <?php endfor;
+                        <?php endforeach;
 
                     else :                        if ( grwp_fs()->can_use_premium_code() ) : ?>
                             <div class="preview_section">

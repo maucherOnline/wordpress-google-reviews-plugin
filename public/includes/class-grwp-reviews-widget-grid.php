@@ -81,9 +81,12 @@ class GRWP_Reviews_Widget_Grid
                 : '';
 
             ob_start();
-            $markup_file = ( $style_type === 'layout_style-10' )
-                ? 'partials/grid/markup-style10.php'
-                : 'partials/grid/markup.php';
+            $markup_file = 'partials/grid/markup.php';
+            if ( $style_type === 'layout_style-10' ) {
+                $markup_file = 'partials/grid/markup-style10.php';
+            } elseif ( $style_type === 'layout_style-11' ) {
+                $markup_file = 'partials/grid/markup-style11.php';
+            }
             require $markup_file;
             $output .= ob_get_clean();
 

@@ -59,6 +59,9 @@ class GRWP_Shortcode {
                 case '10':
                     $review_style_override = 'layout_style-10';
                     break;
+                case '11':
+                    $review_style_override = 'layout_style-11';
+                    break;
             }
         }
 

@@ -77,6 +77,12 @@ class GRWP_Google_Reviews_Public {
         if ( ! empty( $options['use_safe_fallback_font'] ) ) {
             wp_add_inline_style( $this->plugin_name, '#g-review { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important; }' );
         }
+        // Custom slider arrow offset: feed the px value to the .grwp-arrows-custom
+        // CSS as a custom property (see swiper.scss).
+        if ( isset( $options['slider_arrows_position'] ) && $options['slider_arrows_position'] === 'custom' ) {
+            $arrow_offset = isset( $options['slider_arrows_custom_offset'] ) ? intval( $options['slider_arrows_custom_offset'] ) : 0;
+            wp_add_inline_style( $this->plugin_name, ':root{--grwp-arrow-offset:' . $arrow_offset . 'px;}' );
+        }
 	}
 
 	/**
@@ -107,6 +113,13 @@ class GRWP_Google_Reviews_Public {
         $options = get_option( 'google_reviews_option_name' );
         $slider_delay = isset($options['slide_duration']) ? intval($options['slide_duration']) : 0;
         $disable_slider_loop = isset($options['disable_loop_slider']) && $options['disable_loop_slider'] == '1' ? $options['disable_loop_slider'] : false;
+        $marquee_slider = isset($options['marquee_slider']) && $options['marquee_slider'] == '1';
+        $pause_on_hover = isset($options['pause_on_hover']) && $options['pause_on_hover'] == '1';
+        // Map the 1-10 "speed" setting (higher = faster) to a Swiper transition
+        // duration in ms (lower = faster): 1 => 10000ms, 10 => 1000ms.
+        $marquee_level = isset($options['marquee_speed']) ? intval($options['marquee_speed']) : 5;
+        $marquee_level = min( 10, max( 1, $marquee_level ) );
+        $marquee_speed = ( 11 - $marquee_level ) * 1000;
         $show_more_text = isset($options['show_more_grid_text']) && $options['show_more_grid_text'] !== ''
             ? $options['show_more_grid_text']
             : __( 'Show more', 'embedder-for-google-reviews' );
@@ -114,6 +127,9 @@ class GRWP_Google_Reviews_Public {
         $swiper_data = array(
             'disableLoop'   => $disable_slider_loop,
             'autoplayDelay' => $slider_delay,
+            'marquee'       => $marquee_slider,
+            'marqueeSpeed'  => $marquee_speed,
+            'pauseOnHover'  => $pause_on_hover,
             'showMoreText'  => $show_more_text,
         );
         wp_localize_script( $this->plugin_name, 'swiperSettings', $swiper_data );
