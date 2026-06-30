@@ -72,7 +72,7 @@
     }
 
     .swiper {
-      padding-top: 25px;
+      --grwp-pad-top: 25px; // avatar overhang; keeps "Middle" arrow centring exact
 
       .swiper-slide .g-review {
         -webkit-transition: all .4s;

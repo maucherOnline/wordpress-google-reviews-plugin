@@ -152,9 +152,15 @@
     }
 
     // ── Swiper overrides ─────────────────────────────────────────────────
-    // Remove the large bottom-padding used to park nav buttons below slides.
+    // Bottom padding comes from the shared --grwp-pad-bottom default (70px in
+    // swiper.scss), so the "Middle" arrow centring stays in sync — don't set
+    // .swiper padding directly here.
     .swiper {
-      padding: 0 0 70px 0;
+      --grwp-arrow-size: 36px; // smaller nav buttons for this style
+      // NB: the card's `margin: 4px 6px` below is overridden by the base
+      // `.swiper-slide .g-review { margin: 13px 10px }` (same specificity, base
+      // wins on source order), so the real card edge is 10px — keep the default
+      // --grwp-card-edge (10px) so the arrows straddle the actual card edge.
 
       .swiper-slide .g-review {
         margin: 4px 6px;
@@ -162,20 +168,19 @@
       }
     }
 
-    // ── Nav buttons: vertically centered beside the slides ───────────────
-    // Higher specificity than the swiper.scss overrides (1 extra class),
-    // so these rules win regardless of source-file declaration order.
-    .slider-prev-next-wrapper {
+    // ── Nav buttons: cosmetic only ───────────────────────────────────────
+    // Placement (below / middle / custom) is handled globally by the Arrow
+    // position setting (see swiper.scss). This rule no longer sets top/
+    // transform so it doesn't fight that system; the `.swiper` in the
+    // selector keeps it more specific than the base button styles, so the
+    // size/colours below still win.
+    .swiper .slider-prev-next-wrapper {
       .grwp-swiper-button-prev,
       .grwp-swiper-button-next {
-        margin-top: 0;          // reset the 155 px offset from swiper.scss
-        top: 37%;
-        transform: translateY(-50%);
         background: #ffffff;
         border: 1px solid #e0e0e0;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        width: 36px;
-        height: 36px;
+        //box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        // size comes from --grwp-arrow-size (set on .swiper above)
       }
     }
   }

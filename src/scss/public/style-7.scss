@@ -82,7 +82,13 @@
     }
 
     .swiper {
-      padding-top: 25px;
+      // Extra top room so the avatar, which overhangs the card top by ~25px
+      // (img.gr-profile { top: -70px }), isn't clipped by the slider's
+      // overflow:hidden — restores the breathing space above the cards.
+      // Set as variables (not padding directly) so the "Middle" arrow mode
+      // centres on the slide area accurately.
+      --grwp-pad-top: 50px;
+      --grwp-pad-bottom: 85px;
 
       .swiper-slide .g-review {
         margin-top: 26px !important;

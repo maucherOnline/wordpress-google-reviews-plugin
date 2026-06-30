@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-30 12:46+0000\n"
+"POT-Creation-Date: 2026-06-30 15:49+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -110,11 +110,11 @@ msgstr ""
 msgid "Changes apply to all widgets on your site."
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:198, admin/includes/class-grwp-global-settings.php:1438
+#: admin/includes/class-grwp-global-menu-pages.php:198, admin/includes/class-grwp-global-settings.php:1609
 msgid "Slider"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:202, admin/includes/class-grwp-global-settings.php:1442
+#: admin/includes/class-grwp-global-menu-pages.php:202, admin/includes/class-grwp-global-settings.php:1613
 msgid "Grid"
 msgstr ""
 
@@ -127,31 +127,31 @@ msgid "Widget preview"
 msgstr ""
 
 #. translators: %s upgrade link
-#: admin/includes/class-grwp-global-menu-pages.php:309
+#: admin/includes/class-grwp-global-menu-pages.php:320
 msgid "Floating Badge preview requires PRO. %s"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:310
+#: admin/includes/class-grwp-global-menu-pages.php:321
 msgid "Upgrade now"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:291
+#: admin/includes/class-grwp-global-menu-pages.php:302
 msgid "Floating Badge – shortcode (%1$s)"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:292, admin/includes/class-grwp-global-menu-pages.php:263, admin/includes/class-grwp-global-menu-pages.php:238
+#: admin/includes/class-grwp-global-menu-pages.php:303, admin/includes/class-grwp-global-menu-pages.php:274, admin/includes/class-grwp-global-menu-pages.php:249
 msgid "Docs"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:299, admin/includes/class-grwp-global-menu-pages.php:270, admin/includes/class-grwp-global-menu-pages.php:245
+#: admin/includes/class-grwp-global-menu-pages.php:310, admin/includes/class-grwp-global-menu-pages.php:281, admin/includes/class-grwp-global-menu-pages.php:256
 msgid "Copy"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:261, admin/includes/class-grwp-global-menu-pages.php:236
+#: admin/includes/class-grwp-global-menu-pages.php:272, admin/includes/class-grwp-global-menu-pages.php:247
 msgid "Style #%1$s – shortcode (%2$s)"
 msgstr ""
 
-#: admin/includes/class-grwp-global-menu-pages.php:274, admin/includes/class-grwp-global-menu-pages.php:249
+#: admin/includes/class-grwp-global-menu-pages.php:285, admin/includes/class-grwp-global-menu-pages.php:260
 msgid "This preview displays up to 20 reviews. More reviews will be visible on the website."
 msgstr ""
 
@@ -327,128 +327,167 @@ msgstr ""
 msgid "Hide slider arrows"
 msgstr ""
 
-#. translators: Layout type
+#. translators: Prev/next arrow placement
 #: admin/includes/class-grwp-global-settings.php:443
+msgid "Arrow position"
+msgstr ""
+
+#. translators: Custom arrow offset in pixels
+#: admin/includes/class-grwp-global-settings.php:452
+msgid "Custom arrow offset (px)"
+msgstr ""
+
+#. translators: Layout type
+#: admin/includes/class-grwp-global-settings.php:461
 msgid "Disable slider endless loop"
 msgstr ""
 
+#. translators: Pause slider autoplay on mouseover
+#: admin/includes/class-grwp-global-settings.php:470
+msgid "Pause on mouseover"
+msgstr ""
+
 #. translators: Marquee slider
-#: admin/includes/class-grwp-global-settings.php:452
+#: admin/includes/class-grwp-global-settings.php:479
 msgid "Marquee slider <br> (continuous scrolling)"
 msgstr ""
 
 #. translators: Marquee scrolling speed
-#: admin/includes/class-grwp-global-settings.php:461
+#: admin/includes/class-grwp-global-settings.php:488
 msgid "Marquee speed <br> (1 = slow, 10 = fast)"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:540, admin/includes/class-grwp-global-settings.php:579, admin/includes/class-grwp-global-settings.php:618, admin/includes/class-grwp-global-settings.php:882, admin/includes/class-grwp-global-settings.php:907, admin/includes/class-grwp-global-settings.php:931, admin/includes/class-grwp-global-settings.php:955, admin/includes/class-grwp-global-settings.php:1063, admin/includes/class-grwp-global-settings.php:1088, admin/includes/class-grwp-global-settings.php:1169, admin/includes/class-grwp-global-settings.php:1206, admin/includes/class-grwp-global-settings.php:1244, admin/includes/class-grwp-global-settings.php:1310, admin/includes/class-grwp-global-settings.php:1336
+#: admin/includes/class-grwp-global-settings.php:567, admin/includes/class-grwp-global-settings.php:692, admin/includes/class-grwp-global-settings.php:731, admin/includes/class-grwp-global-settings.php:774, admin/includes/class-grwp-global-settings.php:1053, admin/includes/class-grwp-global-settings.php:1078, admin/includes/class-grwp-global-settings.php:1102, admin/includes/class-grwp-global-settings.php:1126, admin/includes/class-grwp-global-settings.php:1234, admin/includes/class-grwp-global-settings.php:1259, admin/includes/class-grwp-global-settings.php:1340, admin/includes/class-grwp-global-settings.php:1377, admin/includes/class-grwp-global-settings.php:1415, admin/includes/class-grwp-global-settings.php:1481, admin/includes/class-grwp-global-settings.php:1507
 msgid "Yes"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:622
+#: admin/includes/class-grwp-global-settings.php:605, admin/includes/class-grwp-global-settings.php:592
+msgid "Below (default)"
+msgstr ""
+
+#: admin/includes/class-grwp-global-settings.php:595
+msgid "Middle (over the slides)"
+msgstr ""
+
+#: admin/includes/class-grwp-global-settings.php:598
+msgid "Custom pixel value"
+msgstr ""
+
+#: admin/includes/class-grwp-global-settings.php:612
+msgid "Where the prev/next arrows sit on the slider."
+msgstr ""
+
+#: admin/includes/class-grwp-global-settings.php:653
+msgid "Distance of the arrows from the top of the slider, in pixels. Only applies when Arrow position is set to \"Custom pixel value\"."
+msgstr ""
+
+#: admin/includes/class-grwp-global-settings.php:735
+msgid "Pauses autoplay while the visitor hovers over the slider. Does not apply to the marquee slider."
+msgstr ""
+
+#: admin/includes/class-grwp-global-settings.php:778
 msgid "Slides scroll continuously at a constant speed instead of advancing one at a time. Overrides the slide duration and endless loop options."
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:669
+#: admin/includes/class-grwp-global-settings.php:825
 msgid "Only applies when \"Marquee slider\" is enabled above."
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:848
+#: admin/includes/class-grwp-global-settings.php:1019
 msgid "Global settings for showing reviews"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:854
+#: admin/includes/class-grwp-global-settings.php:1025
 msgid "Display settings"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:860
+#: admin/includes/class-grwp-global-settings.php:1031
 msgid "Slider settings"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:984
+#: admin/includes/class-grwp-global-settings.php:1155
 msgid "Link to Google Profile"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:987
+#: admin/includes/class-grwp-global-settings.php:1158
 msgid "Link to \"Write a review\""
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:990
+#: admin/includes/class-grwp-global-settings.php:1161
 msgid "Custom URL & text"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:993
+#: admin/includes/class-grwp-global-settings.php:1164
 msgid "No button"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:1000
+#: admin/includes/class-grwp-global-settings.php:1171
 msgid "Re-select your business above to enable this link."
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:1038, public/includes/class-grwp-google-reviews-output.php:393
+#: admin/includes/class-grwp-global-settings.php:1209, public/includes/class-grwp-google-reviews-output.php:393
 msgid "See all Reviews"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:1366
+#: admin/includes/class-grwp-global-settings.php:1537
 msgid "Number of fully-filled review rows shown before \"Load more\" is clicked. The number of cards per row adapts to the screen width. Only applies when \"Show 'Load more' button\" is enabled above."
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:1396
+#: admin/includes/class-grwp-global-settings.php:1567
 msgid "Number of additional fully-filled review rows revealed each time \"Load more\" is clicked. Only applies when \"Show 'Load more' button\" is enabled above."
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:1413, public/includes/class-grwp-google-reviews-public.php:118
+#: admin/includes/class-grwp-global-settings.php:1584, public/includes/class-grwp-google-reviews-public.php:125
 msgid "Show more"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:1423
+#: admin/includes/class-grwp-global-settings.php:1594
 msgid "Only applies when \"Show 'Load more' button\" is enabled above."
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:1455
+#: admin/includes/class-grwp-global-settings.php:1626
 msgid "Floating Badge"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:1448
+#: admin/includes/class-grwp-global-settings.php:1619
 msgid "Floating Badge (PRO)"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:1473
+#: admin/includes/class-grwp-global-settings.php:1644
 msgid "1"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:1474
+#: admin/includes/class-grwp-global-settings.php:1645
 msgid "2"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:1475
+#: admin/includes/class-grwp-global-settings.php:1646
 msgid "3"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:1497
+#: admin/includes/class-grwp-global-settings.php:1668
 msgid "Design type"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:1506
+#: admin/includes/class-grwp-global-settings.php:1677
 msgid "Legacy options"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:1508
+#: admin/includes/class-grwp-global-settings.php:1679
 msgid "These settings apply globally for users who embed the widget without shortcode attributes. New installations should use the shortcode attributes instead."
 msgstr ""
 
 #. translators: Design
-#: admin/includes/class-grwp-global-settings.php:1528
+#: admin/includes/class-grwp-global-settings.php:1699
 msgid "Design #%s"
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:1620
+#: admin/includes/class-grwp-global-settings.php:1791
 msgid "Use this shortcode to show your reviews on pages and posts:"
 msgstr ""
 
 #. translators: %s: URL
-#: admin/includes/class-grwp-global-settings.php:1627
+#: admin/includes/class-grwp-global-settings.php:1798
 msgid "<a href=\"%s\" target=\"_blank\">See</a>, how to overwrite styles, widget types and other settings."
 msgstr ""
 

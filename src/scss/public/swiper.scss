@@ -3,11 +3,28 @@
 /* ------------------------------------------------------------------------- */
 
 #g-review {
+  // The inner slider wrapper is the containing block for the nav arrows. The
+  // .swiper itself is left non-positioned (below) so its overflow:hidden does
+  // NOT clip the arrows — that lets the "Middle" arrows overhang the slider's
+  // outer edge (a clipping box doesn't clip positioned descendants whose
+  // containing block is one of its ancestors).
+  &:not(.grwp_grid) {
+    position: relative;
+  }
+
   .swiper {
-    // Bottom strip that holds the prev/next arrows in the default "Below" mode.
-    // The "Middle" and "Custom" placement modes remove it (see arrow modes below).
-    padding: 0 0 70px 0;
+    // The slider's vertical padding is driven by these custom properties so the
+    // "Middle" arrow mode can centre the buttons on the actual slide area (it
+    // needs to know the strip sizes). Per-style overrides (e.g. the avatar that
+    // overhangs the top in styles 3/5/6/7/8) set the VARIABLES, not padding
+    // directly, otherwise the centring math would be off.
+    --grwp-pad-top: 0px;
+    --grwp-pad-bottom: 70px; // bottom strip that parks the "Below" arrows
+    --grwp-arrow-size: 40px;  // nav button diameter (style 9 overrides to 36px)
+    --grwp-card-edge: 10px;   // card's horizontal margin = visible content edge
+    padding: var(--grwp-pad-top) 0 var(--grwp-pad-bottom) 0;
     max-width: 100%;
+    position: static; // arrows anchor to #g-review (above) so they can overhang
 
     .swiper-wrapper {
       .swiper-slide {
@@ -34,8 +51,8 @@
         // Vertical placement is set by the arrow-position mode classes below
         // (was a fragile `margin-top: 155px` combined with the global `top: 50%`).
         margin-top: 0;
-        width: 40px;
-        height: 40px;
+        width: var(--grwp-arrow-size);
+        height: var(--grwp-arrow-size);
         color: black;
         border: 1px solid #bbbbbb;
         border-radius: 50%;
@@ -63,33 +80,54 @@
       .grwp-swiper-button-next,
       .grwp-swiper-button-prev {
         top: auto;
-        bottom: 15px;
+        bottom: 0;
         margin-top: 0;
+        transform: none; // clear any per-style transform (e.g. style 9)
       }
     }
 
-    // MIDDLE: vertically centred over the slides; no bottom strip needed.
+    // MIDDLE: centred on the SLIDE area (not the padded .swiper box). Keep a
+    // slim bottom strip so the card shadow isn't clipped by overflow:hidden,
+    // then pull the centre up/down by half the difference of the top/bottom
+    // padding so the buttons land on the real vertical middle of the cards.
+    // translateY(-50%) centres regardless of the button height (style 9 uses
+    // 36px buttons).
     &.grwp-arrows-middle {
-      padding-bottom: 0;
+      --grwp-pad-bottom: 40px;
 
       .grwp-swiper-button-next,
       .grwp-swiper-button-prev {
-        top: 50%;
+        top: calc(50% + (var(--grwp-pad-top) - var(--grwp-pad-bottom)) / 2);
         bottom: auto;
-        margin-top: -20px; // half the 40px button height
+        margin-top: 0;
+        transform: translateY(-50%);
+      }
+
+      // Straddle the card's outer edge — half inside, half outside. The card
+      // is inset from the slider box by --grwp-card-edge, so centre the button
+      // on that line: offset = card edge − ½ the button width.
+      .grwp-swiper-button-prev {
+        left: calc(var(--grwp-card-edge) - var(--grwp-arrow-size) / 2);
+        right: auto;
+      }
+      .grwp-swiper-button-next {
+        right: calc(var(--grwp-card-edge) - var(--grwp-arrow-size) / 2);
+        left: auto;
       }
     }
 
     // CUSTOM: a fixed distance from the top of the slider, in px. The value is
     // injected as the --grwp-arrow-offset custom property (see enqueue_styles).
+    // Keep a slim bottom strip so the card shadow isn't clipped.
     &.grwp-arrows-custom {
-      padding-bottom: 0;
+      --grwp-pad-bottom: 40px;
 
       .grwp-swiper-button-next,
       .grwp-swiper-button-prev {
         top: var(--grwp-arrow-offset, 0px);
         bottom: auto;
         margin-top: 0;
+        transform: none; // clear any per-style transform (e.g. style 9)
       }
     }
   }
