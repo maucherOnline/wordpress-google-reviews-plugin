@@ -9,7 +9,7 @@
  * Plugin Name:       Embedder for Google Reviews
  * Plugin URI:        https://reviewsembedder.com
  * Description:       This Google Reviews Plugin pulls reviews from Google profiles and displays them on your website.
- * Version:           2.0.2
+ * Version:           2.1
  * Requires at least: 5.4
  * Requires PHP:      7.4
  * Author:            ReviewsEmbedder.com
@@ -43,7 +43,7 @@ if ( function_exists( 'grwp_fs' ) ) {
                     'premium_slug'        => 'embedder-for-google-reviews-pro',
                     'type'                => 'plugin',
                     'public_key'          => 'pk_6823179f29a329a909c59a7a25a0a',
-                    'is_premium'          => true,
+                    'is_premium'          => false,
                     // If your plugin is a serviceware, set this option to false.
                     'has_premium_version' => true,
                     'has_addons'          => false,
@@ -78,7 +78,7 @@ if ( function_exists( 'grwp_fs' ) ) {
      * Else, pro plugin activation will throw an error while free version is activated
      */
 
-    define( 'GRWP_GOOGLE_REVIEWS_VERSION', '2.0.1' );
+    define( 'GRWP_GOOGLE_REVIEWS_VERSION', '2.1' );
 
     // Base path to plugin for includes
     define( 'GR_BASE_PATH', plugin_dir_path( __FILE__ ) );
@@ -105,6 +105,27 @@ if ( function_exists( 'grwp_fs' ) ) {
         }
 
         return 'standard';
+    }
+
+    /**
+     * Default slider arrow position for installs that have not explicitly
+     * chosen one.
+     *
+     * New installs (first activated on v2.1 or later) default to "Middle"
+     * (arrows over the slides). Installs that predate v2.1 keep the legacy
+     * "Below" placement so their sliders don't shift on update. The
+     * first-activation version is stored once and preserved across updates.
+     *
+     * @return string 'middle' or 'below'.
+     */
+    function grwp_default_arrows_position() {
+        $activation_version = get_option( 'grwp_activation_version' );
+
+        if ( $activation_version && version_compare( $activation_version, '2.1', '>=' ) ) {
+            return 'middle';
+        }
+
+        return 'below';
     }
 
     // Register class autoloader

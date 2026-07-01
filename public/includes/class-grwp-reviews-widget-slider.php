@@ -46,13 +46,14 @@ class GRWP_Reviews_Widget_Slider
 
 	    $google_svg = GR_PLUGIN_DIR_URL . 'dist/images/google-logo-svg.svg';
 
-	    // Prev/next arrow placement mode (CSS in swiper.scss). The custom px
-	    // offset itself is injected as a CSS variable in enqueue_styles().
+	    // Prev/next arrow placement mode (CSS in swiper.scss). The default
+	    // depends on the install's first-activation version (see
+	    // grwp_default_arrows_position()).
 	    $arrows_position = isset( $this->options['slider_arrows_position'] )
 		    ? $this->options['slider_arrows_position']
-		    : 'below';
-	    if ( ! in_array( $arrows_position, array( 'below', 'middle', 'custom' ), true ) ) {
-		    $arrows_position = 'below';
+		    : grwp_default_arrows_position();
+	    if ( ! in_array( $arrows_position, array( 'below', 'middle' ), true ) ) {
+		    $arrows_position = grwp_default_arrows_position();
 	    }
 	    $arrows_class = 'grwp-arrows-' . $arrows_position;
 

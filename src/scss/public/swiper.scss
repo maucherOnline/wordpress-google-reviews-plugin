@@ -115,21 +115,6 @@
         left: auto;
       }
     }
-
-    // CUSTOM: a fixed distance from the top of the slider, in px. The value is
-    // injected as the --grwp-arrow-offset custom property (see enqueue_styles).
-    // Keep a slim bottom strip so the card shadow isn't clipped.
-    &.grwp-arrows-custom {
-      --grwp-pad-bottom: 40px;
-
-      .grwp-swiper-button-next,
-      .grwp-swiper-button-prev {
-        top: var(--grwp-arrow-offset, 0px);
-        bottom: auto;
-        margin-top: 0;
-        transform: none; // clear any per-style transform (e.g. style 9)
-      }
-    }
   }
 }
 

@@ -380,16 +380,16 @@ Class GRWP_Global_Settings {
 
             <select name="google_reviews_option_name[header_type]" id="header_type">
                 <option value="standard" <?php selected( $current, 'standard' ); ?>>
-                    <?php esc_html_e( 'Standard (Overall rating out of X reviews)', 'embedder-for-google-reviews' ); ?>
+                    <?php esc_html_e( 'Standard', 'embedder-for-google-reviews' ); ?>
                 </option>
                 <option value="compact" <?php selected( $current, 'compact' ); ?>>
-                    <?php esc_html_e( 'Compact bar (logo, rating & "See all reviews")', 'embedder-for-google-reviews' ); ?>
+                    <?php esc_html_e( 'Compact bar', 'embedder-for-google-reviews' ); ?>
                 </option>
                 <option value="compact_plain" <?php selected( $current, 'compact_plain' ); ?>>
-                    <?php esc_html_e( 'Compact – plain (no background, border or shadow)', 'embedder-for-google-reviews' ); ?>
+                    <?php esc_html_e( 'Compact – plain', 'embedder-for-google-reviews' ); ?>
                 </option>
                 <option value="none" <?php selected( $current, 'none' ); ?>>
-                    <?php esc_html_e( 'None (hide header)', 'embedder-for-google-reviews' ); ?>
+                    <?php esc_html_e( 'None', 'embedder-for-google-reviews' ); ?>
                 </option>
             </select>
 
@@ -442,15 +442,6 @@ Class GRWP_Global_Settings {
             /* translators: Prev/next arrow placement */
             __( 'Arrow position', 'embedder-for-google-reviews' ),
             array( $this, 'slider_arrows_position_callback' ), // callback
-            $this->settings_slug, // page
-            'google_reviews_slider_setting_section' // section
-        );
-
-        add_settings_field(
-            'slider_arrows_custom_offset', // id
-            /* translators: Custom arrow offset in pixels */
-            __( 'Custom arrow offset (px)', 'embedder-for-google-reviews' ),
-            array( $this, 'slider_arrows_custom_offset_callback' ), // callback
             $this->settings_slug, // page
             'google_reviews_slider_setting_section' // section
         );
@@ -574,35 +565,34 @@ Class GRWP_Global_Settings {
     }
 
     /**
-     * Prev/next arrow placement: Below (default), Middle, or a custom px offset.
+     * Prev/next arrow placement: Below or Middle. The default for installs that
+     * have not chosen one depends on the first-activation version (see
+     * grwp_default_arrows_position()).
      * @return void
      */
     public function slider_arrows_position_callback() {
 
         $current = isset( $this->google_reviews_options['slider_arrows_position'] )
             ? $this->google_reviews_options['slider_arrows_position']
-            : 'below';
-        if ( ! in_array( $current, array( 'below', 'middle', 'custom' ), true ) ) {
-            $current = 'below';
+            : grwp_default_arrows_position();
+        if ( ! in_array( $current, array( 'below', 'middle' ), true ) ) {
+            $current = grwp_default_arrows_position();
         }
 
         if ( grwp_fs()->is__premium_only() ) : ?>
             <select name="google_reviews_option_name[slider_arrows_position]" id="slider_arrows_position">
                 <option value="below" <?php selected( $current, 'below' ); ?>>
-                    <?php esc_html_e( 'Below (default)', 'embedder-for-google-reviews' ); ?>
+                    <?php esc_html_e( 'Below', 'embedder-for-google-reviews' ); ?>
                 </option>
                 <option value="middle" <?php selected( $current, 'middle' ); ?>>
-                    <?php esc_html_e( 'Middle (over the slides)', 'embedder-for-google-reviews' ); ?>
-                </option>
-                <option value="custom" <?php selected( $current, 'custom' ); ?>>
-                    <?php esc_html_e( 'Custom pixel value', 'embedder-for-google-reviews' ); ?>
+                    <?php esc_html_e( 'Middle', 'embedder-for-google-reviews' ); ?>
                 </option>
             </select>
         <?php else : ?>
             <div class="tooltip">
                 <input type="hidden" name="google_reviews_option_name[slider_arrows_position]" value="below" />
                 <select disabled>
-                    <option><?php esc_html_e( 'Below (default)', 'embedder-for-google-reviews' ); ?></option>
+                    <option><?php esc_html_e( 'Below', 'embedder-for-google-reviews' ); ?></option>
                 </select>
                 <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=arrow_position&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
             </div>
@@ -613,50 +603,6 @@ Class GRWP_Global_Settings {
         </p>
 
         <?php
-    }
-
-    /**
-     * Custom vertical offset (px from the top of the slider) for the arrows,
-     * used only when Arrow position is set to "Custom pixel value".
-     * @return void
-     */
-    public function slider_arrows_custom_offset_callback() {
-        global $allowed_html;
-
-        $value = isset( $this->google_reviews_options['slider_arrows_custom_offset'] )
-            ? intval( $this->google_reviews_options['slider_arrows_custom_offset'] )
-            : 0;
-
-        ob_start();
-        ?>
-
-        <?php if ( grwp_fs()->is__premium_only() ) : ?>
-            <input type="number"
-                   name="google_reviews_option_name[slider_arrows_custom_offset]"
-                   id="slider_arrows_custom_offset"
-                   min="0"
-                   step="1"
-                   value="<?php echo esc_attr( $value ); ?>"
-            />
-        <?php else : ?>
-            <div class="tooltip">
-                <input type="hidden"
-                       name="google_reviews_option_name[slider_arrows_custom_offset]"
-                       value="0"
-                />
-                <input type="number" value="0" disabled />
-                <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=arrow_position&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
-            </div>
-        <?php endif; ?>
-
-        <p class="description" style="margin-top:6px;">
-            <?php esc_html_e( 'Distance of the arrows from the top of the slider, in pixels. Only applies when Arrow position is set to "Custom pixel value".', 'embedder-for-google-reviews' ); ?>
-        </p>
-
-        <?php
-        $html = ob_get_clean();
-
-        echo wp_kses( $html, $allowed_html );
     }
 
     public function disable_loop_slider_callback() {
@@ -990,13 +936,9 @@ Class GRWP_Global_Settings {
 
         if ( isset( $input['slider_arrows_position'] ) ) {
             $position = sanitize_text_field( $input['slider_arrows_position'] );
-            $sanitary_values['slider_arrows_position'] = in_array( $position, array( 'below', 'middle', 'custom' ), true )
+            $sanitary_values['slider_arrows_position'] = in_array( $position, array( 'below', 'middle' ), true )
                 ? $position
-                : 'below';
-        }
-
-        if ( isset( $input['slider_arrows_custom_offset'] ) ) {
-            $sanitary_values['slider_arrows_custom_offset'] = absint( $input['slider_arrows_custom_offset'] );
+                : grwp_default_arrows_position();
         }
 
         if ( isset( $input['marquee_slider'] ) ) {

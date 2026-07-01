@@ -77,12 +77,6 @@ class GRWP_Google_Reviews_Public {
         if ( ! empty( $options['use_safe_fallback_font'] ) ) {
             wp_add_inline_style( $this->plugin_name, '#g-review { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important; }' );
         }
-        // Custom slider arrow offset: feed the px value to the .grwp-arrows-custom
-        // CSS as a custom property (see swiper.scss).
-        if ( isset( $options['slider_arrows_position'] ) && $options['slider_arrows_position'] === 'custom' ) {
-            $arrow_offset = isset( $options['slider_arrows_custom_offset'] ) ? intval( $options['slider_arrows_custom_offset'] ) : 0;
-            wp_add_inline_style( $this->plugin_name, ':root{--grwp-arrow-offset:' . $arrow_offset . 'px;}' );
-        }
 	}
 
 	/**
