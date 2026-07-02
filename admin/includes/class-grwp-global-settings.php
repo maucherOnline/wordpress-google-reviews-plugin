@@ -393,10 +393,6 @@ Class GRWP_Global_Settings {
                 </option>
             </select>
 
-        <p class="description" style="margin-top:6px;">
-            <?php esc_html_e( 'The "Compact bar" header shows a "See all reviews" button (using the Button setting from Display Settings) and replaces the standalone button below the widget.', 'embedder-for-google-reviews' ); ?>
-        </p>
-
         <?php
     }
 
@@ -598,10 +594,6 @@ Class GRWP_Global_Settings {
             </div>
         <?php endif; ?>
 
-        <p class="description" style="margin-top:6px;">
-            <?php esc_html_e( 'Where the prev/next arrows sit on the slider.', 'embedder-for-google-reviews' ); ?>
-        </p>
-
         <?php
     }
 
@@ -677,10 +669,6 @@ Class GRWP_Global_Settings {
             <?php esc_html_e( 'Yes', 'embedder-for-google-reviews' ); ?>
         </span>
 
-        <p class="description" style="margin-top:6px;">
-            <?php esc_html_e( 'Pauses autoplay while the visitor hovers over the slider. Does not apply to the marquee slider.', 'embedder-for-google-reviews' ); ?>
-        </p>
-
         <?php
         $html = ob_get_clean();
 
@@ -719,10 +707,6 @@ Class GRWP_Global_Settings {
         <span>
             <?php esc_html_e( 'Yes', 'embedder-for-google-reviews' ); ?>
         </span>
-
-        <p class="description" style="margin-top:6px;">
-            <?php esc_html_e( 'Slides scroll continuously at a constant speed instead of advancing one at a time. Overrides the slide duration and endless loop options.', 'embedder-for-google-reviews' ); ?>
-        </p>
 
         <?php
         $html = ob_get_clean();
@@ -766,10 +750,6 @@ Class GRWP_Global_Settings {
                 <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=marquee_speed&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
             </div>
         <?php endif; ?>
-
-        <p class="description" style="margin-top:6px;">
-            <?php esc_html_e( 'Only applies when "Marquee slider" is enabled above.', 'embedder-for-google-reviews' ); ?>
-        </p>
 
         <?php
         $html = ob_get_clean();
@@ -1475,9 +1455,6 @@ Class GRWP_Global_Settings {
                step="1"
                value="<?php echo esc_attr( $value ); ?>"
         >
-        <p class="description" style="margin-top:6px;">
-            <?php esc_html_e( 'Number of fully-filled review rows shown before "Load more" is clicked. The number of cards per row adapts to the screen width. Only applies when "Show \'Load more\' button" is enabled above.', 'embedder-for-google-reviews' ); ?>
-        </p>
 
         <?php
         $html = ob_get_clean();
@@ -1505,9 +1482,6 @@ Class GRWP_Global_Settings {
                step="1"
                value="<?php echo esc_attr( $value ); ?>"
         >
-        <p class="description" style="margin-top:6px;">
-            <?php esc_html_e( 'Number of additional fully-filled review rows revealed each time "Load more" is clicked. Only applies when "Show \'Load more\' button" is enabled above.', 'embedder-for-google-reviews' ); ?>
-        </p>
 
         <?php
         $html = ob_get_clean();
@@ -1532,9 +1506,6 @@ Class GRWP_Global_Settings {
                id="show_more_grid_text"
                value="<?php echo esc_attr( $value ); ?>"
         >
-        <p class="description" style="margin-top:6px;">
-            <?php esc_html_e( 'Only applies when "Show \'Load more\' button" is enabled above.', 'embedder-for-google-reviews' ); ?>
-        </p>
 
         <?php
         $html = ob_get_clean();
