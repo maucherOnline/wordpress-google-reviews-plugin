@@ -22,6 +22,98 @@ Class GRWP_Global_Menu_Pages {
             75 // position
         );
 
+        add_submenu_page(
+            'google-reviews', // parent_slug
+            /* translators: page title */
+            __( 'Translation', 'embedder-for-google-reviews' ),
+            /* translators: menu title */
+            __( 'Translation', 'embedder-for-google-reviews' ),
+            'manage_options', // capability
+            'google-reviews-translation', // menu_slug
+            array( $this, 'google_reviews_create_translation_page' ) // function
+        );
+
+    }
+
+    /**
+     * Translation subpage: lets the user override the plugin's front-end
+     * strings, regardless of whether a translation exists for the site locale.
+     */
+    public function google_reviews_create_translation_page() {
+
+        $overrides = get_option( 'grwp_string_overrides' );
+        $overrides = is_array( $overrides ) ? $overrides : array();
+        $strings   = grwp_translatable_strings();
+        ?>
+
+        <div class="wrap grwp-outer-wrap">
+            <h2 style="display:none;"></h2><!-- WP-Notices-Anker -->
+
+            <div id="grwp-notices">
+                <?php settings_errors(); ?>
+            </div>
+
+            <div id="grwp-dashboard">
+
+                <div id="grwp-header">
+                    <h1><?php esc_html_e( 'Translation', 'embedder-for-google-reviews' ); ?></h1>
+                    <div class="grwp-header-right">
+                        <a href="<?php echo esc_url( admin_url( 'admin.php?page=google-reviews' ) ); ?>" class="grwp-status-badge">
+                            ← <?php esc_html_e( 'Back to settings', 'embedder-for-google-reviews' ); ?>
+                        </a>
+                    </div>
+                </div>
+
+                <form method="post" action="options.php">
+                    <?php settings_fields( 'grwp_string_overrides_group' ); ?>
+
+                    <div id="grwp-main-card">
+
+                        <div class="grwp-tab-panel active" role="tabpanel" style="display:block;">
+                            <h2><?php esc_html_e( 'Text overrides', 'embedder-for-google-reviews' ); ?></h2>
+                            <p style="color:#64748b;font-size:.85rem;margin:0 0 8px;">
+                                <?php esc_html_e( 'Override the texts shown in your widgets. Leave a field empty to use the default (translated) text.', 'embedder-for-google-reviews' ); ?>
+                            </p>
+
+                            <table class="form-table grwp-form-table" role="presentation"><tbody>
+                                <?php foreach ( $strings as $key => $string ) : ?>
+                                    <tr>
+                                        <th scope="row">
+                                            <label for="grwp_string_<?php echo esc_attr( $key ); ?>">
+                                                <?php echo esc_html( $string['label'] ); ?>
+                                            </label>
+                                        </th>
+                                        <td>
+                                            <input type="text"
+                                                   class="regular-text"
+                                                   name="grwp_string_overrides[<?php echo esc_attr( $key ); ?>]"
+                                                   id="grwp_string_<?php echo esc_attr( $key ); ?>"
+                                                   placeholder="<?php echo esc_attr( $string['label'] ); ?>"
+                                                   value="<?php echo esc_attr( isset( $overrides[ $key ] ) ? $overrides[ $key ] : '' ); ?>"
+                                            >
+                                            <?php if ( ! empty( $string['description'] ) ) : ?>
+                                                <p class="description"><?php echo esc_html( $string['description'] ); ?></p>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody></table>
+                        </div>
+
+                        <div id="grwp-save-row">
+                            <?php submit_button( null, 'primary', 'submit', false ); ?>
+                            <span style="color:#64748b;font-size:.82rem;">
+                                <?php esc_html_e( 'Changes apply to all widgets on your site.', 'embedder-for-google-reviews' ); ?>
+                            </span>
+                        </div>
+
+                    </div><!-- /#grwp-main-card -->
+                </form>
+
+            </div><!-- /#grwp-dashboard -->
+        </div><!-- /.grwp-outer-wrap -->
+
+        <?php
     }
 
     /**
@@ -130,6 +222,11 @@ Class GRWP_Global_Menu_Pages {
                             <span class="dashicons dashicons-backup"></span>
                             <?php esc_html_e( 'Legacy Options', 'embedder-for-google-reviews' ); ?>
                         </button>
+                        <!-- Link tab (no data-tab): navigates to the Translation subpage -->
+                        <a class="grwp-tab-btn" href="<?php echo esc_url( admin_url( 'admin.php?page=google-reviews-translation' ) ); ?>">
+                            <span class="dashicons dashicons-translation"></span>
+                            <?php esc_html_e( 'Translation', 'embedder-for-google-reviews' ); ?>
+                        </a>
                     </div>
 
                     <!-- Panel: Connect Google -->
@@ -206,6 +303,14 @@ Class GRWP_Global_Menu_Pages {
                        class="grwp-layout-btn<?php echo $preview_type === 'Badge' ? ' active' : ''; ?>">
                         <?php esc_html_e( 'Badge', 'embedder-for-google-reviews' ); ?>
                     </a>
+                    <?php else : ?>
+                    <!-- Free version: Badge preview is a PRO feature — shown but deactivated -->
+                    <div class="tooltip grwp-layout-tooltip">
+                        <span class="grwp-layout-btn grwp-layout-btn--disabled">
+                            <?php esc_html_e( 'Badge', 'embedder-for-google-reviews' ); ?>
+                        </span>
+                        <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=badge_preview&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
+                    </div>
                     <?php endif; ?>
                 </div>
             </div>

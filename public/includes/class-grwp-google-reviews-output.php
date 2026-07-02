@@ -114,19 +114,19 @@ class GRWP_Google_Reviews_Output {
 		$rating = $this->rating_value;
 
 		if ( $rating >= 4.5 ) {
-			return __( 'Excellent', 'embedder-for-google-reviews' );
+			return grwp_text( 'excellent', __( 'Excellent', 'embedder-for-google-reviews' ) );
 		}
 		if ( $rating >= 3.5 ) {
-			return __( 'Very good', 'embedder-for-google-reviews' );
+			return grwp_text( 'very_good', __( 'Very good', 'embedder-for-google-reviews' ) );
 		}
 		if ( $rating >= 2.5 ) {
-			return __( 'Average', 'embedder-for-google-reviews' );
+			return grwp_text( 'average', __( 'Average', 'embedder-for-google-reviews' ) );
 		}
 		if ( $rating >= 1.5 ) {
-			return __( 'Poor', 'embedder-for-google-reviews' );
+			return grwp_text( 'poor', __( 'Poor', 'embedder-for-google-reviews' ) );
 		}
 
-		return __( 'Bad', 'embedder-for-google-reviews' );
+		return grwp_text( 'bad', __( 'Bad', 'embedder-for-google-reviews' ) );
 
 	}
 
@@ -256,7 +256,7 @@ class GRWP_Google_Reviews_Output {
 
 		$verified_svg = GR_PLUGIN_DIR_URL . 'dist/images/verified-badge.svg';
 		/* translators: 'Verified by' badge */
-		$verified_label = __( 'Verified by', 'embedder-for-google-reviews' );
+		$verified_label = grwp_text( 'verified_by', __( 'Verified by', 'embedder-for-google-reviews' ) );
 
 		return sprintf(
 			'<span class="grwp_verified-badge"><a href="%1$s" target="_blank" rel="noopener noreferrer" aria-label="%2$s"><span class="grwp_verified-badge-check"></span><span class="grwp_verified-badge-tip">%3$s <img class="grwp_verified-badge-tip-icon" src="%4$s" alt="%5$s" /></span></a></span>',
@@ -294,13 +294,21 @@ class GRWP_Google_Reviews_Output {
 		$output .= sprintf( '<span class="grwp_compact-label">%s</span>', esc_html( $label ) );
 		$output .= sprintf( '<span class="grwp_compact-stars">%s</span>', $stars );
 		$output .= sprintf( '<span class="grwp_compact-rating">%s</span>', esc_html( $this->rating_formatted ) );
+		// Review count: the Translation override uses a {{n}} placeholder for
+		// the number, the built-in default is a translatable sprintf pattern.
+		$count_override = grwp_text( 'n_reviews', '' );
+		if ( $count_override !== '' ) {
+			$count_text = str_replace( '{{n}}', $this->total_reviews, $count_override );
+		} else {
+			$count_text = sprintf(
+				/* translators: %s: total number of reviews */
+				__( '%s reviews', 'embedder-for-google-reviews' ),
+				$this->total_reviews
+			);
+		}
 		$output .= sprintf(
 			'<span class="grwp_compact-count">%s</span>',
-			sprintf(
-				/* translators: %s: total number of reviews */
-				esc_html__( '%s reviews', 'embedder-for-google-reviews' ),
-				esc_html( $this->total_reviews )
-			)
+			esc_html( $count_text )
 		);
 
 		if ( $show_verified ) {
@@ -384,7 +392,7 @@ class GRWP_Google_Reviews_Output {
 
 		switch ( $this->get_button_type() ) {
 			case 'write_review':
-				return __( 'Write a review', 'embedder-for-google-reviews' );
+				return grwp_text( 'write_a_review', __( 'Write a review', 'embedder-for-google-reviews' ) );
 
 			case 'reviews_google':
 				return __( 'View on Google', 'embedder-for-google-reviews' );

@@ -77,6 +77,27 @@ class GRWP_Google_Reviews_Public {
         if ( ! empty( $options['use_safe_fallback_font'] ) ) {
             wp_add_inline_style( $this->plugin_name, '#g-review { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important; }' );
         }
+
+        // Custom review-text height. The .grwp-expanded exception must be emitted
+        // alongside it (higher specificity) so the "Read more" expansion still wins.
+        if ( ! empty( $options['content_max_height'] ) && intval( $options['content_max_height'] ) > 0 ) {
+            $max_height = intval( $options['content_max_height'] );
+            wp_add_inline_style(
+                $this->plugin_name,
+                '#g-review[class*="layout_style"] .g-review .gr-inner-body { max-height: ' . $max_height . 'px !important; }'
+                . ' #g-review[class*="layout_style"] .g-review .gr-inner-body.grwp-expanded { max-height: none !important; }'
+            );
+        }
+
+        // "Read more" mode: hide the scrollbar — overflowing text is revealed
+        // by the button injected in read-more.js instead.
+        if ( isset( $options['content_overflow'] ) && $options['content_overflow'] === 'read_more' ) {
+            wp_add_inline_style(
+                $this->plugin_name,
+                '#g-review[class*="layout_style"] .g-review .gr-inner-body { overflow: hidden !important; }'
+                . ' #g-review[class*="layout_style"] .g-review .gr-inner-body.grwp-expanded { overflow: visible !important; }'
+            );
+        }
 	}
 
 	/**
@@ -114,17 +135,26 @@ class GRWP_Google_Reviews_Public {
         $marquee_level = isset($options['marquee_speed']) ? intval($options['marquee_speed']) : 5;
         $marquee_level = min( 10, max( 1, $marquee_level ) );
         $marquee_speed = ( 11 - $marquee_level ) * 1000;
-        $show_more_text = isset($options['show_more_grid_text']) && $options['show_more_grid_text'] !== ''
+        $show_more_default = isset($options['show_more_grid_text']) && $options['show_more_grid_text'] !== ''
             ? $options['show_more_grid_text']
             : __( 'Show more', 'embedder-for-google-reviews' );
+        // A Translation-page override beats the Grid Settings text.
+        $show_more_text = grwp_text( 'show_more', $show_more_default );
+
+        $content_overflow = isset($options['content_overflow']) && $options['content_overflow'] === 'read_more'
+            ? 'read_more'
+            : 'scrollbar';
 
         $swiper_data = array(
-            'disableLoop'   => $disable_slider_loop,
-            'autoplayDelay' => $slider_delay,
-            'marquee'       => $marquee_slider,
-            'marqueeSpeed'  => $marquee_speed,
-            'pauseOnHover'  => $pause_on_hover,
-            'showMoreText'  => $show_more_text,
+            'disableLoop'     => $disable_slider_loop,
+            'autoplayDelay'   => $slider_delay,
+            'marquee'         => $marquee_slider,
+            'marqueeSpeed'    => $marquee_speed,
+            'pauseOnHover'    => $pause_on_hover,
+            'showMoreText'    => $show_more_text,
+            'contentOverflow' => $content_overflow,
+            'readMoreText'    => grwp_text( 'read_more', __( 'Read more', 'embedder-for-google-reviews' ) ),
+            'readLessText'    => grwp_text( 'read_less', __( 'Read less', 'embedder-for-google-reviews' ) ),
         );
         wp_localize_script( $this->plugin_name, 'swiperSettings', $swiper_data );
 	}

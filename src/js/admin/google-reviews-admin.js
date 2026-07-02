@@ -4,7 +4,9 @@
     $(document).ready(function () {
 
         // ── Tab switching ──────────────────────────────────
-        $('.grwp-tab-btn').on('click', function () {
+        // Only buttons with a data-tab switch panels; plain link tabs
+        // (e.g. "Translation") navigate to their own subpage instead.
+        $('.grwp-tab-btn[data-tab]').on('click', function () {
             var tab = $(this).data('tab');
             $('.grwp-tab-btn').removeClass('active');
             $(this).addClass('active');
@@ -17,6 +19,27 @@
         if (lastTab) {
             $('.grwp-tab-btn[data-tab="' + lastTab + '"]').trigger('click');
         }
+
+        // ── Slider settings: marquee hides the options above it ──
+        // With marquee active, autoplay/arrows/loop/pause don't apply, so all
+        // rows above the marquee checkbox are hidden. In the free version the
+        // checkbox is a disabled PRO teaser (no id on it), so nothing happens.
+        function syncMarqueeRows() {
+            var $cb = $('#grwp-panel-slider input[type="checkbox"]#marquee_slider');
+            if (!$cb.length) return;
+            $cb.closest('tr').prevAll('tr').toggleClass('hidden', $cb.is(':checked'));
+        }
+        $(document).on('change', '#marquee_slider', syncMarqueeRows);
+        syncMarqueeRows();
+
+        // ── Grid settings: "Load more" off hides the options below it ──
+        function syncLoadMoreRows() {
+            var $cb = $('#grwp-panel-grid input[type="checkbox"]#show_more_grid');
+            if (!$cb.length) return;
+            $cb.closest('tr').nextAll('tr').toggleClass('hidden', !$cb.is(':checked'));
+        }
+        $(document).on('change', '#show_more_grid', syncLoadMoreRows);
+        syncLoadMoreRows();
 
         // ── Collapsible preview (standardmaessig offen) ────
         $('#grwp-preview-toggle-btn').on('click', function () {

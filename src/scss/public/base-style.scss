@@ -74,6 +74,38 @@
 }
 
 /* ------------------------------------------------------------------------- */
+/* "Read more" content overflow mode – expands a single review's text
+/* ------------------------------------------------------------------------- */
+
+// Expanded card: release the per-style max-height (76px) so the full text
+// shows. !important beats the per-style rules; the inline style emitted for a
+// custom "Content max height" carries its own .grwp-expanded exception.
+#g-review:not(.badge) .g-review .gr-inner-body.grwp-expanded {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.grwp-read-more-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 0;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: #5791FF;
+  cursor: pointer;
+  line-height: 1.4;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+    background: none;
+  }
+}
+
+/* ------------------------------------------------------------------------- */
 /* General styles for reviews
 /* ------------------------------------------------------------------------- */
 

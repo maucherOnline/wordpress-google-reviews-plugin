@@ -145,6 +145,7 @@ class GRWP_Google_Reviews_Admin {
 
         return (
             'google-reviews' === $page ||
+            'google-reviews-translation' === $page ||
             'how-to-free-version' === $page ||
             'how-to-premium-version' === $page
         );

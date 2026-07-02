@@ -79,6 +79,10 @@ export function initShowMore() {
             const allShown = visibleCount >= total;
             wrapper.classList.toggle('grwp-truncated', !allShown);
             btn.style.display = allShown ? 'none' : '';
+
+            // Newly revealed cards were display:none and couldn't be measured —
+            // let the "Read more" module re-check them.
+            window.dispatchEvent(new CustomEvent('grwp:layout-change'));
         }
 
         apply();

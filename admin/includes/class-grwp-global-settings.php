@@ -16,6 +16,7 @@ Class GRWP_Global_Settings {
         $this->add_slider_settings();
         $this->add_grid_settings();
         $this->add_legacy_settings();
+        $this->add_translation_settings();
 
     }
 
@@ -248,6 +249,111 @@ Class GRWP_Global_Settings {
             $this->settings_slug, // page
             'google_reviews_style_layout_setting_section' // section
         );
+
+        add_settings_field(
+            'content_max_height', // id
+            /* translators: Maximum height of the review text (px) */
+            __( 'Content max height (px)', 'embedder-for-google-reviews' ),
+            array( $this, 'content_max_height_callback' ), // callback
+            $this->settings_slug, // page
+            'google_reviews_style_layout_setting_section_inputs' // section
+        );
+
+        add_settings_field(
+            'content_overflow', // id
+            /* translators: How overflowing review text is handled */
+            __( 'Content overflow', 'embedder-for-google-reviews' ),
+            array( $this, 'content_overflow_callback' ), // callback
+            $this->settings_slug, // page
+            'google_reviews_style_layout_setting_section_inputs' // section
+        );
+    }
+
+    /**
+     * Translation overrides (Translation subpage). Only registers the option;
+     * the fields are rendered directly by the subpage template.
+     * @return void
+     */
+    private function add_translation_settings() {
+
+        register_setting(
+            'grwp_string_overrides_group', // option_group
+            'grwp_string_overrides', // option_name
+            array( $this, 'grwp_sanitize_string_overrides' ) // sanitize_callback
+        );
+
+    }
+
+    /**
+     * Sanitize the Translation subpage overrides: only known keys, plain text.
+     * @param mixed $input
+     * @return array
+     */
+    public function grwp_sanitize_string_overrides( $input ) {
+
+        $sanitary_values = array();
+
+        if ( ! is_array( $input ) ) {
+            return $sanitary_values;
+        }
+
+        foreach ( array_keys( grwp_translatable_strings() ) as $key ) {
+            if ( isset( $input[ $key ] ) ) {
+                $sanitary_values[ $key ] = sanitize_text_field( $input[ $key ] );
+            }
+        }
+
+        return $sanitary_values;
+    }
+
+    /**
+     * Maximum height of the review text of each review card. Empty keeps the
+     * per-style default (76px).
+     * @return void
+     */
+    public function content_max_height_callback() {
+        global $allowed_html;
+
+        $value = isset( $this->google_reviews_options['content_max_height'] ) && $this->google_reviews_options['content_max_height'] !== ''
+            ? intval( $this->google_reviews_options['content_max_height'] )
+            : '';
+
+        ob_start(); ?>
+
+        <input type="number"
+               name="google_reviews_option_name[content_max_height]"
+               id="content_max_height"
+               min="0"
+               step="1"
+               placeholder="76"
+               value="<?php echo esc_attr( $value ); ?>"
+        >
+
+        <?php
+        $html = ob_get_clean();
+        echo wp_kses( $html, $allowed_html );
+    }
+
+    /**
+     * How review text taller than the max height is handled: a vertical
+     * scrollbar (default) or a "Read more" button that expands the card.
+     * @return void
+     */
+    public function content_overflow_callback() {
+
+        $current = isset( $this->google_reviews_options['content_overflow'] ) ? $this->google_reviews_options['content_overflow'] : 'scrollbar';
+        ?>
+
+        <select name="google_reviews_option_name[content_overflow]" id="content_overflow">
+            <option value="scrollbar" <?php selected( $current, 'scrollbar' ); ?>>
+                <?php esc_html_e( 'Vertical scrollbar', 'embedder-for-google-reviews' ); ?>
+            </option>
+            <option value="read_more" <?php selected( $current, 'read_more' ); ?>>
+                <?php esc_html_e( '"Read more" button', 'embedder-for-google-reviews' ); ?>
+            </option>
+        </select>
+
+        <?php
     }
 
     /**
@@ -880,6 +986,20 @@ Class GRWP_Global_Settings {
 
         if ( isset( $input['disable_box_shadow'] ) ) {
             $sanitary_values['disable_box_shadow'] = sanitize_text_field( $input['disable_box_shadow'] );
+        }
+
+        if ( isset( $input['content_max_height'] ) ) {
+            // empty keeps the per-style default height
+            $sanitary_values['content_max_height'] = $input['content_max_height'] === ''
+                ? ''
+                : absint( $input['content_max_height'] );
+        }
+
+        if ( isset( $input['content_overflow'] ) ) {
+            $overflow = sanitize_text_field( $input['content_overflow'] );
+            $sanitary_values['content_overflow'] = in_array( $overflow, array( 'scrollbar', 'read_more' ), true )
+                ? $overflow
+                : 'scrollbar';
         }
 
         if ( isset( $input['show_more_grid'] ) ) {

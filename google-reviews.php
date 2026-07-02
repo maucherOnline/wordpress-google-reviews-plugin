@@ -128,6 +128,84 @@ if ( function_exists( 'grwp_fs' ) ) {
         return 'below';
     }
 
+    /**
+     * Front-end strings the user can override on the Translation subpage,
+     * regardless of the active locale. Keyed by the option key used in the
+     * 'grwp_string_overrides' option.
+     *
+     * @return array key => array( 'label' => admin label, 'default' => runtime default, 'description' => optional hint )
+     */
+    function grwp_translatable_strings() {
+        return array(
+            'write_a_review' => array(
+                'label'   => __( 'Write a review', 'embedder-for-google-reviews' ),
+                'default' => __( 'Write a review', 'embedder-for-google-reviews' ),
+            ),
+            'excellent' => array(
+                'label'   => __( 'Excellent', 'embedder-for-google-reviews' ),
+                'default' => __( 'Excellent', 'embedder-for-google-reviews' ),
+            ),
+            'very_good' => array(
+                'label'   => __( 'Very good', 'embedder-for-google-reviews' ),
+                'default' => __( 'Very good', 'embedder-for-google-reviews' ),
+            ),
+            'average' => array(
+                'label'   => __( 'Average', 'embedder-for-google-reviews' ),
+                'default' => __( 'Average', 'embedder-for-google-reviews' ),
+            ),
+            'poor' => array(
+                'label'   => __( 'Poor', 'embedder-for-google-reviews' ),
+                'default' => __( 'Poor', 'embedder-for-google-reviews' ),
+            ),
+            'bad' => array(
+                'label'   => __( 'Bad', 'embedder-for-google-reviews' ),
+                'default' => __( 'Bad', 'embedder-for-google-reviews' ),
+            ),
+            'n_reviews' => array(
+                'label'       => '{{n}} reviews',
+                /* translators: %s: total number of reviews */
+                'default'     => __( '%s reviews', 'embedder-for-google-reviews' ),
+                'description' => __( '{{n}} is replaced with the number of reviews.', 'embedder-for-google-reviews' ),
+            ),
+            'verified_by' => array(
+                'label'   => __( 'Verified by', 'embedder-for-google-reviews' ),
+                'default' => __( 'Verified by', 'embedder-for-google-reviews' ),
+            ),
+            'show_more' => array(
+                'label'   => __( 'Show more', 'embedder-for-google-reviews' ),
+                'default' => __( 'Show more', 'embedder-for-google-reviews' ),
+            ),
+            'read_more' => array(
+                'label'   => __( 'Read more', 'embedder-for-google-reviews' ),
+                'default' => __( 'Read more', 'embedder-for-google-reviews' ),
+            ),
+            'read_less' => array(
+                'label'   => __( 'Read less', 'embedder-for-google-reviews' ),
+                'default' => __( 'Read less', 'embedder-for-google-reviews' ),
+            ),
+        );
+    }
+
+    /**
+     * Resolve a user-facing string, preferring the user's override from the
+     * Translation subpage over the (possibly translated) default.
+     *
+     * @param string $key     Key from grwp_translatable_strings().
+     * @param string $default Fallback when no override is saved.
+     * @return string
+     */
+    function grwp_text( $key, $default ) {
+        $overrides = get_option( 'grwp_string_overrides' );
+
+        if ( is_array( $overrides )
+            && isset( $overrides[ $key ] )
+            && trim( $overrides[ $key ] ) !== '' ) {
+            return $overrides[ $key ];
+        }
+
+        return $default;
+    }
+
     // Register class autoloader
     spl_autoload_register( function ( $class ) {
 

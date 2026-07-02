@@ -334,6 +334,13 @@
     &.active { color: #2563eb; border-bottom-color: #2563eb; font-weight: 600; }
   }
 
+  // Link tabs (e.g. "Translation") share the button look but navigate away
+  a.grwp-tab-btn {
+    text-decoration: none;
+
+    &:focus { box-shadow: none; outline: none; }
+  }
+
   .grwp-tab-panel { display: none; padding: 4px 24px; }
   .grwp-tab-panel.active { display: block; }
 
@@ -574,7 +581,12 @@
     display: inline-flex;
     border: 1px solid #e2e8f0;
     border-radius: 6px;
-    overflow: hidden;
+    // no overflow:hidden — it would clip the PRO tooltip on the disabled
+    // Badge segment; the end segments are rounded individually instead
+    > :first-child,
+    > :first-child .grwp-layout-btn { border-radius: 5px 0 0 5px; }
+    > :last-child,
+    > :last-child .grwp-layout-btn { border-radius: 0 5px 5px 0; }
 
     .grwp-layout-btn {
       display: inline-block;
@@ -599,6 +611,23 @@
         color: #ffffff;
         font-weight: 600;
       }
+
+      // Free version: Badge preview is a PRO teaser — visible but inactive
+      &--disabled {
+        cursor: not-allowed;
+        color: #cbd5e1;
+
+        &:hover { background: none; color: #cbd5e1; }
+      }
+    }
+
+    // Tooltip wrapper around the disabled Badge button: behaves like a
+    // regular toggle segment (incl. the separator border of its inner button)
+    .grwp-layout-tooltip {
+      display: inline-block;
+
+      .grwp-layout-btn { border-right: 1px solid #e2e8f0; }
+      &:last-child .grwp-layout-btn { border-right: none; }
     }
   }
   #grwp-preview-body { display: block; padding: 0 24px 24px; }
