@@ -241,35 +241,6 @@ Class GRWP_Global_Settings {
         );
 
         add_settings_field(
-            'button_type', // id
-            /* translators: Button link target */
-            __( 'Button', 'embedder-for-google-reviews' ),
-            array( $this, 'button_type_callback' ), // callback
-            $this->settings_slug, // page
-            'google_reviews_style_layout_setting_section_inputs' // section
-        );
-
-        add_settings_field(
-            'button_url', // id
-            /* translators: Button URL */
-            __( 'Custom button URL', 'embedder-for-google-reviews' ),
-            array( $this, 'button_url_callback' ), // callback
-            $this->settings_slug, // page
-            'google_reviews_style_layout_setting_section_inputs', // section
-            array( 'class' => 'grwp-button-custom-row' ) // toggled by the Button dropdown
-        );
-
-        add_settings_field(
-            'button_text', // id
-            /* translators: Button text */
-            __( 'Custom button text', 'embedder-for-google-reviews' ),
-            array( $this, 'button_text_callback' ), // callback
-            $this->settings_slug, // page
-            'google_reviews_style_layout_setting_section_inputs', // section
-            array( 'class' => 'grwp-button-custom-row' ) // toggled by the Button dropdown
-        );
-
-        add_settings_field(
             'disable_box_shadow', // id
             /* translators: Remove card box shadows */
             __( 'Remove card box shadows', 'embedder-for-google-reviews' ),
@@ -357,6 +328,35 @@ Class GRWP_Global_Settings {
             array( $this, 'header_type_callback' ), // callback
             $this->settings_slug, // page
             'google_reviews_header_setting_section' // section
+        );
+
+        add_settings_field(
+            'button_type', // id
+            /* translators: Button link target */
+            __( 'Button', 'embedder-for-google-reviews' ),
+            array( $this, 'button_type_callback' ), // callback
+            $this->settings_slug, // page
+            'google_reviews_header_setting_section' // section
+        );
+
+        add_settings_field(
+            'button_url', // id
+            /* translators: Button URL */
+            __( 'Custom button URL', 'embedder-for-google-reviews' ),
+            array( $this, 'button_url_callback' ), // callback
+            $this->settings_slug, // page
+            'google_reviews_header_setting_section', // section
+            array( 'class' => 'grwp-button-custom-row' ) // toggled by the Button dropdown
+        );
+
+        add_settings_field(
+            'button_text', // id
+            /* translators: Button text */
+            __( 'Custom button text', 'embedder-for-google-reviews' ),
+            array( $this, 'button_text_callback' ), // callback
+            $this->settings_slug, // page
+            'google_reviews_header_setting_section', // section
+            array( 'class' => 'grwp-button-custom-row' ) // toggled by the Button dropdown
         );
 
     }
