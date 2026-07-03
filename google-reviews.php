@@ -43,7 +43,7 @@ if ( function_exists( 'grwp_fs' ) ) {
                     'premium_slug'        => 'embedder-for-google-reviews-pro',
                     'type'                => 'plugin',
                     'public_key'          => 'pk_6823179f29a329a909c59a7a25a0a',
-                    'is_premium'          => true,
+                    'is_premium'          => false,
                     // If your plugin is a serviceware, set this option to false.
                     'has_premium_version' => true,
                     'has_addons'          => false,
@@ -172,8 +172,9 @@ if ( function_exists( 'grwp_fs' ) ) {
                 'default' => __( 'Verified by', 'embedder-for-google-reviews' ),
             ),
             'show_more' => array(
-                'label'   => __( 'Show more', 'embedder-for-google-reviews' ),
-                'default' => __( 'Show more', 'embedder-for-google-reviews' ),
+                'label'       => __( 'Show more', 'embedder-for-google-reviews' ),
+                'default'     => __( 'Show more', 'embedder-for-google-reviews' ),
+                'description' => __( 'Shown on the grid "Load more" button.', 'embedder-for-google-reviews' ),
             ),
             'read_more' => array(
                 'label'   => __( 'Read more', 'embedder-for-google-reviews' ),

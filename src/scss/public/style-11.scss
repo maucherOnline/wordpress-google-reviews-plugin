@@ -6,6 +6,9 @@
 
 #g-review {
   &.layout_style-11 {
+    // Slate scheme — match the "Read more" link to the review text colour.
+    --grwp-readmore-color: #2c3e50;
+
     .g-review {
       display: flex;
       flex-direction: column;

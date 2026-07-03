@@ -6,6 +6,9 @@
 #g-review {
   &.layout_style-10 {
 
+    // Google-blue accent scheme — match the "Read more" link to it.
+    --grwp-readmore-color: #1a73e8;
+
     // ── Card ──────────────────────────────────────────────────────────────
     .g-review {
       display: flex;

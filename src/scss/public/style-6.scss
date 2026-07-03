@@ -4,6 +4,9 @@
 
 #g-review {
   &.layout_style-6 {
+    // Black reviewer name on a grey card — match the "Read more" link.
+    --grwp-readmore-color: #000000;
+
     .g-review {
       padding: 29px 30px 32px;
       border-radius: 0;

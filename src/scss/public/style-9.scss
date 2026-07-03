@@ -5,6 +5,9 @@
 #g-review {
   &.layout_style-9 {
 
+    // Minimal dark scheme — match the "Read more" link to the reviewer name.
+    --grwp-readmore-color: #1a1a1a;
+
     // ── Gray pill on .grwp_body — works for BOTH slider and grid ──────────
     // Slider: .grwp_body has one child (inner #g-review > .swiper) → full width
     // Grid:   .grwp_body has multiple .g-review children → auto-fit columns

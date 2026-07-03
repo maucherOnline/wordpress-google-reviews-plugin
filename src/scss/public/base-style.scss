@@ -86,7 +86,13 @@
 }
 
 .grwp-read-more-btn {
-  display: inline-block;
+  // Always sit at the left edge, regardless of the design's text alignment:
+  // a block box with fit-content width ignores a parent's text-align:center,
+  // and align-self:flex-start keeps it left inside flex-column cards (10/11).
+  display: block;
+  width: fit-content;
+  align-self: flex-start;
+  text-align: left;
   margin-top: 10px;
   padding: 0;
   background: none;
@@ -94,7 +100,10 @@
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;
-  color: #5791FF;
+  // Match each design's colour scheme: falls back to the default reviewer-name
+  // link blue (designs 1–7); designs with their own scheme (8–11) override
+  // --grwp-readmore-color to match their reviewer-name link.
+  color: var(--grwp-readmore-color, #5791FF);
   cursor: pointer;
   line-height: 1.4;
 

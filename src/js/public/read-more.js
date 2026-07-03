@@ -4,11 +4,16 @@
  * Instead of a vertical scrollbar, review text taller than the max height is
  * cut off (overflow:hidden via inline style from PHP) and a "Read more"
  * button is appended to each overflowing card. Clicking it expands only that
- * card. Inside the slider all cards normally stretch to the tallest slide
- * (.g-review { height: 100% }), so before expanding, the current heights of
- * the sibling cards are frozen as inline styles — the expanded card grows
- * while every other slide keeps its initial height. The frozen heights are
- * released once no card in that slider is expanded anymore.
+ * card.
+ *
+ * Cards in a row normally stretch to equal height (the slider's swiper-wrapper
+ * is a flex row; the grid body is a CSS grid — both stretch items to the
+ * tallest one). So when a card expands we must pin every non-expanded card to
+ * its collapsed height, otherwise a collapsed card would stretch up to match
+ * an expanded neighbour. Heights are (re)computed on every toggle from a
+ * baseline snapshot taken while all cards are collapsed, so any combination of
+ * expanded/collapsed cards stays consistent. Once nothing is expanded the
+ * pinned heights are cleared and normal equal-height behaviour resumes.
  */
 export function initReadMore() {
     if (typeof swiperSettings === 'undefined' || swiperSettings.contentOverflow !== 'read_more') {
@@ -18,11 +23,80 @@ export function initReadMore() {
     const readMoreText = swiperSettings.readMoreText || 'Read more';
     const readLessText = swiperSettings.readLessText || 'Read less';
 
+    // The stretch context a card lives in: the slider track or the grid body.
+    function getContainer(el) {
+        return el.closest('.swiper-wrapper') || el.closest('.grwp_body');
+    }
+
+    function isExpanded(card) {
+        const body = card.querySelector('.gr-inner-body');
+        return !!(body && body.classList.contains('grwp-expanded'));
+    }
+
+    function anyExpanded(container) {
+        return !!container.querySelector('.gr-inner-body.grwp-expanded');
+    }
+
+    // Snapshot every card's current (collapsed, equal-stretched) height so we
+    // can pin non-expanded cards to it. Must run while nothing is expanded,
+    // otherwise the measured heights would include a stretched neighbour.
+    function snapshot(container) {
+        container.querySelectorAll('.g-review').forEach(function (card) {
+            card.dataset.grwpH = Math.round(card.getBoundingClientRect().height);
+        });
+    }
+
+    // Reconcile inline heights with the current expanded/collapsed state.
+    function apply(container) {
+        const cards = container.querySelectorAll('.g-review');
+
+        // Several designs put `transition: all .4s` on slider cards. Without
+        // suppressing it, pinning a sibling's height animates it — the sibling
+        // is briefly stretched by the expanding card's taller row, then eases
+        // back, producing a visible flash. Disable transitions, commit the
+        // heights with a forced reflow, then restore them for future (hover)
+        // changes.
+        cards.forEach(function (card) { card.style.transition = 'none'; });
+
+        if (!anyExpanded(container)) {
+            // Back to normal — let the flex/grid equal-height stretch resume.
+            cards.forEach(function (card) { card.style.height = ''; });
+        } else {
+            cards.forEach(function (card) {
+                if (isExpanded(card)) {
+                    card.style.height = 'auto';
+                } else if (card.dataset.grwpH) {
+                    card.style.height = card.dataset.grwpH + 'px';
+                }
+            });
+        }
+
+        void container.offsetHeight; // commit heights under transition:none
+        cards.forEach(function (card) { card.style.transition = ''; });
+    }
+
+    // Approximate line height of the review text, used as an overflow tolerance.
+    function lineHeightOf(body) {
+        const target = body.querySelector('p') || body;
+        const lh = parseFloat(getComputedStyle(target).lineHeight);
+        if (!isNaN(lh) && lh > 0) return lh;
+        // 'normal' → derive from font-size (~1.4 fallback ratio)
+        const fs = parseFloat(getComputedStyle(target).fontSize);
+        return (!isNaN(fs) && fs > 0) ? fs * 1.4 : 20;
+    }
+
     function attach(body) {
         // already processed, or fits (also true for display:none cards, which
         // measure 0x0 — they are re-checked via the grwp:layout-change event)
         if (body.dataset.grwpReadmore) return;
-        if (body.scrollHeight <= body.clientHeight + 1) return;
+
+        // Only add the button when a meaningful amount is hidden. The per-style
+        // max-height rarely lands on a whole line, so text that is barely over
+        // the limit clips the last line mid-height and overflows by only a few
+        // pixels — not worth a button that would reveal just that sliver.
+        // Require at least ~half a line of hidden content.
+        const hidden = body.scrollHeight - body.clientHeight;
+        if (hidden <= lineHeightOf(body) * 0.5) return;
 
         body.dataset.grwpReadmore = '1';
 
@@ -33,34 +107,19 @@ export function initReadMore() {
         body.insertAdjacentElement('afterend', btn);
 
         btn.addEventListener('click', function () {
+            const container = getContainer(body);
             const willExpand = !body.classList.contains('grwp-expanded');
-            const card = body.closest('.g-review');
-            const wrapper = body.closest('.swiper-wrapper');
 
-            if (wrapper && willExpand) {
-                // Freeze the other cards at their current height BEFORE the
-                // expansion reflows the slider, so only this card grows.
-                wrapper.querySelectorAll('.g-review').forEach(function (other) {
-                    if (other !== card && !other.style.height) {
-                        other.style.height = other.offsetHeight + 'px';
-                    }
-                });
-                card.style.height = 'auto';
+            // Capture the baseline while everything is still collapsed, i.e. on
+            // the transition from "none expanded" to "one expanded".
+            if (container && willExpand && !anyExpanded(container)) {
+                snapshot(container);
             }
 
             body.classList.toggle('grwp-expanded', willExpand);
             btn.textContent = willExpand ? readLessText : readMoreText;
 
-            if (wrapper && !willExpand) {
-                card.style.height = '';
-                // release the frozen heights once nothing is expanded anymore,
-                // so responsive/equal-height behavior returns to normal
-                if (!wrapper.querySelector('.grwp-expanded')) {
-                    wrapper.querySelectorAll('.g-review').forEach(function (other) {
-                        other.style.height = '';
-                    });
-                }
-            }
+            if (container) apply(container);
         });
     }
 

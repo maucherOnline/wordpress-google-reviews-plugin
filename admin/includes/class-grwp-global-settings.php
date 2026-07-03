@@ -396,14 +396,8 @@ Class GRWP_Global_Settings {
             'google_reviews_grid_setting_section' // section
         );
 
-        add_settings_field(
-            'show_more_grid_text', // id
-            /* translators: "Load more" button text (grid load-more) */
-            __('"Load more" button text', 'embedder-for-google-reviews'),
-            array($this, 'show_more_grid_text_callback'), // callback
-            $this->settings_slug, // page
-            'google_reviews_grid_setting_section' // section
-        );
+        // The "Load more" button text is edited on the Translation subpage
+        // (the "Show more" string), not here.
     }
 
     public function google_reviews_display_grid_info() { ?>
@@ -1014,8 +1008,13 @@ Class GRWP_Global_Settings {
             $sanitary_values['show_more_grid_load_more_rows'] = absint( $input['show_more_grid_load_more_rows'] );
         }
 
+        // The "Load more" text moved to the Translation subpage. No form field
+        // writes it here anymore, so carry any legacy saved value forward (used
+        // as the front-end fallback) instead of wiping it on save.
         if ( isset( $input['show_more_grid_text'] ) ) {
             $sanitary_values['show_more_grid_text'] = sanitize_text_field( $input['show_more_grid_text'] );
+        } elseif ( isset( $existing_options['show_more_grid_text'] ) ) {
+            $sanitary_values['show_more_grid_text'] = $existing_options['show_more_grid_text'];
         }
 
         if ( isset( $input['link_users_profiles'] ) ) {
@@ -1600,30 +1599,6 @@ Class GRWP_Global_Settings {
                id="show_more_grid_load_more_rows"
                min="1"
                step="1"
-               value="<?php echo esc_attr( $value ); ?>"
-        >
-
-        <?php
-        $html = ob_get_clean();
-        echo wp_kses( $html, $allowed_html );
-    }
-
-    /**
-     * Text shown on the grid "Load more" button
-     * @return void
-     */
-    public function show_more_grid_text_callback() {
-        global $allowed_html;
-
-        $value = isset( $this->google_reviews_options['show_more_grid_text'] ) && $this->google_reviews_options['show_more_grid_text'] !== ''
-            ? $this->google_reviews_options['show_more_grid_text']
-            : __( 'Show more', 'embedder-for-google-reviews' );
-
-        ob_start(); ?>
-
-        <input type="text"
-               name="google_reviews_option_name[show_more_grid_text]"
-               id="show_more_grid_text"
                value="<?php echo esc_attr( $value ); ?>"
         >
 
