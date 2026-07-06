@@ -686,9 +686,13 @@ Class GRWP_Global_Settings {
             </select>
         <?php else : ?>
             <div class="tooltip">
-                <input type="hidden" name="google_reviews_option_name[slider_arrows_position]" value="below" />
+                <input type="hidden" name="google_reviews_option_name[slider_arrows_position]" value="<?php echo esc_attr( $current ); ?>" />
                 <select disabled>
-                    <option><?php esc_html_e( 'Below', 'embedder-for-google-reviews' ); ?></option>
+                    <option>
+                        <?php echo 'middle' === $current
+                            ? esc_html__( 'Middle', 'embedder-for-google-reviews' )
+                            : esc_html__( 'Below', 'embedder-for-google-reviews' ); ?>
+                    </option>
                 </select>
                 <span class="tooltiptext">PRO Feature <br> <a href="https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=arrow_position&utm_campaign=upgrade" target="_blank">⚡ Upgrade now</a></span>
             </div>
