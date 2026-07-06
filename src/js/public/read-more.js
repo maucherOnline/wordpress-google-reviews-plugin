@@ -33,6 +33,14 @@ export function initReadMore() {
         return !!(body && body.classList.contains('grwp-expanded'));
     }
 
+    // A card still hidden behind the grid "Load more" button is display:none, so
+    // it has no layout box. Such cards must be excluded from height snapshotting
+    // and pinning — otherwise they get measured as 0px and, once revealed, stay
+    // stuck at that height (rendering compressed).
+    function isHidden(card) {
+        return card.offsetParent === null || card.getBoundingClientRect().height === 0;
+    }
+
     function anyExpanded(container) {
         return !!container.querySelector('.gr-inner-body.grwp-expanded');
     }
@@ -42,6 +50,7 @@ export function initReadMore() {
     // otherwise the measured heights would include a stretched neighbour.
     function snapshot(container) {
         container.querySelectorAll('.g-review').forEach(function (card) {
+            if (isHidden(card)) return; // skip cards behind "Load more"
             card.dataset.grwpH = Math.round(card.getBoundingClientRect().height);
         });
     }
@@ -63,10 +72,15 @@ export function initReadMore() {
             cards.forEach(function (card) { card.style.height = ''; });
         } else {
             cards.forEach(function (card) {
+                if (isHidden(card)) return; // leave cards behind "Load more" untouched
                 if (isExpanded(card)) {
                     card.style.height = 'auto';
-                } else if (card.dataset.grwpH) {
+                } else if (parseInt(card.dataset.grwpH, 10) > 0) {
                     card.style.height = card.dataset.grwpH + 'px';
+                } else {
+                    // No valid baseline (e.g. revealed after the snapshot was
+                    // taken) — let the grid give it its natural height.
+                    card.style.height = '';
                 }
             });
         }

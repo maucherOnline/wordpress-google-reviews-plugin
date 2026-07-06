@@ -5,6 +5,7 @@
   width: 100%;
   text-align: center;
   margin-top: 20px;
+  margin-bottom: 20px;
   grid-column: 1 / -1; // stay full-width even if a parent grid (e.g. .grwp_grid .grwp_body) puts it in
 }
 

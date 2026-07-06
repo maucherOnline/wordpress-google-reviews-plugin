@@ -8,7 +8,10 @@
   // NOT clip the arrows — that lets the "Middle" arrows overhang the slider's
   // outer edge (a clipping box doesn't clip positioned descendants whose
   // containing block is one of its ancestors).
-  &:not(.grwp_grid) {
+  // Exclude the grid (its own layout) and the floating badge (which is
+  // position:fixed and would otherwise be knocked back into flow — tied
+  // specificity, and this rule is concatenated after badge.scss).
+  &:not(.grwp_grid):not(.badge) {
     position: relative;
   }
 
