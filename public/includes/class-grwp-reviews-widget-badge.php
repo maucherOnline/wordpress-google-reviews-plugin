@@ -54,15 +54,14 @@ class GRWP_Reviews_Widget_Badge
 			<span class="g-rating">%s</span>
 		</a>',
             GR_PLUGIN_DIR_URL,
-            /* translators: %s: business name */
-            __('Our Google Reviews', 'embedder-for-google-reviews'),
+            grwp_text( 'our_google_reviews', __('Our Google Reviews', 'embedder-for-google-reviews') ),
 	        $stars,
             $this->rating_formatted
         );
 
 		$output .= '</div>';
         $output .= sprintf('<div class="g-review-sidebar right hide %s"><div class="grwp-header">', $hide_date);
-        $output .= sprintf('<span class="business-title">%s</span>', $this->place_title);
+        $output .= sprintf('<span class="business-title">%s</span>', grwp_text( 'company_name', $this->place_title ));
         $output .=  $stars;
         $output .= sprintf('<span class="rating">%s</span>', $this->rating_formatted);
         if ($show_verified) {

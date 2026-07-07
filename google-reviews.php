@@ -184,6 +184,33 @@ if ( function_exists( 'grwp_fs' ) ) {
                 'label'   => __( 'Read less', 'embedder-for-google-reviews' ),
                 'default' => __( 'Read less', 'embedder-for-google-reviews' ),
             ),
+            'view_on_google' => array(
+                'label'   => __( 'View on Google', 'embedder-for-google-reviews' ),
+                'default' => __( 'View on Google', 'embedder-for-google-reviews' ),
+                'description' => __( 'Shown on the button that links to the Google reviews page.', 'embedder-for-google-reviews' ),
+            ),
+            'our_google_reviews' => array(
+                'label'   => __( 'Our Google Reviews', 'embedder-for-google-reviews' ),
+                'default' => __( 'Our Google Reviews', 'embedder-for-google-reviews' ),
+                'description' => __( 'Shown on the floating badge label.', 'embedder-for-google-reviews' ),
+            ),
+            'overall_rating' => array(
+                'label'       => 'Overall rating out of {{n}} Google reviews',
+                /* translators: %s: total number of reviews */
+                'default'     => __( 'Overall rating out of %s Google reviews', 'embedder-for-google-reviews' ),
+                'description' => __( '{{n}} is replaced with the number of reviews. Shown in the standard header.', 'embedder-for-google-reviews' ),
+            ),
+            'out_of_stars' => array(
+                'label'       => 'Out of {{n}} stars',
+                /* translators: out of 5 stars */
+                'default'     => __( 'Out of 5 stars', 'embedder-for-google-reviews' ),
+                'description' => __( '{{n}} is replaced with the maximum rating (5). Shown in the standard header.', 'embedder-for-google-reviews' ),
+            ),
+            'company_name' => array(
+                'label'       => __( 'Company name', 'embedder-for-google-reviews' ),
+                'default'     => '',
+                'description' => __( 'Overrides the business name shown in the header and the badge flyout bar. Leave empty to use the name from Google.', 'embedder-for-google-reviews' ),
+            ),
         );
     }
 

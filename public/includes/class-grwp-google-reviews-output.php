@@ -218,21 +218,37 @@ class GRWP_Google_Reviews_Output {
 
 		$stars = $this->get_total_stars();
 
+		// "Out of 5 stars": the Translation override uses a {{n}} placeholder for
+		// the maximum rating, the built-in default is a translatable string.
+		$out_of_override = grwp_text( 'out_of_stars', '' );
+		if ( $out_of_override !== '' ) {
+			$out_of_text = str_replace( '{{n}}', 5, $out_of_override );
+		} else {
+			/* translators: out of 5 stars */
+			$out_of_text = __( 'Out of 5 stars', 'embedder-for-google-reviews' );
+		}
+
 		$output  = '<div class="grwp_header">';
 		$output .= '<div class="grwp_header-inner">';
-		$output .= sprintf( '<h3 class="grwp_business-title">%s</h3>', $this->place_title );
+		$output .= sprintf( '<h3 class="grwp_business-title">%s</h3>', grwp_text( 'company_name', $this->place_title ) );
 		$output .= sprintf(
 			'<span class="grwp_total-rating">%s</span><span class="grwp_5_stars">%s</span>',
 			$this->rating_formatted,
-			/* translators: out of 5 stars */
-			__( 'Out of 5 stars', 'embedder-for-google-reviews' )
+			$out_of_text
 		);
 		$output .= $stars;
-		$overall = sprintf(
-			/* translators: %s: total reviews */
-			__( 'Overall rating out of %s Google reviews', 'embedder-for-google-reviews' ),
-			$this->total_reviews
-		);
+		// Overall rating line: the Translation override uses a {{n}} placeholder
+		// for the review count, the built-in default is a translatable pattern.
+		$overall_override = grwp_text( 'overall_rating', '' );
+		if ( $overall_override !== '' ) {
+			$overall = str_replace( '{{n}}', $this->total_reviews, $overall_override );
+		} else {
+			$overall = sprintf(
+				/* translators: %s: total reviews */
+				__( 'Overall rating out of %s Google reviews', 'embedder-for-google-reviews' ),
+				$this->total_reviews
+			);
+		}
 		// Keep the badge inside the heading so it sits inline after the text and
 		// only wraps to the next line when there isn't enough width.
 		if ( $show_verified ) {
@@ -395,7 +411,7 @@ class GRWP_Google_Reviews_Output {
 				return grwp_text( 'write_a_review', __( 'Write a review', 'embedder-for-google-reviews' ) );
 
 			case 'reviews_google':
-				return __( 'View on Google', 'embedder-for-google-reviews' );
+				return grwp_text( 'view_on_google', __( 'View on Google', 'embedder-for-google-reviews' ) );
 
 			default:
 				return __( 'See all Reviews', 'embedder-for-google-reviews' );

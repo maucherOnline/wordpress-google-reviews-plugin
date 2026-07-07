@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-06 11:15+0000\n"
+"POT-Creation-Date: 2026-07-07 09:11+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -423,7 +423,7 @@ msgstr ""
 msgid "Re-select your business above to enable this link."
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:1254, public/includes/class-grwp-google-reviews-output.php:401
+#: admin/includes/class-grwp-global-settings.php:1254, public/includes/class-grwp-google-reviews-output.php:417
 msgid "See all Reviews"
 msgstr ""
 
@@ -527,7 +527,7 @@ msgstr ""
 msgid "Video tutorial"
 msgstr ""
 
-#: google-reviews.php:141, google-reviews.php:142, public/includes/class-grwp-google-reviews-output.php:395
+#: google-reviews.php:141, google-reviews.php:142, public/includes/class-grwp-google-reviews-output.php:411
 msgid "Write a review"
 msgstr ""
 
@@ -552,7 +552,7 @@ msgid "Bad"
 msgstr ""
 
 #. translators: %s: total number of reviews
-#: google-reviews.php:167, public/includes/class-grwp-google-reviews-output.php:305
+#: google-reviews.php:167, public/includes/class-grwp-google-reviews-output.php:321
 msgid "%s reviews"
 msgstr ""
 
@@ -561,7 +561,7 @@ msgid "{{n}} is replaced with the number of reviews."
 msgstr ""
 
 #. translators: 'Verified by' badge
-#: google-reviews.php:171, google-reviews.php:172, public/includes/class-grwp-google-reviews-output.php:259
+#: google-reviews.php:171, google-reviews.php:172, public/includes/class-grwp-google-reviews-output.php:275
 msgid "Verified by"
 msgstr ""
 
@@ -581,93 +581,122 @@ msgstr ""
 msgid "Read less"
 msgstr ""
 
-#. translators: out of 5 stars
-#: public/includes/class-grwp-google-reviews-output.php:228
-msgid "Out of 5 stars"
-msgstr ""
-
-#. translators: %s: total reviews
-#: public/includes/class-grwp-google-reviews-output.php:233
-msgid "Overall rating out of %s Google reviews"
-msgstr ""
-
-#: public/includes/class-grwp-google-reviews-output.php:398
+#: google-reviews.php:188, google-reviews.php:189, public/includes/class-grwp-google-reviews-output.php:414
 msgid "View on Google"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:442
-msgid "year"
+#: google-reviews.php:190
+msgid "Shown on the button that links to the Google reviews page."
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:443
-msgid "years"
+#: google-reviews.php:193, google-reviews.php:194, public/includes/class-grwp-reviews-widget-badge.php:57
+msgid "Our Google Reviews"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:446
-msgid "month"
+#: google-reviews.php:195
+msgid "Shown on the floating badge label."
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:447
-msgid "months"
+#. translators: %s: total number of reviews
+#. translators: %s: total reviews
+#: google-reviews.php:200, public/includes/class-grwp-google-reviews-output.php:248
+msgid "Overall rating out of %s Google reviews"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:450, public/includes/class-grwp-google-reviews-output.php:472
-msgid "week"
+#: google-reviews.php:201
+msgid "{{n}} is replaced with the number of reviews. Shown in the standard header."
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:451, public/includes/class-grwp-google-reviews-output.php:472
-msgid "weeks"
+#. translators: out of 5 stars
+#: google-reviews.php:206, public/includes/class-grwp-google-reviews-output.php:228
+msgid "Out of 5 stars"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:454
-msgid "day"
+#: google-reviews.php:207
+msgid "{{n}} is replaced with the maximum rating (5). Shown in the standard header."
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:455
-msgid "days"
+#: google-reviews.php:210
+msgid "Company name"
+msgstr ""
+
+#: google-reviews.php:212
+msgid "Overrides the business name shown in the header and the badge flyout bar. Leave empty to use the name from Google."
 msgstr ""
 
 #: public/includes/class-grwp-google-reviews-output.php:458
-msgid "hour"
+msgid "year"
 msgstr ""
 
 #: public/includes/class-grwp-google-reviews-output.php:459
-msgid "hours"
+msgid "years"
 msgstr ""
 
 #: public/includes/class-grwp-google-reviews-output.php:462
-msgid "minute"
+msgid "month"
 msgstr ""
 
 #: public/includes/class-grwp-google-reviews-output.php:463
+msgid "months"
+msgstr ""
+
+#: public/includes/class-grwp-google-reviews-output.php:466, public/includes/class-grwp-google-reviews-output.php:488
+msgid "week"
+msgstr ""
+
+#: public/includes/class-grwp-google-reviews-output.php:467, public/includes/class-grwp-google-reviews-output.php:488
+msgid "weeks"
+msgstr ""
+
+#: public/includes/class-grwp-google-reviews-output.php:470
+msgid "day"
+msgstr ""
+
+#: public/includes/class-grwp-google-reviews-output.php:471
+msgid "days"
+msgstr ""
+
+#: public/includes/class-grwp-google-reviews-output.php:474
+msgid "hour"
+msgstr ""
+
+#: public/includes/class-grwp-google-reviews-output.php:475
+msgid "hours"
+msgstr ""
+
+#: public/includes/class-grwp-google-reviews-output.php:478
+msgid "minute"
+msgstr ""
+
+#: public/includes/class-grwp-google-reviews-output.php:479
 msgid "minutes"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:466
+#: public/includes/class-grwp-google-reviews-output.php:482
 msgid "second"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:467
+#: public/includes/class-grwp-google-reviews-output.php:483
 msgid "seconds"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:486, public/includes/class-grwp-google-reviews-output.php:491
+#: public/includes/class-grwp-google-reviews-output.php:502, public/includes/class-grwp-google-reviews-output.php:507
 msgid " ago"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:486, public/includes/class-grwp-google-reviews-output.php:491
+#: public/includes/class-grwp-google-reviews-output.php:502, public/includes/class-grwp-google-reviews-output.php:507
 msgid "just now"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:528
+#: public/includes/class-grwp-google-reviews-output.php:544
 msgid "Lorem Ipsum"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:533
+#: public/includes/class-grwp-google-reviews-output.php:549
 msgid "three months ago"
 msgstr ""
 
-#: public/includes/class-grwp-google-reviews-output.php:534
+#: public/includes/class-grwp-google-reviews-output.php:550
 msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
 msgstr ""
 
@@ -676,9 +705,4 @@ msgstr ""
 #. translators: no reviews available
 #: public/includes/class-grwp-reviews-widget-badge.php:16, public/includes/class-grwp-reviews-widget-grid.php:12, public/includes/class-grwp-reviews-widget-slider.php:16
 msgid "No reviews available"
-msgstr ""
-
-#. translators: %s: business name
-#: public/includes/class-grwp-reviews-widget-badge.php:58
-msgid "Our Google Reviews"
 msgstr ""
