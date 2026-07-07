@@ -396,15 +396,12 @@ class GRWP_Google_Reviews_Output {
 	}
 
 	/**
-	 * Text for the button. A custom text always wins; otherwise the default
-	 * depends on the selected link target.
+	 * Text for the button. The custom text only applies in "Custom URL & text"
+	 * mode; the Google link modes use their own (translation-overridable)
+	 * default so a stale custom text can't leak onto them.
 	 * @return string
 	 */
 	protected function get_button_text() {
-
-		if ( ! empty( $this->options['button_text'] ) ) {
-			return $this->options['button_text'];
-		}
 
 		switch ( $this->get_button_type() ) {
 			case 'write_review':
@@ -413,7 +410,13 @@ class GRWP_Google_Reviews_Output {
 			case 'reviews_google':
 				return grwp_text( 'view_on_google', __( 'View on Google', 'embedder-for-google-reviews' ) );
 
+			case 'custom':
 			default:
+				// Custom mode: the user's custom text wins; otherwise fall back
+				// to the standard (overridable) default.
+				if ( ! empty( $this->options['button_text'] ) ) {
+					return $this->options['button_text'];
+				}
 				return __( 'See all Reviews', 'embedder-for-google-reviews' );
 		}
 	}
