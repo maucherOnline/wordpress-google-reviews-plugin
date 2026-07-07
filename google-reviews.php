@@ -9,7 +9,7 @@
  * Plugin Name:       Embedder for Google Reviews
  * Plugin URI:        https://reviewsembedder.com
  * Description:       This Google Reviews Plugin pulls reviews from Google profiles and displays them on your website.
- * Version:           2.1
+ * Version:           2.1.1
  * Requires at least: 5.4
  * Requires PHP:      7.4
  * Author:            ReviewsEmbedder.com
@@ -105,6 +105,27 @@ if ( function_exists( 'grwp_fs' ) ) {
         }
 
         return 'standard';
+    }
+
+    /**
+     * Resolve the effective header type for a saved options array.
+     *
+     * The legacy "Hide company header section" checkbox has been folded into the
+     * "None" header type: whenever that flag is set the header type reads as
+     * 'none', so old installs that hid the header keep hiding it and the
+     * Header type dropdown reflects their previous choice.
+     *
+     * @param array $options google_reviews_option_name values.
+     * @return string One of 'standard', 'compact', 'compact_plain', 'none'.
+     */
+    function grwp_resolve_header_type( $options ) {
+        if ( ! empty( $options['hide_company_header'] ) ) {
+            return 'none';
+        }
+
+        return isset( $options['header_type'] ) && $options['header_type'] !== ''
+            ? $options['header_type']
+            : grwp_default_header_type();
     }
 
     /**

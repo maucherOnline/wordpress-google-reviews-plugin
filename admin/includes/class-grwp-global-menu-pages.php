@@ -324,8 +324,9 @@ Class GRWP_Global_Menu_Pages {
                 </button>
                 <div id="grwp-preview-body">
                     <?php
-                    // Respect the "Hide company header" global setting in preview shortcodes.
-                    $place_info = empty( $settings['hide_company_header'] ) ? 'true' : 'false';
+                    // Respect the Header type "None" setting (which absorbs the
+                    // legacy "Hide company header" flag) in preview shortcodes.
+                    $place_info = grwp_resolve_header_type( $settings ) === 'none' ? 'false' : 'true';
 
                     if ( $preview_type === 'Slider' || $preview_type === 'Grid' ) :
 

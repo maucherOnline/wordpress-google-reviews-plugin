@@ -175,10 +175,10 @@ class GRWP_Google_Reviews_Output {
 
 		$header_type = $this->resolve_header_type();
 
-		// 'none' disables the header by default, but an explicit place_info="true"
-		// shortcode attribute still invokes it — fall back to the default style.
+		// 'none' hides the header entirely, even for shortcodes that still carry
+		// an explicit place_info="true" attribute.
 		if ( $header_type === 'none' ) {
-			$header_type = grwp_default_header_type();
+			return '';
 		}
 
 		return $header_type;
@@ -194,7 +194,7 @@ class GRWP_Google_Reviews_Output {
 	 */
 	protected function resolve_header_type() {
 
-		return isset( $this->options['header_type'] ) ? $this->options['header_type'] : grwp_default_header_type();
+		return grwp_resolve_header_type( $this->options );
 
 	}
 

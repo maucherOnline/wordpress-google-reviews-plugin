@@ -5,7 +5,7 @@ Tested up to: 7.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 2.1
+Stable tag: 2.1.1
 Tags: google reviews, google, reviews, rating, reviews plugin
 
 This Google Reviews Plugin pulls reviews from Google profiles and displays them on your website.
@@ -19,8 +19,6 @@ Our Google Reviews WordPress plugin displays customer reviews with newly and eas
 ➡ [See LIVE Demo](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=live_demo)
 
 ✨ [Live Demo](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=live_demo) | 📚 [Documentation](https://reviewsembedder.com/docs/how-to-install/?utm_source=wp_dir&utm_medium=link&utm_campaign=docs) | 🌟 [PRO Features](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=features#pricing) | 🔥 [Get PRO](https://reviewsembedder.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=get_pro)
-
-[youtube https://www.youtube.com/watch?v=RqNEEVWoT0s]
 
 == 🏆 Top Features of this Google Reviews Plugin ==
 The free version of the Google Reviews WordPress plugin has different styles and layouts and offers easy installation and integration. You do NOT need any Google API key or Google Places API key. Just install the business reviews plugin and display the business reviews on your wordpress websites. You also do not need a Google Place ID, like with many other Google Place WordPress plugins.

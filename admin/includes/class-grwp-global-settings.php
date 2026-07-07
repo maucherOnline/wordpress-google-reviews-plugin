@@ -192,18 +192,10 @@ Class GRWP_Global_Settings {
             'google_reviews_style_layout_setting_section_inputs' // section
         );
 
-        // In PRO the Header Settings tab ("None" header type) supersedes this,
-        // so only show the legacy checkbox on the free version.
-        if ( ! grwp_fs()->is__premium_only() ) {
-            add_settings_field(
-                'hide_company_header', // id
-                /* translators: Hide company header section */
-                __('Hide company header section', 'embedder-for-google-reviews'),
-                array($this, 'hide_company_header_callback'), // callback
-                $this->settings_slug, // page
-                'google_reviews_style_layout_setting_section' // section
-            );
-        }
+        // "Hide company header section" has been folded into the Header Settings
+        // tab as the "None" header type, so it no longer has its own field here.
+        // The stored value is still honoured (and kept in sync) via
+        // grwp_resolve_header_type() and the sanitizer.
 
         add_settings_field(
             'show_dummy_content', // id
@@ -475,7 +467,7 @@ Class GRWP_Global_Settings {
      */
     public function header_type_callback() {
 
-        $current = isset( $this->google_reviews_options['header_type'] ) ? $this->google_reviews_options['header_type'] : grwp_default_header_type();
+        $current = grwp_resolve_header_type( $this->google_reviews_options );
         ?>
 
             <select name="google_reviews_option_name[header_type]" id="header_type">
@@ -945,15 +937,24 @@ Class GRWP_Global_Settings {
             $sanitary_values['filter_words'] = $input['filter_words'];
         }
 
-        if ( isset( $input['hide_company_header'] ) ) {
-            $sanitary_values['hide_company_header'] = sanitize_text_field( $input['hide_company_header'] );
-        }
-
+        // Header type. The legacy "Hide company header section" checkbox is now
+        // the "None" option: selecting None keeps the flag set (so pre-existing
+        // shortcodes that hide the header via place_info stay hidden), while any
+        // other type clears it. When the header settings aren't submitted the
+        // stored flag is preserved.
         if ( isset( $input['header_type'] ) ) {
             $header_type = sanitize_text_field( $input['header_type'] );
-            $sanitary_values['header_type'] = in_array( $header_type, array( 'standard', 'compact', 'compact_plain', 'none' ), true )
+            $header_type = in_array( $header_type, array( 'standard', 'compact', 'compact_plain', 'none' ), true )
                 ? $header_type
                 : 'standard';
+            $sanitary_values['header_type'] = $header_type;
+
+            if ( $header_type === 'none' ) {
+                $sanitary_values['hide_company_header'] = 'on';
+            }
+            // Any non-none type intentionally omits hide_company_header, clearing it.
+        } elseif ( ! empty( $existing_options['hide_company_header'] ) ) {
+            $sanitary_values['hide_company_header'] = $existing_options['hide_company_header'];
         }
 
         if ( isset( $input['hide_profile_picture'] ) ) {
@@ -1504,32 +1505,6 @@ Class GRWP_Global_Settings {
 
         echo wp_kses($html, $allowed_html);
 
-    }
-
-    /**
-     * Hide company header section
-     * @return void
-     */
-    public function hide_company_header_callback() {
-        global $allowed_html;
-
-        ob_start(); ?>
-
-        <input type="checkbox"
-               name="google_reviews_option_name[hide_company_header]"
-               value="1"
-               id="hide_company_header"
-            <?php echo esc_attr( ! empty( $this->google_reviews_options['hide_company_header'] ) ? 'checked' : '' ); ?>
-        >
-
-        <span>
-            <?php esc_html_e( 'Yes', 'embedder-for-google-reviews' ); ?>
-        </span>
-
-        <?php
-        $html = ob_get_clean();
-
-        echo wp_kses($html, $allowed_html);
     }
 
     /**
