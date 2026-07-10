@@ -78,7 +78,7 @@ if ( function_exists( 'grwp_fs' ) ) {
      * Else, pro plugin activation will throw an error while free version is activated
      */
 
-    define( 'GRWP_GOOGLE_REVIEWS_VERSION', '2.1' );
+    define( 'GRWP_GOOGLE_REVIEWS_VERSION', '2.1.1' );
 
     // Base path to plugin for includes
     define( 'GR_BASE_PATH', plugin_dir_path( __FILE__ ) );
