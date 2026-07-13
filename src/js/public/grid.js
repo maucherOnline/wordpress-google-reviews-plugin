@@ -34,8 +34,9 @@ export function initShowMore() {
 
         // Create the button and place it directly after the grid body,
         // before the "See all reviews" button
-        const btn = document.createElement('button');
-        btn.type        = 'button';
+        const btn = document.createElement('a');
+        btn.href        = '#';
+        btn.setAttribute('role', 'button');
         btn.className   = 'grwp-show-more-btn';
         btn.textContent = showMoreText;
         body.insertAdjacentElement('afterend', btn);
@@ -88,16 +89,42 @@ export function initShowMore() {
         apply();
 
         // "Load more": reveal the configured number of additional rows
-        btn.addEventListener('click', function () {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault(); // href="#" must not scroll to the top
             visibleRows += loadMoreRows;
             apply();
         });
 
-        // Keep rows filled when the column count changes (debounced)
+        // Keep rows filled when the usable width changes (debounced).
+        //
+        // React to WIDTH changes only: apply() toggles card visibility, which
+        // changes the body's HEIGHT — responding to that would loop.
         let resizeTimer;
-        window.addEventListener('resize', function () {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(apply, 150);
-        });
+        let lastWidth = -1;
+        function onResize() {
+            const width = body.getBoundingClientRect().width;
+            if ( width === lastWidth ) return;
+            lastWidth = width;
+            apply();
+        }
+
+        // A plain window 'resize' listener misses the common Elementor case:
+        // the grid is rendered inside an inactive tab panel (display:none, so
+        // zero-size) and only gets its real width when that tab is later shown.
+        // No window resize fires then, so the column count computed at 0px would
+        // stick and leave the last row partly empty. A ResizeObserver on the
+        // body catches that 0 -> visible transition (and ordinary resizes too).
+        if ( typeof ResizeObserver !== 'undefined' ) {
+            const ro = new ResizeObserver(function () {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(onResize, 150);
+            });
+            ro.observe(body);
+        } else {
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(apply, 150);
+            });
+        }
     });
 }

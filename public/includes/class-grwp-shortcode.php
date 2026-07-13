@@ -100,6 +100,35 @@ class GRWP_Shortcode {
     }
 
     /**
+     * Get marquee override value from shortcode attributes.
+     *
+     * Returns true/false to force marquee mode on/off for this specific
+     * shortcode (overriding the dashboard setting), or null when the attribute
+     * is absent/unrecognised (fall back to the dashboard setting).
+     *
+     * @param array $atts
+     * @return bool|null
+     */
+    private function get_marquee_override( array $atts ) {
+
+        if ( ! isset( $atts['marquee'] ) ) {
+            return null;
+        }
+
+        $value = strtolower( trim( (string) $atts['marquee'] ) );
+
+        if ( in_array( $value, array( 'true', '1', 'yes', 'on' ), true ) ) {
+            return true;
+        }
+
+        if ( in_array( $value, array( 'false', '0', 'no', 'off' ), true ) ) {
+            return false;
+        }
+
+        return null;
+    }
+
+    /**
      * Parse shortcode data, return html
      * @param array|null $atts
      * @return string
@@ -111,6 +140,7 @@ class GRWP_Shortcode {
         $review_style_override = '';
         $max_reviews = null;
 	    $show_place_info = false;
+        $marquee_override = null;
 
         if ( $atts ) {
 
@@ -119,6 +149,7 @@ class GRWP_Shortcode {
 			$place_info = isset($atts['place_info']) ? $atts['place_info'] : null;
 	        $show_place_info = $place_info === 'true';
             $max_reviews = isset($atts['max_reviews']) ? $atts['max_reviews'] : null;
+            $marquee_override = $this->get_marquee_override( $atts );
 
         }
 
@@ -160,7 +191,7 @@ class GRWP_Shortcode {
 
         if ( $widget_type === 'slider' ) {
             $slider = new GRWP_Reviews_Widget_Slider();
-            return $slider->render( $style_type, $link_user_profiles, $max_reviews, $show_place_info, $txt );
+            return $slider->render( $style_type, $link_user_profiles, $max_reviews, $show_place_info, $txt, $marquee_override );
         }
 
 		elseif ( $widget_type === 'badge' ) {     

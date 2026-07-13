@@ -8,7 +8,7 @@ class GRWP_Reviews_Widget_Slider
      * Slider HTML
      * @return string
      */
-    public function render( $style_type, $link_user_profiles, $max_reviews = null, $show_place_info = false, $txt = '' ) {
+    public function render( $style_type, $link_user_profiles, $max_reviews = null, $show_place_info = false, $txt = '', $marquee_override = null ) {
 
         // error handling
         if ( $this->reviews_have_error ) {
@@ -38,9 +38,22 @@ class GRWP_Reviews_Widget_Slider
             }
         }
 
+        // Resolve the effective marquee state for this instance. A shortcode
+        // `marquee` attribute (true/false) overrides the dashboard setting; when
+        // absent ($marquee_override === null) the dashboard setting applies.
+        // Marquee is a premium feature, so it's forced off on free installs
+        // regardless of the shortcode/dashboard value.
+        $marquee_active = ( $marquee_override !== null )
+            ? (bool) $marquee_override
+            : ( isset($this->options['marquee_slider']) && $this->options['marquee_slider'] === '1' );
+
+        if ( ! grwp_fs()->can_use_premium_code() ) {
+            $marquee_active = false;
+        }
+
         // Marquee mode scrolls continuously and ignores the navigation arrows
         // (the Swiper Navigation module isn't loaded for it), so hide them.
-        if ( isset($this->options['marquee_slider']) && $this->options['marquee_slider'] === '1' ) {
+        if ( $marquee_active ) {
             $hide_slider_arrows = true;
         }
 

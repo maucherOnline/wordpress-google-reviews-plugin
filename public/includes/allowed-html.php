@@ -21,6 +21,7 @@ $allowed_html = [
         'data-swiper-autoplay'   => [],
         'data-grwp-show-more-rows' => [],
         'data-grwp-load-more-rows' => [],
+        'data-grwp-marquee'      => [],
     ],
     'a' => [
         'href'      => [],

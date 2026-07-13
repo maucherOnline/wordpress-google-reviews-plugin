@@ -7,9 +7,16 @@ $(document).ready(function() {
     const $grwp_swiper_container = $('.reviews_embedder_slider');
     if ( $grwp_swiper_container.length ) {
 
-        const marquee = !! swiperSettings.marquee;
-
         $grwp_swiper_container.each(function (i, slider) {
+
+            // Marquee is resolved per slider: a shortcode `marquee` attribute is
+            // emitted server-side as data-grwp-marquee ("1"/"0") and overrides
+            // the global dashboard setting. Fall back to the global flag if the
+            // attribute is missing (older markup).
+            const marqueeAttr = slider.getAttribute('data-grwp-marquee');
+            const marquee = marqueeAttr !== null
+                ? marqueeAttr === '1'
+                : !! swiperSettings.marquee;
 
             const breakpoints = {
                 690: {

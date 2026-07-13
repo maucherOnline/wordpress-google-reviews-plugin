@@ -114,13 +114,15 @@ export function initReadMore() {
 
         body.dataset.grwpReadmore = '1';
 
-        const btn = document.createElement('button');
-        btn.type = 'button';
+        const btn = document.createElement('a');
+        btn.href = '#';
+        btn.setAttribute('role', 'button');
         btn.className = 'grwp-read-more-btn';
         btn.textContent = readMoreText;
         body.insertAdjacentElement('afterend', btn);
 
-        btn.addEventListener('click', function () {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault(); // href="#" must not scroll to the top
             const container = getContainer(body);
             const willExpand = !body.classList.contains('grwp-expanded');
 
