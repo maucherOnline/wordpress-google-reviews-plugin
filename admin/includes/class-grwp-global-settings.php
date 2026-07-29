@@ -79,6 +79,7 @@ Class GRWP_Global_Settings {
 
     public function show_upgrade_message_callback() {
         $upgrade_url = 'https://reviewsembedder.com/?utm_source=wp_backend&utm_medium=upgrade_tab&utm_campaign=upgrade_banner';
+        $reviews_free = 10;
         ?>
         <div id="grwp-upgrade-banner" style="background:#fffbeb;border:1px solid #fde68a;border-left:4px solid #f59e0b;border-radius:6px;padding:12px 16px;display:flex;align-items:flex-start;gap:12px;margin:8px 0 4px;">
             <span style="font-size:1.1rem;line-height:1.5;">⚡</span>
@@ -87,8 +88,8 @@ Class GRWP_Global_Settings {
                 printf(
                     wp_kses(
                     /* translators: %s is replaced with "Attention" in bold. */
-                        sprintf( __('%s: the free version only allows for pulling 20 reviews.', 'embedder-for-google-reviews'),
-                            '<strong>' . __('Attention', 'embedder-for-google-reviews') . '</strong>'
+                        sprintf( __('%s: the free version only allows for pulling %d reviews.', 'embedder-for-google-reviews'),
+                            '<strong>' . __('Attention', 'embedder-for-google-reviews') . '</strong>', $reviews_free
                         ),
                         array('strong' => array()) // Allowed HTML tags
                     )

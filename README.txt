@@ -231,6 +231,8 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 6. Google Reviews Plugin backend #2
 
 == Changelog ==
+= 2.1.2 =
+* Updated text strings
 = 2.1.1 =
 * Bugfixing
 = 2.1 =
