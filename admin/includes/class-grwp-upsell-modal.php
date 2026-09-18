@@ -3,21 +3,13 @@
 /**
  * Upsell modal shown on the plugin's start screen (free version only).
  *
- * The modal opens automatically every time the start screen is loaded.
- * Once the user closes it, it stays hidden for the rest of the day
- * (site timezone) and reappears on the next day. The dismissal is stored
- * per user, so it follows the user across browsers.
+ * The markup is rendered hidden on the start screen; upsell-modal.js opens it
+ * unless it was already closed today (tracked in the browser's localStorage).
  */
 class GRWP_Upsell_Modal {
 
-    const META_KEY    = 'grwp_upsell_modal_dismissed';
-    const AJAX_ACTION = 'grwp_dismiss_upsell_modal';
-    const NONCE       = 'grwp_upsell_modal';
-
     public function __construct() {
-        add_action( 'admin_enqueue_scripts', array( $this, 'localize' ), 20 );
         add_action( 'admin_footer', array( $this, 'render' ) );
-        add_action( 'wp_ajax_' . self::AJAX_ACTION, array( $this, 'handle_dismiss' ) );
     }
 
     /**
@@ -29,57 +21,6 @@ class GRWP_Upsell_Modal {
         $page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
 
         return 'google-reviews' === $page && current_user_can( 'manage_options' );
-    }
-
-    /**
-     * Today's date in the site timezone, used as the dismissal marker.
-     *
-     * @return string
-     */
-    private function today() {
-        return current_time( 'Y-m-d' );
-    }
-
-    /**
-     * Whether the current user already closed the modal today.
-     *
-     * @return bool
-     */
-    private function dismissed_today() {
-        return get_user_meta( get_current_user_id(), self::META_KEY, true ) === $this->today();
-    }
-
-    /**
-     * Pass state to the admin bundle (the bundle is enqueued by GRWP_Google_Reviews_Admin).
-     */
-    public function localize() {
-        if ( ! $this->is_start_screen() ) {
-            return;
-        }
-
-        wp_localize_script( 'admin-google-reviews', 'grwp_upsell', array(
-            'ajax_url'  => admin_url( 'admin-ajax.php' ),
-            'action'    => self::AJAX_ACTION,
-            'nonce'     => wp_create_nonce( self::NONCE ),
-            // Temporarily shown on every page load. Restore `! $this->dismissed_today()`
-            // to hide it for the rest of the day once closed.
-            'auto_open' => true,
-        ) );
-    }
-
-    /**
-     * Store today's date so the modal stays closed until tomorrow.
-     */
-    public function handle_dismiss() {
-        check_ajax_referer( self::NONCE, 'nonce' );
-
-        if ( ! current_user_can( 'manage_options' ) ) {
-            wp_send_json_error( null, 403 );
-        }
-
-        update_user_meta( get_current_user_id(), self::META_KEY, $this->today() );
-
-        wp_send_json_success();
     }
 
     /**

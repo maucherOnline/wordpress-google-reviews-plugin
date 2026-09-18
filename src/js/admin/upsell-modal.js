@@ -1,36 +1,41 @@
 import $ from 'jquery';
 
-// Upsell modal on the plugin start screen (markup + state from GRWP_Upsell_Modal).
-// Opens on load unless the user already closed it today; closing it stores the
-// dismissal server-side so it stays hidden until the next day.
+// Upsell modal on the plugin start screen (markup from GRWP_Upsell_Modal).
+// Opens on load unless it was already closed today; the close date is kept in
+// localStorage, so the modal stays hidden until the next (local) day.
 $(document).ready(function () {
 
-    const config = window.grwp_upsell;
+    const STORAGE_KEY = 'grwp_upsell_modal_dismissed';
     const $overlay = $('#grwp-upsell-modal');
 
-    if (!config || !$overlay.length) {
+    if (!$overlay.length) {
         return;
     }
 
-    let dismissed = false;
-    let $lastFocus = null;
+    // Local calendar date as YYYY-MM-DD.
+    const today = function () {
+        const d = new Date();
+        return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    };
+
+    // localStorage can throw (private mode, blocked site data) — then just show the modal.
+    const dismissedToday = function () {
+        try {
+            return window.localStorage.getItem(STORAGE_KEY) === today();
+        } catch (e) {
+            return false;
+        }
+    };
 
     const dismiss = function () {
-        if (dismissed) {
-            return;
+        try {
+            window.localStorage.setItem(STORAGE_KEY, today());
+        } catch (e) {
+            // ignore
         }
-        dismissed = true;
-
-        const data = new FormData();
-        data.append('action', config.action);
-        data.append('nonce', config.nonce);
-
-        // sendBeacon survives page navigation (e.g. when the CTA is clicked).
-        if (navigator.sendBeacon && navigator.sendBeacon(config.ajax_url, data)) {
-            return;
-        }
-        $.post(config.ajax_url, { action: config.action, nonce: config.nonce });
     };
+
+    let $lastFocus = null;
 
     const open = function () {
         $lastFocus = $(document.activeElement);
@@ -66,7 +71,7 @@ $(document).ready(function () {
     // Going for the upgrade also counts as "seen today".
     $overlay.on('click', '.rem-buy, .rem-foot a', dismiss);
 
-    if (config.auto_open) {
+    if (!dismissedToday()) {
         open();
     }
 

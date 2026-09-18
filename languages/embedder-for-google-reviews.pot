@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-29 11:19+0000\n"
+"POT-Creation-Date: 2026-09-18 08:10+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -204,7 +204,7 @@ msgstr ""
 msgid "– to display ALL reviews and hide bad ones."
 msgstr ""
 
-#: admin/includes/class-grwp-global-settings.php:103
+#: admin/includes/class-grwp-global-settings.php:103, admin/includes/class-grwp-upsell-modal.php:174
 msgid "Close"
 msgstr ""
 
@@ -466,6 +466,91 @@ msgstr ""
 #. translators: %s: URL
 #: admin/includes/class-grwp-global-settings.php:1786
 msgid "<a href=\"%s\" target=\"_blank\">See</a>, how to overwrite styles, widget types and other settings."
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:93
+msgid "Free"
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:94
+msgid "Current plan"
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:97
+msgid "Free forever"
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:100
+msgid "Up to 20 reviews"
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:101, admin/includes/class-grwp-upsell-modal.php:122
+msgid "Slider & grid layouts"
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:102
+msgid "8 designs"
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:103, admin/includes/class-grwp-upsell-modal.php:123
+msgid "Shortcode for any page builder"
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:104, admin/includes/class-grwp-upsell-modal.php:119
+msgid "Pull ALL reviews"
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:105, admin/includes/class-grwp-upsell-modal.php:120
+msgid "Premium designs"
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:106, admin/includes/class-grwp-upsell-modal.php:121
+msgid "Filter reviews by rating & keywords"
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:112
+msgid "PRO"
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:113
+msgid "Recommended"
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:115
+msgid "/ month"
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:116
+msgid "14-day free trial"
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:119
+msgid "instead of only 20"
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:124
+msgid "Automatic weekly review updates"
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:125
+msgid "More customization options"
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:127
+msgid "Start free trial"
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:214
+msgid "Show every review your customers left."
+msgstr ""
+
+#. translators: %s: link to the pricing page
+#: admin/includes/class-grwp-upsell-modal.php:218
+msgid "Compare all plans and prices on the %s."
+msgstr ""
+
+#: admin/includes/class-grwp-upsell-modal.php:219
+msgid "pricing page"
 msgstr ""
 
 #: admin/includes/how-to.php:10
