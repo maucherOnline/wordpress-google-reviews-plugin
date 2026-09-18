@@ -52,6 +52,9 @@ class GRWP_Google_Reviews_Admin {
             // newest version
             new GRWP_Free_API_Service();
 
+            // Daily upsell modal on the start screen
+            new GRWP_Upsell_Modal();
+
         }
 
         $this->plugin_name = $plugin_name;

@@ -38,6 +38,8 @@ class GRWP_Google_Reviews_Uninstaller {
             delete_option('gr_latest_results_free');
         }
 
+        delete_metadata('user', 0, 'grwp_upsell_modal_dismissed', '', true);
+
     }
 
 }
