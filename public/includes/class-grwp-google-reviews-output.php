@@ -270,19 +270,73 @@ class GRWP_Google_Reviews_Output {
 	 */
 	protected function get_verified_badge( $txt = '' ) {
 
+		$badge_link = $this->get_badge_link();
+		if ( $txt === '' ) {
+			$txt = $badge_link['alt'];
+		}
+
 		$verified_svg = GR_PLUGIN_DIR_URL . 'dist/images/verified-badge.svg';
 		/* translators: 'Verified by' badge */
 		$verified_label = grwp_text( 'verified_by', __( 'Verified by', 'embedder-for-google-reviews' ) );
 
 		return sprintf(
 			'<span class="grwp_verified-badge"><a href="%1$s" target="_blank" rel="noopener noreferrer" aria-label="%2$s"><span class="grwp_verified-badge-check"></span><span class="grwp_verified-badge-tip">%3$s <img class="grwp_verified-badge-tip-icon" src="%4$s" alt="%5$s" /></span></a></span>',
-			'https://reviewsembedder.com',
+			esc_url( $badge_link['url'] ),
 			esc_attr( $verified_label ),
 			esc_html( $verified_label ),
 			esc_url( $verified_svg ),
 			esc_attr( $txt )
 		);
 
+	}
+
+	/**
+	 * Alt text and target URL of the "Verified by" badge.
+	 *
+	 * Installs first activated on v2.1.5 or later get a localized pair based on
+	 * the site language (fr, es, de, otherwise English). Older installs keep the
+	 * values they had before, so their output does not change on update.
+	 *
+	 * @return array { 'url' => string, 'alt' => string }
+	 */
+	protected function get_badge_link() {
+		$activation_version = get_option( 'grwp_activation_version' );
+
+		// Legacy installs.
+		if ( ! $activation_version || version_compare( $activation_version, '2.1.5', '<' ) ) {
+			$alt = 'https://reviewsembedder.com';
+			if ( $activation_version ) {
+				if ( version_compare( $activation_version, '1.6.6', '<=' ) ) {
+					$alt = 'https://reviewsembedder.com';
+				} elseif ( version_compare( $activation_version, '1.7.6', '<=' ) ) {
+					$alt = 'Google Reviews WordPress Plugin';
+				} elseif ( version_compare( $activation_version, '2.1.2', '>=' ) ) {
+					$alt = 'Google Reviews WordPress Plugin';
+				}
+			}
+
+			return array(
+				'url' => 'https://reviewsembedder.com',
+				'alt' => $alt,
+			);
+		}
+
+		$links = array(
+			'fr' => array( 'url' => 'https://reviewsembedder.com/fr/', 'alt' => 'Plugin d’intégration pour les avis Google' ),
+			'es' => array( 'url' => 'https://reviewsembedder.com/es/', 'alt' => 'Plugin para reseñas de Google' ),
+			'de' => array( 'url' => 'https://reviewsembedder.com/de/', 'alt' => 'Plugin für Google Bewertungen' ),
+		);
+
+		$lang = strtolower( substr( get_locale(), 0, 2 ) );
+
+		if ( isset( $links[ $lang ] ) ) {
+			return $links[ $lang ];
+		}
+
+		return array(
+			'url' => 'https://reviewsembedder.com/',
+			'alt' => 'Google Reviews WordPress Plugin',
+		);
 	}
 
 	/**

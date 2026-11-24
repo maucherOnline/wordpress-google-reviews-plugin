@@ -177,20 +177,8 @@ class GRWP_Shortcode {
 
         }
 
-        // set txt for badge
-        $txt = 'https://reviewsembedder.com';
-        $activation_version = get_option('grwp_activation_version');
-        if ( $activation_version ) {
-            if ( version_compare( $activation_version, '1.6.6', '<=') ) {
-                $txt = 'https://reviewsembedder.com';
-            }
-            else if ( version_compare( $activation_version, '1.7.6', '<=') ) {
-                $txt = 'Google Reviews WordPress Plugin';
-            }
-            else if ( version_compare( $activation_version, '2.1.2', '>=') ) {
-                $txt = 'Google Reviews WordPress Plugin';
-            }
-        }
+        // badge alt text and URL are resolved in GRWP_Google_Reviews_Output::get_badge_link()
+        $txt = '';
 
         if ( $widget_type === 'slider' ) {
             $slider = new GRWP_Reviews_Widget_Slider();
