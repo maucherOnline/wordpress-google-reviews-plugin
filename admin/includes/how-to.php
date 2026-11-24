@@ -35,7 +35,7 @@ $docs_link = 'https://reviewsembedder.com/docs/how-to-overwrite-styles/?utm_sour
 echo
 wp_kses(
 /* translators: %s: link to the upgrade page */
-sprintf(__('<strong>Note:</strong> the free version only allows for pulling 20 reviews. To get around this, please <a href="%s" target="_blank">upgrade to the PRO version</a>, which will pull all your reviews', 'embedder-for-google-reviews'), $upgrade_link),
+sprintf(__('<strong>Note:</strong> the free version only allows for pulling 10 reviews. To get around this, please <a href="%s" target="_blank">upgrade to the PRO version</a>, which will pull all your reviews', 'embedder-for-google-reviews'), $upgrade_link),
     $allowed_html
 );
 ?>

@@ -20,7 +20,17 @@ class GRWP_Upsell_Modal {
     private function is_start_screen() {
         $page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
 
-        return 'google-reviews' === $page && current_user_can( 'manage_options' );
+        if ( 'google-reviews' !== $page || ! current_user_can( 'manage_options' ) ) {
+            return false;
+        }
+
+        // Freemius shows its opt-in / pending-activation screen on the same page
+        // until the user opts in or skips: don't show the modal there.
+        if ( grwp_fs()->is_activation_page() ) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
