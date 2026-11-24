@@ -388,7 +388,7 @@ Class GRWP_Global_Menu_Pages {
                                         </button>
                                     </div>
                                     <p class="grwp-preview-notice">
-                                        <?php esc_html_e( 'This preview displays up to 20 reviews. More reviews will be visible on the website.', 'embedder-for-google-reviews' ); ?>
+                                        <?php esc_html_e( 'This preview is limited. More reviews will be visible your website.', 'embedder-for-google-reviews' ); ?>
                                     </p>
                                     <?php
                                     // max_reviews=20 keeps the preview light and prevents timeout.
