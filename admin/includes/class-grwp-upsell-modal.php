@@ -48,7 +48,7 @@ class GRWP_Upsell_Modal {
                 'note'     => __( 'Free forever', 'embedder-for-google-reviews' ),
                 'featured' => false,
                 'features' => array(
-                    array( true, __( 'Up to 20 reviews', 'embedder-for-google-reviews' ) ),
+                    array( true, __( 'Up to 10 reviews', 'embedder-for-google-reviews' ) ),
                     array( true, __( 'Slider & grid layouts', 'embedder-for-google-reviews' ) ),
                     array( true, __( '8 designs', 'embedder-for-google-reviews' ) ),
                     array( true, __( 'Shortcode for any page builder', 'embedder-for-google-reviews' ) ),
