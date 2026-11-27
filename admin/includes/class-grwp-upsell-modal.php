@@ -26,7 +26,9 @@ class GRWP_Upsell_Modal {
 
         // Freemius shows its opt-in / pending-activation screen on the same page
         // until the user opts in or skips: don't show the modal there.
-        if ( grwp_fs()->is_activation_page() ) {
+        // (Not is_activation_page(): it returns true on the plugin's main page
+        // even after opt-in.)
+        if ( grwp_fs()->is_activation_mode() || grwp_fs()->is_pending_activation() ) {
             return false;
         }
 
@@ -67,7 +69,7 @@ class GRWP_Upsell_Modal {
                 'note'     => __( '14-day free trial', 'embedder-for-google-reviews' ),
                 'featured' => true,
                 'features' => array(
-                    array( true, '<strong>' . __( 'Pull ALL reviews', 'embedder-for-google-reviews' ) . '</strong> <span class="rem-feat__sub">' . __( 'instead of only 20', 'embedder-for-google-reviews' ) . '</span>' ),
+                    array( true, '<strong>' . __( 'Pull ALL reviews', 'embedder-for-google-reviews' ) . '</strong> <span class="rem-feat__sub">' . __( 'instead of only 10', 'embedder-for-google-reviews' ) . '</span>' ),
                     array( true, '<strong>' . __( 'Premium designs', 'embedder-for-google-reviews' ) . '</strong>' ),
                     array( true, '<strong>' . __( 'Filter reviews by rating & keywords', 'embedder-for-google-reviews' ) . '</strong>' ),
                     array( true, __( 'Slider & grid layouts', 'embedder-for-google-reviews' ) ),
